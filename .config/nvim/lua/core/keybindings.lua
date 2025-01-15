@@ -43,6 +43,11 @@ map("n", "<leader>fm", ":FzfLua manpages<CR>", { desc = "[F]ind page in [m]anpag
 map("n", "<leader>fc", ":FzfLua files cwd=$XDG_CONFIG_HOME/nvim/<CR>", { desc = "[F]ind files in [N]eovim configuration directory" })
 -- }}}
 
+-- Lazy and Mason {{{
+map("n", "<leader>pl", ":Lazy<CR>", { desc = "Open Lazy.nvim UI" })
+map("n", "<leader>pm", ":Mason<CR>", { desc = "Open Mason UI" })
+-- }}}
+
 -- Lazygit {{{
 map("n", "<leader>gl", ":LazyGit<CR>", { desc = "Open current [g]it repository in [L]azyGit" })
 -- }}}
