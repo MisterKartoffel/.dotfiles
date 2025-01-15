@@ -64,6 +64,11 @@ map("n", "<leader>fk", function() Snacks.picker.keymaps() end, { desc = "[F]ind 
 map("n", "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "[F]ind files in [N]eovim configuration directory" })
 -- }}}
 
+-- Snacks.scratch {{{
+map("n", "<leader>st", function() Snacks.scratch.open() end, { desc = "[S]cratch buffer [t]oggle" })
+map("n", "<leader>ss", function() Snacks.scratch.select() end, { desc = "[S]cratch buffer [s]elect" })
+-- }}}
+
 -- Which-key {{{
 map("n", "<leader>?", function()
     require("which-key").show({ global = true })

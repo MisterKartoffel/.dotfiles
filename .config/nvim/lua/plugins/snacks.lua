@@ -47,5 +47,6 @@ return {
             enabled = true,
             exclude = { "markdown", },
         },
+        scratch = { enabled = true, },
     },
 }
