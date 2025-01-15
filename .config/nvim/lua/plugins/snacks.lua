@@ -42,5 +42,9 @@ return {
                 bo = { filetype = "snacks_notif" },
             },
         },
+        quickfile = {
+            enabled = true,
+            exclude = { "markdown", },
+        },
     },
 }
