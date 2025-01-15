@@ -35,7 +35,7 @@ return {
         dashboard.section.buttons.val = {
             button("e", "  ❱ New file", "<CMD>ene <BAR> startinsert <CR>"),
             button("SPC e", "  ❱ Browse filesystem", "<CMD>Yazi<CR>"),
-            button("SPC ff", "󰱽  ❱ Find file", "<CMD>FzfLua findfiles<CR>"),
+            button("SPC ff", "󰱽  ❱ Find file", "<CMD>FzfLua files<CR>"),
             button("SPC fr", "󱋢  ❱ Recent files", "<CMD>FzfLua oldfiles<CR>"),
             button("s", "  ❱ Settings", "<CMD>cd $HOME/.config/nvim<CR> <CMD>Yazi<CR>"),
             button("q", "󰩈  ❱ Quit Neovim", "<CMD>qa<CR>"),
