@@ -1,0 +1,86 @@
+# Ligatures {{{
+
+    font-feature = -calt
+    # {{ }} {{-- --}} {| |} [| |] // ///
+    # /* /** ++ +++ .? .. ... ..< <!-- <<-
+    # <- <#-- <> <: <:< :> <=> <-> <||| <||
+    # <| <|> ||> |> -| ->> --> -> = <= <<=
+    # <== != !! !== =!= => == =:= :=: := :>
+    # :< :: ;; ;;; :? :?> ::= ||- ||= |- |=
+    # || -- --- <-- ?? ??? ?: ?. && __ =/=
+    # <-< <=< <==> ==> =>> => = - -< -<< <-|
+    # <=| |=> - <~ ~~ <~> <~~ -~ ~~> ~> ~-
+    # ~@ <+> <+ +> <*> <* *> </> </ /> <<
+    # <<< >> #{ #[ #( #? #_ #__ #: #=
+    # #_( ]# 0x12 fixme)) ######## <!----> \\
+    # [TRACE] [DEBUG] [INFO] [WARN] [ERROR] [FATAL] [TODO] todo)) [FIXME]
+
+# }}}
+
+# Character variants {{{
+# Standard font
+
+    font-feature = -zero
+    # 0 with dot style
+
+    font-feature = cv01
+    # @ $ & % Q => -> without gap
+
+    font-feature = -cv02
+    # a with top arm
+
+    font-feature = cv03
+    # i without left bottom bar
+
+    font-feature = -cv04
+    # l with left bottom bar, like consolas, will be overrided by cv35 in italic style
+
+# Italic font
+
+    font-feature = -cv31
+    # italic a with top arm
+
+    font-feature = -cv32
+    # italic f without bottom tail, just like regular style
+
+    font-feature = -cv33
+    # italic i j with left bottom bar and horizen top bar, just like regular style
+
+    font-feature = -cv34
+    # italic k without circle, just like regular style
+
+    font-feature = cv35
+    # italic l without tail, just like regular style
+
+    font-feature = -cv36
+    # italic x without tail, just like regular style
+
+# }}}
+
+# Style sets {{{
+
+    font-feature = ss01
+    # Broken equals ligatures (==, ===, !=, !==, =/=)
+
+    font-feature = ss02
+    # Broken compare and equal ligatures (<=, >=)
+
+    font-feature = -ss03
+    # Enable arbitrary tag (allow to use any case in all tags)
+
+    font-feature = ss04
+    # Break multiple underscores (__, #__)
+
+    font-feature = -ss05
+    # Thin backslash in escape letters (\w, \n, \r ...)
+
+    font-feature = -ss06
+    # Break connected strokes between italic letters (al, ul, il ...)
+
+    font-feature = ss07
+    # Relax the conditions for multiple greaters ligatures (>> or >>>)
+
+    font-feature = -ss08
+    # Enable double headed arrows and reverse arrows (>>=, -<<, ->>, >- ...)
+
+# }}}

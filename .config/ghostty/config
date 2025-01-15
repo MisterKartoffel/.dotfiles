@@ -1,0 +1,28 @@
+font-family = Maple Mono
+font-family = JetBrainsMono Nerd Font
+font-style = Medium
+font-size = 14
+
+theme = catppuccin-mocha
+
+window-padding-x = 5
+window-decoration = false
+
+resize-overlay = never
+
+clipboard-trim-trailing-spaces = true
+clipboard-paste-protection = true
+
+confirm-close-surface = false
+quit-after-last-window-closed = false
+
+shell-integration = zsh
+shell-integration-features = true
+
+gtk-single-instance = true
+gtk-tabs-location = bottom
+gtk-adwaita = false
+
+config-file = ?keybindings
+config-file = ?maple-mono-font-features
+# config-file = ?monaspace-font-features
