@@ -1,0 +1,10 @@
+bibata-cursor-theme-bin
+catppuccin-gtk-theme-mocha
+downgrade
+ncspot-bin
+paru-bin
+refind-btrfs
+snapper-rollback
+ttf-maple-beta
+uwsm
+zsh-antidote

@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# Source for all list generating commands:
+# https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#List_of_installed_packages
+
+pkgListDir="$HOME/.dotfiles/.config/pkglists"
+
+function setupListings () {
+    creationTime="$(date --rfc-3339="seconds")"
+
+    for source in "$@";
+    do
+        current="$pkgListDir/$source-$creationTime.txt"
+        logMessage="$source install listing: $current"
+
+        case "$source" in
+            AUR)
+                pacman -Qqem > $current 
+                ;;
+
+            Flatpak)
+                flatpak list --columns=application --app > $current 
+                ;;
+
+            Optional)
+                comm -13 <(pacman -Qqdt | sort) <(pacman -Qqdtt | sort) > $current 
+                ;;
+
+            Explicit)
+                pacman -Qqen > $current 
+                ;;
+
+            *)
+                echo "Error: $1 undefined as a source."
+                exit 1
+                ;;
+        esac
+
+        echo -e "$logMessage\n"
+    done
+}
+
+if [ -e "$pkgListDir" ]; then
+    rm -rf "$pkgListDir"
+    echo -e "Cleared previous package lists under $pkgListDir\n"
+fi
+
+mkdir "$pkgListDir"
+echo -e "New package listing master directory: $pkgListDir\n"
+
+setupListings "AUR" "Flatpak" "Optional" "Explicit"

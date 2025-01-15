@@ -1,0 +1,13 @@
+7zip
+chafa
+cmake
+fd
+geoclue
+glib2-devel
+imagemagick
+jq
+libnotify
+meson
+openexr
+ripgrep
+zathura-pdf-poppler
