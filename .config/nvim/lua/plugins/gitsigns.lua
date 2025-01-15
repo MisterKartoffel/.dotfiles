@@ -21,12 +21,6 @@ return {
             changedelete = { text = "~" },
             untracked = { text = "¨" },
         },
-        worktrees = {
-            {
-                toplevel = vim.env.HOME,
-                gitdir = vim.env.HOME .. "/Dotfiles",
-            },
-        },
         current_line_blame = true,
         current_line_blame_opts = {
             delay = 100,
