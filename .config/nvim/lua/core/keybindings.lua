@@ -54,6 +54,16 @@ map("n", "<leader>lf", vim.lsp.buf.format, { desc = "[L]SP auto[f]ormatting" })
 map("n", "<leader>mt", ":Markview<CR>", { desc = "[M]arkview [t]oggle" })
 -- }}}
 
+-- Snacks.picker {{{
+map("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "[F]ind [f]iles in CWD" })
+map("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "[F]ind [r]ecently opened files" })
+map("n", "<leader>fg", function() Snacks.picker.grep() end, { desc = "[F]ind string in CWD with [g]rep" })
+map("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "[F]ind string in [h]elp tags" })
+map("n", "<leader>fm", function() Snacks.picker.man() end, { desc = "[F]ind page in [m]anpages" })
+map("n", "<leader>fk", function() Snacks.picker.keymaps() end, { desc = "[F]ind [k]eymaps" })
+map("n", "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "[F]ind files in [N]eovim configuration directory" })
+-- }}}
+
 -- Which-key {{{
 map("n", "<leader>?", function()
     require("which-key").show({ global = true })
