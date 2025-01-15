@@ -18,7 +18,6 @@ require("lazy").setup({
     spec = {
         { import = "plugins" },
         { import = "plugins.lsp" },
-        { import = "plugins.notify" },
         { import = "plugins.completions" },
         { import = "plugins.eyecandy" },
     },

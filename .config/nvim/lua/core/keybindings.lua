@@ -34,15 +34,6 @@ map("n", "<leader>w", ":w<CR>", { desc = "Save current buffer" })
 map("n", "<leader>q", ":wqa<CR>", { desc = "Save and quit all buffers" })
 -- }}}
 
--- fzf-lua {{{
-map("n", "<leader>ff", ":FzfLua files<CR>", { desc = "[F]ind [f]ile in CWD" })
-map("n", "<leader>fr", ":FzfLua oldfiles<CR>", { desc = "[F]ind [r]ecently opened files" })
-map("n", "<leader>fg", ":FzfLua live_grep_native<CR>", { desc = "[F]ind string in CWD with [g]rep" })
-map("n", "<leader>fh", ":FzfLua helptags<CR>", { desc = "[F]ind string in [h]elp tags" })
-map("n", "<leader>fm", ":FzfLua manpages<CR>", { desc = "[F]ind page in [m]anpages" })
-map("n", "<leader>fc", ":FzfLua files cwd=$XDG_CONFIG_HOME/nvim/<CR>", { desc = "[F]ind files in [N]eovim configuration directory" })
--- }}}
-
 -- Lazy and Mason {{{
 map("n", "<leader>pl", ":Lazy<CR>", { desc = "Open Lazy.nvim UI" })
 map("n", "<leader>pm", ":Mason<CR>", { desc = "Open Mason UI" })
@@ -61,6 +52,21 @@ map("n", "<leader>lf", vim.lsp.buf.format, { desc = "[L]SP auto[f]ormatting" })
 
 -- Markview {{{
 map("n", "<leader>mt", ":Markview<CR>", { desc = "[M]arkview [t]oggle" })
+-- }}}
+
+-- Snacks.picker {{{
+map("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "[F]ind [f]iles in CWD" })
+map("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "[F]ind [r]ecently opened files" })
+map("n", "<leader>fg", function() Snacks.picker.grep() end, { desc = "[F]ind string in CWD with [g]rep" })
+map("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "[F]ind string in [h]elp tags" })
+map("n", "<leader>fm", function() Snacks.picker.man() end, { desc = "[F]ind page in [m]anpages" })
+map("n", "<leader>fk", function() Snacks.picker.keymaps() end, { desc = "[F]ind [k]eymaps" })
+map("n", "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "[F]ind files in [N]eovim configuration directory" })
+-- }}}
+
+-- Snacks.scratch {{{
+map("n", "<leader>st", function() Snacks.scratch.open() end, { desc = "[S]cratch buffer [t]oggle" })
+map("n", "<leader>ss", function() Snacks.scratch.select() end, { desc = "[S]cratch buffer [s]elect" })
 -- }}}
 
 -- Which-key {{{
