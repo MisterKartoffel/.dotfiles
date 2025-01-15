@@ -34,15 +34,6 @@ map("n", "<leader>w", ":w<CR>", { desc = "Save current buffer" })
 map("n", "<leader>q", ":wqa<CR>", { desc = "Save and quit all buffers" })
 -- }}}
 
--- fzf-lua {{{
-map("n", "<leader>ff", ":FzfLua files<CR>", { desc = "[F]ind [f]ile in CWD" })
-map("n", "<leader>fr", ":FzfLua oldfiles<CR>", { desc = "[F]ind [r]ecently opened files" })
-map("n", "<leader>fg", ":FzfLua live_grep_native<CR>", { desc = "[F]ind string in CWD with [g]rep" })
-map("n", "<leader>fh", ":FzfLua helptags<CR>", { desc = "[F]ind string in [h]elp tags" })
-map("n", "<leader>fm", ":FzfLua manpages<CR>", { desc = "[F]ind page in [m]anpages" })
-map("n", "<leader>fc", ":FzfLua files cwd=$XDG_CONFIG_HOME/nvim/<CR>", { desc = "[F]ind files in [N]eovim configuration directory" })
--- }}}
-
 -- Lazy and Mason {{{
 map("n", "<leader>pl", ":Lazy<CR>", { desc = "Open Lazy.nvim UI" })
 map("n", "<leader>pm", ":Mason<CR>", { desc = "Open Mason UI" })

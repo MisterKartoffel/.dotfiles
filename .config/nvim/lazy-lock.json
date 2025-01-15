@@ -4,7 +4,6 @@
   "catppuccin": { "branch": "main", "commit": "f67b886d65a029f12ffa298701fb8f1efd89295d" },
   "colorful-menu.nvim": { "branch": "master", "commit": "785a0d808969c1adabd4d8b039c9c548cb6f72d5" },
   "friendly-snippets": { "branch": "main", "commit": "efff286dd74c22f731cdec26a70b46e5b203c619" },
-  "fzf-lua": { "branch": "main", "commit": "f10843834e79a71c07231b2642170b652c1095f1" },
   "gitsigns.nvim": { "branch": "main", "commit": "9541f5e8e24571723cb02a5c2bf078aeacc5a711" },
   "lazy.nvim": { "branch": "main", "commit": "d8f26efd456190241afd1b0f5235fe6fdba13d4a" },
   "lazydev.nvim": { "branch": "main", "commit": "8620f82ee3f59ff2187647167b6b47387a13a018" },
