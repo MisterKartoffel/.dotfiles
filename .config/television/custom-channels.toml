@@ -1,0 +1,33 @@
+[[cable_channel]]
+name = "file"
+source_command = "fd -t f -H . $HOME"
+preview_command = "bat -n --color=always {}"
+
+[[cable_channel]]
+name = "man"
+source_command = "man -k . | cut -d ' ' -f 1"
+preview_command = "man {}"
+
+[[cable_channel]]
+name = "dir"
+source_command = "fd -t d -H . $HOME"
+preview_command = "lsd -Al1 {}"
+
+[[cable_channel]]
+name = "config add"
+source_command = "fd -H . $HOME"
+preview_command = "bat -n --color=always {}"
+
+[[cable_channel]]
+name = "config restore"
+source_command = "git --git-dir=$HOME/Dotfiles --work-tree=$HOME ls-tree -r master --name-only"
+preview_command = "bat -n --color=always {}"
+
+[[cable_channel]]
+name = "history"
+source_command = "bat -n $HISTFILE | cut -d ';' -f 2-"
+
+# [[cable_channel]] (Disabled while television doesn't support image previews)
+# name = "image"
+# source_command = "fd -t f . $HOME | xargs file --mime-type | rg -F 'image/' | cut -d ':' -f 1"
+# preview_command = "xargs -ro chafa -f kitty"
