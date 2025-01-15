@@ -1,0 +1,5 @@
+[plugin]
+deps = [{ use = "yazi-rs/plugins:full-border", rev = "600614a" }, { use = "yazi-rs/plugins:max-preview", rev = "600614a" }, { use = "boydaihungst/file-extra-metadata", rev = "fdea1c6" }, { use = "Lil-Dank/lazygit", rev = "c82794f" }, { use = "iynaix/time-travel", rev = "85baafd" }, ]
+
+[flavor]
+deps = [{ use = "yazi-rs/flavors:catppuccin-mocha", rev = "fc8eeaa" }]
