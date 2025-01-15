@@ -22,6 +22,7 @@ require("lazy").setup({
         { import = "plugins.completions" },
         { import = "plugins.eyecandy" },
     },
+    ui = { border = "rounded", },
     change_detection = { notify = false, },
     install = { colorscheme = { "catppuccin" }, },
     checker = {
