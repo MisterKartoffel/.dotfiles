@@ -23,5 +23,9 @@ return {
                 { section = "startup" },
             },
         },
+        indent = {
+            enabled = true,
+            char = "┊",
+        },
     },
 }
