@@ -14,16 +14,6 @@ source_command = "fd -t d -H . $HOME"
 preview_command = "lsd -Al1 {}"
 
 [[cable_channel]]
-name = "config add"
-source_command = "fd -H . $HOME"
-preview_command = "bat -n --color=always {}"
-
-[[cable_channel]]
-name = "config restore"
-source_command = "git --git-dir=$HOME/Dotfiles --work-tree=$HOME ls-tree -r master --name-only"
-preview_command = "bat -n --color=always {}"
-
-[[cable_channel]]
 name = "history"
 source_command = "bat -n $HISTFILE | cut -d ';' -f 2-"
 
