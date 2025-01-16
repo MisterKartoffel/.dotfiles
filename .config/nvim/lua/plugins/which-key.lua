@@ -16,6 +16,10 @@ return {
                 { "<leader>g", group = "git" },
                 { "<leader>l", group = "lsp" },
                 { "<leader>m", group = "markdown" },
+                { "<leader>p", group = "plugin managers" },
+                { "<leader>q", group = "quickfix" },
+                { "<leader>s", group = "scratchpad" },
+                { "<leader>w", group = "write" },
             }
         },
     },
