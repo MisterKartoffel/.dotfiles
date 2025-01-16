@@ -36,4 +36,3 @@ set.clipboard = "unnamedplus"
 
 vim.cmd("colorscheme catppuccin")
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-vim.g.mapleader = " "
