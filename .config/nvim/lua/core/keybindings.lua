@@ -32,6 +32,10 @@ map({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without copying" })
 map("n", "<leader><leader>", ":w<CR> :so<CR>", { desc = "Save and source current file" })
 map("n", "<leader>wa", ":wa<CR>", { desc = "Save all buffers" })
 map("n", "<leader>wq", ":wqa<CR>", { desc = "Save and quit all buffers" })
+
+map("n", "<leader>qn", ":cnext<CR>", { desc = "Go to next item in quickfix list" })
+map("n", "<leader>qp", ":cprev<CR>", { desc = "Go to previous item in quickfix list" })
+map("n", "<leader>qc", ":cclose<CR>", { desc = "Close quickfix list" })
 -- }}}
 
 -- Lazy and Mason {{{
