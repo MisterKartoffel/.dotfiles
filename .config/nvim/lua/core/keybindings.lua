@@ -62,6 +62,8 @@ map("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "[F]ind str
 map("n", "<leader>fm", function() Snacks.picker.man() end, { desc = "[F]ind page in [m]anpages" })
 map("n", "<leader>fk", function() Snacks.picker.keymaps() end, { desc = "[F]ind [k]eymaps" })
 map("n", "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "[F]ind files in [N]eovim configuration directory" })
+map("n", "<leader>fl", function() Snacks.picker.lines() end, { desc = "[F]ind [l]ines in current buffer" })
+map("n", "<leader>fp", function() Snacks.picker() end, { desc = "[F]ind [p]icker" })
 -- }}}
 
 -- Snacks.scratch {{{
