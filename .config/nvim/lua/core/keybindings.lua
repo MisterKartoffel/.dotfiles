@@ -43,10 +43,6 @@ map("n", "<leader>pl", ":Lazy<CR>", { desc = "Open Lazy.nvim UI" })
 map("n", "<leader>pm", ":Mason<CR>", { desc = "Open Mason UI" })
 -- }}}
 
--- Lazygit {{{
-map("n", "<leader>gl", ":LazyGit<CR>", { desc = "Open current [g]it repository in [L]azyGit" })
--- }}}
-
 -- LSP and None-LS {{{
 map("n", "<leader>lh", vim.lsp.buf.hover, { desc = "Display [L]SP [h]over info about symbol under cursor" })
 map("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Jump to [L]SP [d]efinition for symbol under cursor" })
