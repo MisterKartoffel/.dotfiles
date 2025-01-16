@@ -5,5 +5,14 @@ return {
         "nvim-treesitter/nvim-treesitter",
         "nvim-tree/nvim-web-devicons",
     },
-    config = true,
+
+    config = function()
+        local markview = require("markview")
+        local presets = require("markview.presets")
+
+        markview.setup({
+            checkboxes = presets.checkboxes.nerd,
+            headings = presets.headings.simple,
+        })
+    end
 }
