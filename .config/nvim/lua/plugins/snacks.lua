@@ -42,7 +42,12 @@ return {
                 bo = { filetype = "snacks_notif" },
             },
         },
-        picker = { enabled = true, },
+        picker = {
+            enabled = true,
+            files = {
+                hidden = true,
+            },
+        },
         quickfile = {
             enabled = true,
             exclude = { "markdown", },
