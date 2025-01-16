@@ -30,8 +30,8 @@ map("x", "<leader>p", [["_dP]], { desc = "Paste over selected string while keepi
 map({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without copying" })
 
 map("n", "<leader><leader>", ":w<CR> :so<CR>", { desc = "Save and source current file" })
-map("n", "<leader>w", ":w<CR>", { desc = "Save current buffer" })
-map("n", "<leader>q", ":wqa<CR>", { desc = "Save and quit all buffers" })
+map("n", "<leader>wa", ":wa<CR>", { desc = "Save all buffers" })
+map("n", "<leader>wq", ":wqa<CR>", { desc = "Save and quit all buffers" })
 -- }}}
 
 -- Lazy and Mason {{{
