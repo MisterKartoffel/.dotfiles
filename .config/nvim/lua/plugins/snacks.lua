@@ -27,6 +27,7 @@ return {
             enabled = true,
             char = "┊",
         },
+        lazygit = { enabled = true, },
         notifier = {
             enabled = true,
             style = {
