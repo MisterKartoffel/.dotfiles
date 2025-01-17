@@ -23,10 +23,7 @@ return {
                 { section = "startup" },
             },
         },
-        indent = {
-            enabled = true,
-            char = "┊",
-        },
+        indent = { enabled = true, },
         lazygit = { enabled = true, },
         notifier = {
             enabled = true,
