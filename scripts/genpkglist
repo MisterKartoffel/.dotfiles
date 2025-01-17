@@ -5,13 +5,12 @@
 
 user=$1
 logFile="/home/${user}/.dotfiles/scripts/genpkglist.log"
+logTime="$(date --rfc-3339="seconds")"
 pkgListDir="/home/${user}/.dotfiles/.config/pkglists"
 
 function setupListings () {
     local creationTime
-    local logTime
     creationTime="$(date '+%F')"
-    logTime="$(date --rfc-3339="seconds")"
 
     for source in "$@";
     do
