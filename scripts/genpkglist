@@ -9,15 +9,16 @@ pkgListDir="/home/${user}/.dotfiles/.config/pkglists"
 
 function setupListings () {
     local creationTime
-    creationTime="$(date --rfc-3339="seconds")"
+    local logTime
+    creationTime="$(date '+%F')"
+    logTime="$(date --rfc-3339="seconds")"
 
     for source in "$@";
     do
         local currentList
-        currentList="${pkgListDir}/${source}-${creationTime}.txt"
-
         local logMessage
-        logMessage="[${creationTime}] ${source} install listing: ${currentList}"
+        currentList="${pkgListDir}/${source}-${creationTime}.txt"
+        logMessage="[${logTime}] ${source} install listing: ${currentList}"
 
         case "${source}" in
             AUR)
@@ -37,7 +38,7 @@ function setupListings () {
                 ;;
 
             *)
-                echo "[${creationTime}] Error: $1 undefined as a source." >> ${logFile}
+                echo "[${logTime}] Error: $1 undefined as a source." >> ${logFile}
                 exit 1
                 ;;
         esac
@@ -48,10 +49,10 @@ function setupListings () {
 
 if [[ -e "${pkgListDir}" ]]; then
     rm -rf "${pkgListDir}"
-    echo "Cleared previous package lists under ${pkgListDir}" >> ${logFile}
+    echo "[${logTime}] Cleared previous package lists under ${pkgListDir}" >> ${logFile}
 fi
 
 mkdir "${pkgListDir}"
-echo "New package listing master directory: ${pkgListDir}" >> ${logFile}
+echo "[${logTime}] New package listing master directory: ${pkgListDir}" >> ${logFile}
 
 setupListings "AUR" "Flatpak" "Optional" "Explicit"
