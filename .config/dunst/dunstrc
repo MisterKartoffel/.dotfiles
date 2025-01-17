@@ -1,19 +1,17 @@
-[global] # {{{
-    ### Display ### {{{
+[global]
+    ### Display ###
     monitor = 0
     follow = none
-    # }}}
 
-    ### Geometry ### {{{
+    ### Geometry ###
     width = (0, 300)
     height = (0, 300)
     origin = top-center
     offset = (0, 0)
     scale = 0
     notification_limit = 20
-    # }}}
 
-    ### Progress bar ### {{{
+    ### Progress bar ###
     progress_bar = true
     progress_bar_height = 10
     progress_bar_frame_width = 1
@@ -34,9 +32,8 @@
     gap_size = 2
     separator_color = frame
     sort = urgency_descending
-    # }}}
 
-    ### Text ### {{{
+    ### Text ###
     font = Monospace 10
     line_height = 0
     markup = full
@@ -49,23 +46,20 @@
     stack_duplicates = true
     hide_duplicate_count = false
     show_indicators = yes
-    # }}}
 
-    ### Icons ### {{{
+    ### Icons ###
     enable_recursive_icon_lookup = true
     icon_theme = Adwaita
     icon_position = left
     min_icon_size = 32
     max_icon_size = 32
     icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
-    # }}}
 
-    ### History ### {{{
+    ### History ###
     sticky_history = yes
     history_length = 20
-    # }}}
 
-    ### Misc/Advanced ### {{{
+    ### Misc/Advanced ###
     dmenu = /usr/bin/dmenu -p dunst:
     browser = /usr/bin/xdg-open
     always_run_script = true
@@ -74,52 +68,44 @@
     corner_radius = 0
     corners = all
     ignore_dbusclose = false
-    # }}}
 
-    ### Wayland ### {{{
+    ### Wayland ###
     # layer = top
     force_xwayland = false
-    # }}}
 
-    ### Legacy {{{
+    ### Legacy
     force_xinerama = false
-    # }}}
 
-    ### mouse {{{
+    ### mouse
     mouse_left_click = do_action, open_url, close_current
     mouse_middle_click = context
     mouse_right_click = close_current
-    # }}}
-# }}}
 
-[experimental] # {{{
+[experimental]
     per_monitor_dpi = false
-# }}}
 
-[urgency_low] # {{{
+[urgency_low]
     background = "#1e1e2e"
     foreground = "#cdd6f4"
     timeout = 10
     default_icon = dialog-information
-# }}}
 
-[urgency_normal] # {{{
+[urgency_normal]
     background = "#1e1e2e"
     foreground = "#cdd6f4"
     timeout = 10
     override_pause_level = 30
     default_icon = dialog-information
-# }}}
 
-[urgency_critical] # {{{
+[urgency_critical]
     background = "#1e1e2e"
     foreground = "#cdd6f4"
     frame_color = "#fab387"
     timeout = 0
     override_pause_level = 60
     default_icon = dialog-warning
-# }}}
 
+# Misc
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
 #

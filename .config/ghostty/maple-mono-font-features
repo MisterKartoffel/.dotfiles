@@ -1,4 +1,4 @@
-# Ligatures {{{
+# Ligatures
 
     font-feature = -calt
     # {{ }} {{-- --}} {| |} [| |] // ///
@@ -15,9 +15,7 @@
     # #_( ]# 0x12 fixme)) ######## <!----> \\
     # [TRACE] [DEBUG] [INFO] [WARN] [ERROR] [FATAL] [TODO] todo)) [FIXME]
 
-# }}}
-
-# Character variants {{{
+# Character variants
 # Standard font
 
     font-feature = -zero
@@ -55,9 +53,7 @@
     font-feature = -cv36
     # italic x without tail, just like regular style
 
-# }}}
-
-# Style sets {{{
+# Style sets
 
     font-feature = ss01
     # Broken equals ligatures (==, ===, !=, !==, =/=)
@@ -82,5 +78,3 @@
 
     font-feature = -ss08
     # Enable double headed arrows and reverse arrows (>>=, -<<, ->>, >- ...)
-
-# }}}

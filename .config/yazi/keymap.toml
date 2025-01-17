@@ -2,7 +2,7 @@
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
-[manager] # {{{
+[manager]
 prepend_keymap = [
 { on = "J", run = "plugin parent-arrow --args=1",   desc = "Move cursor down in parent directory" },
 { on = "K", run = "plugin parent-arrow --args=-1",  desc = "Move cursor up in parent directory" },
@@ -125,9 +125,9 @@ keymap = [
 
 # Help
 { on = "~", run = "help", desc = "Open help" },
-] # }}}
+]
 
-[tasks] # {{{
+[tasks]
 keymap = [
 { on = "<Esc>", run = "close", desc = "Close task manager" },
 { on = "w",     run = "close", desc = "Close task manager" },
@@ -141,9 +141,9 @@ keymap = [
 # Help
 { on = "~",     run = "help",   desc = "Open help" },
 { on = "<F1>",  run = "help",   desc = "Open help" },
-] # }}}
+]
 
-[spot] # {{{
+[spot]
 keymap = [
 { on = "<Esc>", run = "close",  desc = "Close the spot" },
 { on = "<Tab>", run = "close",  desc = "Close the spot" },
@@ -160,9 +160,9 @@ keymap = [
 # Help
 { on = "~",     run = "help",   desc = "Open help" },
 { on = "<F1>",  run = "help",   desc = "Open help" },
-] # }}}
+]
 
-[pick] # {{{
+[pick]
 keymap = [
 { on = "<Esc>",     run = "close",          desc = "Cancel pick" },
 { on = "<Enter>",   run = "close --submit", desc = "Submit the pick" },
@@ -173,9 +173,9 @@ keymap = [
 # Help
 { on = "~",     run = "help",   desc = "Open help" },
 { on = "<F1>",  run = "help",   desc = "Open help" },
-] # }}}
+]
 
-[input] # {{{
+[input]
 keymap = [
 { on = "<Esc>",     run = "escape",         desc = "Go back the normal mode, or cancel input" },
 { on = "<Enter>",   run = "close --submit", desc = "Submit the input" },
@@ -235,9 +235,9 @@ keymap = [
 # Help
 { on = "~",     run = "help",   desc = "Open help" },
 { on = "<F1>",  run = "help",   desc = "Open help" },
-] # }}}
+]
 
-[confirm] # {{{
+[confirm]
 keymap = [
 { on = "<Esc>",     run = "close",          desc = "Cancel the confirm" },
 { on = "<Enter>",   run = "close --submit", desc = "Submit the confirm" },
@@ -251,9 +251,9 @@ keymap = [
 # Help
 { on = "~",     run = "help",   desc = "Open help" },
 { on = "<F1>",  run = "help",   desc = "Open help" },
-] # }}}
+]
 
-[completion] # {{{
+[completion]
 keymap = [
 { on = "<Esc>",     run = "close",                                      desc = "Cancel completion" },
 { on = "<Tab>",     run = "close --submit",                             desc = "Submit the completion" },
@@ -265,9 +265,9 @@ keymap = [
 # Help
 { on = "~",     run = "help",   desc = "Open help" },
 { on = "<F1>",  run = "help",   desc = "Open help" },
-] # }}}
+]
 
-[help] # {{{
+[help]
 keymap = [
 { on = "<Esc>", run = "escape", desc = "Clear the filter, or hide the help" },
 
@@ -277,4 +277,4 @@ keymap = [
 
 # Filtering
 { on = "f", run = "filter", desc = "Apply a filter for the help items" },
-] # }}}
+]

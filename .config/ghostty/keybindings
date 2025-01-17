@@ -1,22 +1,20 @@
-# General keybinds {{{
+# General keybinds
     keybind = clear
     keybind = ctrl+physical:v=paste_from_clipboard
     keybind = ctrl+physical:comma=reload_config
     keybind = ctrl+physical:i=inspector:toggle
-# }}}
 
-# Font keybinds {{{
+# Font keybinds
     keybind = ctrl+physical:equal=increase_font_size:1
     keybind = ctrl+physical:minus=decrease_font_size:1
     keybind = ctrl+physical:zero=reset_font_size
-# }}}
 
-# Surface keybinds {{{
+# Surface keybinds
     # Close current split -> tab -> window
         # Not <C-w> not to interfere with <C-w> window operations in Neovim
         keybind = ctrl+physical:escape=close_surface
 
-    # Split keybinds {{{
+    # Split keybinds
         keybind = ctrl+physical:s=new_split:auto
 
         keybind = ctrl+left=resize_split:left,20
@@ -29,10 +27,7 @@
         keybind = ctrl+physical:j=goto_split:bottom
         keybind = ctrl+physical:k=goto_split:top
         keybind = ctrl+physical:l=goto_split:right
-    # }}}
 
-    # Window keybinds {{{
+    # Window keybinds
         # Not <C-n> not to interfere with <C-n> <C-p> operation in multiple applications.
         keybind = ctrl+physical:a=new_window
-    # }}}
-# }}}

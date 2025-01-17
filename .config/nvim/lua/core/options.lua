@@ -17,7 +17,7 @@ set.autoindent = true
 set.smartindent = true
 set.smarttab = true
 set.wrap = false
-set.foldmethod = "marker"
+set.foldmethod = "manual"
 
 set.ignorecase = true
 set.smartcase = true

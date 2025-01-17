@@ -2,7 +2,7 @@
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
 "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
-[manager] # {{{
+[manager]
 ratio		    = [ 1, 1, 4 ]
 sort_by		    = "alphabetical"
 sort_sensitive	= false
@@ -15,9 +15,8 @@ show_symlink	= true
 scrolloff	    = 5
 mouse_events	= [ "click", "scroll" ]
 title_format	= "Yazi: {cwd}"
-# }}}
 
-[preview] # {{{
+[preview]
 wrap            = "no"
 tab_size	    = 2
 max_width	    = 1366
@@ -29,9 +28,8 @@ image_quality	= 75
 sixel_fraction	= 15
 ueberzug_scale	= 1
 ueberzug_offset	= [ 0, 0, 0, 0 ]
-# }}}
 
-[opener] # {{{
+[opener]
 edit = [
 { run = '${EDITOR:-vi} "$@"',   desc = "$EDITOR",   block = true },
 ]
@@ -51,9 +49,8 @@ extract = [
 play = [
 	{ run = 'mpv --force-window "$@"', orphan = true },
 ]
-# }}}
 
-[open] # {{{
+[open]
 rules = [
 # Folder
 { name = "*/",  use = [ "reveal", "edit", "open" ] },
@@ -82,18 +79,16 @@ rules = [
 # Fallback
 { name = "*",   use = [ "open", "reveal" ] },
 ]
-# }}}
 
-[tasks] # {{{
+[tasks]
 micro_workers    = 10
 macro_workers    = 10
 bizarre_retry    = 3
 image_alloc      = 536870912  # 512MB
 image_bound      = [ 0, 0 ]
 suppress_preload = false
-# }}}
 
-[plugin] # {{{
+[plugin]
 fetchers = [
 # Mimetype
 { id = "mime",  name = "*", run = "mime",   if = "!mime",   prio = "high" },
@@ -181,9 +176,8 @@ previewers = [
 append_previewers = [
 { name = "*",   run = "file-extra-metadata" },
 ]
-# }}}
 
-[input] # {{{
+[input]
 cursor_blink = false
 
 # cd
@@ -220,9 +214,8 @@ search_offset   = [ 0, 2, 50, 3 ]
 shell_title  = [ "Shell:", "Shell (block):" ]
 shell_origin = "top-center"
 shell_offset = [ 0, 2, 50, 3 ]
-# }}}
 
-[confirm] # {{{
+[confirm]
 # trash
 trash_title     = "Trash {n} selected file{s}?"
 trash_origin    = "center"
@@ -244,20 +237,17 @@ quit_title      = "Quit?"
 quit_content    = "The following tasks are still running, are you sure you want to quit?"
 quit_origin     = "center"
 quit_offset     = [ 0, 0, 50, 15 ]
-# }}}
 
-[pick] # {{{
+[pick]
 open_title  = "Open with:"
 open_origin = "hovered"
 open_offset = [ 0, 1, 50, 7 ]
-# }}}
 
-[which] # {{{
+[which]
 sort_by         = "none"
 sort_sensitive  = false
 sort_reverse    = false
 sort_translit   = false
-# }}}
 
 [log]
 enabled = false
