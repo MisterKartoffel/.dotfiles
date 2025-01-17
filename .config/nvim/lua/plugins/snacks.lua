@@ -53,7 +53,6 @@ return {
         scratch = { enabled = true, },
         statuscolumn = {
             enabled = true,
-            right = { "git", },
             folds = {
                 open = true,
                 git_hl = true,
