@@ -14,8 +14,6 @@ window#waybar {
     margin: 5px;
     border-radius: 10px;
     background: @base;
-    border-top: 1px solid @sky;
-    border-bottom: 1px solid @sky;
     box-shadow: 0px 0px 2px alpha(black, .5);
 }
 
