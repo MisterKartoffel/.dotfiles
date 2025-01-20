@@ -1,10 +1,10 @@
+app.zen_browser.zen
 com.github.IsmaelMartinez.teams_for_linux
 com.github.tchx84.Flatseal
 com.obsproject.Studio
 dev.vencord.Vesktop
 io.ente.auth
 io.github.celluloid_player.Celluloid
-io.github.zen_browser.zen
 org.gnome.baobab
 org.keepassxc.KeePassXC
 org.prismlauncher.PrismLauncher
