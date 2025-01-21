@@ -3,6 +3,7 @@ export ZDOTDIR="$HOME/.dotfiles/.config/zsh/"
 export HISTFILE="$ZDOTDIR/.zsh_history"
 export PATH="$PATH:$HOME/.local/bin"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export DATA_YML="$HOME/.dotfiles/data.yml"
 export EDITOR=nvim
 export VISUAL=nvim
 export MANPAGER='nvim +Man!'
