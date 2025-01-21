@@ -6,7 +6,7 @@
 user=$1
 logFile="/home/${user}/.dotfiles/scripts/genpkglist.log"
 logTime="$(date --rfc-3339="seconds")"
-pkgListDir="/home/${user}/.dotfiles/.config/pkglists"
+pkgListDir="/home/${user}/.dotfiles/pkglists"
 
 function setupListings () {
     local creationTime
