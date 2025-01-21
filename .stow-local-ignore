@@ -1,13 +1,12 @@
 \.git
 \.gitignore
-\.gitmodules
 \.gitattributes
 \scripts
 
-.*.yaml
+.*.yaml$
+.*.md$
 ^/.stowrc
 ^/.zshenv
-^/todo.md
 
 ^/README.*
 ^/LICENSE.*
