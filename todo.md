@@ -2,14 +2,12 @@
 # ▀█▀ █▀█ █▀▄ █▀█
 # ░█░ █▄█ █▄▀ █▄█
 
-
 # TODO
 ## Essentials
-- [ ] Configure all custom channels in Television
-    *Note: Pending a new release fixing [#275](https://github.com/alexpasmantier/television/issues/275)*
 
 ## Non-essentials
-- [ ] Set up Neovim to work with LaTeX files.
+
+---
 
 # Completed
 ## Essentials
