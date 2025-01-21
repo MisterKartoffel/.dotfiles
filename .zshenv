@@ -20,7 +20,7 @@ export FZF_DEFAULT_OPTS=" \
     --multi"
 
 # Credentials
-export SOPS_AGE_KEY_FILE="$HOME/.sops/age/keys.txt"
-export DATA_YML="$HOME/.dotfiles/data.yml"
-export GH_TOKEN="$(cat $DATA_YML | yq '.github[]' | sed 's/\"//g')"
-export SPOTIFY_CLIENT_ID="$(cat $DATA_YML | yq '.spotify[]' | sed 's/\"//g')"
+export SOPS_AGE_KEY_FILE="${HOME}/.sops/age/keys.txt"
+export DATA_YML="${HOME}/.dotfiles/data.yml"
+export GH_TOKEN="$(yq -r '.github.oauth_token' ${DATA_YML})"
+export SPOTIFY_CLIENT_ID="$(yq -r '.spotify.client_id' ${DATA_YML})"
