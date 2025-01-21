@@ -18,12 +18,10 @@ github-cli
 gnu-free-fonts
 gptfdisk
 grim
-gtk-engine-murrine
 hypridle
 hyprland
 hyprlock
 hyprpicker
-inotify-tools
 intel-ucode
 kvantum
 kvantum-qt5
@@ -60,15 +58,12 @@ qt5-wayland
 qt5ct
 qt6-wayland
 qt6ct
-realtime-privileges
 refind
 reflector
 rofi-wayland
 rsync
-sassc
 satty
 slurp
-smartmontools
 snap-pac
 snapper
 sops
@@ -91,7 +86,6 @@ xdg-desktop-portal
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 xf86-video-amdgpu
-xorg-xhost
 yazi
 yq
 zathura

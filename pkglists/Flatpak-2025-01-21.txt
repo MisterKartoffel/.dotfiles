@@ -2,7 +2,6 @@ app.zen_browser.zen
 com.github.IsmaelMartinez.teams_for_linux
 com.github.tchx84.Flatseal
 com.obsproject.Studio
-com.quexten.Goldwarden
 dev.vencord.Vesktop
 io.ente.auth
 io.github.celluloid_player.Celluloid
