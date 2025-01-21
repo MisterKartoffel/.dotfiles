@@ -1,5 +1,5 @@
 theme = "Catppuccin-mocha"
-client_id_command = "grep -oG 'client_id: \\K(.*)' $DATA_YML"
+client_id_command = "cat $DATA_YML | yq '.spotify[]' | sed 's/\"//g'"
 login_redirect_uri = "http://127.0.0.1:8989/login"
 client_port = 8080
 tracks_playback_limit = 50
