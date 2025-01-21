@@ -1,5 +1,5 @@
 [[cable_channel]]
-name = "file"
+name = "files"
 source_command = "fd -t f -H . $HOME"
 preview_command = "bat -n --color=always {}"
 
@@ -9,7 +9,7 @@ source_command = "man -k . | cut -d ' ' -f 1"
 preview_command = "man {}"
 
 [[cable_channel]]
-name = "dir"
+name = "dirs"
 source_command = "fd -t d -H . $HOME"
 preview_command = "lsd -Al1 {}"
 

@@ -60,7 +60,7 @@ alias c="clear"
 
 # Helper functions
 function nf() { # Nvim find with television
-    tv file | xargs -ro nvim
+    tv files | xargs -ro nvim
 }
 
 function install() {

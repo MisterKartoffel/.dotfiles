@@ -167,16 +167,16 @@ toggle_preview = "ctrl-o"
 "unset" = "env"
 
 # dirs channel
-"cd" = "dir"
-"ls" = "dir"
-"rmdir" = "dir"
+"cd" = "dirs"
+"ls" = "dirs"
+"rmdir" = "dirs"
 
 # file channel
-"less" = "file"
-"head" = "file"
-"tail" = "file"
-"bat" = "file"
-"nvim" = "file"
+"less" = "files"
+"head" = "files"
+"tail" = "files"
+"bat" = "files"
+"nvim" = "files"
 
 # man channel
 "man" = "man"
