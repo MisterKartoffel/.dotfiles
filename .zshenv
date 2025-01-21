@@ -2,7 +2,7 @@
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export HISTFILE="$ZDOTDIR/.zsh_history"
 export PATH="$PATH:$HOME/.local/bin"
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-/run/user/1000}/ssh-agent.socket"
 
 # Applications
 export EDITOR=nvim
