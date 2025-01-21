@@ -2,6 +2,7 @@
 \.gitignore
 \.gitmodules
 \.gitattributes
+\scripts
 
 .*.yaml
 ^/.stowrc
