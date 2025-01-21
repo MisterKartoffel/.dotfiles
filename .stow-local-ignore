@@ -1,0 +1,13 @@
+\.git
+\.gitignore
+\.gitmodules
+\.gitattributes
+
+.*.yaml
+^/.stowrc
+^/.zshenv
+^/todo.md
+
+^/README.*
+^/LICENSE.*
+^/COPYING

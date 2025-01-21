@@ -1,3 +1,4 @@
+age
 alsa-firmware
 alsa-utils
 base
@@ -70,6 +71,7 @@ slurp
 smartmontools
 snap-pac
 snapper
+sops
 stow
 sudo
 swww
@@ -91,6 +93,7 @@ xdg-desktop-portal-hyprland
 xf86-video-amdgpu
 xorg-xhost
 yazi
+yq
 zathura
 zsh
 zsh-autosuggestions
