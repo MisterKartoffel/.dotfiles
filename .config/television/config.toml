@@ -181,10 +181,6 @@ toggle_preview = "ctrl-o"
 # man channel
 "man" = "man"
 
-# config channel
-"config add" = "config add"
-"config restore" = "config restore"
-
 # history channel
 "" = "history"
 
