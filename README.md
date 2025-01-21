@@ -8,7 +8,7 @@ Install the following dependencies:
 ```
 
 ## Installation
-First, clone this remote repository in your $HOME directory using git:
+First, clone this remote repository in your `$HOME` directory using git:
 ```text
 $ git clone git@github.com/MisterKartoffel/.dotfiles.git $HOME
 $ cd .dotfiles
@@ -19,7 +19,7 @@ Then use GNU Stow to create the necessary symlinks:
 $ stow .
 ```
 
-Finally, manually symlink `.zshenv` to $HOME:
+Finally, manually symlink `.zshenv` to `$HOME`:
 ```text
 $ ln -sf ./.zshenv $HOME/.zshenv
 ```
