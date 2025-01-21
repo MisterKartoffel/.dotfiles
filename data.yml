@@ -1,0 +1,22 @@
+spotify:
+    client_id: ENC[AES256_GCM,data:gUIJ9xAbppJjvodthxvZLzbxOar0OowIv1Bnn6wP2RM=,iv:LTB75Qam3xcsfM3bqnC2DncUhmGq9DvgXYmWbX1h0+s=,tag:9MfKvgVGEH5M4wrpHBhxQA==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1t4whmqu7wv7d6xmfgyqnsw4n38yuz54x227cm3vvljsgxyryfdhqfzeugw
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBSbDM5TkIwUkVWdUhGU3Nj
+            WUNMbngyOU5mVjF6Z2hFZEZTWk9HZlNneWprCitKYjhpU01YUDIrVEtHMU15aUtT
+            TnBKUjd5Z1NuQWMyd3VvN1cybEUvUkkKLS0tIHB6TWFwVDVDTTZBaDNsTkZTSWRy
+            M1pDKy8zczlCb1d2RVNlRjcyTkJ1d0UKkRiadAz25AM3y4LmrQZdWwh6Jbbr4XrJ
+            uRw1Ye5n/p5nT/5sYV04Pq92aI7l+JhryhlqhaL77NRGv2lIu6RJaQ==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2025-01-21T03:53:40Z"
+    mac: ENC[AES256_GCM,data:sxOHKprzNAWN43ln9YU3SdTjyoM/aa6AZWYbNS0/ioxYmT+7sGez5hPMWEs3RoHnrvVMmG2DHoTxbsfaSfF6UMSIX3vffVcD0CLQG2vdTbHDMuPdkfdl6aRPp7AIdCoZzxx87u66sigsd+0cuaBzAWlC9oaPaa6FUBFI7nVj5To=,iv:pTDbBgfCCTu1n+tbiBd72ql3UZAOjEyHLH5A4JNAeQM=,tag:yKHbt1HcqofwAVf9NyRf7Q==,type:str]
+    pgp: []
+    unencrypted_suffix: _unencrypted
+    version: 3.9.1
