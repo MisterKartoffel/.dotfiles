@@ -22,6 +22,5 @@ export FZF_DEFAULT_OPTS=" \
 # Credentials
 export SOPS_AGE_KEY_FILE="${HOME}/.sops/age/keys.txt"
 export CREDENTIAL_FILE="${HOME}/.dotfiles/credentials.yaml"
-export SPOTIFY_CLIENT_ID="$(yq -r '.spotify.client_id' ${CREDENTIAL_FILE})"
-export GH_TOKEN="$(yq -r '.github.personal_token' ${CREDENTIAL_FILE})"
-export BW_PASSWORD="$(yq -r '.bitwarden.password' ${CREDENTIAL_FILE})"
+export GH_TOKEN="$(sops decrypt --extract '["github"]["personal_token"]' ${CREDENTIAL_FILE})"
+export BW_PASSWORD="$(sops decrypt --extract '["bitwarden"]["password"]' ${CREDENTIAL_FILE})"

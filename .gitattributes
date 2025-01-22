@@ -1,1 +1,1 @@
-credentials.yaml    filter=encrypt-decrypt
+credentials.yaml    diff=sopsdiffer

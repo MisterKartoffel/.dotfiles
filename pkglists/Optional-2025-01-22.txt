@@ -5,6 +5,7 @@ fd
 geoclue
 glib2-devel
 imagemagick
+jq
 libnotify
 meson
 openexr
