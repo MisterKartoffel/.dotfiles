@@ -2,7 +2,6 @@
 # ▀█▀ █▀█ █▀▄ █▀█
 # ░█░ █▄█ █▄▀ █▄█
 
-- [ ] Configure Spotify_player keybindings.
 - [ ] Configure Zen Browser keybindings. 
 
 ---
@@ -36,3 +35,5 @@ Steps:
 Steps:
 1. Added `nowatchdog` to kernel parameters.
 2. Added `blacklist iTCO_wdt` to `/etc/modprobe.d/disable-iTCO_wdt.conf`
+
+- [x] Configure Spotify_player keybindings.
