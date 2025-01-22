@@ -3,10 +3,8 @@ com.github.IsmaelMartinez.teams_for_linux
 com.github.tchx84.Flatseal
 com.obsproject.Studio
 dev.vencord.Vesktop
-io.ente.auth
 io.github.celluloid_player.Celluloid
 org.gnome.baobab
-org.keepassxc.KeePassXC
 org.prismlauncher.PrismLauncher
 org.qbittorrent.qBittorrent
 org.rncbc.qpwgraph

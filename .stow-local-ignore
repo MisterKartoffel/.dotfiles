@@ -2,6 +2,7 @@
 \.gitignore
 \.gitattributes
 \scripts
+\pkglists
 
 .*.yaml$
 .*.md$
