@@ -2,10 +2,8 @@
 # ▀█▀ █▀█ █▀▄ █▀█
 # ░█░ █▄█ █▄▀ █▄█
 
-# TODO
-## Essentials
-
-## Non-essentials
+- [ ] Configure Spotify_player keybindings.
+- [ ] Configure Zen Browser keybindings. 
 
 ---
 
