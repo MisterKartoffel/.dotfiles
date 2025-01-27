@@ -1,14 +1,11 @@
 \.git
 \.gitignore
 \.gitattributes
-\scripts
-\pkglists
+/scripts
+/pkglists
 
-.*.yaml$
-.*.md$
-^/.stowrc
-^/.zshenv
-
+^.*\.(yaml|md)$
+^\.stowrc$
+^\.zshenv$
 ^/README.*
 ^/LICENSE.*
-^/COPYING
