@@ -6,6 +6,11 @@ return {
         "neovim/nvim-lspconfig",
     },
     opts = {
-        ui = { border = "rounded", },
+        ensure_installed = {
+            "pyright",
+            "mypy",
+            "black",
+        },
+        ui = { border = "rounded" },
     },
 }
