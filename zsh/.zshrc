@@ -54,7 +54,7 @@ zstyle ":fzf-tab:complete:cd:*" fzf-preview "ls --color $realpath"
 zstyle ":antidote:bundle" use-friendly-names "yes"
 
 # Aliases
-alias fetch="fastfetch --gpu-hide-type integrated"
+alias fetch="fastfetch --gpu-hide-type integrated --logo arch3"
 alias ls="lsd -Al1"
 alias c="clear"
 
