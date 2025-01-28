@@ -3,20 +3,13 @@ local on_attach = function(_, bufnr)
 end
 
 return {
-            lua_ls = {
-                filetypes = { "lua", },
-            },
-            pyright = {
-                filetypes = { "python", },
-            },
-            marksman = {},
-            bashls = {},
-            vimls = {},
-            yamlls = {},
-            cssls = {},
 	"neovim/nvim-lspconfig",
 	opts = {
 		servers = {
+			lua_ls = {},
+			pyright = {},
+			bashls = {},
+			vimls = {},
 		},
 	},
 

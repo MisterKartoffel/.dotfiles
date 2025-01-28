@@ -11,17 +11,18 @@ return {
     config = function()
         local null_ls = require("null-ls")
         local completion = null_ls.builtins.completion
-        local formatting = null_ls.builtins.formatting
         local diagnostics = null_ls.builtins.diagnostics
+        local formatting = null_ls.builtins.formatting
+        local hover = null_ls.builtins.hover
 
         null_ls.setup({
             sources = {
                 completion.luasnip,
+                formatting.black,
                 formatting.shfmt,
                 formatting.stylua,
-                formatting.biome,
-                formatting.black,
-                diagnostics.zsh,
+                diagnostics.mypy,
+                hover.printenv,
             },
             on_attach = function(client, bufnr)
                 if client.supports_method("textDocument/formatting") then
