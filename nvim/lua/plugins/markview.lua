@@ -11,9 +11,11 @@ return {
 		local presets = require("markview.presets")
 
 		markview.setup({
-			headings = presets.headings.glow,
-			checkboxes = presets.checkboxes.nerd,
-			tables = presets.tables.rounded,
+			markdown = {
+				headings = presets.headings.glow,
+				checkboxes = presets.checkboxes.nerd,
+				tables = presets.tables.rounded,
+			},
 		})
 	end,
 }
