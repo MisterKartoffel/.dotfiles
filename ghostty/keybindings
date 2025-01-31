@@ -17,7 +17,11 @@
         keybind = ctrl+physical:escape=close_surface
 
     # Split keybinds
-        keybind = ctrl+physical:s=new_split:auto
+        keybind = ctrl+physical:s>s=new_split:auto
+        keybind = ctrl+physical:s>h=new_split:left
+        keybind = ctrl+physical:s>j=new_split:down
+        keybind = ctrl+physical:s>k=new_split:up
+        keybind = ctrl+physical:s>l=new_split:right
 
         keybind = ctrl+left=resize_split:left,20
         keybind = ctrl+down=resize_split:down,20
