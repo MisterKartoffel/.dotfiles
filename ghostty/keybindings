@@ -29,7 +29,3 @@
         keybind = ctrl+physical:j=goto_split:bottom
         keybind = ctrl+physical:k=goto_split:top
         keybind = ctrl+physical:l=goto_split:right
-
-    # Window keybinds
-        # Not <C-n> not to interfere with <C-n> <C-p> operation in multiple applications.
-        keybind = ctrl+physical:a=new_window
