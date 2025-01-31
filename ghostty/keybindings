@@ -15,7 +15,7 @@
 # Surface keybinds
     # Close current split -> tab -> window
         # Not <C-w> not to interfere with <C-w> window operations in Neovim
-        keybind = ctrl+physical:escape=close_surface
+        keybind = ctrl+physical:q=close_surface
 
     # Split keybinds
         keybind = ctrl+physical:s>s=new_split:auto
