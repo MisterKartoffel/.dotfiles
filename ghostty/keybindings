@@ -1,3 +1,5 @@
+# vim: set filetype=dosini :
+
 # General keybinds
     keybind = clear
     keybind = ctrl+physical:v=paste_from_clipboard

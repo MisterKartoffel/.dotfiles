@@ -1,3 +1,5 @@
+# vim: set filetype=dosini :
+
 font-family = Maple Mono
 font-family = JetBrainsMono Nerd Font
 font-style = Medium
