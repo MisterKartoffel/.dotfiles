@@ -71,11 +71,6 @@
 			"keyColor": "green"
 		},
 		{
-			"type": "swap",
-			"key": "│ ├󰓡",
-			"keyColor": "green"
-		},
-		{
 			"type": "uptime",
 			"key": "│ ├󰅐",
 			"keyColor": "green"
