@@ -1,5 +1,29 @@
-[plugin]
-deps = [{ use = "yazi-rs/plugins:full-border", rev = "600614a" }, { use = "yazi-rs/plugins:max-preview", rev = "600614a" }, { use = "boydaihungst/file-extra-metadata", rev = "fdea1c6" }, { use = "Lil-Dank/lazygit", rev = "c82794f" }, { use = "iynaix/time-travel", rev = "85baafd" }, ]
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "8945e54"
+hash = "ae9e1d0c6bfd68cdebc98cc684c22b45"
 
-[flavor]
-deps = [{ use = "yazi-rs/flavors:catppuccin-mocha", rev = "fc8eeaa" }]
+[[plugin.deps]]
+use = "yazi-rs/plugins:max-preview"
+rev = "8945e54"
+hash = "15b2ff7f6563c14d5b2e93b3e9da35de"
+
+[[plugin.deps]]
+use = "boydaihungst/file-extra-metadata"
+rev = "dc8e790"
+hash = "c52ba4aed37df0772b6f699e135e72f"
+
+[[plugin.deps]]
+use = "Lil-Dank/lazygit"
+rev = "9f924e3"
+hash = "2b0c33928986f126d5c5a4cac31a6b46"
+
+[[plugin.deps]]
+use = "iynaix/time-travel"
+rev = "85baafd"
+hash = "653fca8253e8cc431e7b1ceacc53ccfc"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "fd85060"
+hash = "c40e434318a8ceffd01842f8dfb2390e"

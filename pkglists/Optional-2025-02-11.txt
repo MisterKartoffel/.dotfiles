@@ -1,9 +1,7 @@
 7zip
 chafa
-cmake
 fd
 geoclue
-glib2-devel
 imagemagick
 jq
 libnotify
