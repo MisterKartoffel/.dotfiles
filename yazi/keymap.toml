@@ -11,10 +11,6 @@ prepend_keymap = [
 
 { on = "T", run = "plugin max-preview", desc = "Maximize or restore preview" },
 
-{ on = [ "z", "h" ],    run = "plugin time-travel --args=prev", desc = "Go to previous snapshot" },
-{ on = [ "z", "l" ],    run = "plugin time-travel --args=next", desc = "Go to next snapshot" },
-{ on = [ "z", "e" ],    run = "plugin time-travel --args=exit", desc = "Exit browsing snapshots" },
-
 { on = [ "g", "r" ],    run = "plugin lazygit", desc = "Open LazyGit" },
 ]
 

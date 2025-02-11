@@ -18,11 +18,6 @@ use = "Lil-Dank/lazygit"
 rev = "9f924e3"
 hash = "2b0c33928986f126d5c5a4cac31a6b46"
 
-[[plugin.deps]]
-use = "iynaix/time-travel"
-rev = "85baafd"
-hash = "653fca8253e8cc431e7b1ceacc53ccfc"
-
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "fd85060"
