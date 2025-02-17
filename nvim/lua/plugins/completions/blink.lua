@@ -77,7 +77,9 @@ return {
 			per_filetype = {
 				markdown = { "buffer", "path" },
 			},
-			cmdline = function()
+		},
+		cmdline = {
+			sources = function()
 				local type = vim.fn.getcmdtype()
 				if type == "/" or type == "?" then
 					return { "buffer" }
