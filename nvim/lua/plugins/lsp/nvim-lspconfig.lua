@@ -1,7 +1,3 @@
-local on_attach = function(_, bufnr)
-	return { buffer = bufnr }
-end
-
 return {
 	"neovim/nvim-lspconfig",
 	opts = {
@@ -14,6 +10,10 @@ return {
 	},
 
 	config = function(_, opts)
+		local on_attach = function(_, bufnr)
+			return { bufnr = bufnr }
+		end
+
 		local lspconfig = require("lspconfig")
 		for server, config in pairs(opts.servers) do
 			config.on_attach = on_attach
