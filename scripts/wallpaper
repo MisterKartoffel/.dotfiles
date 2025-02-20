@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 if [ "$1" = "random" ]; then
-    WALLPAPER="$(fd -t f --full-path ${XDG_PICTURES_DIR:-$HOME/Pictures}/Wallpapers | shuf -n 1)"
+	WALLPAPER="$(fd -t f --full-path "${XDG_PICTURES_DIR:-$HOME/Pictures}"/Wallpapers | shuf -n 1)"
 else
-    WALLPAPER="$1"
+	WALLPAPER="$1"
 fi
 
-ln -f "$WALLPAPER" $HOME/.background    # Update hyprlock background to new wallpaper
-swww img "$HOME/.background"            # Set new wallpaper
+ln -f "$WALLPAPER" "$HOME"/.background # Update hyprlock background to new wallpaper
+swww img "$HOME/.background"           # Set new wallpaper
