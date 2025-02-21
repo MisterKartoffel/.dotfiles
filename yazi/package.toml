@@ -13,11 +13,6 @@ use = "boydaihungst/file-extra-metadata"
 rev = "dc8e790"
 hash = "c52ba4aed37df0772b6f699e135e72f"
 
-[[plugin.deps]]
-use = "Lil-Dank/lazygit"
-rev = "9f924e3"
-hash = "2b0c33928986f126d5c5a4cac31a6b46"
-
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
 rev = "fd85060"
