@@ -1,19 +1,19 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "8945e54"
+rev = "5186af7"
 hash = "ae9e1d0c6bfd68cdebc98cc684c22b45"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:max-preview"
-rev = "8945e54"
-hash = "15b2ff7f6563c14d5b2e93b3e9da35de"
+rev = "5186af7"
+hash = "a8025f2bb311e869069364fba01abffc"
 
 [[plugin.deps]]
 use = "boydaihungst/file-extra-metadata"
-rev = "dc8e790"
-hash = "c52ba4aed37df0772b6f699e135e72f"
+rev = "9a38001"
+hash = "b504fc1ec260e2a7136ff3dfa4372507"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "fd85060"
+rev = "df95930"
 hash = "c40e434318a8ceffd01842f8dfb2390e"

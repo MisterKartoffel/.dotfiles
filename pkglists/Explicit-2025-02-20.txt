@@ -4,7 +4,6 @@ alsa-utils
 base
 base-devel
 bat
-bitwarden-cli
 brightnessctl
 btop
 btrfs-progs
@@ -58,7 +57,6 @@ qt5-wayland
 qt5ct
 qt6-wayland
 qt6ct
-refind
 reflector
 rofi-wayland
 rsync
@@ -89,7 +87,7 @@ xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 xf86-video-amdgpu
 yazi
-zram-generator
+zip
 zsh
 zsh-autosuggestions
 zsh-syntax-highlighting
