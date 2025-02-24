@@ -103,8 +103,8 @@ git:
     overrideGpg: false
     disableForcePushing: false
     commitPrefix:
-        pattern: ""
-        replace: ""
+        - pattern: ""
+          replace: ""
     branchPrefix: ""
     parseEmoji: false
     log:
