@@ -29,7 +29,6 @@ bindkey -v
 # History
 HISTSIZE=1000
 SAVEHIST=$HISTSIZE
-HISTFILE=$XDG_CACHE_HOME/zsh_history
 HISTDUP=erase
 
 # Options
