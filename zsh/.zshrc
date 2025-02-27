@@ -28,8 +28,8 @@ bindkey -v
 
 # History
 HISTSIZE=1000
-HISTFILE=$ZDOTDIR/.zsh_history
 SAVEHIST=$HISTSIZE
+HISTFILE=$XDG_CACHE_HOME/zsh_history
 HISTDUP=erase
 setopt appendhistory
 setopt sharehistory
@@ -40,6 +40,7 @@ setopt hist_ignore_dups
 setopt hist_find_no_dups
 setopt globdots
 setopt correct_all
+compinit -d "XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
 
 # Shell integrations
 eval "$(tv init zsh)"
@@ -50,6 +51,7 @@ zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
 zstyle ":completion:*:descriptions" format "[%d]"
 zstyle ":completion:*" special-dirs true
 zstyle ":completion:*" menu no
+zstyle ":completion:*" cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 zstyle ":fzf-tab:complete:cd:*" fzf-preview "ls --color $realpath"
 zstyle ":antidote:bundle" use-friendly-names "yes"
 
