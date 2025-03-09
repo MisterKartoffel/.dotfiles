@@ -48,23 +48,13 @@ toggle_send_to_channel = "ctrl-s"
 toggle_help = "ctrl-g"
 toggle_preview = "ctrl-o"
 
-[shell_integration.commands]
-"export" = "env"
-"unset" = "env"
-
-"cd" = "dirs"
-"ls" = "dirs"
-"rmdir" = "dirs"
-
-"less" = "files"
-"head" = "files"
-"tail" = "files"
-"bat" = "files"
-"nvim" = "files"
-
-"man" = "man"
-
-"" = "history"
+[shell_integration.channel_triggers]
+"env" = [ "set", "unset", ]
+"dirs" = [ "cd", "ls", "rmdir", ]
+"files" = [ "less", "head", "tail", "bat", "nvim", ]
+"image" = [ "chafa", "wallpaper", ]
+"man" = [ "man", ]
+"history" = [ "", ]
 
 # image channel (Disabled while television doesn't support image previews)
 # "chafa" = "image"
