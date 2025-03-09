@@ -17,7 +17,7 @@ preview_command = "lsd -Al1 {}"
 name = "history"
 source_command = "bat -n $HISTFILE | cut -d ';' -f 2-"
 
-# [[cable_channel]] (Disabled while television doesn't support image previews)
-# name = "image"
-# source_command = "fd -t f . $HOME | xargs file --mime-type | rg -F 'image/' | cut -d ':' -f 1"
-# preview_command = "xargs -ro chafa -f kitty"
+[[cable_channel]]
+name = "image"
+source_command = "fd -t f . $HOME | xargs file --mime-type | rg -F 'image/' | cut -d ':' -f 1"
+preview_command = ":files:"

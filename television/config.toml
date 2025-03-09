@@ -55,7 +55,3 @@ toggle_preview = "ctrl-o"
 "image" = [ "chafa", "wallpaper", ]
 "man" = [ "man", ]
 "history" = [ "", ]
-
-# image channel (Disabled while television doesn't support image previews)
-# "chafa" = "image"
-# "wallpaper" = "image"
