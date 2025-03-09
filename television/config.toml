@@ -13,8 +13,8 @@ theme = "Catppuccin-Mocha"
 
 [keybindings.Channel]
 quit = "esc"
-select_next_entry = ["down", "ctrl-n", "ctrl-j"]
-select_prev_entry = ["up", "ctrl-p", "ctrl-k"]
+select_next_entry = [ "down", "ctrl-n", ]
+select_prev_entry = [ "up", "ctrl-p", ]
 select_next_page = "pagedown"
 select_prev_page = "pageup"
 scroll_preview_half_page_down = "ctrl-d"
@@ -28,8 +28,8 @@ toggle_preview = "ctrl-o"
 
 [keybindings.RemoteControl]
 quit = "esc"
-select_next_entry = ["down", "ctrl-n", "ctrl-j"]
-select_prev_entry = ["up", "ctrl-p", "ctrl-k"]
+select_next_entry = [ "down", "ctrl-n", ]
+select_prev_entry = [ "up", "ctrl-p", ]
 select_next_page = "pagedown"
 select_prev_page = "pageup"
 select_entry = "enter"
@@ -39,8 +39,8 @@ toggle_preview = "ctrl-o"
 
 [keybindings.SendToChannel]
 quit = "esc"
-select_next_entry = ["down", "ctrl-n", "ctrl-j"]
-select_prev_entry = ["up", "ctrl-p", "ctrl-k"]
+select_next_entry = [ "down", "ctrl-n", ]
+select_prev_entry = [ "up", "ctrl-p", ]
 select_next_page = "pagedown"
 select_prev_page = "pageup"
 select_entry = "enter"
