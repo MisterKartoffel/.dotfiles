@@ -27,4 +27,3 @@ gtk-adwaita = false
 
 config-file = ?keybindings
 config-file = ?maple-mono-font-features
-# config-file = ?monaspace-font-features
