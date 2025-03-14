@@ -68,11 +68,11 @@ function nf() { # Nvim find with television
 }
 
 function install() {
-    paru -Slq | tv -p 'paru -Si {}' | xargs -ro paru -S
+    tv install-packages | xargs -ro paru -S
 }
 
 function uninstall() {
-    paru -Qq | tv -p 'paru -Qi {}' | xargs -ro paru -Rns
+    tv uninstall-packages | xargs -ro paru -Rns
 }
 
 function stray() {

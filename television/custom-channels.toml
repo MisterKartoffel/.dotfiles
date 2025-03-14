@@ -21,3 +21,13 @@ source_command = "bat -n $HISTFILE | cut -d ';' -f 2-"
 name = "image"
 source_command = "fd -t f . $HOME | xargs file --mime-type | rg -F 'image/' | cut -d ':' -f 1"
 preview_command = ":files:"
+
+[[cable_channel]]
+name = "install-packages"
+source_command = "paru -Sl"
+preview_command = "paru -Si {1}"
+
+[[cable_channel]]
+name = "uninstall-packages"
+source_command = "paru -Q"
+preview_command = "paru -Qi {1}"
