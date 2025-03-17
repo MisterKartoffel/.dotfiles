@@ -1,11 +1,11 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "2bf70d8"
-hash = "9dce00232a0e0e2502565c7aa2b0ed4e"
+rev = "79193b3"
+hash = "1f3dad061209081a6b04dd6ff2cb06c7"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:max-preview"
-rev = "2bf70d8"
+rev = "79193b3"
 hash = "a8025f2bb311e869069364fba01abffc"
 
 [[plugin.deps]]
@@ -15,5 +15,5 @@ hash = "e55d11c23b7b70cf7015503f24d42205"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"
-rev = "b929df6"
+rev = "68326b4"
 hash = "2ac87e1b3a61f5887472899e86535d29"

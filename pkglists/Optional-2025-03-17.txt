@@ -2,10 +2,7 @@
 chafa
 fd
 geoclue
-imagemagick
 jq
 libnotify
-meson
-openexr
 poppler
 ripgrep
