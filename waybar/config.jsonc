@@ -12,7 +12,7 @@
 		"format": "{icon}",
 		"format-icons": {
 			"1": "",
-			"2": "",
+			"2": "󰖟",
 			"3": "",
 			"default": "",
 			"empty": ""
@@ -24,8 +24,6 @@
 
 	"hyprland/window": {
 		"format": "{initialTitle}",
-		"icon": true,
-		"icon-size": 20
 	},
 
 	"idle_inhibitor": {
