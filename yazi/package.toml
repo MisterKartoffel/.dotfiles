@@ -4,11 +4,6 @@ rev = "79193b3"
 hash = "1f3dad061209081a6b04dd6ff2cb06c7"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:max-preview"
-rev = "79193b3"
-hash = "a8025f2bb311e869069364fba01abffc"
-
-[[plugin.deps]]
 use = "boydaihungst/file-extra-metadata"
 rev = "031999d"
 hash = "e55d11c23b7b70cf7015503f24d42205"
