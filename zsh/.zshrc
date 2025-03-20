@@ -27,21 +27,19 @@ source ${zsh_plugins}.zsh
 bindkey -v
 
 # History
-HISTSIZE=1000
+HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
 
 # Options
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
-setopt autocd
-setopt globdots
-setopt correct_all
+setopt AUTOCD
+setopt GLOB_DOTS
+setopt APPENDHISTORY
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_SAVE_NO_DUPS
+setopt SHAREHISTORY
 compinit -d "XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
 
 # Shell integrations
