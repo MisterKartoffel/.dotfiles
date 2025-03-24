@@ -23,11 +23,11 @@ source_command = "fd -t f . $HOME | xargs file --mime-type | rg -F 'image/' | cu
 preview_command = ":files:"
 
 [[cable_channel]]
-name = "install-packages"
+name = "remote-package-list"
 source_command = "paru -Sl"
 preview_command = "paru -Si {1}"
 
 [[cable_channel]]
-name = "uninstall-packages"
+name = "local-package-list"
 source_command = "paru -Q"
 preview_command = "paru -Qi {1}"
