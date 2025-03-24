@@ -32,10 +32,10 @@ toggle_preview = "ctrl-o"
 fallback_channel = "files"
 
 [shell_integration.channel_triggers]
-"env" = [ "set", "unset", ]
-"dirs" = [ "cd", "ls", "rmdir", ]
 "files" = [ "less", "head", "tail", "bat", "nvim", ]
+"dirs" = [ "cd", "ls", "rmdir", ]
 "image" = [ "chafa", "wallpaper", ]
+"env" = [ "set", "unset", ]
 "man" = [ "man", ]
 "history" = [ "", ]
 
