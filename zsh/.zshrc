@@ -66,11 +66,11 @@ function nf() { # Nvim find with television
 }
 
 function install() {
-    tv install-packages | xargs -ro paru -S
+    tv install-packages | cut -d ' ' -f 2 | xargs -ro paru -S
 }
 
 function uninstall() {
-    tv uninstall-packages | xargs -ro paru -Rns
+    tv uninstall-packages | cut -d ' ' -f 2  | xargs -ro paru -Rns
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
