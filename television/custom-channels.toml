@@ -30,4 +30,4 @@ preview_command = "paru -Si {1}"
 [[cable_channel]]
 name = "local-package-list"
 source_command = "paru -Q"
-preview_command = "paru -Qi {1}"
+preview_command = "paru -Qi {0}"
