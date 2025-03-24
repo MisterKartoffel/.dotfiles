@@ -53,6 +53,9 @@
     font-feature = -cv36
     # italic x without tail, just like regular style
 
+    font-feature = -cv37
+    # italic y with straight intersection, just like regular style
+
 # Style sets
 
     font-feature = ss01
