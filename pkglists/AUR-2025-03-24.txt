@@ -1,7 +1,7 @@
 bibata-cursor-theme-bin
 catppuccin-gtk-theme-mocha
 downgrade
+maplemono-ttf-autohint
 paru-bin
 spotify-player-full
-ttf-maple-beta
 zsh-antidote

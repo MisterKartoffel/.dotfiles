@@ -6,3 +6,4 @@ jq
 libnotify
 poppler
 ripgrep
+uwsm

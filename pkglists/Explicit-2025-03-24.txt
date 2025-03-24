@@ -76,7 +76,6 @@ ttf-jetbrains-mono
 ttf-jetbrains-mono-nerd
 ufw
 unzip
-uwsm
 vivid
 vulkan-mesa-layers
 vulkan-radeon
