@@ -13,6 +13,7 @@ return {
 		markview.setup({
 			markdown = {
 				headings = presets.headings.glow,
+				horizontal_rules = presets.horizontal_rules.arrowed,
 				checkboxes = presets.checkboxes.nerd,
 				tables = presets.tables.rounded,
 			},
