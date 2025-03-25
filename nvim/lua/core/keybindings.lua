@@ -1,4 +1,3 @@
-
 -- █▄▀ █▀▀ █▄█ █▄▄ █ █▄░█ █▀▄ █ █▄░█ █▀▀ █▀
 -- █░█ ██▄ ░█░ █▄█ █ █░▀█ █▄▀ █ █░▀█ █▄█ ▄█
 
@@ -14,8 +13,6 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- Vanilla Neovim
-map({ "n", "v", "i" }, "<C-ç>", "<CR>", { desc = "Remaps CTRL+ç to ENTER" })
-
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected string down a line and autoindent" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected string up a line and autoindent" })
 
