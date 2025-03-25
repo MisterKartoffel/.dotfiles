@@ -37,6 +37,10 @@ map("n", "<leader>qc", ":cclose<CR>", { desc = "Close quickfix list" })
 map("n", "[q", ":cprev<CR>", { desc = "Go to previous item in quickfix list" })
 map("n", "]q", ":cnext<CR>", { desc = "Go to next item in quickfix list" })
 
+map("n", "<leader>lc", ":lclose<CR>", { desc = "Close location list" })
+map("n", "[l", ":lprev<CR>", { desc = "Go to previous item in location list" })
+map("n", "]l", ":lnext<CR>", { desc = "Go to next item in location list" })
+
 -- Lazy and Mason
 map("n", "<leader>pl", ":Lazy<CR>", { desc = "Open Lazy.nvim UI" })
 map("n", "<leader>pm", ":Mason<CR>", { desc = "Open Mason UI" })
