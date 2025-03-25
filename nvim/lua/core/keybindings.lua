@@ -51,8 +51,6 @@ map("n", "<leader>lf", vim.lsp.buf.format, { desc = "[L]SP auto[f]ormatting" })
 map("n", "<leader>mt", ":Markview<CR>", { desc = "[M]arkview [t]oggle" })
 
 -- Snacks.picker
-map("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "[F]ind [f]iles in CWD" })
-map("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "[F]ind [r]ecently opened files" })
 map("n", "<leader>fc", function()
 	Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[F]ind files in [n]eovim configuration directory" })
@@ -74,6 +72,9 @@ end, { desc = "[F]ind page in [m]anpages" })
 map("n", "<leader>fp", function()
 	Snacks.picker()
 end, { desc = "[F]ind [p]icker" })
+map("n", "<leader>fs", function()
+	Snacks.picker.smart()
+end, { desc = "[F]ind among open buffers, recent files and files in CWD" })
 
 -- Snacks.scratch
 map("n", "<leader>st", function()
