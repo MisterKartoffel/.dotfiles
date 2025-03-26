@@ -1,7 +1,7 @@
 # vim: set filetype=dosini :
 
 font-family = Maple Mono
-font-family = JetBrainsMono Nerd Font
+font-family = Maple Mono NF
 font-style = Medium
 font-size = 14
 
