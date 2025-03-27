@@ -27,3 +27,8 @@ end, 3300, Status.LEFT)
 require("full-border"):setup({
 	type = ui.Border.ROUNDED,
 })
+
+-- Sync yanked files across Yazi sessions
+require("session"):setup({
+	sync_yanked = true,
+})
