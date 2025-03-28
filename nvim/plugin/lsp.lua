@@ -44,7 +44,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         if client:supports_method("textDocument/completion") then
-            vim.lsp.completion.enable(true, client.id, args.buf, {})
+            vim.lsp.completion.enable(true, client.id, args.buf, {
+                autotrigger = true,
+                convert = function(item)
+                    return { abbr = item.label:gsub("%b()", "") }
+                end
+            })
             map("i", "<C-Space>", vim.lsp.completion.get, { desc = "Display [L]SP [c]ompletions" })
         end
 
@@ -68,8 +73,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         if client:supports_method("textDocument/implementation") then
-            vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation,
+            map("n", "<leader>li", vim.lsp.buf.implementation,
                 { desc = "List [L]SP [i]mplementations for currently hovered symbol" })
+        end
+
+        if client:supports_method("textDocument/signatureHelp") then
+            map("n", "<leader>ls", vim.lsp.buf.signature_help,
+                { desc = "Display [L]SP [s]ignature help for currently hovered symbol" })
         end
 
         if not client:supports_method("textDocument/willSaveWaitUntil") and client:supports_method("textDocument/formatting") then

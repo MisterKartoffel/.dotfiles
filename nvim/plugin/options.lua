@@ -1,4 +1,3 @@
-
 -- █▀▀ █░░ █▀█ █▄▄ ▄▀█ █░░   █▀ █▀▀ ▀█▀ ▀█▀ █ █▄░█ █▀▀ █▀
 -- █▄█ █▄▄ █▄█ █▄█ █▀█ █▄▄   ▄█ ██▄ ░█░ ░█░ █ █░▀█ █▄█ ▄█
 
@@ -13,7 +12,7 @@ set.termguicolors = true
 set.nu = true
 set.relativenumber = true
 set.showmode = false
-set.winborder = "rounded"
+vim.o.winborder = "rounded"
 
 set.smartindent = true
 set.wrap = false
@@ -34,5 +33,6 @@ set.incsearch = true
 set.clipboard = "unnamedplus"
 
 set.swapfile = false
+set.completeopt = "fuzzy,menuone,preview,noinsert"
 
 vim.cmd("colorscheme catppuccin")
