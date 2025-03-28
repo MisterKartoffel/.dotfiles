@@ -3,13 +3,13 @@
 
 -- Saves having to define default options for all keymaps, shamelessly stolen from https://github.com/Bvngee/nixconf
 local function map(mode, lhs, rhs, opts)
-	local default_opts = { silent = true }
-	if opts then
-		opts = vim.tbl_extend("force", default_opts, opts)
-	else
-		opts = default_opts
-	end
-	vim.keymap.set(mode, lhs, rhs, opts)
+    local default_opts = { silent = true }
+    if opts then
+        opts = vim.tbl_extend("force", default_opts, opts)
+    else
+        opts = default_opts
+    end
+    vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 -- Vanilla Neovim
@@ -53,50 +53,50 @@ map("n", "<leader>mt", ":Markview<CR>", { desc = "[M]arkview [t]oggle" })
 
 -- Snacks.picker
 map("n", "<leader>fc", function()
-	Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+    Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[F]ind files in [n]eovim configuration directory" })
 map("n", "<leader>fg", function()
-	Snacks.picker.grep()
+    Snacks.picker.grep()
 end, { desc = "[F]ind string in CWD with [g]rep" })
 map("n", "<leader>fh", function()
-	Snacks.picker.help()
+    Snacks.picker.help()
 end, { desc = "[F]ind string in [h]elp tags" })
 map("n", "<leader>fk", function()
-	Snacks.picker.keymaps()
+    Snacks.picker.keymaps()
 end, { desc = "[F]ind [k]eymaps" })
 map("n", "<leader>fl", function()
-	Snacks.picker.lines()
+    Snacks.picker.lines()
 end, { desc = "[F]ind [l]ines in current buffer" })
 map("n", "<leader>fm", function()
-	Snacks.picker.man()
+    Snacks.picker.man()
 end, { desc = "[F]ind page in [m]anpages" })
 map("n", "<leader>fn", function()
-	Snacks.picker.notifications()
+    Snacks.picker.notifications()
 end, { desc = "[F]ind [n]otifications" })
 map("n", "<leader>fo", function()
-	Snacks.picker.loclist()
+    Snacks.picker.loclist()
 end, { desc = "[F]ind item in l[o]cation list" })
 map("n", "<leader>fp", function()
-	Snacks.picker()
+    Snacks.picker()
 end, { desc = "[F]ind [p]icker" })
 map("n", "<leader>fq", function()
-	Snacks.picker.qflist()
+    Snacks.picker.qflist()
 end, { desc = "[F]ind item in [q]uickfix list" })
 map("n", "<leader>fs", function()
-	Snacks.picker.smart()
+    Snacks.picker.smart()
 end, { desc = "[F]ind among open buffers, recent files and files in CWD" })
 
 -- Snacks.scratch
 map("n", "<leader>st", function()
-	Snacks.scratch.open()
+    Snacks.scratch.open()
 end, { desc = "[S]cratch buffer [t]oggle" })
 map("n", "<leader>ss", function()
-	Snacks.scratch.select()
+    Snacks.scratch.select()
 end, { desc = "[S]cratch buffer [s]elect" })
 
 -- Which-key
 map("n", "<leader>?", function()
-	require("which-key").show({ global = true })
+    require("which-key").show({ global = true })
 end, { desc = "Show keymaps" })
 
 -- Yazi
