@@ -1,8 +1,3 @@
-require("core.lazy")
-require("core.options")
-require("core.keybindings")
-require("core.autocmd")
-
 -- LSP setup for servers configured in lsp/*
 local configs = {}
 

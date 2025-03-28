@@ -31,12 +31,6 @@ map("n", "<leader>wq", ":wqa<CR>", { desc = "Save and quit all buffers" })
 map("n", "<leader>pl", ":Lazy<CR>", { desc = "Open Lazy.nvim UI" })
 map("n", "<leader>pm", ":Mason<CR>", { desc = "Open Mason UI" })
 
--- LSP
-map("n", "<leader>lh", vim.lsp.buf.hover, { desc = "Display [L]SP [h]over info about symbol under cursor" })
-map("n", "<leader>ld", vim.lsp.buf.definition, { desc = "Jump to [L]SP [d]efinition for symbol under cursor" })
-map("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Displays [L]SP [a]ctions for annotation under cursor" })
-map("n", "<leader>lf", vim.lsp.buf.format, { desc = "[L]SP auto[f]ormatting" })
-
 -- Markview
 map("n", "<leader>mt", ":Markview<CR>", { desc = "[M]arkview [t]oggle" })
 
