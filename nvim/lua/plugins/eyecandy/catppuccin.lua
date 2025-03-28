@@ -15,7 +15,7 @@ return {
                 scope_color = "text",
             },
             mason = true,
-            mini = {
+            mini = { enabled = true, },
                 enabled = true,
             },
             noice = true,
