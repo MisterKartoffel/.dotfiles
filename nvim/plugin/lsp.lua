@@ -64,6 +64,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         if client:supports_method("textDocument/formatting") then
             map("n", "<leader>lf", vim.lsp.buf.format, { desc = "[L]SP auto[f]ormatting" })
+
+            if not client:supports_method("textDocument/willSaveWaitUntil") then
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                    group = vim.api.nvim_create_augroup("LSPformat", { clear = false }),
+                    buffer = args.buf,
+                    callback = function()
+                        vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
+                    end,
+                })
+            end
         end
 
         if not client:supports_method("textDocument/hover") then
@@ -78,16 +88,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         if client:supports_method("textDocument/signatureHelp") then
             map("n", "<leader>ls", vim.lsp.buf.signature_help,
                 { desc = "Display [L]SP [s]ignature help for currently hovered symbol" })
-        end
-
-        if not client:supports_method("textDocument/willSaveWaitUntil") and client:supports_method("textDocument/formatting") then
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                group = vim.api.nvim_create_augroup("LSPformat", { clear = false }),
-                buffer = args.buf,
-                callback = function()
-                    vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
-                end,
-            })
         end
     end,
 })
