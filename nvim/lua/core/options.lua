@@ -12,6 +12,8 @@ set.termguicolors = true
 
 set.nu = true
 set.relativenumber = true
+set.showmode = false
+set.winborder = "rounded"
 
 set.smartindent = true
 set.wrap = false
@@ -30,5 +32,7 @@ set.inccommand = "split"
 set.hlsearch = false
 set.incsearch = true
 set.clipboard = "unnamedplus"
+
+set.swapfile = false
 
 vim.cmd("colorscheme catppuccin")
