@@ -58,10 +58,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 { desc = "Jump to [L]SP [d]efinition for symbol under cursor" })
         end
 
-        -- [TODO]: Find out how to move diagnostic stuff from init.lua into here
         if client:supports_method("textDocument/diagnostic") then
-            map("n", "<leader>le", vim.diagnostic.enable(not vim.diagnostic.is_enabled()),
-                { desc = "Toggle [L]SP [v]irtual line diagnostics" })
+            vim.diagnostic.enable()
+            map("n", "<leader>lt", function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
+                { desc = "[L]SP diagnostics [t]oggle" })
         end
 
         if client:supports_method("textDocument/formatting") then
