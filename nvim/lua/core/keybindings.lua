@@ -16,9 +16,6 @@ end
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected string down a line and autoindent" })
 map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected string up a line and autoindent" })
 
-map("n", "<A-o>", "o<Esc>", { desc = "Create a new line below and stay in normal mode" })
-map("n", "<A-O>", "O<Esc>", { desc = "Create a new line above and stay in normal mode" })
-
 map("n", "J", "mzJ`z", { desc = "Append line below while keeping cursor still" })
 map("n", "<C-d>", "<C-d>zz", { desc = "Scroll half page down and center screen on cursor" })
 map("n", "<C-u>", "<C-u>zz", { desc = "Scroll half page up and center screen on cursor" })
@@ -29,14 +26,6 @@ map({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without copying" })
 map("n", "<leader><leader>", ":w<CR> :so<CR>", { desc = "Save and source current file" })
 map("n", "<leader>wa", ":wa<CR>", { desc = "Save all buffers" })
 map("n", "<leader>wq", ":wqa<CR>", { desc = "Save and quit all buffers" })
-
-map("n", "<leader>qc", ":cclose<CR>", { desc = "Close quickfix list" })
-map("n", "[q", ":cprev<CR>", { desc = "Go to previous item in quickfix list" })
-map("n", "]q", ":cnext<CR>", { desc = "Go to next item in quickfix list" })
-
-map("n", "<leader>lc", ":lclose<CR>", { desc = "Close location list" })
-map("n", "[l", ":lprev<CR>", { desc = "Go to previous item in location list" })
-map("n", "]l", ":lnext<CR>", { desc = "Go to next item in location list" })
 
 -- Lazy and Mason
 map("n", "<leader>pl", ":Lazy<CR>", { desc = "Open Lazy.nvim UI" })

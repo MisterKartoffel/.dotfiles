@@ -1,6 +1,4 @@
 return {
-				border = "single",
-				window = { border = "single" },
     "saghen/blink.cmp",
     event = "VeryLazy",
     dependencies = {
