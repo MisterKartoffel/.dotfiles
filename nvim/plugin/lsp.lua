@@ -85,6 +85,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
                 { desc = "List [L]SP [i]mplementations for currently hovered symbol" })
         end
 
+        if client:supports_method("textDocument/inlayHint") then
+            map("n", "<leader>lh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+                { desc = "Toggle [L]SP inlay [h]int" })
+        end
+
         if client:supports_method("textDocument/signatureHelp") then
             map("n", "<leader>ls", vim.lsp.buf.signature_help,
                 { desc = "Display [L]SP [s]ignature help for currently hovered symbol" })
