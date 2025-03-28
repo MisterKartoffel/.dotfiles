@@ -13,11 +13,8 @@ set.termguicolors = true
 set.nu = true
 set.relativenumber = true
 
-set.autoindent = true
 set.smartindent = true
-set.smarttab = true
 set.wrap = false
-set.foldmethod = "manual"
 
 set.ignorecase = true
 set.smartcase = true
@@ -35,4 +32,3 @@ set.incsearch = true
 set.clipboard = "unnamedplus"
 
 vim.cmd("colorscheme catppuccin")
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
