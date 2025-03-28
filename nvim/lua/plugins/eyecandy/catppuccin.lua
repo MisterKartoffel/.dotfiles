@@ -31,7 +31,7 @@ return {
                 },
                 inlay_hints = { background = true, },
             },
-            snacks = { enabled = true },
+            snacks = { enabled = true, },
             treesitter = true,
             which_key = true,
         },
