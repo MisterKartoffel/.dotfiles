@@ -1,5 +1,5 @@
 return {
     "mikavilpas/yazi.nvim",
-    cmd = { "Yazi" },
+    cmd = { "Yazi", },
     opts = { open_for_directories = true, },
 }

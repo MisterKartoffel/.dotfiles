@@ -1,4 +1,3 @@
-
 -- █▀▀ █░░ █▀█ █▄▄ ▄▀█ █░░   █▀ █▀▀ ▀█▀ ▀█▀ █ █▄░█ █▀▀ █▀
 -- █▄█ █▄▄ █▄█ █▄█ █▀█ █▄▄   ▄█ ██▄ ░█░ ░█░ █ █░▀█ █▄█ ▄█
 
@@ -12,12 +11,11 @@ set.termguicolors = true
 
 set.nu = true
 set.relativenumber = true
+set.showmode = false
+vim.o.winborder = "rounded"
 
-set.autoindent = true
 set.smartindent = true
-set.smarttab = true
 set.wrap = false
-set.foldmethod = "manual"
 
 set.ignorecase = true
 set.smartcase = true
@@ -34,5 +32,7 @@ set.hlsearch = false
 set.incsearch = true
 set.clipboard = "unnamedplus"
 
+set.swapfile = false
+set.completeopt = "fuzzy,menuone,preview,noinsert"
+
 vim.cmd("colorscheme catppuccin")
-vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
