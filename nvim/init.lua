@@ -16,13 +16,10 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Mapping <leader> here to stop Lazy from erroring out
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 require("lazy").setup({
-    spec = {
-        { import = "plugins" },
-        { import = "plugins.eyecandy" },
-        -- { import = "plugins.completions" },
-    },
+    spec = { import = "plugins", },
     ui = { border = "rounded", },
     change_detection = { notify = false, },
     install = { colorscheme = { "catppuccin" }, },
