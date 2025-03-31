@@ -33,12 +33,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         if client:supports_method("textDocument/completion") then
-            vim.lsp.completion.enable(true, client.id, args.buf, {
-                autotrigger = true,
-                convert = function(item)
-                    return { abbr = item.label:gsub("%b()", "") }
-                end
-            })
+            vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true, })
             map("i", "<C-Space>", vim.lsp.completion.get, { desc = "Display [L]SP [c]ompletions" })
         end
 
