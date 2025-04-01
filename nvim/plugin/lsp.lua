@@ -6,6 +6,15 @@ for _, file in ipairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
     configs[name] = true
 end
 
+vim.diagnostic.config({
+    virtual_lines = {
+        current_line = true,
+        format = function(diagnostic)
+            return diagnostic.message
+        end,
+    }
+})
+
 vim.lsp.config("*", {
     root_markers = { ".git" },
 })
@@ -35,15 +44,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         if client:supports_method("textDocument/diagnostic") then
-            vim.diagnostic.config({
-                virtual_lines = {
-                    current_line = true,
-                    format = function(diagnostic)
-                        return diagnostic.message
-                    end,
-                }
-            })
-
             vim.diagnostic.enable()
             map("n", "<leader>lt", function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
                 { desc = "[L]SP diagnostics [t]oggle" })
