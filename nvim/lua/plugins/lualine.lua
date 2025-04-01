@@ -1,3 +1,4 @@
+-- Using gitsigns as a source for diffs.
 local function diff_source()
     local gitsigns = vim.b.gitsigns_status_dict
     if gitsigns then
@@ -12,7 +13,7 @@ end
 return {
     "nvim-lualine/lualine.nvim",
     event = "VimEnter",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons", },
     config = function()
         local lualine = require("lualine")
         local lazy_status = require("lazy.status")
@@ -21,23 +22,27 @@ return {
             options = { theme = "catppuccin", },
             sections = {
                 lualine_b = {
+                    { "b:gitsigns_head", icon = "", },
+                    { "diff", source = diff_source, },
+                    { "diagnostics", },
+                },
+                lualine_c = {
                     {
-                        "b:gitsigns_head",
-                        icon = "",
-                    },
-                    {
-                        "diff",
-                        source = diff_source,
+                        "filename",
+                        symbols = {
+                            modified = "",
+                            readonly = "󱀰",
+                            unnamed = "󱀶",
+                            newfile = "",
+                        },
                     },
                 },
                 lualine_x = {
-                    {
-                        lazy_status.updates,
-                        cond = lazy_status.has_updates,
-                        color = { fg = "#89b4fa" },
-                    },
-                    { "fileformat" },
-                    { "filetype" },
+                    { lazy_status.updates, cond = lazy_status.has_updates, },
+                },
+                lualine_y = {
+                    { "lsp_status", },
+                    { "filetype", },
                 },
             },
         })
