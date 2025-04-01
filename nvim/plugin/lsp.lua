@@ -22,35 +22,30 @@ vim.lsp.config("*", {
 vim.lsp.enable(vim.tbl_keys(configs))
 
 local map = require("utils").map
+local unmap = require("utils").unmap
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("LSP", { clear = false }),
     callback = function(args)
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
-        if client:supports_method("textDocument/codeAction") then
-            map("n", "<leader>la", vim.lsp.buf.code_action,
-                { desc = "Displays [L]SP [a]ctions for annotation under cursor" })
-        end
-
+        -- Mappings for non-default Neovim LSP actions
         if client:supports_method("textDocument/completion") then
             vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true, })
-            map("i", "<C-Space>", vim.lsp.completion.get, { desc = "Display [L]SP [c]ompletions" })
+            map("i", "<C-Space>", vim.lsp.completion.get, { desc = "Display LSP completions" })
         end
 
         if client:supports_method("textDocument/definition") then
-            map("n", "<leader>ld", vim.lsp.buf.definition,
-                { desc = "Jump to [L]SP [d]efinition for symbol under cursor" })
+            map("n", "grd", vim.lsp.buf.definition,
+                { desc = "Jump to definition for symbol under cursor" })
         end
 
         if client:supports_method("textDocument/diagnostic") then
             vim.diagnostic.enable()
-            map("n", "<leader>lt", function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end,
-                { desc = "[L]SP diagnostics [t]oggle" })
         end
 
         if client:supports_method("textDocument/formatting") then
-            map("n", "<leader>lf", vim.lsp.buf.format, { desc = "[L]SP auto[f]ormatting" })
+            map("n", "grf", vim.lsp.buf.format, { desc = "Autoformat using LSP formatting" })
 
             if not client:supports_method("textDocument/willSaveWaitUntil") then
                 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -63,23 +58,27 @@ vim.api.nvim_create_autocmd("LspAttach", {
             end
         end
 
-        if not client:supports_method("textDocument/hover") then
-            map("n", "K", "<NOP>", { desc = "Disable [L]SP [h]over if unavailable" })
-        end
-
-        if client:supports_method("textDocument/implementation") then
-            map("n", "<leader>li", vim.lsp.buf.implementation,
-                { desc = "List [L]SP [i]mplementations for currently hovered symbol" })
-        end
-
         if client:supports_method("textDocument/inlayHint") then
-            map("n", "<leader>lh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
-                { desc = "Toggle [L]SP inlay [h]int" })
+            map("n", "grh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+                { desc = "Toggle LSP inlay hint" })
         end
 
         if client:supports_method("textDocument/signatureHelp") then
-            map("n", "<leader>ls", vim.lsp.buf.signature_help,
-                { desc = "Display [L]SP [s]ignature help for currently hovered symbol" })
+            map("n", "grs", vim.lsp.buf.signature_help,
+                { desc = "Display signature help for currently hovered symbol" })
+        end
+
+        -- Remove default mappings for unsupported default Neovim actions
+        if not client:supports_method("textDocument/codeAction") then
+            unmap("n", "gra")
+        end
+
+        if not client:supports_method("textDocument/hover") then
+            unmap("n", "K")
+        end
+
+        if not client:supports_method("textDocument/implementation") then
+            unmap("n", "gri")
         end
     end,
 })
