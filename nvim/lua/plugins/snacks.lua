@@ -8,18 +8,18 @@ return {
             preset = {
                 pick = "fzf-lua",
                 header = [[
-      ████ ██████           █████      ██                    
-     ███████████             █████                            
-     █████████ ███████████████████ ███   ███████████  
-    █████████  ███    █████████████ █████ ██████████████  
-   █████████ ██████████ █████████ █████ █████ ████ █████  
- ███████████ ███    ███ █████████ █████ █████ ████ █████ 
+      ████ ██████           █████      ██⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+     ███████████             █████ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+     █████████ ███████████████████ ███   ███████████⠀⠀
+    █████████  ███    █████████████ █████ ██████████████⠀⠀
+   █████████ ██████████ █████████ █████ █████ ████ █████⠀⠀
+ ███████████ ███    ███ █████████ █████ █████ ████ █████⠀
 ██████  █████████████████████ ████ █████ █████ ████ ██████]]
             },
             sections = {
-                { section = "header" },
-                { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-                { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+                { section = "header", },
+                { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1, },
+                { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1, },
                 { section = "startup" },
             },
         },
@@ -37,14 +37,12 @@ return {
                     conceallevel = 2,
                     colorcolumn = "",
                 },
-                bo = { filetype = "snacks_notif" },
+                bo = { filetype = "snacks_notif", },
             },
         },
         picker = {
             enabled = true,
-            files = {
-                hidden = true,
-            },
+            files = { hidden = true, },
         },
         quickfile = {
             enabled = true,
