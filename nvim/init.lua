@@ -18,13 +18,14 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-require("lazy").setup({
-    spec = { import = "plugins", },
+local opts = {
     ui = { border = "rounded", },
     change_detection = { notify = false, },
-    install = { colorscheme = { "catppuccin" }, },
+    install = { colorscheme = { "catppuccin", }, },
     checker = {
         enabled = true,
         notify = false,
     },
-})
+}
+
+require("lazy").setup("plugins", opts)
