@@ -12,12 +12,8 @@ return {
             current_line_blame = true,
             current_line_blame_opts = { delay = 100 },
 
-            on_attach = function(bufnr)
-                local function map(mode, lhs, rhs, opts)
-                    opts = opts or {}
-                    opts.buffer = bufnr
-                    vim.keymap.set(mode, lhs, rhs, opts)
-                end
+            on_attach = function()
+                local map = require("utils").map
 
                 -- Navigation
                 map("n", "<leader>gn", function()

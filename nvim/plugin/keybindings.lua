@@ -1,16 +1,7 @@
 -- █▄▀ █▀▀ █▄█ █▄▄ █ █▄░█ █▀▄ █ █▄░█ █▀▀ █▀
 -- █░█ ██▄ ░█░ █▄█ █ █░▀█ █▄▀ █ █░▀█ █▄█ ▄█
 
--- Saves having to define default options for all keymaps, shamelessly stolen from https://github.com/Bvngee/nixconf
-local function map(mode, lhs, rhs, opts)
-    local default_opts = { silent = true }
-    if opts then
-        opts = vim.tbl_extend("force", default_opts, opts)
-    else
-        opts = default_opts
-    end
-    vim.keymap.set(mode, lhs, rhs, opts)
-end
+local map = require("utils").map
 
 -- Vanilla Neovim
 map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected string down a line and autoindent" })

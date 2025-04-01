@@ -1,13 +1,3 @@
-local function map(mode, lhs, rhs, opts)
-    local default_opts = { silent = true }
-    if opts then
-        opts = vim.tbl_extend("force", default_opts, opts)
-    else
-        opts = default_opts
-    end
-    vim.keymap.set(mode, lhs, rhs, opts)
-end
-
 -- LSP setup for servers configured in lsp/*
 local configs = {}
 
@@ -21,6 +11,8 @@ vim.lsp.config("*", {
 })
 
 vim.lsp.enable(vim.tbl_keys(configs))
+
+local map = require("utils").map
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("LSP", { clear = false }),
