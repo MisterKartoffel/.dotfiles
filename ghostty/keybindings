@@ -2,10 +2,7 @@
 
 # General keybinds
     keybind = clear
-    keybind = performable:y=copy_to_clipboard
-    keybind = ctrl+physical:v=paste_from_clipboard
     keybind = ctrl+physical:comma=reload_config
-    keybind = ctrl+physical:i=inspector:toggle
 
 # Font keybinds
     keybind = ctrl+physical:equal=increase_font_size:1
@@ -18,11 +15,10 @@
         keybind = ctrl+physical:q=close_surface
 
     # Split keybinds
-        keybind = ctrl+physical:s>s=new_split:auto
-        keybind = ctrl+physical:s>h=new_split:left
-        keybind = ctrl+physical:s>j=new_split:down
-        keybind = ctrl+physical:s>k=new_split:up
-        keybind = ctrl+physical:s>l=new_split:right
+        keybind = ctrl+shift+physical:h=new_split:left
+        keybind = ctrl+shift+physical:j=new_split:down
+        keybind = ctrl+shift+physical:k=new_split:up
+        keybind = ctrl+shift+physical:l=new_split:right
 
         keybind = ctrl+left=resize_split:left,20
         keybind = ctrl+down=resize_split:down,20
