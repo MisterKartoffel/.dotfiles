@@ -45,22 +45,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         if client:supports_method("textDocument/formatting") then
-            map("n", "grf", vim.lsp.buf.format, { desc = "Autoformat using LSP formatting" })
+            local format_opts = { bufnr = args.buf, id = client.id }
+            map("n", "grf", function()
+                vim.lsp.buf.format(format_opts)
+            end, { desc = "Autoformat using LSP formatting" })
 
             if not client:supports_method("textDocument/willSaveWaitUntil") then
                 vim.api.nvim_create_autocmd("BufWritePre", {
                     group = vim.api.nvim_create_augroup("LSPformat", { clear = false }),
                     buffer = args.buf,
                     callback = function()
-                        vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 })
+                        vim.lsp.buf.format(format_opts)
                     end,
                 })
             end
         end
 
         if client:supports_method("textDocument/inlayHint") then
-            map("n", "grh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
-                { desc = "Toggle LSP inlay hint" })
+            map("n", "grh", function()
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+            end, { desc = "Toggle LSP inlay hint" })
         end
 
         if client:supports_method("textDocument/signatureHelp") then
