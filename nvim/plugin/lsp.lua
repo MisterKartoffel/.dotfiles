@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
             if not client:supports_method("textDocument/willSaveWaitUntil") then
                 vim.api.nvim_create_autocmd("BufWritePre", {
-                    group = vim.api.nvim_create_augroup("LSPformat", { clear = false }),
+                    group = "LSP",
                     buffer = args.buf,
                     callback = function()
                         vim.lsp.buf.format(format_opts)
@@ -85,4 +85,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
             unmap("n", "gri")
         end
     end,
+})
+
+vim.api.nvim_create_autocmd("LspDetach", {
+    callback = function(args)
+        vim.api.nvim_clear_autocmds({
+            event = "LspAttach",
+            buffer = args.buf,
+        })
+    end
 })
