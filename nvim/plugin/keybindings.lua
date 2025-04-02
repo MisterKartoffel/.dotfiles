@@ -15,8 +15,6 @@ map("x", "<leader>p", [["_dP]], { desc = "Paste over selected string while keepi
 map({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without copying" })
 
 map("n", "<leader><leader>", ":w<CR> :so<CR>", { desc = "Save and source current file" })
-map("n", "<leader>wa", ":wa<CR>", { desc = "Save all buffers" })
-map("n", "<leader>wq", ":wqa<CR>", { desc = "Save and quit all buffers" })
 
 -- Lazy and Mason
 map("n", "<leader>pl", ":Lazy<CR>", { desc = "Open Lazy.nvim UI" })
@@ -26,6 +24,7 @@ map("n", "<leader>pm", ":Mason<CR>", { desc = "Open Mason UI" })
 map("n", "<leader>mt", ":Markview<CR>", { desc = "[M]arkview [t]oggle" })
 
 -- Snacks.picker
+---@module 'Snacks' main Snacks module containing its pickers
 map("n", "<leader>fc", function()
     Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[F]ind files in [n]eovim configuration directory" })
