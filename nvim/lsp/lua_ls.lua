@@ -6,11 +6,7 @@ return {
         Lua = {
             runtime = { version = "LuaJIT", },
             hint = { enable = true, },
-            workspace = {
-                library = {
-                    vim.env.VIMRUNTIME,
-                },
-            },
+            workspace = { library = { vim.env.VIMRUNTIME, }, },
         },
     },
 }
