@@ -11,7 +11,7 @@
 
 # Surface keybinds
     # Close current split -> tab -> window
-        # Not <C-w> not to interfere with <C-w> window operations in Neovim
+        # Not <C-w> not to interfere with Neovim's CTRL-W
         keybind = ctrl+physical:q=close_surface
 
     # Split keybinds
@@ -30,3 +30,11 @@
         keybind = ctrl+physical:j=goto_split:bottom
         keybind = ctrl+physical:k=goto_split:top
         keybind = ctrl+physical:l=goto_split:right
+
+    # Tab keybinds
+        # Not <C-t> not to interfere with Neovim's i_CTRL-T
+        keybind = ctrl+shift+physical:t=new_tab
+
+        # Not <C-n> and <C-p> not to interfere with Neovim's CTRL-N and CTRL-P
+        keybind = ctrl+shift+physical:n=next_tab
+        keybind = ctrl+shift+physical:p=previous_tab
