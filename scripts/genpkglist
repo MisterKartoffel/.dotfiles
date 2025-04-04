@@ -3,10 +3,23 @@
 # Source for all list generating commands:
 # https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#List_of_installed_packages
 
-user=$1
-logFile="/home/${user}/.dotfiles/scripts/genpkglist.log"
+# To be called on a package manager hook or ad hoc.
+# Example hook for pacman:
+
+# [Trigger]
+# Operation = Install
+# Operation = Remove
+# Type = Package
+# Target = *
+#
+# [Action]
+# Description = Generating updated package lists...
+# When = PostTransaction
+# Exec = /bin/su - <TARGET_USER> /bin/sh -c '/home/<TARGET_USER>/.local/bin/genpkglist'
+
+logFile="$HOME/.dotfiles/scripts/genpkglist.log"
 logTime="$(date --rfc-3339="seconds")"
-pkgListDir="/home/${user}/.dotfiles/pkglists"
+pkgListDir="$HOME/.dotfiles/pkglists"
 
 function setupListings() {
 	local creationTime
