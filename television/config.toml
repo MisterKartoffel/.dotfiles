@@ -40,5 +40,5 @@ fallback_channel = "files"
 "history" = [ "", ]
 
 [shell_integration.keybindings]
-"smart_autocomplete" = "ctrl-t"
+"smart_autocomplete" = "ctrl-a"
 "command_history" = "ctrl-r"
