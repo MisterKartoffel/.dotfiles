@@ -8,7 +8,7 @@ font-size = 14
 theme = catppuccin-mocha
 
 window-padding-x = 5
-window-decoration = false
+window-decoration = none
 
 resize-overlay = never
 
