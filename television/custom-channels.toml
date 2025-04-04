@@ -14,10 +14,6 @@ source_command = "fd -t d -H . $HOME"
 preview_command = "lsd -Al1 {}"
 
 [[cable_channel]]
-name = "history"
-source_command = "bat -n $HISTFILE | cut -d ';' -f 2-"
-
-[[cable_channel]]
 name = "image"
 source_command = "fd -t f . $HOME | xargs file --mime-type | rg -F 'image/' | cut -d ':' -f 1"
 preview_command = ":files:"
