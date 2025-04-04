@@ -23,7 +23,7 @@
 	},
 
 	"hyprland/window": {
-		"format": "{initialTitle}",
+		"format": "{initialTitle}"
 	},
 
 	"idle_inhibitor": {
