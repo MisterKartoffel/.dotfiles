@@ -4,7 +4,6 @@ com.github.tchx84.Flatseal
 com.obsproject.Studio
 dev.vencord.Vesktop
 io.github.celluloid_player.Celluloid
-org.gnome.baobab
 org.prismlauncher.PrismLauncher
 org.qbittorrent.qBittorrent
 org.rncbc.qpwgraph
