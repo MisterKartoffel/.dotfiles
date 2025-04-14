@@ -111,7 +111,7 @@ keymap = [
     { on = "]", run = "tab_switch 1 --relative",    desc = "Switch to the next tab" },
 
     # Tasks
-    { on = "w", run = "tasks_show", desc = "Show task manager" },
+    { on = "w", run = "tasks:show", desc = "Show task manager" },
 
     # Help
     { on = "~", run = "help",   desc = "Open help" },
@@ -248,7 +248,7 @@ keymap = [
 keymap = [
     { on = "<Esc>",     run = "close",                                      desc = "Cancel completion" },
     { on = "<Tab>",     run = "close --submit",                             desc = "Submit the completion" },
-    { on = "<Enter>",   run = [ "close --submit", "close_input --submit" ], desc = "Submit the completion and input" },
+    { on = "<Enter>",   run = [ "close --submit", "input:close --submit" ], desc = "Submit the completion and input" },
 
     { on = "<C-p>", run = "arrow -1",   desc = "Move cursor up" },
     { on = "<C-n>", run = "arrow 1",    desc = "Move cursor down" },
