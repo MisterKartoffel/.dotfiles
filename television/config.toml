@@ -35,9 +35,8 @@ fallback_channel = "files"
 "files" = [ "less", "head", "tail", "bat", "nvim", ]
 "dirs" = [ "cd", "ls", "rmdir", ]
 "image" = [ "chafa", "wallpaper", ]
+"man" = [ "man", "apropos", ]
 "env" = [ "set", "unset", ]
-"man" = [ "man", ]
-"history" = [ "", ]
 
 [shell_integration.keybindings]
 "smart_autocomplete" = "ctrl-a"
