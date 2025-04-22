@@ -70,7 +70,7 @@ function install() {
 }
 
 function uninstall() {
-    tv local-package-list | cut -d ' ' -f 2  | xargs -ro paru -Rns
+    tv local-package-list | cut -d ' ' -f 1 | xargs -ro paru -Rns
 }
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
