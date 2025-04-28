@@ -16,13 +16,7 @@ command = "None" # Quit
 key_sequence = "q"
 [[keymaps]]
 command = "None" # SelectNextOrScrollDown
-key_sequence = "C-n"
-[[keymaps]]
-command = "None" # SelectNextOrScrollDown
 key_sequence = "down"
-[[keymaps]]
-command = "None" #SelectPreviousOrScrollUp
-key_sequence = "C-p"
 [[keymaps]]
 command = "None" #SelectPreviousOrScrollUp
 key_sequence = "up"
@@ -175,8 +169,14 @@ key_sequence = "l"
 command = "SelectNextOrScrollDown"
 key_sequence = "j"
 [[keymaps]]
+command = "SelectNextOrScrollDown"
+key_sequence = "C-n"
+[[keymaps]]
 command = "SelectPreviousOrScrollUp"
 key_sequence = "k"
+[[keymaps]]
+command = "SelectPreviousOrScrollUp"
+key_sequence = "C-p"
 [[keymaps]]
 command = "PageSelectNextOrScrollDown"
 key_sequence = "C-f"

@@ -12,6 +12,10 @@ set.expandtab = true
 -- (default): vim.o.tabstop = 8
 set.tabstop = 4
 
+-- Number of spaces a <Tab> counts for when editing.
+-- (default): vim.o.softtabstop = 0
+set.softtabstop = 4
+
 -- Number of spaces used for indenting. When 0, uses 'tabstop'.
 -- (default): vim.o.shiftwidth = 8
 set.shiftwidth = 0
