@@ -43,7 +43,7 @@ setopt SHAREHISTORY
 compinit -d "XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
 
 # Shell integrations
-eval "$(tv init zsh)"
+source <(fzf --zsh)
 
 # Completion styling
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
@@ -61,17 +61,7 @@ alias ls="lsd -Al1"
 alias c="clear"
 
 # Helper functions
-function nf() { # Nvim find with television
-    tv files | xargs -ro nvim
-}
-
-function install() {
-    tv remote-package-list | cut -d ' ' -f 2 | xargs -ro paru -S
-}
-
-function uninstall() {
-    tv local-package-list | cut -d ' ' -f 1 | xargs -ro paru -Rns
-}
+source $ZDOTDIR/.zsh_functions
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
