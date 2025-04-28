@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
 
-if [ "$1" = "random" ]; then
-	WALLPAPER="$(fd -t f --full-path "${XDG_PICTURES_DIR:-$HOME/Pictures}"/Wallpapers | shuf -n 1)"
-else
-	WALLPAPER="$1"
-fi
+case "$1" in
+    random)
+        WALLPAPER="$(fd -t f . "$HOME"/Pictures/Wallpapers | shuf -n 1)"
+        ;;
+    pick)
+        # TODO: Fix preview
+        WALLPAPER="$(fd -t f . "$HOME"/Pictures/Wallpapers | fzf --preview 'xargs -ro chafa')"
+        ;;
+    *)
+        WALLPAPER="$1"
+        ;;
+esac
 
-ln -f "$WALLPAPER" "$HOME"/.background # Update hyprlock background to new wallpaper
-swww img "$HOME/.background"           # Set new wallpaper
+if [[ -n "$WALLPAPER" ]]; then
+    ln -f "$WALLPAPER" "$HOME"/.background # Update hyprlock background to new wallpaper
+    swww img "$HOME/.background"           # Set new wallpaper
+fi
