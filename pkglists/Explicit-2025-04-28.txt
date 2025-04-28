@@ -69,7 +69,6 @@ sops
 stow
 sudo
 swww
-television
 tldr
 ttf-font-awesome
 ttf-jetbrains-mono
