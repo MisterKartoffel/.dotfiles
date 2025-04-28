@@ -24,7 +24,6 @@ return {
             },
         },
         indent = { enabled = true, },
-        lazygit = { enabled = true, },
         notifier = {
             enabled = true,
             style = {

@@ -25,7 +25,6 @@ hyprpicker
 intel-ucode
 kvantum
 kvantum-qt5
-lazygit
 less
 linux
 linux-firmware

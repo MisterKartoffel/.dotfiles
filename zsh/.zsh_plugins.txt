@@ -5,5 +5,6 @@ mattmc3/ez-compinit
 zsh-users/zsh-completions                   kind:fpath path:src
 jeffreytse/zsh-vi-mode
 Aloxaf/fzf-tab
+wfxr/forgit
 zdharma-continuum/fast-syntax-highlighting  kind:defer
 zsh-users/zsh-autosuggestions               kind:defer
