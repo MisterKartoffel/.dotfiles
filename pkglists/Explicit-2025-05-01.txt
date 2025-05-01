@@ -24,6 +24,8 @@ hyprlock
 hyprpaper
 hyprpicker
 intel-ucode
+kvantum
+kvantum-qt5
 less
 linux
 linux-firmware

@@ -5,6 +5,5 @@ geoclue
 jq
 libnotify
 poppler
-qt5-x11extras
 ripgrep
 uwsm
