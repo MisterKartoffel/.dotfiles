@@ -1,6 +1,5 @@
 app.zen_browser.zen
 com.calibre_ebook.calibre
-com.github.IsmaelMartinez.teams_for_linux
 com.github.tchx84.Flatseal
 com.obsproject.Studio
 dev.vencord.Vesktop

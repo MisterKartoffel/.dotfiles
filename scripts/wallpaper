@@ -1,12 +1,18 @@
 #!/usr/bin/env bash
+# Script mostly taken from this example
+# https://wiki.hyprland.org/Hypr-Ecosystem/hyprpaper/#using-this-keyword-to-randomize-your-wallpaper
+
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+CURRENT_WALLPAPER=$(hyprctl hyprpaper listloaded)
 
 case "$1" in
     random)
-        WALLPAPER="$(fd -t f . "$HOME"/Pictures/Wallpapers | shuf -n 1)"
+        # Get a random wallpaper that is not the current one
+        WALLPAPER=$(find "$WALLPAPER_DIR" -type f ! -name "$(basename "$CURRENT_WALLPAPER")" | shuf -n 1)
         ;;
     pick)
         # TODO: Fix preview
-        WALLPAPER="$(fd -t f . "$HOME"/Pictures/Wallpapers | fzf --preview 'xargs -ro chafa')"
+        WALLPAPER=$(fd -t f . "$WALLPAPER_DIR" | fzf --preview 'xargs -ro chafa')
         ;;
     *)
         WALLPAPER="$1"
@@ -14,6 +20,9 @@ case "$1" in
 esac
 
 if [[ -n "$WALLPAPER" ]]; then
-    ln -f "$WALLPAPER" "$HOME"/.background # Update hyprlock background to new wallpaper
-    swww img "$HOME/.background"           # Set new wallpaper
+    # Hardlink wallpaper to $HOME (used by hyprlock)
+    ln -f "$WALLPAPER" "$HOME"/.background
+
+    # Set new wallpaper with hyprpaper via IPC
+    hyprctl hyprpaper reload eDP-1,"$WALLPAPER"
 fi
