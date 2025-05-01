@@ -3,6 +3,7 @@ chafa
 fd
 geoclue
 jq
+kvantum-qt5
 libnotify
 poppler
 ripgrep

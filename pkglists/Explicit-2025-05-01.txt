@@ -25,7 +25,6 @@ hyprpaper
 hyprpicker
 intel-ucode
 kvantum
-kvantum-qt5
 less
 linux
 linux-firmware
@@ -54,9 +53,7 @@ polkit-kde-agent
 python-pillow
 qt5-svg
 qt5-wayland
-qt5ct
 qt6-wayland
-qt6ct
 reflector
 rofi-wayland
 rsync
