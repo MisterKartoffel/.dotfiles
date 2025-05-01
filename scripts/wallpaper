@@ -7,14 +7,21 @@ CURRENT_WALLPAPER=$(hyprctl hyprpaper listloaded)
 
 case "$1" in
     random)
-        # Get a random wallpaper that is not the current one
-        WALLPAPER=$(find "$WALLPAPER_DIR" -type f ! -name "$(basename "$CURRENT_WALLPAPER")" | shuf -n 1)
+        if [[ -n "$CURRENT_WALLPAPER" ]]; then
+            # Get a random wallpaper, if none is set
+            WALLPAPER=$(fd -t f . "$WALLPAPER_DIR" | shuf -n 1)
+        else
+            # Get a random wallpaper that is not the current one, if one is set
+            WALLPAPER=$(fd -t f -E "$(basename "$CURRENT_WALLPAPER")" | shuf -n 1)
+        fi
         ;;
     pick)
         # TODO: Fix preview
+        # Open wallpaper selector in fzf
         WALLPAPER=$(fd -t f . "$WALLPAPER_DIR" | fzf --preview 'xargs -ro chafa')
         ;;
     *)
+        # Pick selected wallpaper
         WALLPAPER="$1"
         ;;
 esac
