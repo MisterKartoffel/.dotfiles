@@ -1,6 +1,11 @@
-
+# vim : set filetype=conf :
+#
 # █▀▀ █▄░█ █░█
 # ██▄ █░▀█ ▀▄▀
+#
+# DE/WM agnostic
+# uwsm environment variables
+#
 
 export HYPRCURSOR_THEME=Bibata-Modern-Ice
 export HYPRCURSOR_SIZE=24

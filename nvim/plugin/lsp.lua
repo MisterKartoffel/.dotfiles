@@ -1,3 +1,8 @@
+--
+-- █░░ █▀ █▀█
+-- █▄▄ ▄█ █▀▀
+--
+
 -- LSP setup for servers configured in lsp/*
 vim.lsp.config("*", {
     root_markers = { ".git" },
