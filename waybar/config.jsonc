@@ -1,139 +1,117 @@
 {
-	"layer": "top",
+    "layer": "top",
     "output": "eDP-1",
-	"position": "top",
-	"reload_style_on_change": true,
-	"margin": "0 5",
+    "position": "top",
+    "height": 20,
+    "spacing": 10,
+    "margin": "4 10",
+    "reload_style_on_change": true,
 
-	"modules-left": ["hyprland/workspaces", "hyprland/window"],
-	"modules-center": ["idle_inhibitor", "clock"],
-	"modules-right": ["group/expand", "group/audio", "network"],
+    "modules-left": ["hyprland/workspaces", "hyprland/window"],
+    "modules-center": ["idle_inhibitor", "clock"],
+    "modules-right": ["cpu", "memory", "disk", "pulseaudio", "pulseaudio#microphone", "network", "backlight"],
 
-	"hyprland/workspaces": {
-		"format": "{icon}",
-		"format-icons": {
-			"1": "",
-			"2": "󰖟",
-			"3": "",
-			"default": "",
-			"empty": ""
-		},
-		"persistent-workspaces": {
-			"*": [1, 2, 3]
-		}
-	},
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "",
+            "2": "󰈹",
+            "3": "",
+            "default": "",
+            "empty": ""
+        },
+        "persistent-workspaces": {
+            "*": [1, 2, 3]
+        }
+    },
 
-	"hyprland/window": {
-		"format": "{initialTitle}"
-	},
+    "hyprland/window": {
+        "format": "{initialTitle}"
+    },
 
-	"idle_inhibitor": {
-		"format": "{icon}",
-		"format-icons": {
-			"activated": "󰥔",
-			"deactivated": "󱑎"
-		}
-	},
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰥔",
+            "deactivated": "󰅐"
+        }
+    },
 
-	"clock": {
-		"format": "{:%a, %b %d | %R} ",
-		"interval": 1,
-		"tooltip": false
-	},
+    "clock": {
+        "format": "{:%R}",
+        "format-alt": "{:%a, %b %d %Y}",
+        "interval": 1,
+        "tooltip": false
+    },
 
-	"group/audio": {
-		"orientation": "inherit",
-		"modules": ["wireplumber", "pulseaudio#microphone"]
-	},
+    "group/audio": {
+        "orientation": "inherit",
+        "modules": ["pulseaudio", "pulseaudio#microphone"]
+    },
 
-	"group/expand": {
-		"orientation": "inherit",
-		"drawer": {
-			"transition-duration": 600,
-			"transition-to-left": true,
-			"click-to-reveal": true
-		},
-		"modules": ["custom/expand", "cpu", "memory", "disk", "custom/endpoint"]
-	},
+    "cpu": {
+        "format": "{usage}% 󰘚",
+        "tooltip": false
+    },
 
-	"custom/expand": {
-		"format": "",
-		"tooltip": false
-	},
+    "memory": {
+        "format": "{used:0.1f}G ",
+        "tooltip": false
+    },
 
-	"cpu": {
-		"interval": 60,
-		"format": "󰻠",
-		"states": {
-			"low": 0,
-			"medium": 60,
-			"high": 80
-		}
-	},
+    "disk": {
+        "format": "{used} 󰒋",
+        "tooltip": false
+    },
 
-	"memory": {
-		"interval": 60,
-		"format": "",
-		"states": {
-			"low": 0,
-			"medium": 60,
-			"high": 80
-		}
-	},
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "tooltip": false,
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "uwsm app -- pavucontrol -t 3",
+        "min-length": 6,
+        "scroll-step": 5,
+        "format-icons": {
+            "default": ["", "", ""],
+            "default-muted": "",
+            "headphone": "",
+            "headphone-muted": "󰟎",
+            "hdmi": "󰡁"
+        }
+    },
 
-	"disk": {
-		"interval": 60,
-		"format": "",
-		"states": {
-			"low": 0,
-			"medium": 60,
-			"high": 80
-		}
-	},
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "tooltip": false,
+        "format-source": "{volume}% 󰍬",
+        "format-source-muted": "{volume}% 󰍭",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-click-right": "uwsm app -- pavucontrol -t 4",
+        "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
+        "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%",
+        "min-length": 6,
+        "scroll-step": 5
+    },
 
-	"custom/endpoint": {
-		"format": "",
-		"tooltip": false
-	},
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) {icon}",
+        "format-ethernet": "{ipaddr}/{cidr} 󰛳",
+        "format-disconnected": "Disconnected 󰌙",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "uwsm app -- nm-connection-editor",
+        "format-icons": {
+            "default": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
+        }
+    },
 
-	"wireplumber": {
-		"format": "{icon}   {volume}%",
-		"format-muted": " off",
-		"tooltip": false,
-		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-		"on-click-right": "uwsm app -- pavucontrol -t 3",
-		"min-length": 7,
-		"align": 0,
-		"states": {
-			"high": 51
-		},
-		"scroll-step": 5,
-		"format-icons": {
-			"default": ["", ""]
-		}
-	},
-
-	"pulseaudio#microphone": {
-		"format": "{format_source}",
-		"format-source": " {volume}%",
-		"format-source-muted": "   off",
-		"tooltip": false,
-		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-		"on-click-right": "uwsm app -- pavucontrol -t 4",
-		"on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
-		"on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%",
-		"min-length": 6,
-		"align": 0,
-		"max-volume": 1
-	},
-
-	"network": {
-		"format-ethernet": "",
-		"format-wifi": "",
-		"format-disconnected": "",
-		"tooltip-format-ethernet": "   {bandwidthDownBytes}   {bandwidthUpBytes}",
-		"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-		"tooltip-format-disconnected": "Disconnected",
-		"on-click": "uwsm app -- nm-connection-editor"
-	}
+    "backlight": {
+        "format": "{percent}% {icon}",
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-",
+        "min-length": 6,
+        "format-icons": {
+            "default": ["󰽤", "󰽥", "󰽣", "󰽦", "󰽢"]
+        }
+    }
 }

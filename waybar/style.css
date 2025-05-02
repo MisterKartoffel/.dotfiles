@@ -1,7 +1,8 @@
 @import "Catppuccin-Mocha.css";
 
 * {
-    font-size: 14px;
+    all: unset;
+    font-size: 12px;
     font-family: "FreeMono Bold";
 }
 
@@ -9,110 +10,84 @@ window#waybar {
     all: unset;
 }
 
-.modules-left,
-.modules-center,
-.modules-right {
-    padding: 7px;
-    margin: 5px;
+.modules-center {
+    padding: 4px 12px;
     border-radius: 10px;
     background: @base;
-    box-shadow: 0px 0px 2px alpha(black, .5);
+    color: @text;
+    transition: all .5s ease;
+}
+
+#idle_inhibitor {
+    margin-right: 2px;
 }
 
 tooltip {
     background: @base;
 }
 
-#idle_inhibitor:hover,
-#clock:hover,
-#wireplumber:hover,
-#pulseaudio:hover,
-#network:hover,
-#cpu:hover,
-#memory:hover,
-#disk:hover {
-    transition: all .3s ease;
+#idle_inhibitor:hover, #clock:hover,
+#cpu:hover, #memory:hover, #disk:hover,
+#pulseaudio:hover, #network:hover, #backlight:hover {
+    transition: all .5s ease;
     color: @blue;
 }
 
-#workspaces,
-#window,
-#idle_inhibitor,
-#clock,
-#group-expand,
-#cpu,
-#memory,
-#disk,
-#custom-endpoint,
-#wireplumber,
-#pulseaudio,
-#network {
-    padding: 0px 5px;
+#workspaces, #window,
+#cpu, #memory, #disk,
+#pulseaudio, #network, #backlight {
+    padding: 4px 12px;
+    border-radius: 10px;
+    background: @base;
     color: @text;
-    transition: all .3s ease;
+    transition: all .5s ease;
 }
 
 #workspaces button {
-    all: unset;
     padding: 0px 8px;
     color: @subtext0;
-    transition: all .5s ease;
-    text-shadow: 0px 0px 1px rgba(0, 0, 0, .5);
 }
 
 #workspaces button.empty {
     color: @crust;
-    border: none;
-    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .2);
 }
 
 #workspaces button.active {
     color: @green;
-    border: none;
-    transition: all .5s ease;
 }
 
 #workspaces button:hover {
-    transition: all .5s ease;
     color: @blue;
-    text-shadow: 0px 0px 1px rgba(0, 0, 0, .6);
 }
 
-#custom-expand {
-    padding: 0px 5px;
-    color: @subtext0;
-    text-shadow: 0px 0px 2px rgba(0, 0, 0, .7);
-    transition: all .3s ease;
+#workspaces button.urgent {
+    color: @red;
 }
 
-#custom-expand:hover {
-    color: @blue;
-    text-shadow: 0px 0px 2px alpha(@text, .5);
+#cpu {
+    color: @red;
 }
 
-#custom-endpoint {
-    color: transparent;
-    text-shadow: 0px 0px 2px alpha(@text, 1);
+#memory {
+    color: @peach;
 }
 
-#cpu.low,
-#memory.low,
-#disk.low {
-    color: @green;
-}
-
-#cpu.medium,
-#memory.medium,
-#disk.medium {
+#disk {
     color: @yellow;
 }
 
-#cpu.high,
-#memory.high,
-#disk.high,
-#wireplumber.high,
-#wireplumber.muted,
-#pulseaudio.source-muted,
-#network.disconnected {
-    color: @red;
+#pulseaudio {
+    color: @green;
+}
+
+#pulseaudio.microphone {
+    color: @teal;
+}
+
+#network {
+    color: @sky;
+}
+
+#backlight {
+    color: @sapphire;
 }
