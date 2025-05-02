@@ -4,7 +4,7 @@
     "position": "top",
     "height": 20,
     "spacing": 10,
-    "margin": "4 10",
+    "margin": "4",
     "reload_style_on_change": true,
 
     "modules-left": ["hyprland/workspaces", "hyprland/window"],
