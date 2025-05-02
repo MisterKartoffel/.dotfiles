@@ -18,7 +18,7 @@ set.softtabstop = 4
 
 -- Number of spaces used for indenting. When 0, uses 'tabstop'.
 -- (default): vim.o.shiftwidth = 8
-set.shiftwidth = 0
+set.shiftwidth = 4
 
 -- Enables 24-bit RGB color for the TUI. Requires ISO-8613-3 compatible terminal.
 -- (default): vim.o.termguicolors = false (autodetect)
