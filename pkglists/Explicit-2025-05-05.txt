@@ -23,6 +23,7 @@ hyprland
 hyprlock
 hyprpaper
 hyprpicker
+hyprpolkitagent
 intel-ucode
 kvantum
 less
@@ -48,7 +49,6 @@ pavucontrol
 pipewire-alsa
 pipewire-pulse
 pkgstats
-polkit-kde-agent
 python-pillow
 qt5-svg
 qt5-wayland
