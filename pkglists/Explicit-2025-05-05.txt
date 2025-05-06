@@ -4,6 +4,7 @@ alsa-utils
 base
 base-devel
 bat
+bitwarden-cli
 brightnessctl
 btop
 btrfs-progs
@@ -43,6 +44,7 @@ noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
 npm
+oath-toolkit
 otf-font-awesome
 pacman-contrib
 pavucontrol
