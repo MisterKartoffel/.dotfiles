@@ -27,6 +27,7 @@
 
     "hyprland/window": {
         "format": "{initialTitle}",
+        "tooltip": false,
         "rewrite": {
             "": "󰣇"
         }
@@ -69,6 +70,7 @@
 
     "pulseaudio": {
         "format": "{volume}% {icon}",
+        "format-muted": "mute {icon}",
         "tooltip": false,
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
         "on-click-right": "uwsm app -- pavucontrol -t 3",
@@ -87,7 +89,7 @@
         "format": "{format_source}",
         "tooltip": false,
         "format-source": "{volume}% 󰍬",
-        "format-source-muted": "{volume}% 󰍭",
+        "format-source-muted": "mute 󰍭",
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
         "on-click-right": "uwsm app -- pavucontrol -t 4",
         "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
