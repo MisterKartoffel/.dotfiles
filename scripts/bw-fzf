@@ -156,55 +156,55 @@ function bw_list() {
         --header="Press ctrl-f for help"
         --preview-window="right:50%"
         --preview='
-        if [[ "{}" == "HELP" ]]; then
-            echo "'"$HELP_TEXT"'"
-        else
-            item_id=$(echo {} | sed -n "s/.*(\(.*\)).*/\1/p")
-            touch '"$TIMESTAMP_FILE"'
-            item=$(jq -r --arg id "$item_id" ".[] | select(.id == \$id)" "'"$TEMP_ITEMS_FILE"'")
-
-            username=$(jq -r ".login.username" <<< $item)
-            notes=$(jq -r ".notes // empty" <<< $item)
-            creationDate=$(jq -r ".creationDate" <<< $item)
-            revisionDate=$(jq -r ".revisionDate" <<< $item)
-            uris=$(jq -r ".login.uris[]?.uri // empty" <<< "$item" | sed "s/^/  • /")
-
-            password_available=$(jq -r ".login.password != null" <<< $item)
-            if [ "$password_available" = "true" ]; then
-                password="[Press Ctrl+p to copy password]"
+            if [[ "{}" == "HELP" ]]; then
+                echo "'"$HELP_TEXT"'"
             else
-                password="null"
+                item_id=$(echo {} | sed -n "s/.*(\(.*\)).*/\1/p")
+                touch '"$TIMESTAMP_FILE"'
+                item=$(jq -r --arg id "$item_id" ".[] | select(.id == \$id)" "'"$TEMP_ITEMS_FILE"'")
+
+                username=$(jq -r ".login.username" <<< $item)
+                notes=$(jq -r ".notes // empty" <<< $item)
+                creationDate=$(jq -r ".creationDate" <<< $item)
+                revisionDate=$(jq -r ".revisionDate" <<< $item)
+                uris=$(jq -r ".login.uris[]?.uri // empty" <<< "$item" | sed "s/^/  • /")
+
+                password_available=$(jq -r ".login.password != null" <<< $item)
+                if [ "$password_available" = "true" ]; then
+                    password="[Press Ctrl+p to copy password]"
+                else
+                    password="null"
+                fi
+
+                totp_available=$(jq -r ".login.totp != null" <<< $item)
+                if [ "$totp_available" = "true" ]; then
+                    totp="[Press Ctrl+o to copy TOTP]"
+                else
+                    totp="null"
+                fi
+
+                bold=$(tput bold)
+                normal=$(tput sgr0)
+                cyan=$(tput setaf 6)
+                underline=$(tput smul)
+                nounderline=$(tput rmul)
+                padding="  "
+
+                printf "\n${padding}${bold}${underline}Login Details${nounderline}${normal}\n\n"
+                printf "${padding}${bold}${cyan}Username${normal}\n${padding}  %s\n\n" "$username"
+                printf "${padding}${bold}${cyan}Password${normal}\n${padding}  %s\n\n" "$password"
+                printf "${padding}${bold}${cyan}TOTP${normal}\n${padding}  %s\n\n" "$totp"
+                printf "${padding}${bold}${cyan}Notes${normal}\n${padding}  %s\n\n" "$notes"
+                printf "${padding}${bold}${cyan}URIs${normal}\n%s\n\n" "$uris"
+                printf "${padding}${bold}${cyan}Created${normal}\n${padding}  %s\n" "$creationDate"
+                printf "${padding}${bold}${cyan}Modified${normal}\n${padding}  %s\n" "$revisionDate"
             fi
-
-            totp_available=$(jq -r ".login.totp != null" <<< $item)
-            if [ "$totp_available" = "true" ]; then
-                totp="[Press Ctrl+o to copy TOTP]"
-            else
-                totp="null"
-            fi
-
-            bold=$(tput bold)
-            normal=$(tput sgr0)
-            cyan=$(tput setaf 6)
-            underline=$(tput smul)
-            nounderline=$(tput rmul)
-            padding="  "
-
-            printf "\n${padding}${bold}${underline}Login Details${nounderline}${normal}\n\n"
-            printf "${padding}${bold}${cyan}Username${normal}\n${padding}  %s\n\n" "$username"
-            printf "${padding}${bold}${cyan}Password${normal}\n${padding}  %s\n\n" "$password"
-            printf "${padding}${bold}${cyan}TOTP${normal}\n${padding}  %s\n\n" "$totp"
-            printf "${padding}${bold}${cyan}Notes${normal}\n${padding}  %s\n\n" "$notes"
-            printf "${padding}${bold}${cyan}URIs${normal}\n%s\n\n" "$uris"
-            printf "${padding}${bold}${cyan}Created${normal}\n${padding}  %s\n" "$creationDate"
-            printf "${padding}${bold}${cyan}Modified${normal}\n${padding}  %s\n" "$revisionDate"
-        fi
         '
     )
 
     jq -r '.[] | "\(.name) (\(.id)) \(.login.username)"' "$TEMP_ITEMS_FILE" |
         FZF_PREVIEW_FILE="$TEMP_ITEMS_FILE" fzf "${fzf_args[@]}"
-    }
+}
 
 function help() {
     echo "bw-fzf - A Bitwarden cli wrapper with fzf"
