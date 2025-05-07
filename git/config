@@ -5,30 +5,67 @@
 [credential "https://gist.github.com"]
     helper = !/usr/bin/gh auth git-credential
 [user]
-    name = Felipe Duarte
-    email = felipesdrs@hotmail.com
-    signingkey = /home/felipe/.ssh/id_ed25519.pub
+    name        = Felipe Duarte
+    email       = felipesdrs@hotmail.com
+    signingkey  = /home/felipe/.ssh/id_ed25519.pub
 [core]
-    editor = nvim
-    whitespace = -trailing-space
+    compression = 9
+    editor      = nvim
+    whitespace  = error
 [commit]
     gpgsign = true
     verbose = true
-[merge]
-    conflictStyle = diff3
-[rerere]
-    enabled = true
-    autoupdate = true
-[init]
-    defaultBranch = main
-[pull]
-    ff = only
-    rebase = true
+    template = ~/.config/git/template
+[diff]
+    tool    = nvim
+    renames = copies
+[difftool "nvim"]
+    cmd = nvim -d
+[diff-so-fancy]
+    markEmptyLines = false
 [fetch]
     prune = true
 [gpg]
     format = ssh
-[diff]
-	tool = nvim
-[difftool "nvim"]
-	cmd = nvim -d
+[init]
+    defaultBranch = main
+[interactive]
+    diffFilter = diff-so-fancy --patch
+    singleKey = true
+[log]
+    abbrevCommit = true
+    graphColors = blue,yellow,cyan,magenta,green,red
+[pager]
+    branch = false
+    diff = diff-so-fancy | $PAGER
+[pull]
+    ff      = only
+    rebase  = true
+[rebase]
+    autoStash = true
+[rerere]
+    enabled     = true
+    autoupdate  = true
+[status]
+    branch      = true
+    showStash   = true
+
+[url "git@github.com:"]
+    insteadOf = "gh:"
+
+[color "branch"]
+    current     = magenta
+    local       = default
+    remote      = yellow
+    upstream    = green
+    plain       = blue
+[color "decorate"]
+    HEAD            = red
+    branch          = blue
+    remoteBranch    = magenta
+[color "diff"]
+    meta        = black bold
+    frag        = magenta
+    context     = white
+    whitespace  = yellow reverse
+    old         = red

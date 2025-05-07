@@ -59,6 +59,7 @@ zstyle ":antidote:bundle" use-friendly-names "yes"
 alias fetch="fastfetch --gpu-hide-type integrated --logo arch3"
 alias ls="lsd -Al1"
 alias c="clear"
+source $ZDOTDIR/.git_aliases
 
 # Helper functions
 source $ZDOTDIR/.zsh_functions
