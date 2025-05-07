@@ -8,7 +8,6 @@ trap 'cleanup' EXIT
 
 ITEMS=
 TIMEOUT=60s
-SEARCH_TERM=
 TIMEOUT_PID=
 TIMESTAMP_FILE="/tmp/bw-fzf-active.timestamp"
 TEMP_ITEMS_FILE=
@@ -83,18 +82,10 @@ function check_session() {
 }
 
 function load_items() {
-    local search_term="$1"
     echo "Loading items..."
-    if [[ -n "$search_term" ]]; then
-        if ! ITEMS=$(bw list items --search "$search_term" --session "$BW_SESSION" 2>/dev/null); then
-            echo "Could not load items or operation timed out."
-            exit 1
-        fi
-    else
-        if ! ITEMS=$(bw list items --session "$BW_SESSION" 2>/dev/null); then
-            echo "Could not load items or operation timed out."
-            exit 1
-        fi
+    if ! ITEMS=$(bw list items --session "$BW_SESSION" 2>/dev/null); then
+        echo "Could not load items or operation timed out."
+        exit 1
     fi
     echo "Items loaded successfully."
 }
@@ -102,17 +93,9 @@ function load_items() {
 export -f monitor_inactivity
 
 function bw_list() {
-    local prompt
-
     TEMP_ITEMS_FILE=$(mktemp)
     echo "$ITEMS" > "$TEMP_ITEMS_FILE"
     chmod 600 "$TEMP_ITEMS_FILE"
-
-    if [ -n "$SEARCH_TERM" ]; then
-        prompt="bw-fzf (filter: $SEARCH_TERM) ➜ "
-    else
-        prompt="bw-fzf ➜ "
-    fi
 
     monitor_inactivity
 
@@ -142,11 +125,15 @@ function bw_list() {
 
     local fzf_args=(
         --cycle
-        --inline-info
-        --ansi
+        --no-info
         --no-mouse
-        --layout=reverse
-        --prompt="$prompt"
+        --prompt="> "
+        --ghost="Name, ID or Username"
+        --border="rounded"
+        --list-border="rounded"
+        --list-label="Vault Items"
+        --input-border="rounded"
+        --input-label="Search"
         --bind="change:execute-silent(touch $TIMESTAMP_FILE)"
         --bind="focus:execute-silent(touch $TIMESTAMP_FILE)"
         --bind="ctrl-u:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); username=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.username' \"$TEMP_ITEMS_FILE\"); echo -n \"\$username\" | $CLIP_COMMAND $CLIP_ARGS)+execute-silent(touch $TIMESTAMP_FILE)"
@@ -155,6 +142,7 @@ function bw_list() {
         --bind="ctrl-f:preview(echo \"$HELP_TEXT\")"
         --header="Press ctrl-f for help"
         --preview-window="right:50%"
+        --preview-label="Login Details"
         --preview='
             if [[ "{}" == "HELP" ]]; then
                 echo "'"$HELP_TEXT"'"
@@ -172,15 +160,11 @@ function bw_list() {
                 password_available=$(jq -r ".login.password != null" <<< $item)
                 if [ "$password_available" = "true" ]; then
                     password="[Press Ctrl+p to copy password]"
-                else
-                    password="null"
                 fi
 
                 totp_available=$(jq -r ".login.totp != null" <<< $item)
                 if [ "$totp_available" = "true" ]; then
                     totp="[Press Ctrl+o to copy TOTP]"
-                else
-                    totp="null"
                 fi
 
                 bold=$(tput bold)
@@ -190,7 +174,7 @@ function bw_list() {
                 nounderline=$(tput rmul)
                 padding="  "
 
-                printf "\n${padding}${bold}${underline}Login Details${nounderline}${normal}\n\n"
+                printf "\n"
                 printf "${padding}${bold}${cyan}Username${normal}\n${padding}  %s\n\n" "$username"
                 printf "${padding}${bold}${cyan}Password${normal}\n${padding}  %s\n\n" "$password"
                 printf "${padding}${bold}${cyan}TOTP${normal}\n${padding}  %s\n\n" "$totp"
@@ -231,10 +215,6 @@ function main() {
                 shift
                 TIMEOUT="$1"
                 ;;
-            -s | --search)
-                shift
-                SEARCH_TERM="$1"
-                ;;
             *)
                 echo "Invalid option: $1"
                 help
@@ -271,7 +251,7 @@ function main() {
     monitor_inactivity
 
     check_session
-    load_items "$SEARCH_TERM"
+    load_items
     bw_list
 }
 

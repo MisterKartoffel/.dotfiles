@@ -30,16 +30,17 @@ function populate_hist_file() {
 function dunst_list() {
     local fzf_args=(
         --cycle
+        --no-info
+        --no-mouse
+        --prompt="> "
+        --ghost="Application name or urgency"
         --border="rounded"
         --list-border="rounded"
         --list-label="Notifications"
         --input-border="rounded"
         --input-label="Search"
-        --no-info
-        --ghost="Application name or urgency"
-        --prompt="> "
-        --preview-window="right:50%"
         --bind "focus:transform-preview-label:echo Details for {}"
+        --preview-window="right:50%"
         --preview='
             item=$(jq -r ".[$FZF_POS-1]" "'"$HIST_FILE"'")
             application=$(jq -r ".appname.data" <<< $item)
@@ -57,7 +58,7 @@ function dunst_list() {
             printf "\n"
             printf "${padding}${bold}${cyan}Urgency${normal}\n${padding}  %s\n\n" "$urgency"
             printf "${padding}${bold}${cyan}Application${normal}\n${padding}  %s\n\n" "$application"
-            printf "${padding}${bold}${cyan}Message${normal}\n${padding}  %s\n${padding}  %s\n" "$title" "$body"
+            printf "${padding}${bold}${cyan}Message${normal}\n${padding}  %s\n${padding}  %s\n\n" "$title" "$body"
         '
     )
 
