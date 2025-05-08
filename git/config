@@ -7,7 +7,7 @@
 [user]
     name        = Felipe Duarte
     email       = felipesdrs@hotmail.com
-    signingkey  = /home/felipe/.ssh/id_ed25519.pub
+    signingkey  = B0135FF137497DCE
 [core]
     compression = 9
     editor      = nvim
@@ -24,8 +24,6 @@
     markEmptyLines = false
 [fetch]
     prune = true
-[gpg]
-    format = ssh
 [init]
     defaultBranch = main
 [interactive]
