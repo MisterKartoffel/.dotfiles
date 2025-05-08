@@ -44,5 +44,11 @@ unset SSH_AGENT_PID
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 gpg-connect-agent updatestartuptty /bye>/dev/null
-export CREDENTIAL_FILE="${XDG_CONFIG_HOME}/sops/credentials.yaml"
-export CREDENTIAL_SOURCE="${XDG_CONFIG_HOME}/sops/.credentials"
+
+export CREDENTIAL_FILE="${HOME}/.sops/.credentials.yaml"
+export SOPS_AGE_KEY_FILE="${HOME}/.sops/.keys.txt"
+
+export GH_TOKEN="$(sops decrypt --extract '["github"]["personal_token"]' ${CREDENTIAL_FILE})"
+export BW_CLIENTID="$(sops decrypt --extract '["bitwarden"]["client_id"]' ${CREDENTIAL_FILE})"
+export BW_CLIENTSECRET="$(sops decrypt --extract '["bitwarden"]["client_secret"]' ${CREDENTIAL_FILE})"
+export BW_PASSWORD="$(sops decrypt --extract '["bitwarden"]["password"]' ${CREDENTIAL_FILE})"
