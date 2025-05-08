@@ -40,11 +40,6 @@ export FZF_DEFAULT_OPTS=" \
     --multi"
 
 # Credentials
-unset SSH_AGENT_PID
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-gpg-connect-agent updatestartuptty /bye>/dev/null
-
 export CREDENTIAL_FILE="${HOME}/.sops/.credentials.yaml"
 export SOPS_AGE_KEY_FILE="${HOME}/.sops/.keys.txt"
 

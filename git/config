@@ -7,9 +7,9 @@
 [user]
     name        = Felipe Duarte
     email       = felipesdrs@hotmail.com
-    signingKey  = B0135FF137497DCE
+    signingKey  = ~/.ssh/github_sign_id_ed25519.pub
 [core]
-    sshCommand  = ssh -i ~/.ssh/github_id_ed25519
+    sshCommand  = ssh -i ~/.ssh/github_auth_id_ed25519
     compression = 9
     editor      = nvim
     whitespace  = error
@@ -24,6 +24,8 @@
     markEmptyLines = false
 [fetch]
     prune = true
+[gpg]
+    format = ssh
 [init]
     defaultBranch = main
 [interactive]
