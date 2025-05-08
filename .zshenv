@@ -27,7 +27,7 @@ export PATH="$PATH:$HOME/.local/bin"
 # Applications
 export EDITOR=nvim
 export VISUAL=nvim
-export PAGER='less -iJR'
+export PAGER='less --mouse'
 export MANPAGER='nvim +Man!'
 export BROWSER=app.zen_browser.zen
 

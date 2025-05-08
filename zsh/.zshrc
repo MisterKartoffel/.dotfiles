@@ -64,5 +64,8 @@ source $ZDOTDIR/.git_aliases
 # Helper functions
 source $ZDOTDIR/.zsh_functions
 
+# Environment variables
+source $HOME/.zshenv
+
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
