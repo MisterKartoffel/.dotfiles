@@ -15,7 +15,6 @@
 [commit]
     gpgsign = true
     verbose = true
-    template = ~/.config/git/template
 [diff]
     tool    = nvim
     renames = copies
