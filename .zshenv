@@ -9,7 +9,6 @@ export XDG_STATE_HOME="${HOME}/.local/state"
 # XDG Base Directory compliance
 export CARGO_HOME="${XDG_DATA_HOME}/cargo" # Rust Cargo
 export FFMPEG_DATADIR="${XDG_CONFIG_HOME}/ffmpeg" # Ffmpeg config
-export GNUPGHOME="${XDG_DATA_HOME}/gnupg" # GPG directory
 export GOPATH="${XDG_DATA_HOME}/go" # Go directory
 export GOMODCACHE="${XDG_CACHE_HOME}/go/mod"
 export GOCACHE="${XDG_CACHE_HOME}/go-build"
@@ -41,8 +40,9 @@ export FZF_DEFAULT_OPTS=" \
     --multi"
 
 # Credentials
+unset SSH_AGENT_PID
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+gpg-connect-agent updatestartuptty /bye>/dev/null
 export CREDENTIAL_FILE="${XDG_CONFIG_HOME}/sops/credentials.yaml"
-export GH_TOKEN="$(sops decrypt --extract '["github"]["personal_token"]' ${CREDENTIAL_FILE})"
-export BW_CLIENTID="$(sops decrypt --extract '["bitwarden"]["client_id"]' ${CREDENTIAL_FILE})"
-export BW_CLIENTSECRET="$(sops decrypt --extract '["bitwarden"]["client_secret"]' ${CREDENTIAL_FILE})"
-export BW_PASSWORD="$(sops decrypt --extract '["bitwarden"]["password"]' ${CREDENTIAL_FILE})"
+export CREDENTIAL_SOURCE="${XDG_CONFIG_HOME}/sops/.credentials"

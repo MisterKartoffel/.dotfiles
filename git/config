@@ -7,14 +7,14 @@
 [user]
     name        = Felipe Duarte
     email       = felipesdrs@hotmail.com
-    signingkey  = B0135FF137497DCE
+    signingKey  = B0135FF137497DCE
 [core]
+    sshCommand  = ssh -i ~/.ssh/github_id_ed25519
     compression = 9
     editor      = nvim
     whitespace  = error
 [commit]
     gpgsign = true
-    verbose = true
 [diff]
     tool    = nvim
     renames = copies
