@@ -54,16 +54,17 @@ function monitor_inactivity() {
 function handle_session() {
     case "${SHOULD_LOGIN}" in
         0)
-            local VAULT_SESSION
-            VAULT_SESSION=$(bw unlock --raw --passwordenv BW_PASSWORD 2>/dev/null)
-            if [[ -z "${VAULT_SESSION}" ]]; then
-                echo "Could not unlock vault."
-                exit 1
-            fi
+            if [[ "${SHOULD_UNLOCK}" ]]; then
+                local VAULT_SESSION
+                VAULT_SESSION=$(bw unlock --raw --passwordenv BW_PASSWORD 2>/dev/null)
+                if [[ -z "${VAULT_SESSION}" ]]; then
+                    echo "Could not unlock vault."
+                    exit 1
+                fi
 
-            export BW_SESSION="${VAULT_SESSION}"
-            echo "Vault unlocked!"
-            SHOULD_UNLOCK=0
+                export BW_SESSION="${VAULT_SESSION}"
+                echo "Vault unlocked!"
+            fi
             return 0
             ;;
         1)
@@ -73,13 +74,10 @@ function handle_session() {
             fi
 
             echo "Logged in!"
-            SHOULD_LOGIN=0
             handle_session
             ;;
         *)
             echo "[ERROR] Unexpected SHOULD_LOGIN value in check_credentials(): ${SHOULD_LOGIN}"
-            SHOULD_LOGIN=0
-            SHOULD_UNLOCK=0
             exit 1
             ;;
     esac
