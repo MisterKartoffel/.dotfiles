@@ -43,7 +43,6 @@ export FZF_DEFAULT_OPTS=" \
 export CREDENTIAL_FILE="${HOME}/.sops/.credentials.yaml"
 export SOPS_AGE_KEY_FILE="${HOME}/.sops/.keys.txt"
 
-export GH_TOKEN="$(sops decrypt --extract '["github"]["personal_token"]' ${CREDENTIAL_FILE})"
 export BW_CLIENTID="$(sops decrypt --extract '["bitwarden"]["client_id"]' ${CREDENTIAL_FILE})"
 export BW_CLIENTSECRET="$(sops decrypt --extract '["bitwarden"]["client_secret"]' ${CREDENTIAL_FILE})"
 export BW_PASSWORD="$(sops decrypt --extract '["bitwarden"]["password"]' ${CREDENTIAL_FILE})"
