@@ -6,6 +6,11 @@ trap 'exit_handler' INT TERM
 trap 'cleanup' EXIT
 
 HIST_FILE=
+DEPENDS=(
+    fzf
+    jq
+    dunstctl
+)
 
 function exit_handler() {
     trap - INT TERM
@@ -66,21 +71,19 @@ function dunst_list() {
         FZF_PREVIEW_FILE="$HIST_FILE" fzf "${fzf_args[@]}"
 }
 
+function check_depends() {
+    for COMMAND in ${DEPENDS[@]}; do
+        if ! command -v "${COMMAND}" >/dev/null; then
+            echo "$COMMAND is missing. Exiting."
+            exit 1
+        fi
+    done
+
+    return 0
+}
+
 function main() {
-    if ! command -v fzf >/dev/null; then
-        echo "fzf is missing. Exiting."
-        exit 1
-    fi
-
-    if ! command -v jq >/dev/null; then
-        echo "jq is missing. Exiting."
-        exit 1
-    fi
-
-    if ! command -v dunstctl >/dev/null; then
-        echo "dunst is missing. Exiting."
-        exit 1
-    fi
+    check_depends
 
     populate_hist_file
     dunst_list

@@ -15,6 +15,13 @@ SHOULD_UNLOCK=0
 SHOULD_LOGIN=0
 CLIP_COMMAND="wl-copy"
 CLIP_ARGS="-o"
+DEPENDS=(
+    bw
+    fzf
+    jq
+    oathtool
+    "${CLIP_COMMAND}"
+)
 
 function exit_handler() {
     trap - INT TERM
@@ -133,6 +140,17 @@ function load_items() {
         exit 1
     fi
     echo "Items loaded successfully."
+}
+
+function check_depends() {
+    for COMMAND in "${DEPENDS[@]}"; do
+        if ! command -v "${COMMAND}" >/dev/null; then
+            echo "$COMMAND is missing. Exiting."
+            exit 1
+        fi
+    done
+
+    return 0
 }
 
 export -f monitor_inactivity
@@ -269,29 +287,7 @@ function main() {
         shift
     done
 
-    if ! command -v bw >/dev/null; then
-        echo "Bitwarden CLI is missing. Exiting."
-        exit 1
-    fi
-
-    if ! command -v jq >/dev/null; then
-        echo "jq is missing. Exiting."
-        exit 1
-    fi
-
-    if ! command -v fzf >/dev/null; then
-        echo "fzf is missing. Exiting."
-        exit 1
-    fi
-
-    if ! command -v oathtool >/dev/null; then
-        echo "oath-toolkit is missing. Exiting."
-        exit 1
-    fi
-
-    if ! command -v $CLIP_COMMAND >/dev/null; then
-        echo "WARNING: $CLIP_COMMAND is missing. Copy functionality will be unavailable"
-    fi
+    check_depends
 
     monitor_inactivity
 
