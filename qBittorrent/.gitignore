@@ -1,0 +1,7 @@
+VueTorrent
+rss/storage.lock
+
+ipc-socket
+lockfile
+qBittorrent-data.conf
+watched_folders.json
