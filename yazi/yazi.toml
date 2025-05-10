@@ -31,13 +31,9 @@ ueberzug_offset = [0, 0, 0, 0]
 
 [opener]
 edit = [{ run = '${EDITOR} "$@"', desc = "$EDITOR", block = true }]
-
 open = [{ run = 'xdg-open "$1"', desc = "Open" }]
-
 reveal = [{ run = 'xdg-open "$(dirname "$1")"', desc = "Reveal" }]
-
-extract = [{ run = 'ya pub extract --list "$@"', desc = "Extract here" }]
-
+extract = [{ run = 'tar -xvf "$@"', desc = "Extract here" }]
 play = [{ run = 'mpv --force-window "$@"', orphan = true }]
 
 [open]
@@ -129,11 +125,12 @@ spotters = [
     # { name = "*",   run = "file" },
 ]
 
-append_spotters = [{ name = "*", run = "file-extra-metadata" }]
+append_spotters = [
+    { name = "*", run = "file-extra-metadata" }
+]
 
 preloaders = [
     # Image
-    { mime = "image/{avif,hei?,jxl,svg+xml}", run = "magick" },
     { mime = "image/*", run = "image" },
 
     # Video
@@ -144,7 +141,7 @@ preloaders = [
 
     # Font
     { mime = "font/*", run = "font" },
-    { mime = "application/vnd.ms-opentype", run = "font" },
+    { mime = "application/ms-opentype", run = "font" },
 ]
 
 previewers = [
@@ -158,7 +155,6 @@ previewers = [
     { mime = "application/{json,ndjson}", run = "json" },
 
     # Image
-    { mime = "image/{avif,hei?,jxl,svg+xml}", run = "magick" },
     { mime = "image/*", run = "image" },
 
     # Video
@@ -179,7 +175,7 @@ previewers = [
 
     # Font
     { mime = "font/*", run = "font" },
-    { mime = "application/vnd.ms-opentype", run = "font" },
+    { mime = "application/ms-opentype", run = "font" },
 
     # Empty file
     { mime = "inode/empty", run = "empty" },
@@ -188,7 +184,9 @@ previewers = [
     # { name = "*",   run = "file" },
 ]
 
-append_previewers = [{ name = "*", run = "file-extra-metadata" }]
+append_previewers = [
+    { name = "*", run = "file-extra-metadata" }
+]
 
 [input]
 cursor_blink = false
