@@ -1,6 +1,5 @@
 # vim: set filetype=dosini :
 
-font-family = Maple Mono
 font-family = Maple Mono NF
 font-style = Medium
 font-size = 14
