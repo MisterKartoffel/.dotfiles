@@ -52,12 +52,12 @@ zstyle ":completion:*:descriptions" format "[%d]"
 zstyle ":completion:*" special-dirs true
 zstyle ":completion:*" menu no
 zstyle ":completion:*" cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
-zstyle ":fzf-tab:complete:cd:*" fzf-preview "ls --color $realpath"
+zstyle ":fzf-tab:*" use-fzf-default-opts yes
 zstyle ":antidote:bundle" use-friendly-names "yes"
 
 # Aliases
 alias fetch="fastfetch --gpu-hide-type integrated --logo arch3"
-alias ls="lsd -Al1"
+alias ls="eza -la --icons=always"
 alias c="clear"
 source $ZDOTDIR/.git_aliases
 
