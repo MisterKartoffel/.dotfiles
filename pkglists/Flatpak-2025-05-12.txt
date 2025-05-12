@@ -3,7 +3,5 @@ com.calibre_ebook.calibre
 com.github.tchx84.Flatseal
 com.obsproject.Studio
 dev.vencord.Vesktop
-io.github.celluloid_player.Celluloid
+org.pipewire.Helvum
 org.prismlauncher.PrismLauncher
-org.qbittorrent.qBittorrent
-org.rncbc.qpwgraph

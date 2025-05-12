@@ -1,5 +1,4 @@
 bibata-cursor-theme-bin
-catppuccin-gtk-theme-mocha
 downgrade
 maplemono-nf
 maplemono-ttf-autohint
