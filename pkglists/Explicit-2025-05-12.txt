@@ -57,5 +57,3 @@ xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 yazi
 zsh
-zsh-autosuggestions
-zsh-syntax-highlighting

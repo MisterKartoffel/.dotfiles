@@ -1,9 +1,0 @@
-# List of plugins
-
-romkatv/powerlevel10k
-mattmc3/ez-compinit
-zsh-users/zsh-completions                   kind:fpath path:src
-jeffreytse/zsh-vi-mode
-Aloxaf/fzf-tab
-zdharma-continuum/fast-syntax-highlighting  kind:defer
-zsh-users/zsh-autosuggestions               kind:defer

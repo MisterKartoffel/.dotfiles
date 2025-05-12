@@ -5,26 +5,42 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Set the root name of the plugins files (.txt and .zsh) antidote will use.
-zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
-
-# Ensure the .zsh_plugins.txt file exists so you can add plugins.
-[[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
-
-# Lazy-load antidote from its functions directory.
-fpath=(/usr/share/zsh-antidote/functions $fpath)
-autoload -Uz antidote
-
-# Generate a new static file whenever .zsh_plugins.txt is updated.
-if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
-    antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
+# Set PROFILING_MODE to 1 to enable profiling when sourced
+export PROFILING_MODE=0
+if [ $PROFILING_MODE -ne 0 ]; then
+    zmodload zsh/zprof
+    ZSH_START_TIME=$(python3 -c 'import time; print(int(time.time() * 1000))')
 fi
 
-# Source your static plugins file.
-source ${zsh_plugins}.zsh
+# Compile zsh file, and source them - first run is slower
+zsource() {
+    local FILE=$1
+    local ZWC="${FILE}.zwc"
+    if [[ -f "$FILE" && (! -f "$FILE" || "$FILE" -nt "$FILE") ]]; then
+        zcompile "$FILE"
+    fi
+    source "$FILE"
+}
 
-# Keybindings
-bindkey -v
+# Completion styling
+zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
+zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
+zstyle ":completion:*:descriptions" format "[%d]"
+zstyle ":completion:*" special-dirs true
+zstyle ":completion:*" menu no
+zstyle ":fzf-tab:*" use-fzf-default-opts yes
+zstyle ":antidote:bundle" use-friendly-names "yes"
+fpath=($ZDOTDIR/plugins/zsh-completions/src $fpath)
+
+autoload -Uz compinit
+ZSH_COMPDUMP="${ZDOTDIR}/.zcompdump"
+compinit -C -d "$ZSH_COMPDUMP"
+
+# Plugins
+zsource $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
+zsource $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+zsource $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+zsource $ZDOTDIR/plugins/powerlevel10k/powerlevel10k.zsh-theme
 
 # History
 HISTSIZE=100000
@@ -40,32 +56,23 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_SAVE_NO_DUPS
 setopt SHAREHISTORY
-compinit -d "XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
 
 # Shell integrations
 source <(fzf --zsh)
 
-# Completion styling
-zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
-zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
-zstyle ":completion:*:descriptions" format "[%d]"
-zstyle ":completion:*" special-dirs true
-zstyle ":completion:*" menu no
-zstyle ":completion:*" cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
-zstyle ":fzf-tab:*" use-fzf-default-opts yes
-zstyle ":antidote:bundle" use-friendly-names "yes"
-
 # Aliases
-alias fetch="fastfetch --gpu-hide-type integrated --logo arch3"
-alias ls="eza -la --icons=always"
-alias c="clear"
-source $ZDOTDIR/.git_aliases
+source $ZDOTDIR/aliases/.general_aliases
+source $ZDOTDIR/aliases/.git_aliases
 
 # Helper functions
 source $ZDOTDIR/.zsh_functions
 
-# Environment variables
-source $HOME/.zshenv
+# Profiling
+if [ $PROFILING_MODE -ne 0 ]; then
+    ZSH_END_TIME=$(python3 -c 'import time; print(int(time.time() * 1000))')
+    zprof
+    echo "Shell init time: $((ZSH_END_TIME - ZSH_START_TIME - 21)) ms"
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
