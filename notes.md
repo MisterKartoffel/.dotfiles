@@ -10,6 +10,45 @@
 ...
 ```
 
+## Enabled swap on zram
+> `/etc/modules-load.d/zram.conf`
+```text
+zram
+```
+
+> `/etc/udev/rules.d/99-zram.rules`
+```text
+ACTION=="add", KERNEL=="zram0", ATTR{initstate}=="0", ATTR{comp_algorithm}="zstd", ATTR{disksize}="4G", RUN="/usr/bin/mkswap -U clear %N", TAG+="systemd"
+```
+
+> `/etc/fstab`
+```text
+...
+/dev/zram0  none    swap    defaults,discard,pri=100    0   0
+...
+```
+
+> `/etc/sysctl.d/99-vm-zram-parameters.conf`
+```text
+vm.swappiness = 180
+vm.watermark_boost_factor = 0
+vm.watermark_scale_factor = 125
+vm.page-cluster = 0
+```
+
+## Forced AMDGPU module
+> `/etc/modprobe.d/radeon.conf`
+```
+options radeon si_support=0
+options radeon cik_support=0
+```
+
+> `/etc/modprobe.d/amdgpu.conf`
+```
+options amdgpu si_support=1
+options amdgpu cik_support=1
+```
+
 ## Pacman hooks
 > `/etc/pacman.d/hooks/10-bootbackup.hook`
 ```text
