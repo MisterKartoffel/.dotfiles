@@ -33,7 +33,7 @@ ueberzug_offset = [0, 0, 0, 0]
 edit = [{ run = '${EDITOR} "$@"', desc = "$EDITOR", block = true }]
 open = [{ run = 'xdg-open "$1"', desc = "Open" }]
 reveal = [{ run = 'xdg-open "$(dirname "$1")"', desc = "Reveal" }]
-extract = [{ run = 'tar -xvf "$@"', desc = "Extract here" }]
+extract = [{ run = 'ya pack --extract "$@"', desc = "Extract here" }]
 play = [{ run = 'mpv --force-window "$@"', orphan = true }]
 
 [open]
