@@ -111,6 +111,8 @@ keymap = [
     { on = [ "g", "d" ],        run = "cd ~/Downloads",     desc = "Go to the downloads directory" },
     { on = [ "g", "<Space>" ],  run = "cd --interactive",   desc = "Go to a directory interactively" },
     { on = [ "g", "f" ],        run = "follow",             desc = "Follow hovered symlink" },
+    { on = [ "g", "e" ],        run = "cd /etc",            desc = "Go to the system's config directory" },
+    { on = [ "g", "m" ],        run = "cd /media",          desc = "Go to USB mount directory" },
 
     # Tabs
     { on = "t", run = "tab_create --current",       desc = "Create a new tab with CWD" },
