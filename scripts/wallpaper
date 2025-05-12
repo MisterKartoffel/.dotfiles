@@ -9,6 +9,8 @@ CURRENT_WALLPAPER=$(hyprctl hyprpaper listloaded)
 case "$1" in
     random)
         if [[ -n "$CURRENT_WALLPAPER" ]]; then
+            # Attempt to fix hyprpaper sometimes not having a wallpaper
+            sleep 1
             # Get a random wallpaper, if none is set
             WALLPAPER=$(fd -t f . "$WALLPAPER_DIR" | shuf -n 1)
         else
