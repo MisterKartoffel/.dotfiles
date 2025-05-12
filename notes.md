@@ -49,6 +49,12 @@ options amdgpu si_support=1
 options amdgpu cik_support=1
 ```
 
+## Automount USB devices
+> `/etc/udev/rules.d/72-usb_automount.rules`
+```text
+ACTION=="add", SUBSYSTEMS=="usb", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesystem", RUN{program}+="/usr/bin/systemd-mount --no-block --automount=yes --collect $devnode /media"
+```
+
 ## Pacman hooks
 > `/etc/pacman.d/hooks/10-bootbackup.hook`
 ```text
