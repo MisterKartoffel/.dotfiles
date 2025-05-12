@@ -1,5 +1,5 @@
 return {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     event = "VeryLazy",
     opts = {
         ensure_installed = {
@@ -11,6 +11,5 @@ return {
             "taplo",
             "yamlls",
         },
-        ui = { border = "rounded", },
     },
 }
