@@ -4,10 +4,10 @@
     follow = none
 
     ### Geometry ###
-    width = (0, 300)
+    width = (100, 300)
     height = (0, 300)
-    origin = top-center
-    offset = (0, 0)
+    origin = top-right
+    offset = (4, 0)
     scale = 0
     notification_limit = 20
 
@@ -65,7 +65,7 @@
     always_run_script = true
     title = Dunst
     class = Dunst
-    corner_radius = 0
+    corner_radius = 10
     corners = all
     ignore_dbusclose = false
 
