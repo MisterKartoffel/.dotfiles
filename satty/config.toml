@@ -10,7 +10,7 @@ primary-highlighter = "block"
 disable-notifications = true
 
 [font]
-family = "FreeSans"
+family = "AdwaitaMono Bold"
 
 [color-palette]
 palette = [
