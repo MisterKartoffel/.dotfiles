@@ -23,13 +23,22 @@ zsource() {
 }
 
 # Completion styling
+## Turns completion case-insensitive
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
+
+## Adds colors to ls completion
 zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
+
+## Set descriptions format to enable group support
 zstyle ":completion:*:descriptions" format "[%d]"
-zstyle ":completion:*" special-dirs true
+
+## Disables built-in Zsh completion menu
 zstyle ":completion:*" menu no
+
+## Causes fzf-tab to use default fzf opts
 zstyle ":fzf-tab:*" use-fzf-default-opts yes
-zstyle ":antidote:bundle" use-friendly-names "yes"
+
+## Adds zsh-completions to fpath
 fpath=($ZDOTDIR/plugins/zsh-completions/src $fpath)
 
 autoload -Uz compinit
@@ -43,19 +52,44 @@ zsource $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 zsource $ZDOTDIR/plugins/powerlevel10k/powerlevel10k.zsh-theme
 
 # History
-HISTSIZE=100000
+HISTSIZE=10000
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
 
 # Options
+## Sets vim keybindings for Zsh
+bindkey -v
+
+## If an issued command is the name of a directory,
+## cd into that directory
 setopt AUTOCD
+
+## Do not require a leading . in filename to
+## match it explicitly
 setopt GLOB_DOTS
-setopt APPENDHISTORY
+
+## Appends commands to history such that multiple
+## sessions can share history
+setopt INC_APPEND_HISTORY
+
+## Do not show duplicates when searching history
 setopt HIST_FIND_NO_DUPS
+
+## If a new history entry matches an older one,
+## delete the older entry
 setopt HIST_IGNORE_ALL_DUPS
+
+## Do not append command to history
+## if the first character is a space
 setopt HIST_IGNORE_SPACE
+
+## Omit older commands that match newer entries
+## when writing to the history file
 setopt HIST_SAVE_NO_DUPS
-setopt SHAREHISTORY
+
+## Imports new commands from history file
+## to current session
+setopt SHARE_HISTORY
 
 # Shell integrations
 source <(fzf --zsh)
