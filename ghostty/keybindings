@@ -4,6 +4,8 @@
     keybind = clear
     keybind = ctrl+physical:comma=reload_config
     keybind = ctrl+physical:period=clear_screen
+    keybind = ctrl+shift+physical:c=copy_to_clipboard
+    keybind = ctrl+shift+physical:v=paste_from_clipboard
 
 # Font keybinds
     keybind = ctrl+physical:equal=increase_font_size:1
