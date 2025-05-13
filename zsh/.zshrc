@@ -12,7 +12,7 @@ if [ ${PROFILING_MODE} -ne 0 ]; then
     ZSH_START_TIME=$(python3 -c 'import time; print(int(time.time() * 1000))')
 fi
 
-# Compile zsh file, and source them - first run is slower
+# Manually compile plugin files for faster shell startup
 zsource() {
     local FILE=${1}
     local ZWC="${FILE}.zwc"
@@ -95,7 +95,7 @@ source ${ZDOTDIR}/aliases/.git_aliases
 # Helper functions
 source ${ZDOTDIR}/.zsh_functions
 
-# Profiling
+# Finish profiling and print out total initialization time
 if [ ${PROFILING_MODE} -ne 0 ]; then
     ZSH_END_TIME=$(python3 -c 'import time; print(int(time.time() * 1000))')
     zprof
