@@ -7,19 +7,19 @@ fi
 
 # Set PROFILING_MODE to 1 to enable profiling when sourced
 export PROFILING_MODE=0
-if [ $PROFILING_MODE -ne 0 ]; then
+if [ ${PROFILING_MODE} -ne 0 ]; then
     zmodload zsh/zprof
     ZSH_START_TIME=$(python3 -c 'import time; print(int(time.time() * 1000))')
 fi
 
 # Compile zsh file, and source them - first run is slower
 zsource() {
-    local FILE=$1
+    local FILE=${1}
     local ZWC="${FILE}.zwc"
-    if [[ -f "$FILE" && (! -f "$ZWC" || "$FILE" -nt "$FILE") ]]; then
-        zcompile "$FILE"
+    if [[ -f "${FILE}" && (! -f "${ZWC}" || "${FILE}" -nt "${FILE}") ]]; then
+        zcompile "${FILE}"
     fi
-    source "$FILE"
+    source "${FILE}"
 }
 
 # Completion styling
@@ -39,22 +39,22 @@ zstyle ":completion:*" menu no
 zstyle ":fzf-tab:*" use-fzf-default-opts yes
 
 ## Adds zsh-completions to fpath
-fpath=($ZDOTDIR/plugins/zsh-completions/src $fpath)
+fpath=(${ZDOTDIR}/plugins/zsh-completions/src ${fpath})
 
 autoload -Uz compinit
 ZSH_COMPDUMP="${ZDOTDIR}/.zcompdump"
-compinit -C -d "$ZSH_COMPDUMP"
+compinit -C -d "${ZSH_COMPDUMP}"
 
 # Plugins
-zsource $ZDOTDIR/plugins/fzf-tab/fzf-tab.plugin.zsh
-zsource $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-zsource $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-zsource $ZDOTDIR/plugins/powerlevel10k/powerlevel10k.zsh-theme
+zsource ${ZDOTDIR}/plugins/fzf-tab/fzf-tab.plugin.zsh
+zsource ${ZDOTDIR}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+zsource ${ZDOTDIR}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+zsource ${ZDOTDIR}/plugins/powerlevel10k/powerlevel10k.zsh-theme
 
 # History
 HISTFILE="${ZDOTDIR}/.zsh_history"
 HISTSIZE=10000
-SAVEHIST=$HISTSIZE
+SAVEHIST=${HISTSIZE}
 HISTDUP=erase
 
 # Options
@@ -63,7 +63,7 @@ bindkey -v
 
 ## If an issued command is the name of a directory,
 ## cd into that directory
-setopt AUTOCD
+setopt AUTO_CD
 
 ## Do not require a leading . in filename to
 ## match it explicitly
@@ -71,10 +71,7 @@ setopt GLOB_DOTS
 
 ## Appends commands to history such that multiple
 ## sessions can share history
-setopt INC_APPEND_HISTORY
-
-## Do not show duplicates when searching history
-setopt HIST_FIND_NO_DUPS
+setopt APPEND_HISTORY
 
 ## If a new history entry matches an older one,
 ## delete the older entry
@@ -84,10 +81,6 @@ setopt HIST_IGNORE_ALL_DUPS
 ## if the first character is a space
 setopt HIST_IGNORE_SPACE
 
-## Omit older commands that match newer entries
-## when writing to the history file
-setopt HIST_SAVE_NO_DUPS
-
 ## Imports new commands from history file
 ## to current session
 setopt SHARE_HISTORY
@@ -96,14 +89,14 @@ setopt SHARE_HISTORY
 source <(fzf --zsh)
 
 # Aliases
-source $ZDOTDIR/aliases/.general_aliases
-source $ZDOTDIR/aliases/.git_aliases
+source ${ZDOTDIR}/aliases/.general_aliases
+source ${ZDOTDIR}/aliases/.git_aliases
 
 # Helper functions
-source $ZDOTDIR/.zsh_functions
+source ${ZDOTDIR}/.zsh_functions
 
 # Profiling
-if [ $PROFILING_MODE -ne 0 ]; then
+if [ ${PROFILING_MODE} -ne 0 ]; then
     ZSH_END_TIME=$(python3 -c 'import time; print(int(time.time() * 1000))')
     zprof
     echo "Shell init time: $((ZSH_END_TIME - ZSH_START_TIME - 21)) ms"
