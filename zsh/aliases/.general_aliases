@@ -3,4 +3,3 @@
 
 alias fetch="fastfetch --gpu-hide-type integrated --logo arch3"
 alias ls="eza -la --icons=always"
-alias c="clear"
