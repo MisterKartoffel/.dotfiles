@@ -52,6 +52,7 @@ zsource $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
 zsource $ZDOTDIR/plugins/powerlevel10k/powerlevel10k.zsh-theme
 
 # History
+HISTFILE="${ZDOTDIR}/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
