@@ -16,7 +16,7 @@ fi
 zsource() {
     local FILE=$1
     local ZWC="${FILE}.zwc"
-    if [[ -f "$FILE" && (! -f "$FILE" || "$FILE" -nt "$FILE") ]]; then
+    if [[ -f "$FILE" && (! -f "$ZWC" || "$FILE" -nt "$FILE") ]]; then
         zcompile "$FILE"
     fi
     source "$FILE"
