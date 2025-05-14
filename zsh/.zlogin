@@ -25,5 +25,5 @@
     done
 
     zrecompile -pq "${ZDOTDIR}/plugins/powerlevel10k/powerlevel10k.zsh-theme"
-    zrecompile -pq "${ZDOTDIR}/.p10k.zsh"
+    zrecompile -pq "${ZDOTDIR}/cache/.p10k.zsh"
 } &!

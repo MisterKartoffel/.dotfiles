@@ -25,7 +25,7 @@ zstyle ":fzf-tab:*" use-fzf-default-opts yes
 fpath=(${ZDOTDIR}/plugins/zsh-completions/src ${fpath})
 
 autoload -Uz compinit
-ZSH_COMPDUMP="${ZDOTDIR}/.zcompdump"
+ZSH_COMPDUMP="${ZDOTDIR}/cache/.zcompdump"
 compinit -C -d "${ZSH_COMPDUMP}"
 
 # Plugins
@@ -35,7 +35,7 @@ source ${ZDOTDIR}/plugins/powerlevel10k/powerlevel10k.zsh-theme
 source ${ZDOTDIR}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # History
-HISTFILE="${ZDOTDIR}/.zsh_history"
+HISTFILE="${ZDOTDIR}/cache/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=${HISTSIZE}
 HISTDUP=erase
@@ -76,7 +76,7 @@ source ${ZDOTDIR}/aliases/.general_aliases
 source ${ZDOTDIR}/aliases/.git_aliases
 
 # Helper functions
-source ${ZDOTDIR}/.zsh_functions
+source ${ZDOTDIR}/aliases/.zsh_functions
 
 # Finish profiling and print out total initialization time
 if [ ${PROFILING_MODE} -ne 0 ]; then
@@ -86,4 +86,4 @@ if [ ${PROFILING_MODE} -ne 0 ]; then
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+[[ ! -f ~/.config/zsh/cache/.p10k.zsh ]] || source ~/.config/zsh/cache/.p10k.zsh
