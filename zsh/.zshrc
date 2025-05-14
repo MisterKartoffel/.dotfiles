@@ -12,16 +12,6 @@ if [ ${PROFILING_MODE} -ne 0 ]; then
     ZSH_START_TIME=$(python3 -c 'import time; print(int(time.time() * 1000))')
 fi
 
-# Manually compile plugin files for faster shell startup
-zsource() {
-    local FILE=${1}
-    local ZWC="${FILE}.zwc"
-    if [[ -f "${FILE}" && (! -f "${ZWC}" || "${FILE}" -nt "${FILE}") ]]; then
-        zcompile "${FILE}"
-    fi
-    source "${FILE}"
-}
-
 # Completion styling
 ## Turns completion case-insensitive
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
@@ -46,10 +36,10 @@ ZSH_COMPDUMP="${ZDOTDIR}/.zcompdump"
 compinit -C -d "${ZSH_COMPDUMP}"
 
 # Plugins
-zsource ${ZDOTDIR}/plugins/fzf-tab/fzf-tab.plugin.zsh
-zsource ${ZDOTDIR}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-zsource ${ZDOTDIR}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-zsource ${ZDOTDIR}/plugins/powerlevel10k/powerlevel10k.zsh-theme
+source ${ZDOTDIR}/plugins/fzf-tab/fzf-tab.plugin.zsh
+source ${ZDOTDIR}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source ${ZDOTDIR}/plugins/powerlevel10k/powerlevel10k.zsh-theme
+source ${ZDOTDIR}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # History
 HISTFILE="${ZDOTDIR}/.zsh_history"
