@@ -9,9 +9,9 @@
         zrecompile -pq "${ZSH_COMPDUMP}"
     fi 
 
-    zrecompile -pq "${ZDOTDIR:${HOME}}/.zlogin"
-    zrecompile -pq "${ZDOTDIR:${HOME}}/.zshrc"
-    zrecompile -pq "${ZDOTDIR:${HOME}}/.zprofile"
+    zrecompile -pq "${ZDOTDIR:-${HOME}}/.zlogin"
+    zrecompile -pq "${ZDOTDIR:-${HOME}}/.zshrc"
+    zrecompile -pq "${ZDOTDIR:-${HOME}}/.zprofile"
     zrecompile -pq "${HOME}/.dotfiles/.zshenv"
 
     PLUGINS=(
