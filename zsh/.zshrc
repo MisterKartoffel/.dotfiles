@@ -6,6 +6,13 @@ if [ ${PROFILING_MODE} -ne 0 ]; then
 fi
 
 # Completion styling
+## Enable caching for completion
+zstyle ":completion:*" use-cache on
+zstyle ":completion:*" cache-path ${ZDOTDIR}/cache
+
+## Ignore completion for unavailable commands
+zstyle ":completion:*:functions" ignored-patterns "_*"
+
 ## Turns completion case-insensitive
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Za-z}"
 
@@ -60,6 +67,9 @@ setopt AUTO_CD
 ## Do not require a leading . in filename to
 ## match it explicitly
 setopt GLOB_DOTS
+
+## Prevents truncating file if it exists
+setopt NO_CLOBBER
 
 ## Appends commands to history such that multiple
 ## sessions can share history
