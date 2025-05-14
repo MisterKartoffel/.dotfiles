@@ -23,3 +23,6 @@ export LC_MEASUREMENT="pt_BR.UTF-8"
 export LC_NAME="pt_BR.UTF-8"
 export LC_ADDRESS="pt_BR.UTF-8"
 export LC_TELEPHONE="pt_BR.UTF-8"
+
+# Eliminates duplicates in *path
+typeset -gU cdpath fpath path
