@@ -5,11 +5,11 @@
     autoload -U zrecompile
 
     # Check to recompile .zcompdump
-    ZSH_COMPDUMP="${ZDOTDIR:-${HOME}}/.zcompdump"
     if [[ -s "${ZSH_COMPDUMP}" && (! -s "${ZSH_COMPDUMP}.zwc" || "${ZSH_COMPDUMP}" -nt "${ZSH_COMPDUMP}.zwc") ]]; then
         zrecompile -pq "${ZSH_COMPDUMP}"
     fi 
 
+    zrecompile -pq "${ZDOTDIR:${HOME}}/.zlogin"
     zrecompile -pq "${ZDOTDIR:${HOME}}/.zshrc"
     zrecompile -pq "${ZDOTDIR:${HOME}}/.zprofile"
     zrecompile -pq "${HOME}/.dotfiles/.zshenv"
