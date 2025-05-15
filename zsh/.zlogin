@@ -1,13 +1,7 @@
 #!/usr/bin/env zsh
-
 {
     setopt LOCAL_OPTIONS EXTENDED_GLOB
     autoload -U zrecompile
-
-    # Check to recompile .zcompdump
-    if [[ -s "${ZSH_COMPDUMP}" && (! -s "${ZSH_COMPDUMP}.zwc" || "${ZSH_COMPDUMP}" -nt "${ZSH_COMPDUMP}.zwc") ]]; then
-        zrecompile -pq "${ZSH_COMPDUMP}"
-    fi 
 
     zrecompile -pq "${ZDOTDIR:-${HOME}}/.zlogin"
     zrecompile -pq "${ZDOTDIR:-${HOME}}/.zshrc"
@@ -26,4 +20,6 @@
 
     zrecompile -pq "${ZDOTDIR}/plugins/powerlevel10k/powerlevel10k.zsh-theme"
     zrecompile -pq "${ZDOTDIR}/cache/.p10k.zsh"
+
+    zrecompile -pq "${ZSH_COMPDUMP}"
 } &!
