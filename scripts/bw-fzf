@@ -70,9 +70,11 @@ function handle_session() {
                     exit 1
                 fi
 
+                SHOULD_UNLOCK=0
                 export BW_SESSION="${VAULT_SESSION}"
                 echo "Vault unlocked!"
             fi
+
             return 0
             ;;
         1)
@@ -81,8 +83,10 @@ function handle_session() {
                 exit 1
             fi
 
+            SHOULD_LOGIN=0
             echo "Logged in!"
             handle_session
+            return 0
             ;;
         *)
             echo "[ERROR] Unexpected SHOULD_LOGIN value in check_credentials(): ${SHOULD_LOGIN}"
@@ -100,6 +104,8 @@ function check_credentials() {
                 echo "Password environment variable not set."
                 exit 1
             fi
+
+            return 0
             ;;
         1)
             if [[ -z "${BW_CLIENTID}" ]] || [[ -z "${BW_CLIENTSECRET}" ]]; then
