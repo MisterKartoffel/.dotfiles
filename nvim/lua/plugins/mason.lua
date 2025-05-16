@@ -9,7 +9,6 @@ return {
             "ruff",
             "shellcheck",
             "taplo",
-            "yamlls",
             "tinymist",
             "typstyle",
         },
