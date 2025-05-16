@@ -7,5 +7,4 @@
 ^.*\.(yaml|md)$
 ^\.stowrc$
 ^\.zshenv$
-^/README.*
-^/LICENSE.*
+^\.zshenv\.zwc($|\.old$)
