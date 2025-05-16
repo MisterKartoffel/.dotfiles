@@ -104,7 +104,6 @@
         "format-disconnected": "Disconnected 󰌙",
         "tooltip-format": "{ifname} via {gwaddr}",
         "tooltip-format-disconnected": "Disconnected",
-        "on-click": "uwsm app -- nm-connection-editor",
         "format-icons": {
             "default": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
         }

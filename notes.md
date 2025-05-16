@@ -7,6 +7,39 @@ Could be caused by a lack of WAYLAND_DISPLAY and HYPRLAND_INSTANCE_SIGNATURE in 
 ---
 
 # System-wide modifications
+## Netctl-based internet
+> [!IMPORTANT]
+> List of dependencies:
+> - netctl
+> - openresolv
+> - dhcpdc
+> - wpa_supplicant
+> - ifplugd
+
+> Copy the following profiles to `/etc/netctl`
+```conf
+/etc/netctl/examples/ethernet-dhcp
+/etc/netctl/examples/wireless-wpa
+```
+
+> Generate PSK from ESSID and Passphrase via wpa_passphrase.
+```sh
+wpa_passphrase `ESSID`
+```
+
+> Configure wireless profile(s) in `/etc/netctl` to use ESSID and PSK.
+
+> Find interface names.
+```sh
+ip a
+```
+
+> Enable systemd units.
+```systemd
+systemctl enable --now netctl-ifplugd@ethernet-interface.service
+systemctl enable --now netctl-auto@wireless-interface.service
+```
+
 ## Enabled zswap for hibernation
 > [!IMPORTANT]
 > Before running the command below, make sure the swapfile will be in a non-snapshotted, non-COW subvolume.

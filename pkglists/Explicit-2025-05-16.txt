@@ -7,6 +7,7 @@ bitwarden-cli
 brightnessctl
 btop
 btrfs-progs
+dhcpcd
 diff-so-fancy
 dosfstools
 dunst
@@ -24,6 +25,7 @@ hyprlock
 hyprpaper
 hyprpicker
 hyprpolkitagent
+ifplugd
 intel-ucode
 kvantum
 linux
@@ -32,8 +34,7 @@ ly
 man-db
 mpv
 neovim
-networkmanager
-nm-connection-editor
+netctl
 npm
 oath-toolkit
 pavucontrol
@@ -56,5 +57,4 @@ waybar
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 yazi
-zlib-ng
 zsh

@@ -9,6 +9,7 @@ linux-firmware
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
+openssh
 pipewire-alsa
 pipewire-pulse
 poppler
@@ -18,3 +19,4 @@ uwsm
 vulkan-mesa-layers
 vulkan-radeon
 wl-clipboard
+wpa_supplicant
