@@ -10,6 +10,8 @@ return {
             "shellcheck",
             "taplo",
             "yamlls",
+            "tinymist",
+            "typstyle",
         },
     },
 }
