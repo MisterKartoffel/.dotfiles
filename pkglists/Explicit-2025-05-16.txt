@@ -56,4 +56,5 @@ waybar
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 yazi
+zlib-ng
 zsh
