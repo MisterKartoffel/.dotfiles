@@ -1,13 +1,14 @@
 # Important notes
 ## uwsm logout after login
-Could be caused by a lack of WAYLAND_DISPLAY and HYPRLAND_INSTANCE_SIGNATURE in the exported variables, causing uwsm to timeout. This is corroborated by an inspection of `journalctl`. On second launch, I assume uwsm picks up on `exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP` and launches as per usual.
-1. Testing not having any environment-related `exec-once` in `$HOME/.config/hypr/hyprland/launch.conf`
+Could be caused by a lack of WAYLAND_DISPLAY and HYPRLAND_INSTANCE_SIGNATURE in the exported variables, causing uwsm to timeout. This is corroborated by an inspection of `journalctl`. Testing a variety of fixes in `$HOME/.config/hypr/hyprland/launch.conf`
+1. Tested not having any environment-related `exec-once`. (Failed, once caused the bug to happen twice consecutively.)
+2. Testing `exec-once = exec uwsm finalize`.
 
 ---
 
 # System-wide modifications
 ## Enabled zswap for hibernation
-> [!NOTE]
+> [!IMPORTANT]
 > Before running the command below, make sure the swapfile will be in a non-snapshotted, non-COW subvolume.
 ```sh
 sudo btrfs filesystem mkswapfile --size 8g --uuid clear /swap/swapfile
@@ -132,7 +133,6 @@ options snd_ac97_codec power_save=0
 ```
 
 > Disable device suspension in wireplumber configuration.
-
 ```conf
 /etc/wireplumber/wireplumber.conf.d/51-disable-suspension.conf
 
