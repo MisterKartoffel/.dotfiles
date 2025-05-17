@@ -19,4 +19,3 @@ uwsm
 vulkan-mesa-layers
 vulkan-radeon
 wl-clipboard
-wpa_supplicant

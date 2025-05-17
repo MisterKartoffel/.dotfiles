@@ -7,37 +7,60 @@ Could be caused by a lack of WAYLAND_DISPLAY and HYPRLAND_INSTANCE_SIGNATURE in 
 ---
 
 # System-wide modifications
-## Netctl-based internet
+## Systemd-networkd / iwd based internet
 > [!IMPORTANT]
 > List of dependencies:
-> - netctl
-> - openresolv
-> - dhcpdc
-> - wpa_supplicant
-> - ifplugd
+> - systemd
+> - iwd
 
-> Copy the following profiles to `/etc/netctl`
+> Create the following profiles.
 ```conf
-/etc/netctl/examples/ethernet-dhcp
+/etc/systemd/network/20-wired.network
+
+[Match]
+Name=(ethernet interface)
+
+[Link]
+RequiredForOnline=routable
+
+[Network]
+DHCP=yes
+
+[DHCPv4]
+RouteMetric=100
+
+[IPv6AcceptRA]
+RouteMetric=100
+```
+
+```
 /etc/netctl/examples/wireless-wpa
-```
 
-> Generate PSK from ESSID and Passphrase via wpa_passphrase.
-```sh
-wpa_passphrase `ESSID`
-```
+[Match]
+Name=(wireless interface)
 
-> Configure wireless profile(s) in `/etc/netctl` to use ESSID and PSK.
+[Link]
+RequiredForOnline=routable
 
-> Find interface names.
-```sh
-ip a
+[Network]
+DHCP=yes
+
+[DHCPv4]
+RouteMetric=100
+
+[IPv6AcceptRA]
+RouteMetric=100
 ```
 
 > Enable systemd units.
-```systemd
-systemctl enable --now netctl-ifplugd@ethernet-interface.service
-systemctl enable --now netctl-auto@wireless-interface.service
+```sh
+systemctl enable --now systemd-networkd.service
+systemctl enable --now iwd.service
+```
+
+> Connect to wireless access point via iwd.
+```sh
+iwctl --passphrase passphrase station (wireless interface) connect SSID
 ```
 
 ## Enabled zswap for hibernation
