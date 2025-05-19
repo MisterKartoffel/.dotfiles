@@ -280,3 +280,136 @@ monitor.bluez.rules = [
 
 blacklist iTCO_wdt
 ```
+
+## Changes to systemd units
+> Created user-scoped qBittorrent-nox service.
+```systemd
+/etc/systemd/user/qbittorrent-nox.service
+
+[Unit]
+Description=qBittorrent-nox service scoped for user
+Documentation=man:qbittorrent-nox(1)
+Wants=network-online.target
+After=local-fs.target network-online.target nss-lookup.target
+
+[Service]
+Type=simple
+PrivateTmp=false
+ExecStart=/usr/bin/qbittorrent-nox
+TimeoutStopSec=1800
+
+[Install]
+WantedBy=default.target
+```
+
+> Created rclone service for different remotes
+```systemd
+/etc/systemd/user/rclone@.service
+
+[Unit]
+Description=rclone mount for %i remote
+Documentation=http://rclone.org/docs
+Wants=network-online.target
+After=local-fs.target network-online.target nss-lookup.target
+
+[Service]
+Type=notify
+
+# Set up environment
+Environment=REMOTE_NAME="%i"
+Environment=REMOTE_PATH="/"
+Environment=POST_MOUNT_SCRIPT=""
+Environment=RCLONE_CONF="%h/.config/rclone/rclone.conf"
+Environment=RCLONE_TEMP_DIR="/tmp/rclone/%u/%i"
+Environment=RCLONE_RC_ON="false"
+
+#Default arguments for rclone mount. Can be overridden in the environment file
+Environment=RCLONE_MOUNT_ATTR_TIMEOUT="1s"
+Environment=RCLONE_MOUNT_DIR_CACHE_TIME="60m"
+Environment=RCLONE_MOUNT_DIR_PERMS="0777"
+Environment=RCLONE_MOUNT_FILE_PERMS="0666"
+Environment=RCLONE_MOUNT_GID="%G"
+Environment=RCLONE_MOUNT_MAX_READ_AHEAD="128k"
+Environment=RCLONE_MOUNT_POLL_INTERVAL="1m0s"
+Environment=RCLONE_MOUNT_UID="%U"
+Environment=RCLONE_MOUNT_UMASK="022"
+Environment=RCLONE_MOUNT_VFS_CACHE_MAX_AGE="1h0m0s"
+Environment=RCLONE_MOUNT_VFS_CACHE_MAX_SIZE="off"
+Environment=RCLONE_MOUNT_VFS_CACHE_MODE="writes"
+Environment=RCLONE_MOUNT_VFS_CACHE_POLL_INTERVAL="1m0s"
+Environment=RCLONE_MOUNT_VFS_READ_CHUNK_SIZE="128M"
+Environment=RCLONE_MOUNT_VFS_READ_CHUNK_SIZE_LIMIT="off"
+
+# Define environment settings from env file
+# [Important] Must define MOUNT_DIR in env file
+EnvironmentFile=-%h/.config/rclone/%i.env
+
+# Check mount directory
+ExecStartPre=/usr/bin/test -d "${MOUNT_DIR}"
+ExecStartPre=/usr/bin/test -w "${MOUNT_DIR}"
+
+# Check rclone configuration file
+ExecStartPre=/usr/bin/test -f "${RCLONE_CONF}"
+ExecStartPre=/usr/bin/test -r "${RCLONE_CONF}"
+
+# Mount remote filesystem
+ExecStart=/usr/bin/rclone mount \
+            --config="${RCLONE_CONF}" \
+            --rc="${RCLONE_RC_ON}" \
+            --cache-chunk-path="${RCLONE_TEMP_DIR}/chunks" \
+            --cache-workers=8 \
+            --cache-writes \
+            --cache-dir="${RCLONE_TEMP_DIR}/vfs" \
+            --cache-db-path="${RCLONE_TEMP_DIR}/db" \
+            --no-modtime \
+            --drive-use-trash \
+            --stats=0 \
+            --checkers=16 \
+            --bwlimit=40M \
+            --cache-info-age=60m \
+            --attr-timeout="${RCLONE_MOUNT_ATTR_TIMEOUT}" \
+            --dir-cache-time="${RCLONE_MOUNT_DIR_CACHE_TIME}" \
+            --dir-perms="${RCLONE_MOUNT_DIR_PERMS}" \
+            --file-perms="${RCLONE_MOUNT_FILE_PERMS}" \
+            --gid="${RCLONE_MOUNT_GID}" \
+            --max-read-ahead="${RCLONE_MOUNT_MAX_READ_AHEAD}" \
+            --poll-interval="${RCLONE_MOUNT_POLL_INTERVAL}" \
+            --uid="${RCLONE_MOUNT_UID}" \
+            --umask="${RCLONE_MOUNT_UMASK}" \
+            --vfs-cache-max-age="${RCLONE_MOUNT_VFS_CACHE_MAX_AGE}" \
+            --vfs-cache-max-size="${RCLONE_MOUNT_VFS_CACHE_MAX_SIZE}" \
+            --vfs-cache-mode="${RCLONE_MOUNT_VFS_CACHE_MODE}" \
+            --vfs-cache-poll-interval="${RCLONE_MOUNT_VFS_CACHE_POLL_INTERVAL}" \
+            --vfs-read-chunk-size="${RCLONE_MOUNT_VFS_READ_CHUNK_SIZE}" \
+            --vfs-read-chunk-size-limit="${RCLONE_MOUNT_VFS_READ_CHUNK_SIZE_LIMIT}" \
+            "${REMOTE_NAME}:${REMOTE_PATH}" "${MOUNT_DIR}"
+
+# Execute post-mount script if specified
+ExecStartPost=/bin/sh -c "${POST_MOUNT_SCRIPT}"
+
+# Unmount remote filesystem on exit
+ExecStop=/bin/fusermount3 -u "${MOUNT_DIR}"
+
+# Restart information
+Restart=no
+
+[Install]
+WantedBy=default.target
+```
+
+> Keep boot messages in TTY1.
+```systemd
+/etc/systemd/system/getty@tty1.service.d/noclear.conf
+
+TTYVTDisallocate=no
+```
+
+> Change systemd-networkd-wait-online.service to wait for any interface
+instead of all.
+```systemd
+/etc/systemd/system/systemd-networkd-wait-online.service.d/wait-for-only-one-interface.conf
+
+[Service]
+ExecStart=
+ExecStart=/usr/lib/systemd/systemd-networkd-wait-online --any
+```
