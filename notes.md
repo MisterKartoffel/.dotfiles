@@ -3,8 +3,7 @@
 Could be caused by a lack of WAYLAND_DISPLAY and HYPRLAND_INSTANCE_SIGNATURE in the exported variables, causing uwsm to timeout. This is corroborated by an inspection of `journalctl`. Testing a variety of fixes in `$HOME/.config/hypr/hyprland/launch.conf`
 1. No environment-related `exec-once` failed, once caused the bug to happen twice consecutively.
 2. `exec-once = exec uwsm finalize` failed.
-3. Testing `exec-once = exec uwsm finalize WAYLAND_DISPLAY
-   HYPRLAND_INSTANCE_SIGNATURE`.
+3. Testing `exec-once = exec uwsm finalize WAYLAND_DISPLAY HYPRLAND_INSTANCE_SIGNATURE`.
 
 ---
 
@@ -21,7 +20,7 @@ the RouteMetric directive to assign one interface as a priority.
 
 > Create the bond interface.
 ```systemd
-/etc/systemd/network/30-bond0.netdev
+/etc/systemd/network/10-bond0.netdev
 
 [NetDev]
 Name=bond0
@@ -35,13 +34,13 @@ MIIMonitorSec=1s
 
 > Create the bond network.
 ```systemd
-/etc/systemd/network/30-bond0.network
+/etc/systemd/network/40-bond0.network
 
 [Match]
 Name=bond0
 
 [Link]
-RequiredForOnline=routable
+RequiredForOnline=yes
 
 [Network]
 BindCarrier=enp7s0 wlan0
@@ -53,7 +52,7 @@ DHCP=yes
 /etc/systemd/network/30-ethernet-bond0.network
 
 [Match]
-Name=enp7s0
+PermanentMACAddress=
 
 [Network]
 Bond=bond0
@@ -70,7 +69,7 @@ RouteMetric=100
 /etc/systemd/network/30-wifi-bond0.network
 
 [Match]
-Name=wlan0
+PermanentMACAddress=
 
 [Network]
 Bond=bond0
@@ -98,7 +97,8 @@ systemctl enable --now iwd.service
 
 > Connect to wireless access point via iwd.
 ```sh
-iwctl --passphrase passphrase station wlan0 connect SSID
+iwctl
+[iwctl]# station interface connect SSID
 ```
 
 ## Enabled zswap for hibernation

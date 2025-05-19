@@ -105,6 +105,7 @@ function check_credentials() {
                 exit 1
             fi
 
+            handle_session
             return 0
             ;;
         1)
@@ -120,8 +121,6 @@ function check_credentials() {
             exit 1
             ;;
     esac
-
-    handle_session
 }
 
 function check_session() {
