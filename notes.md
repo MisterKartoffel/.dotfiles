@@ -15,43 +15,79 @@ Could be caused by a lack of WAYLAND_DISPLAY and HYPRLAND_INSTANCE_SIGNATURE in 
 > - systemd
 > - iwd
 
-> Create the following profiles.
+> [!NOTE]
+> This configuration takes advantage of bonding to bind multiple interfaces and
+the RouteMetric directive to assign one interface as a priority.
+
+> Create the bond interface.
+```systemd
+/etc/systemd/network/30-bond0.netdev
+
+[NetDev]
+Name=bond0
+Kind=bond
+
+[Bond]
+Mode=active-backup
+PrimaryReselectPolicy=always
+MIIMonitorSec=1s
+```
+
+> Create the bond network.
+```systemd
+/etc/systemd/network/30-bond0.network
+
+[Match]
+Name=bond0
+
+[Link]
+RequiredForOnline=routable
+
+[Network]
+BindCarrier=enp7s0 wlan0
+DHCP=yes
+```
+
+> Enslave wanted network interfaces.
+```
+/etc/systemd/network/30-ethernet-bond0.network
+
+[Match]
+Name=enp7s0
+
+[Network]
+Bond=bond0
+PrimarySlave=true
+
+[DHCPv4]
+RouteMetric=100
+
+[IPv6AcceptRA]
+RouteMetric=100
+```
+
+```
+/etc/systemd/network/30-wifi-bond0.network
+
+[Match]
+Name=wlan0
+
+[Network]
+Bond=bond0
+
+[DHCPv4]
+RouteMetric=600
+
+[IPv6AcceptRA]
+RouteMetric=600
+```
+
+> Enable iwd's built-in DHCP client.
 ```conf
-/etc/systemd/network/20-wired.network
+/etc/iwd/main.conf
 
-[Match]
-Name=(ethernet interface)
-
-[Link]
-RequiredForOnline=routable
-
-[Network]
-DHCP=yes
-
-[DHCPv4]
-RouteMetric=100
-
-[IPv6AcceptRA]
-RouteMetric=100
-```
-
-```
-/etc/netctl/examples/wireless-wpa
-
-[Match]
-Name=(wireless interface)
-
-[Link]
-RequiredForOnline=routable
-
-[Network]
-DHCP=yes
-
-[DHCPv4]
-RouteMetric=100
-
-[IPv6AcceptRA]
-RouteMetric=100
+[General]
+EnableNetworkConfiguration=true
 ```
 
 > Enable systemd units.
@@ -62,7 +98,7 @@ systemctl enable --now iwd.service
 
 > Connect to wireless access point via iwd.
 ```sh
-iwctl --passphrase passphrase station (wireless interface) connect SSID
+iwctl --passphrase passphrase station wlan0 connect SSID
 ```
 
 ## Enabled zswap for hibernation
