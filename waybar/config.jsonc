@@ -45,6 +45,7 @@
         "format": "{:%R}",
         "format-alt": "{:%a, %b %d %Y}",
         "interval": 1,
+        "on-click-right": "terminal-window Calendar cal -y",
         "tooltip": false
     },
 
@@ -55,16 +56,19 @@
 
     "cpu": {
         "format": "{usage}% 󰘚",
+        "on-click-right": "ghostty --title=\"btop\" -e btop --preset 4",
         "tooltip": false
     },
 
     "memory": {
         "format": "{used:0.1f}G ",
+        "on-click-right": "ghostty --title=\"btop\" -e btop --preset 4",
         "tooltip": false
     },
 
     "disk": {
         "format": "{used} 󰒋",
+        "on-click-right": "ghostty --title=\"Yazi\" -e yazi",
         "tooltip": false
     },
 
