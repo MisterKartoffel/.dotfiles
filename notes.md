@@ -282,6 +282,11 @@ blacklist iTCO_wdt
 ```
 
 ## Changes to systemd units
+> Mask systemd-fsck-root.service (not needed for btrfs).
+```sh
+systemctl mask systemd-fsck-root.service
+```
+
 > Created user-scoped qBittorrent-nox service.
 ```systemd
 /etc/systemd/user/qbittorrent-nox.service
