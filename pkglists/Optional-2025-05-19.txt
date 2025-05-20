@@ -15,6 +15,7 @@ pipewire-pulse
 poppler
 qt5-wayland
 ripgrep
+rsync
 uwsm
 vulkan-mesa-layers
 vulkan-radeon
