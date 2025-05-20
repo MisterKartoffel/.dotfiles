@@ -14,6 +14,7 @@ efibootmgr
 eza
 fastfetch
 flatpak
+fuzzel
 fzf
 ghostty
 git
@@ -41,7 +42,6 @@ qbittorrent-nox
 rage-encryption
 rclone
 reflector
-rofi-wayland
 satty
 slurp
 snap-pac

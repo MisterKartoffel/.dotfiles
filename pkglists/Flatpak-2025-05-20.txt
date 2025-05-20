@@ -1,7 +1,6 @@
 app.zen_browser.zen
 com.calibre_ebook.calibre
 com.github.tchx84.Flatseal
-com.obsproject.Studio
 dev.vencord.Vesktop
 org.pipewire.Helvum
 org.prismlauncher.PrismLauncher
