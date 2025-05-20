@@ -1,5 +1,6 @@
 alsa-firmware
 alsa-utils
+apparmor
 base
 base-devel
 bat
