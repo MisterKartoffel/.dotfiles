@@ -101,6 +101,20 @@ iwctl
 [iwctl]# station interface connect SSID
 ```
 
+## Mkinitcpio drop-in configuration
+```conf
+/etc/mkinitcpio.conf.d/10-modules.conf
+
+MODULES=(btrfs amdgpu)
+```
+
+```conf
+/etc/mkinitcpio.conf.d/40-hooks.conf
+
+HOOKS=(systemd autodetect microcode modconf kms keyboard sd-vconsole block
+filesystems)
+```
+
 ## Enabled zswap for hibernation
 > [!IMPORTANT]
 > Before running the command below, make sure the swapfile will be in a non-snapshotted, non-COW subvolume.
@@ -145,6 +159,16 @@ vm.swappiness = 180
 vm.watermark_boost_factor = 0
 vm.watermark_scale_factor = 125
 vm.page-cluster = 0
+```
+
+## Pacman configuration
+```conf
+/etc/pacman.conf
+
+Color
+VerbosePkgLists
+DisableDownloadTimeout
+ILoveCandy
 ```
 
 ## Forced AMDGPU module
