@@ -306,6 +306,15 @@ blacklist iTCO_wdt
 ```
 
 ## Changes to systemd units
+> Added userdata to snapper-boot.service.
+```systemd
+/etc/systemd/system/snapper-boot.service.d/10-userdata.conf
+
+[Service]
+ExecStart=
+ExecStart=/usr/bin/snapper --config root create --cleanup-algorithm number --description "boot" --userdata "important=yes"
+```
+
 > Mask systemd-fsck-root.service (not needed for btrfs).
 ```sh
 systemctl mask systemd-fsck-root.service
