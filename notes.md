@@ -236,10 +236,27 @@ Depends = rsync
 ```
 
 > [!INFO]
+> This hook creates updated lists of installed packages based on the genpkglist script.
+```conf
+/etc/pacman.d/hooks/98-pkglists.hook
+
+[Trigger]
+Operation = Install
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Generating updated package lists...
+When = PostTransaction
+Exec = /bin/su - user /bin/sh -c '$HOME/.local/bin/genpkglist'
+```
+
+> [!INFO]
 > This hook explicitly prints out .pacnew and .pacsave files post system
 update.
 ```conf
-/etc/pacman.d/hooks/90-pacdiff.hook
+/etc/pacman.d/hooks/99-pacdiff.hook
 
 [Trigger]
 Operation = Upgrade
