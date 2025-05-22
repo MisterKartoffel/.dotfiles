@@ -82,8 +82,17 @@ set.inccommand = "split"
 set.hlsearch = false
 
 -- Set the register to use as clipboard.
+-- Scheduled to reduce startup time.
 -- (default): vim.o.clipboard = ""
-set.clipboard = "unnamedplus"
+vim.schedule(function()
+    set.clipboard = "unnamedplus"
+end)
+
+-- Show and configure tab, trailing space and non-breakable space character.
+-- (default): vim.o.list = false
+set.list = true
+-- (default): vim.opt.listchars = { tab = ">", trail = "-", nbsp = "+" }
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Use a swapfile for the buffer.
 -- (default): vim.o.swapfile = true
