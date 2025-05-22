@@ -15,52 +15,52 @@ return {
             on_attach = function()
                 local map = require("utils").map
 
-                -- Navigation
-                map("n", "<leader>gn", function()
-                    if vim.wo.diff then
-                        vim.cmd.normal({ "<leader>gn", bang = true })
-                    else
-                        gitsigns.nav_hunk("next")
-                    end
-                end, { desc = "Jump to next hunk" })
+                -- Snacks pickers
+                map("n", "gps", function()
+                    Snacks.picker.git_status()
+                end, { desc = "Show status for current working tree" })
 
-                map("n", "<leader>gp", function()
-                    if vim.wo.diff then
-                        vim.cmd.normal({ "<leader>gp", bang = true })
-                    else
-                        gitsigns.nav_hunk("prev")
-                    end
+                map("n", "gpd", function()
+                    Snacks.picker.git_diff()
+                end, { desc = "Show diff between HEAD and working tree" })
+
+                map("n", "gpl", function()
+                    Snacks.picker.git_log_file()
+                end, { desc = "Browse logs for current buffer" })
+
+                map("v", "gpl", function()
+                    Snacks.picker.git_log_line()
+                end, { desc = "Browse logs for current line" })
+
+                -- Navigation
+                map("n", "gsp", function()
+                    gitsigns.nav_hunk("prev")
                 end, { desc = "Jump to previous hunk" })
 
+                map("n", "gsn", function()
+                    gitsigns.nav_hunk("next")
+                end, { desc = "Jump to next hunk" })
+
                 -- Actions
-                map("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Stage current hunk" })
-                map("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset current hunk" })
-                map("v", "<leader>gs", function()
+                map("n", "gss", gitsigns.stage_hunk, { desc = "Stage current hunk" })
+                map("n", "gsr", gitsigns.reset_hunk, { desc = "Reset current hunk" })
+                map("v", "gss", function()
                     gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
                 end, { desc = "Stage currently selected hunk" })
-                map("v", "<leader>gr", function()
+                map("v", "gsr", function()
                     gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
                 end, { desc = "Reset currently selected hunk" })
-                map("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Stage current buffer" })
-                map("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Reset current buffer" })
-                map("n", "<leader>gv", gitsigns.preview_hunk_inline, { desc = "Preview current hunk" })
-                map("n", "<leader>gb", function()
+                map("n", "gsS", gitsigns.stage_buffer, { desc = "Stage current buffer" })
+                map("n", "gsR", gitsigns.reset_buffer, { desc = "Reset current buffer" })
+                map("n", "gsv", gitsigns.preview_hunk_inline, { desc = "Preview current hunk" })
+                map("n", "gsb", function()
                     gitsigns.blame_line({ full = true })
                 end, { desc = "View current line blame" })
-                map("n", "<leader>gd", gitsigns.diffthis, { desc = "Open split view diff" })
-
-                -- Lazygit
-                map("n", "<leader>gl", function()
-                    Snacks.lazygit.open()
-                end, { desc = "Open Lazygit" })
+                map("n", "gsd", gitsigns.diffthis, { desc = "Open split view diff" })
 
                 -- Text object
-                map(
-                    { "o", "x" },
-                    "<leader>gi",
-                    ":<C-U>Gitsigns select_hunk<CR>",
-                    { desc = "Visually select current hunk" }
-                )
+                map({ "o", "x" }, "gsi", ":<C-U>Gitsigns select_hunk<CR>",
+                    { desc = "Visually select current hunk" })
             end,
         })
     end,

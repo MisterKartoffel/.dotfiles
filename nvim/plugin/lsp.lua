@@ -33,7 +33,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
         local utils = require("utils")
 
-        -- Mappings for non-default Neovim LSP actions
+        utils.map("n", "gO", function()
+            Snacks.picker.lsp_symbols()
+        end, { desc = "Find all symbols in current buffer" })
+
         if client:supports_method("textDocument/completion") then
             vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true, })
             utils.map("i", "<C-Space>", vim.lsp.completion.get, { desc = "Display LSP completions" })
@@ -47,12 +50,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         if client:supports_method("textDocument/definition") then
-            utils.map("n", "grd", vim.lsp.buf.definition,
-                { desc = "Jump to definition for symbol under cursor" })
+            utils.map("n", "grD", function()
+                Snacks.picker.lsp_definitions()
+            end, { desc = "Jump to definition for symbol under cursor" })
         end
 
         if client:supports_method("textDocument/diagnostic") then
             vim.diagnostic.enable()
+
+            utils.map("n", "grd", function()
+                Snacks.picker.diagnostics_buffer()
+            end, { desc = "Find all diagnostics in current buffer" })
         end
 
         if client:supports_method("textDocument/formatting") then
