@@ -27,6 +27,7 @@ vim.diagnostic.config({
     }
 })
 
+---@diagnostic disable: undefined-global
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("LSP", { clear = false }),
     callback = function(args)
@@ -56,11 +57,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         if client:supports_method("textDocument/diagnostic") then
-            vim.diagnostic.enable()
-
             utils.map("n", "grd", function()
                 Snacks.picker.diagnostics_buffer()
             end, { desc = "Find all diagnostics in current buffer" })
+
+            vim.diagnostic.enable()
         end
 
         if client:supports_method("textDocument/formatting") then

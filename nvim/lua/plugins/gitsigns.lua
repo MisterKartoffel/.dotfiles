@@ -16,6 +16,7 @@ return {
                 local map = require("utils").map
 
                 -- Snacks pickers
+                ---@diagnostic disable: undefined-global
                 map("n", "gps", function()
                     Snacks.picker.git_status()
                 end, { desc = "Show status for current working tree" })

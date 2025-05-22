@@ -26,7 +26,7 @@ map("n", "<leader>pm", ":Mason<CR>", { desc = "Open Mason UI" })
 map("n", "<leader>mt", ":Markview<CR>", { desc = "[M]arkview [t]oggle" })
 
 -- Snacks.picker
----@module 'Snacks' main Snacks module containing its pickers
+---@diagnostic disable: undefined-global
 map("n", "<leader>fc", function()
     Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[F]ind files in [n]eovim configuration directory" })
