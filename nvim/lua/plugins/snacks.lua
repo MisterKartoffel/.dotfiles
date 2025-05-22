@@ -55,5 +55,6 @@ return {
                 git_hl = true,
             },
         },
+        terminal = { enabled = true, },
     },
 }

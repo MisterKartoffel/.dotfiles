@@ -69,6 +69,11 @@ map("n", "<leader>ss", function()
     Snacks.scratch.select()
 end, { desc = "[S]cratch buffer [s]elect" })
 
+-- Snacks.terminal
+map("n", "<leader>tt", function()
+    Snacks.terminal.toggle()
+end, { desc = "Toggle terminal" })
+
 -- Which-key
 map("n", "<leader>?", function()
     require("which-key").show({ global = true })
