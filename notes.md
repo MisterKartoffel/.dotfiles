@@ -61,12 +61,6 @@ PermanentMACAddress=
 [Network]
 Bond=bond0
 PrimarySlave=true
-
-[DHCPv4]
-RouteMetric=100
-
-[IPv6AcceptRA]
-RouteMetric=100
 ```
 
 ```
@@ -77,12 +71,6 @@ PermanentMACAddress=
 
 [Network]
 Bond=bond0
-
-[DHCPv4]
-RouteMetric=600
-
-[IPv6AcceptRA]
-RouteMetric=600
 ```
 
 > Enable iwd's built-in DHCP client.
