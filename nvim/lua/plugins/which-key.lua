@@ -12,14 +12,13 @@ return {
         spec = {
             {
                 mode = { "n" },
-                { "<leader>f", group = "file" },
-                { "<leader>g", group = "git" },
-                { "<leader>l", group = "lsp" },
-                { "<leader>m", group = "markdown" },
+                { "<leader>f", group = "pickers" },
+                { "gp",        group = "git" },
+                { "gs",        group = "git" },
+                { "gr",        group = "LSP" },
                 { "<leader>p", group = "plugin managers" },
                 { "<leader>q", group = "quickfix" },
                 { "<leader>s", group = "scratchpad" },
-                { "<leader>w", group = "write" },
             }
         },
     },
