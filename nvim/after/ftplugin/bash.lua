@@ -1,4 +1,4 @@
-local map = require("utils").map
+local nmap = require("utils").nmap
 
-map("n", "siB", "eF$a{<Esc>ea}<Esc>", { desc = "Surround current variable in braces" })
-map("n", "siq", "diWa\"\"<Esc>P", { desc = "Surround current WORD in quotes" })
+nmap("siB", "eF$a{<Esc>ea}<Esc>", { desc = "Surround current variable in braces" })
+nmap("siq", "diWa\"\"<Esc>P", { desc = "Surround current WORD in quotes" })
