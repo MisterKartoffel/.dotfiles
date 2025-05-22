@@ -6,6 +6,11 @@
 -- LSP setup for servers configured in lsp/*
 vim.lsp.config("*", {
     root_markers = { ".git" },
+    capabilities = {
+        textDocument = {
+            semanticTokens = { multilineTokenSupport = true, },
+        },
+    },
 })
 
 for _, file in ipairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
