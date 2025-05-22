@@ -48,7 +48,6 @@ slurp
 snap-pac
 snapper
 sops
-stow
 tealdeer
 ufw
 vivid

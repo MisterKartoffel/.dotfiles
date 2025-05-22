@@ -1,4 +1,3 @@
-bibata-cursor-theme-bin
 downgrade
 maplemono-nf
 maplemono-ttf-autohint

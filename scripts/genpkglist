@@ -16,11 +16,11 @@
 # [Action]
 # Description = Generating updated package lists...
 # When = PostTransaction
-# Exec = /bin/su - <TARGET_USER> /bin/sh -c '/home/<TARGET_USER>/.local/bin/genpkglist'
+# Exec = /bin/su - user /bin/sh -c '/home/user/.local/bin/genpkglist'
 
-logFile="$HOME/.dotfiles/scripts/genpkglist.log"
+logFile="${XDG_CONFIG_HOME:-${HOME}/.config}/scripts/genpkglist.log"
 logTime="$(date --rfc-3339="seconds")"
-pkgListDir="$HOME/.dotfiles/pkglists"
+pkgListDir="${XDG_CONFIG_HOME:-${HOME}/.config}/pkglists"
 
 function setupListings() {
 	local creationTime
