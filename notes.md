@@ -45,6 +45,10 @@ RequiredForOnline=yes
 [Network]
 BindCarrier=enp7s0 wlan0
 DHCP=yes
+
+[Route]
+InitialCongestionWindow=30
+InitialAdvertisedReceiveWindow=30
 ```
 
 > Enslave wanted network interfaces.
