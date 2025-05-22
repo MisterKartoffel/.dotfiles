@@ -14,50 +14,52 @@ return {
 
             on_attach = function()
                 local map = require("utils").map
+                local nmap = require("utils").nmap
+                local vmap = require("utils").vmap
 
                 -- Snacks pickers
                 ---@diagnostic disable: undefined-global
-                map("n", "gps", function()
+                nmap("gps", function()
                     Snacks.picker.git_status()
                 end, { desc = "Show status for current working tree" })
 
-                map("n", "gpd", function()
+                nmap("gpd", function()
                     Snacks.picker.git_diff()
                 end, { desc = "Show diff between HEAD and working tree" })
 
-                map("n", "gpl", function()
+                nmap("gpl", function()
                     Snacks.picker.git_log_file()
                 end, { desc = "Browse logs for current buffer" })
 
-                map("v", "gpl", function()
+                vmap("gpl", function()
                     Snacks.picker.git_log_line()
                 end, { desc = "Browse logs for current line" })
 
                 -- Navigation
-                map("n", "gsp", function()
+                nmap("gsp", function()
                     gitsigns.nav_hunk("prev")
                 end, { desc = "Jump to previous hunk" })
 
-                map("n", "gsn", function()
+                nmap("gsn", function()
                     gitsigns.nav_hunk("next")
                 end, { desc = "Jump to next hunk" })
 
                 -- Actions
-                map("n", "gss", gitsigns.stage_hunk, { desc = "Stage current hunk" })
-                map("n", "gsr", gitsigns.reset_hunk, { desc = "Reset current hunk" })
-                map("v", "gss", function()
+                nmap("gss", gitsigns.stage_hunk, { desc = "Stage current hunk" })
+                nmap("gsr", gitsigns.reset_hunk, { desc = "Reset current hunk" })
+                vmap("gss", function()
                     gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
                 end, { desc = "Stage currently selected hunk" })
-                map("v", "gsr", function()
+                vmap("gsr", function()
                     gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
                 end, { desc = "Reset currently selected hunk" })
-                map("n", "gsS", gitsigns.stage_buffer, { desc = "Stage current buffer" })
-                map("n", "gsR", gitsigns.reset_buffer, { desc = "Reset current buffer" })
-                map("n", "gsv", gitsigns.preview_hunk_inline, { desc = "Preview current hunk" })
-                map("n", "gsb", function()
+                nmap("gsS", gitsigns.stage_buffer, { desc = "Stage current buffer" })
+                nmap("gsR", gitsigns.reset_buffer, { desc = "Reset current buffer" })
+                nmap("gsv", gitsigns.preview_hunk_inline, { desc = "Preview current hunk" })
+                nmap("gsb", function()
                     gitsigns.blame_line({ full = true })
                 end, { desc = "View current line blame" })
-                map("n", "gsd", gitsigns.diffthis, { desc = "Open split view diff" })
+                nmap("gsd", gitsigns.diffthis, { desc = "Open split view diff" })
 
                 -- Text object
                 map({ "o", "x" }, "gsi", ":<C-U>Gitsigns select_hunk<CR>",

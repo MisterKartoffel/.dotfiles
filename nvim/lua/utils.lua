@@ -13,6 +13,18 @@ function M.map(mode, lhs, rhs, opts)
     vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+function M.nmap(lhs, rhs, opts)
+    M.map("n", lhs, rhs, opts)
+end
+
+function M.imap(lhs, rhs, opts)
+    M.map("i", lhs, rhs, opts)
+end
+
+function M.vmap(lhs, rhs, opts)
+    M.map("v", lhs, rhs, opts)
+end
+
 function M.unmap(mode, lhs, opts)
     if not opts then
         opts.buffer = 0

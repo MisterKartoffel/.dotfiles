@@ -32,23 +32,24 @@ vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("LSP", { clear = false }),
     callback = function(args)
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-        local utils = require("utils")
+        local nmap = require("utils").nmap
+        local imap = require("utils").imap
 
-        utils.map("n", "gO", function()
+        nmap("gO", function()
             Snacks.picker.lsp_symbols()
         end, { desc = "Find all symbols in current buffer" })
 
-        utils.map("n", "grD", function()
+        nmap("grD", function()
             Snacks.picker.lsp_definitions()
         end, { desc = "Jump to definition for symbol under cursor" })
 
-        utils.map("n", "grd", function()
+        nmap("grd", function()
             Snacks.picker.diagnostics_buffer()
         end, { desc = "Find all diagnostics in current buffer" })
 
         if client:supports_method("textDocument/completion") then
             vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true, })
-            utils.map("i", "<C-Space>", vim.lsp.completion.get, { desc = "Display LSP completions" })
+            imap("<C-Space>", vim.lsp.completion.get, { desc = "Display LSP completions" })
         end
 
         if client:supports_method("textDocument/diagnostic") then
@@ -57,7 +58,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         if client:supports_method("textDocument/formatting") then
             local format_opts = { bufnr = args.buf, id = client.id }
-            utils.map("n", "grf", function()
+            nmap("grf", function()
                 vim.lsp.buf.format(format_opts)
             end, { desc = "Autoformat using LSP formatting" })
 
@@ -73,13 +74,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         if client:supports_method("textDocument/inlayHint") then
-            utils.map("n", "grh", function()
+            nmap("grh", function()
                 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
             end, { desc = "Toggle LSP inlay hint" })
         end
 
         if client:supports_method("textDocument/signatureHelp") then
-            utils.map("n", "grs", vim.lsp.buf.signature_help,
+            nmap("grs", vim.lsp.buf.signature_help,
                 { desc = "Display signature help for currently hovered symbol" })
         end
     end,
