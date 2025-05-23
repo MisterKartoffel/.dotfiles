@@ -144,6 +144,13 @@ preloaders = [
     { mime = "application/ms-opentype", run = "font" },
 ]
 
+prepend_previewers = [
+    { name = "**/.sops/**", run = "noop" },
+    { name = "**/.ssh/*id*", run = "noop" },
+    { name = "**/.gnupg/*.conf", run = "code" },
+    { name = "**/.gnupg/**", run = "noop" },
+]
+
 previewers = [
     { name = "*/", run = "folder", sync = true },
 
