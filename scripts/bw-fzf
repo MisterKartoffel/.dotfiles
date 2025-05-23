@@ -12,7 +12,6 @@ TIMEOUT=60s
 TIMEOUT_PID=
 TIMESTAMP_FILE="/tmp/bw-fzf-active.timestamp"
 TEMP_ITEMS_FILE=
-SHOULD_UNLOCK=0
 SHOULD_LOGIN=0
 CLIP_COMMAND="wl-copy"
 CLIP_ARGS="-o"
@@ -62,18 +61,15 @@ function monitor_inactivity() {
 function handle_session() {
     case "${SHOULD_LOGIN}" in
         0)
-            if [[ "${SHOULD_UNLOCK}" ]]; then
-                local VAULT_SESSION
-                VAULT_SESSION=$(bw unlock --raw --passwordenv BW_PASSWORD 2>/dev/null)
-                if [[ -z "${VAULT_SESSION}" ]]; then
-                    echo "Could not unlock vault."
-                    exit 1
-                fi
-
-                SHOULD_UNLOCK=0
-                export BW_SESSION="${VAULT_SESSION}"
-                echo "Vault unlocked!"
+            local VAULT_SESSION
+            VAULT_SESSION=$(bw unlock --raw --passwordenv BW_PASSWORD 2>/dev/null)
+            if [[ -z "${VAULT_SESSION}" ]]; then
+                echo "Could not unlock vault."
+                exit 1
             fi
+
+            export BW_SESSION="${VAULT_SESSION}"
+            echo "Vault unlocked!"
 
             return 0
             ;;
@@ -123,13 +119,7 @@ function check_credentials() {
     esac
 }
 
-function check_session() {
-    if [[ -n "${BW_SESSION}" ]] && bw unlock --check --quiet 2>/dev/null; then
-        echo "Using existing session from environment."
-        return 0
-    fi
-    SHOULD_UNLOCK=1
-
+function check_login() {
     if bw login --check --quiet 2>/dev/null; then
         echo "Using existing login from environment."
     else
@@ -229,11 +219,15 @@ function bw_list() {
                 password_available=$(jq -r ".login.password != null" <<< $item)
                 if [ "$password_available" = "true" ]; then
                     password="[Press Ctrl+p to copy password]"
+                else
+                    password="null"
                 fi
 
                 totp_available=$(jq -r ".login.totp != null" <<< $item)
                 if [ "$totp_available" = "true" ]; then
                     totp="[Press Ctrl+o to copy TOTP]"
+                else
+                    totp="null"
                 fi
 
                 bold=$(tput bold)
@@ -255,8 +249,8 @@ function bw_list() {
         '
     )
 
-    jq -r '.[] | "\(.name) (\(.id)) \(.login.username)"' "$TEMP_ITEMS_FILE" |
-        FZF_PREVIEW_FILE="$TEMP_ITEMS_FILE" fzf "${fzf_args[@]}"
+    jq -r '.[] | "\(.name) (\(.id)) \(.login.username)"' "${TEMP_ITEMS_FILE}" |
+        FZF_PREVIEW_FILE="${TEMP_ITEMS_FILE}" fzf "${fzf_args[@]}"
 }
 
 function help() {
@@ -274,18 +268,18 @@ function help() {
 }
 
 function main() {
-    while [[ "$1" != "" ]]; do
-        case $1 in
+    while [[ "${1}" != "" ]]; do
+        case ${1} in
             -h | --help)
                 help
                 exit 0
                 ;;
             -t | --timeout)
                 shift
-                TIMEOUT="$1"
+                TIMEOUT="${1}"
                 ;;
             *)
-                echo "Invalid option: $1"
+                echo "Invalid option: ${1}"
                 help
                 exit 1
                 ;;
@@ -297,9 +291,9 @@ function main() {
 
     monitor_inactivity
 
-    check_session
+    check_login
     load_items
     bw_list
 }
 
-main "$@"
+main "${@}"
