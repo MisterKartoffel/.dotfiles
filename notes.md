@@ -107,6 +107,28 @@ HOOKS=(systemd autodetect microcode modconf kms keyboard sd-vconsole block
 filesystems)
 ```
 
+## Disable Copy-on-Write on select $HOME directories
+> For each directory, if it exists.
+```sh
+mv directory{,.bak}
+mkdir directory
+chattr +C directory
+cp -av --reflink=never directory.bak/. directory
+rm -rfv directory.bak
+```
+
+> List of modified directories.
+```text
+$HOME/.cache
+$HOME/.local
+$HOME/Desktop
+$HOME/Documents
+$HOME/Downloads
+$HOME/Music
+$HOME/Pictures
+$HOME/Videos
+```
+
 ## AppArmor
 > Add AppArmor to kernel parameters.
 ```conf
