@@ -472,7 +472,7 @@ TTYVTDisallocate=no
 > Change systemd-networkd-wait-online.service to wait for any interface
 instead of all.
 ```systemd
-/etc/systemd/system/systemd-networkd-wait-online.service.d/wait-for-only-one-interface.conf
+/etc/systemd/system/systemd-networkd-wait-online.service.d/10-wait_for_only_one_interface.conf
 
 [Service]
 ExecStart=
