@@ -13,10 +13,12 @@ vim.lsp.config("*", {
     },
 })
 
-for _, file in ipairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
-    local name = vim.fn.fnamemodify(file, ":t:r")
-    vim.lsp.enable(name)
+local lsp_configs = {}
+for _, file in pairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
+    local server_name = vim.fn.fnamemodify(file, ":t:r")
+    table.insert(lsp_configs, server_name)
 end
+vim.lsp.enable(lsp_configs)
 
 vim.diagnostic.config({
     virtual_lines = {
