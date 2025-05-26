@@ -1,16 +1,24 @@
 [general]
 fullscreen = false
 early-exit = true
+corner-roundness = 10
 initial-tool = "brush"
 copy-command = "wl-copy"
 annotation-size-factor = 2
 output-filename = "/tmp/test-%Y-%m-%d_%H:%M:%S.png"
+save-after-copy = false
 default-hide-toolbars = false
 primary-highlighter = "block"
 disable-notifications = true
+actions-on-right-click = []
+actions-on-enter = ["save-to-file", "save-to-clipboard"]
+actions-on-escape = ["save-to-clipboard"]
+no-window-decoration = true
+brush-smooth-history-size = 10
 
 [font]
-family = "AdwaitaMono Bold"
+family = "AdwaitaMono"
+style = "Bold"
 
 [color-palette]
 palette = [
