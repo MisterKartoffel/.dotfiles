@@ -369,26 +369,6 @@ ExecStart=/usr/bin/snapper --config root create --cleanup-algorithm number --des
 systemctl mask systemd-fsck-root.service
 ```
 
-> Created user-scoped qBittorrent-nox service.
-```systemd
-/etc/systemd/user/qbittorrent-nox.service
-
-[Unit]
-Description=qBittorrent-nox service scoped for user
-Documentation=man:qbittorrent-nox(1)
-Wants=network-online.target
-After=local-fs.target network-online.target nss-lookup.target
-
-[Service]
-Type=simple
-PrivateTmp=false
-ExecStart=/usr/bin/qbittorrent-nox
-TimeoutStopSec=1800
-
-[Install]
-WantedBy=default.target
-```
-
 > Created rclone service for different remotes
 ```systemd
 /etc/systemd/user/rclone@.service
