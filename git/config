@@ -9,44 +9,56 @@
     compression = 9
     editor      = nvim
     whitespace  = error
-[commit]
-    gpgsign = true
-[diff]
-    tool    = nvim
-    renames = copies
-[difftool "nvim"]
-    cmd = nvim -d
-[diff-so-fancy]
-    markEmptyLines = false
-[fetch]
-    prune = true
-[gpg]
-    format = ssh
+
 [init]
     defaultBranch = main
-[interactive]
-    diffFilter = diff-so-fancy --patch
-    singleKey = true
-[log]
-    abbrevCommit = true
-    graphColors = blue,yellow,cyan,magenta,green,red
-[pager]
-    branch = false
-    diff = diff-so-fancy | $PAGER
-[pull]
-    ff      = only
-    rebase  = true
+
+[commit]
+    gpgsign = true
+[gpg]
+    format = ssh
+
+[diff]
+    tool        = nvimdiff
+    algorithm   = histogram
+    renames     = copies
+[diff-so-fancy]
+    markEmptyLines = false
+
+[merge]
+    conflictstyle = zdiff3
 [rebase]
-    autoStash = true
+    autoSquash  = true
+    autoStash   = true
+    updateRefs  = true
 [rerere]
     enabled     = true
     autoupdate  = true
+
+[fetch]
+    prune = true
+[push]
+    autoSetupRemote = true
+[pull]
+    ff      = only
+    rebase  = true
 [status]
     branch      = true
     showStash   = true
 
-[url "git@github.com:"]
-    insteadOf = "gh:"
+[column]
+    ui = auto
+[interactive]
+    diffFilter  = diff-so-fancy --patch
+    singleKey   = true
+[pager]
+    branch  = false
+    diff    = diff-so-fancy | $PAGER
+[help]
+    autocorrect = prompt
+[log]
+    abbrevCommit = true
+    graphColors = blue,yellow,cyan,magenta,green,red
 
 [color "branch"]
     current     = magenta
