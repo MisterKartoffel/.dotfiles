@@ -25,7 +25,6 @@ nmap("<leader>pl", ":Lazy<CR>", { desc = "Open Lazy.nvim UI" })
 nmap("<leader>pm", ":Mason<CR>", { desc = "Open Mason UI" })
 
 -- Snacks.picker
----@diagnostic disable: undefined-global
 nmap("<leader>fc", function()
     Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[F]ind files in [n]eovim configuration directory" })

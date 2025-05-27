@@ -4,6 +4,10 @@ return {
     filetypes = { "lua", },
     settings = {
         Lua = {
+            completion = {
+                callSnippet = "Replace",
+                keywordSnippet = "Replace",
+            },
             runtime = { version = "LuaJIT", },
             path = {
                 "lua/?.lua",

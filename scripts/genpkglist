@@ -23,45 +23,45 @@ logTime="$(date --rfc-3339="seconds")"
 pkgListDir="${XDG_CONFIG_HOME:-${HOME}/.config}/pkglists"
 
 function setupListings() {
-	local creationTime
-	local currentList
-	local logMessage
-	creationTime="$(date '+%F')"
+    local creationTime
+    local currentList
+    local logMessage
+    creationTime="$(date '+%F')"
 
-	for source in "$@"; do
-		currentList="${pkgListDir}/${source}-${creationTime}.txt"
-		logMessage="[${logTime}] ${source} install listing: ${currentList}"
+    for source in "$@"; do
+        currentList="${pkgListDir}/${source}-${creationTime}.txt"
+        logMessage="[${logTime}] ${source} install listing: ${currentList}"
 
-		case "${source}" in
-		AUR)
-			pacman -Qqem >"${currentList}"
-			;;
+        case "${source}" in
+            AUR)
+                pacman -Qqem >"${currentList}"
+                ;;
 
-		Flatpak)
-			flatpak list --columns=application --app >"${currentList}"
-			;;
+            Flatpak)
+                flatpak list --columns=application --app >"${currentList}"
+                ;;
 
-		Optional)
-			comm -13 <(pacman -Qqdt | sort) <(pacman -Qqdtt | sort) >"${currentList}"
-			;;
+            Optional)
+                comm -13 <(pacman -Qqdt | sort) <(pacman -Qqdtt | sort) >"${currentList}"
+                ;;
 
-		Explicit)
-			pacman -Qqen >"${currentList}"
-			;;
+            Explicit)
+                pacman -Qqen >"${currentList}"
+                ;;
 
-		*)
-			echo "[${logTime}] Error: $1 undefined as a source." >>"${logFile}"
-			exit 1
-			;;
-		esac
+            *)
+                echo "[${logTime}] Error: $1 undefined as a source." >>"${logFile}"
+                exit 1
+                ;;
+        esac
 
-		echo "${logMessage}" >>"${logFile}"
-	done
+        echo "${logMessage}" >>"${logFile}"
+    done
 }
 
 if [[ -e "${pkgListDir}" ]]; then
-	rm -rf "${pkgListDir}"
-	echo "[${logTime}] Cleared previous package lists under ${pkgListDir}" >>"${logFile}"
+    rm -rf "${pkgListDir}"
+    echo "[${logTime}] Cleared previous package lists under ${pkgListDir}" >>"${logFile}"
 fi
 
 mkdir "${pkgListDir}"

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2016
 # vim: set filetype=bash :
 
 # Mostly taken from https://github.com/radityaharya/bw-fzf
@@ -96,7 +97,7 @@ function check_credentials() {
     CHECK_LOGIN="${1}"
     case "${CHECK_LOGIN}" in
         0)
-            if [[ "${SHOULD_UNLOCK}" ]] && [[ -z "${BW_PASSWORD}" ]]; then
+            if [[ "${SHOULD_UNLOCK}" -ne 0 ]] && [[ -z "${BW_PASSWORD}" ]]; then
                 echo "Password environment variable not set."
                 exit 1
             fi
@@ -131,7 +132,7 @@ function check_login() {
 
 function load_items() {
     echo "Loading items..."
-    if ! ITEMS=$(bw list items --session "$BW_SESSION" 2>/dev/null); then
+    if ! ITEMS=$(bw list items --session "${BW_SESSION}" 2>/dev/null); then
         echo "Could not load items or operation timed out."
         exit 1
     fi
@@ -141,7 +142,7 @@ function load_items() {
 function check_depends() {
     for COMMAND in "${DEPENDS[@]}"; do
         if ! command -v "${COMMAND}" >/dev/null; then
-            echo "$COMMAND is missing. Exiting."
+            echo "${COMMAND} is missing. Exiting."
             exit 1
         fi
     done
@@ -153,8 +154,8 @@ export -f monitor_inactivity
 
 function bw_list() {
     TEMP_ITEMS_FILE=$(mktemp)
-    echo "$ITEMS" > "$TEMP_ITEMS_FILE"
-    chmod 600 "$TEMP_ITEMS_FILE"
+    echo "${ITEMS}" >"${TEMP_ITEMS_FILE}"
+    chmod 600 "${TEMP_ITEMS_FILE}"
 
     monitor_inactivity
 
@@ -193,22 +194,22 @@ function bw_list() {
         --list-label="Vault Items"
         --input-border="rounded"
         --input-label="Search"
-        --bind="change:execute-silent(touch $TIMESTAMP_FILE)"
-        --bind="focus:execute-silent(touch $TIMESTAMP_FILE)"
-        --bind="ctrl-u:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); username=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.username' \"$TEMP_ITEMS_FILE\"); echo -n \"\$username\" | $CLIP_COMMAND $CLIP_ARGS)+execute-silent(touch $TIMESTAMP_FILE)"
-        --bind="ctrl-p:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); password=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.password' \"$TEMP_ITEMS_FILE\"); echo -n \"\$password\" | $CLIP_COMMAND $CLIP_ARGS)+execute-silent(touch $TIMESTAMP_FILE)"
-        --bind="ctrl-o:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); totp_secret=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.totp' \"$TEMP_ITEMS_FILE\"); if [[ \"\$totp_secret\" != \"null\" ]]; then totp=\$(oathtool --totp -b \"\$totp_secret\"); echo -n \"\$totp\" | $CLIP_COMMAND $CLIP_ARGS; else echo \"No TOTP available for this item\"; fi)+execute-silent(touch $TIMESTAMP_FILE)"
-        --bind="ctrl-f:preview(echo \"$HELP_TEXT\")"
+        --bind="change:execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="focus:execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-u:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); username=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.username' \"${TEMP_ITEMS_FILE}\"); echo -n \"\$username\" | ${CLIP_COMMAND} ${CLIP_ARGS})+execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-p:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); password=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.password' \"${TEMP_ITEMS_FILE}\"); echo -n \"\$password\" | ${CLIP_COMMAND} ${CLIP_ARGS})+execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-o:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); totp_secret=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.totp' \"${TEMP_ITEMS_FILE}\"); if [[ \"\$totp_secret\" != \"null\" ]]; then totp=\$(oathtool --totp -b \"\$totp_secret\"); echo -n \"\$totp\" | ${CLIP_COMMAND} ${CLIP_ARGS}; else echo \"No TOTP available for this item\"; fi)+execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-f:preview(echo \"${HELP_TEXT}\")"
         --header="Press ctrl-f for help"
         --preview-window="right:50%"
         --preview-label="Login Details"
         --preview='
             if [[ "{}" == "HELP" ]]; then
-                echo "'"$HELP_TEXT"'"
+                echo "'"${HELP_TEXT}"'"
             else
                 item_id=$(echo {} | sed -n "s/.*(\(.*\)).*/\1/p")
-                touch '"$TIMESTAMP_FILE"'
-                item=$(jq -r --arg id "$item_id" ".[] | select(.id == \$id)" "'"$TEMP_ITEMS_FILE"'")
+                touch '"${TIMESTAMP_FILE}"'
+                item=$(jq -r --arg id "$item_id" ".[] | select(.id == \$id)" "'"${TEMP_ITEMS_FILE}"'")
 
                 username=$(jq -r ".login.username" <<< $item)
                 notes=$(jq -r ".notes // empty" <<< $item)
@@ -268,8 +269,8 @@ function help() {
 }
 
 function main() {
-    while [[ "${1}" != "" ]]; do
-        case ${1} in
+    while [[ -n "${1}" ]]; do
+        case "${1}" in
             -h | --help)
                 help
                 exit 0

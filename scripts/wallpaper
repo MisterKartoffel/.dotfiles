@@ -4,25 +4,25 @@
 # Script mostly taken from this example
 # https://wiki.hyprland.org/Hypr-Ecosystem/hyprpaper/#using-this-keyword-to-randomize-your-wallpaper
 
-WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+WALLPAPER_DIR="${HOME}/Pictures/Wallpapers"
 CURRENT_WALLPAPER=$(hyprctl hyprpaper listloaded)
 
-case "$1" in
+case "${1}" in
     random)
-        if [[ -n "$CURRENT_WALLPAPER" ]]; then
+        if [[ -n "${CURRENT_WALLPAPER}" ]]; then
             # Attempt to fix hyprpaper sometimes not having a wallpaper
             sleep 1
             # Get a random wallpaper, if none is set
-            WALLPAPER=$(fd -t f . "$WALLPAPER_DIR" | shuf -n 1)
+            WALLPAPER=$(fd -t f . "${WALLPAPER_DIR}" | shuf -n 1)
         else
             # Get a random wallpaper that is not the current one, if one is set
-            WALLPAPER=$(fd -t f -E "$(basename "$CURRENT_WALLPAPER")" | shuf -n 1)
+            WALLPAPER=$(fd -t f -E "$(basename "${CURRENT_WALLPAPER}")" | shuf -n 1)
         fi
         ;;
     pick)
         # TODO: Fix preview
         # Open wallpaper selector in fzf
-        WALLPAPER=$(fd -t f . "$WALLPAPER_DIR" | fzf --preview 'xargs -ro chafa')
+        WALLPAPER=$(fd -t f . "${WALLPAPER_DIR}" | fzf --preview 'xargs -ro chafa')
         ;;
     *)
         # Pick selected wallpaper
@@ -30,10 +30,10 @@ case "$1" in
         ;;
 esac
 
-if [[ -n "$WALLPAPER" ]]; then
+if [[ -n "${WALLPAPER}" ]]; then
     # Hardlink wallpaper to $HOME (used by hyprlock)
-    ln -f "$WALLPAPER" "$HOME"/.background
+    ln -f "${WALLPAPER}" "${HOME}"/.background
 
     # Set new wallpaper with hyprpaper via IPC
-    hyprctl hyprpaper reload eDP-1,"$WALLPAPER"
+    hyprctl hyprpaper reload eDP-1,"${WALLPAPER}"
 fi

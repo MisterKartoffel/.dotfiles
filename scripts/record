@@ -2,12 +2,12 @@
 
 REC_FILE="/home/felipe/Videos/Screencaptures/$(date --rfc-3339="seconds").mkv"
 
-function record () {
+function record() {
     notify-send --expire-time=500 --app-name="wf-recorder" "wf-recorder" "Recording started"
     wf-recorder -f "${REC_FILE}"
 }
 
-function end () {
+function end() {
     kill -15 "$(pidof wf-recorder)" 2>/dev/null || true
     wait "$(pidof wf-recorder)" 2>/dev/null || true
 

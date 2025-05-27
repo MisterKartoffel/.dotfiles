@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2016
 # vim: set filetype=bash :
 
 # Heavily inspired by https://github.com/radityaharya/bw-fzf
@@ -20,7 +21,7 @@ function exit_handler() {
 }
 
 function cleanup() {
-    rm -f "$HIST_FILE" 2>/dev/null
+    rm -f "${HIST_FILE}" 2>/dev/null
     pkill -P $$ 2>/dev/null || true
     wait 2>/dev/null || true
 }
@@ -29,8 +30,8 @@ function populate_hist_file() {
     local ITEMS
     HIST_FILE=$(mktemp)
     ITEMS=$(dunstctl history | jq '.data.[]')
-    echo "$ITEMS" > "$HIST_FILE"
-    chmod 600 "$HIST_FILE"
+    echo "${ITEMS}" >"${HIST_FILE}"
+    chmod 600 "${HIST_FILE}"
 }
 
 function dunst_list() {
@@ -48,7 +49,7 @@ function dunst_list() {
         --bind "focus:transform-preview-label:echo Details for {}"
         --preview-window="right:50%"
         --preview='
-            item=$(jq -r ".[$FZF_POS-1]" "'"$HIST_FILE"'")
+            item=$(jq -r ".[$FZF_POS-1]" "'"${HIST_FILE}"'")
             application=$(jq -r ".appname.data" <<< $item)
             title=$(jq -r ".summary.data" <<< $item)
             body=$(jq -r ".body.data" <<< $item)
@@ -68,14 +69,14 @@ function dunst_list() {
         '
     )
 
-    jq -r '.[] | "\(.appname.data) (\(.urgency.data))"' "$HIST_FILE" |
-        FZF_PREVIEW_FILE="$HIST_FILE" fzf "${fzf_args[@]}"
+    jq -r '.[] | "\(.appname.data) (\(.urgency.data))"' "${HIST_FILE}" |
+        FZF_PREVIEW_FILE="${HIST_FILE}" fzf "${fzf_args[@]}"
 }
 
 function check_depends() {
-    for COMMAND in ${DEPENDS[@]}; do
+    for COMMAND in "${DEPENDS[@]}"; do
         if ! command -v "${COMMAND}" >/dev/null; then
-            echo "$COMMAND is missing. Exiting."
+            echo "${COMMAND} is missing. Exiting."
             exit 1
         fi
     done
