@@ -71,10 +71,6 @@ setopt GLOB_DOTS
 ## Prevents truncating file if it exists
 setopt NO_CLOBBER
 
-## Appends commands to history such that multiple
-## sessions can share history
-setopt APPEND_HISTORY
-
 ## If a new history entry matches an older one,
 ## delete the older entry
 setopt HIST_IGNORE_ALL_DUPS
