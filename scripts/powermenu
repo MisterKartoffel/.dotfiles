@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+OPTIONS=(
+    poweroff
+    reboot
+    logout
+    lock
+)
+
+SELECTED=$(for OPTION in "${OPTIONS[@]}"; do echo "${OPTION}"; done | anyrun --plugins libstdin.so)
+
+case "${SELECTED}" in
+    poweroff)
+        systemctl poweroff
+        ;;
+    reboot)
+        systemctl reboot
+        ;;
+    lock)
+        hyprlock
+        ;;
+    logout)
+        uwsm stop
+        ;;
+    *)
+        return 0
+        ;;
+esac
