@@ -15,11 +15,11 @@ input {
 
 output "eDP-1" {
     mode "1920x1080"
+    position x=0 y=0
     focus-at-startup
 }
 
 output "HDMI-A-1" {
-    off
     mode "1920x1080"
     position x=0 y=-1080
 }
@@ -73,6 +73,11 @@ window-rule {
     match title="Bitwarden" app-id="com.mitchellh.ghostty"
     open-floating true
     block-out-from "screen-capture"
+}
+
+window-rule {
+    match app-id="mpv"
+    open-on-output "HDMI-A-1"
 }
 
 window-rule {
