@@ -4,13 +4,23 @@
 --
 
 -- LSP setup for servers configured in lsp/*
+local function defaultClientCapabilities()
+    local capabilities = nil
+    if capabilities then
+        return capabilities
+    end
+
+    capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.semanticTokens.multilineTokenSupport = true
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
+
+    return capabilities
+end
+
 vim.lsp.config("*", {
     root_markers = { ".git" },
-    capabilities = {
-        textDocument = {
-            semanticTokens = { multilineTokenSupport = true, },
-        },
-    },
+    capabilities = defaultClientCapabilities(),
 })
 
 local lsp_configs = {}
