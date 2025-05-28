@@ -1,3 +1,4 @@
+anyrun-git
 downgrade
 maplemono-nf
 maplemono-ttf-autohint

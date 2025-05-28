@@ -1,0 +1,9 @@
+Config(
+    desktop_actions: true,
+    max_entries: 5,
+    preprocess_exec_script: Some("$HOME/.config/anyrun/uwsm-app.sh"),
+    terminal: Some(Terminal(
+            command: "ghostty",
+            args: "-e {}",
+    )),
+)
