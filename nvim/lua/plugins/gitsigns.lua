@@ -18,7 +18,6 @@ return {
                 local vmap = require("utils").vmap
 
                 -- Snacks pickers
-                ---@diagnostic disable: undefined-global
                 nmap("gps", function()
                     Snacks.picker.git_status()
                 end, { desc = "Show status for current working tree" })
@@ -36,33 +35,33 @@ return {
                 end, { desc = "Browse logs for current line" })
 
                 -- Navigation
-                nmap("gsp", function()
+                nmap("<leader>gp", function()
                     gitsigns.nav_hunk("prev")
                 end, { desc = "Jump to previous hunk" })
 
-                nmap("gsn", function()
+                nmap("<leader>gn", function()
                     gitsigns.nav_hunk("next")
                 end, { desc = "Jump to next hunk" })
 
                 -- Actions
-                nmap("gss", gitsigns.stage_hunk, { desc = "Stage current hunk" })
-                nmap("gsr", gitsigns.reset_hunk, { desc = "Reset current hunk" })
-                vmap("gss", function()
+                nmap("<leader>gs", gitsigns.stage_hunk, { desc = "Stage current hunk" })
+                nmap("<leader>gr", gitsigns.reset_hunk, { desc = "Reset current hunk" })
+                vmap("<leader>gs", function()
                     gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
                 end, { desc = "Stage currently selected hunk" })
-                vmap("gsr", function()
+                vmap("<leader>gr", function()
                     gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
                 end, { desc = "Reset currently selected hunk" })
-                nmap("gsS", gitsigns.stage_buffer, { desc = "Stage current buffer" })
-                nmap("gsR", gitsigns.reset_buffer, { desc = "Reset current buffer" })
-                nmap("gsv", gitsigns.preview_hunk_inline, { desc = "Preview current hunk" })
-                nmap("gsb", function()
+                nmap("<leader>gS", gitsigns.stage_buffer, { desc = "Stage current buffer" })
+                nmap("<leader>gR", gitsigns.reset_buffer, { desc = "Reset current buffer" })
+                nmap("<leader>gv", gitsigns.preview_hunk_inline, { desc = "Preview current hunk" })
+                nmap("<leader>gb", function()
                     gitsigns.blame_line({ full = true })
                 end, { desc = "View current line blame" })
-                nmap("gsd", gitsigns.diffthis, { desc = "Open split view diff" })
+                nmap("<leader>gd", gitsigns.diffthis, { desc = "Open split view diff" })
 
                 -- Text object
-                map({ "o", "x" }, "gsi", ":<C-U>Gitsigns select_hunk<CR>",
+                map({ "o", "x" }, "<leader>gi", ":<C-U>Gitsigns select_hunk<CR>",
                     { desc = "Visually select current hunk" })
             end,
         })

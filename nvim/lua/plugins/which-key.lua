@@ -13,13 +13,14 @@ return {
             {
                 mode = { "n" },
                 { "<leader>f", group = "pickers" },
-                { "gp",        group = "git" },
-                { "gs",        group = "git" },
+                { "<leader>g", group = "git commands" },
+                { "gp",        group = "git pickers" },
                 { "gr",        group = "LSP" },
                 { "<leader>p", group = "plugin managers" },
-                { "<leader>q", group = "quickfix" },
-                { "<leader>s", group = "scratchpad" },
             }
         },
+    },
+    keys = {
+        { "<leader>?", function() require("which-key").show({ global = true }) end, desc = "Show keymaps" },
     },
 }
