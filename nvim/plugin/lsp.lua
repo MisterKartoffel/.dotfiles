@@ -39,7 +39,6 @@ vim.diagnostic.config({
     }
 })
 
----@diagnostic disable: undefined-global
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("LSP", { clear = false }),
     callback = function(args)
@@ -47,21 +46,56 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local nmap = require("utils").nmap
         local imap = require("utils").imap
 
-        nmap("gO", function()
-            Snacks.picker.lsp_symbols()
-        end, { desc = "Find all symbols in current buffer" })
-
-        nmap("grD", function()
-            Snacks.picker.lsp_definitions()
-        end, { desc = "Jump to definition for symbol under cursor" })
-
-        nmap("grd", function()
-            Snacks.picker.diagnostics_buffer()
-        end, { desc = "Find all diagnostics in current buffer" })
+        nmap("gO", function() Snacks.picker.lsp_symbols() end,
+            { desc = "Find all symbols in current buffer" })
+        nmap("grD", function() Snacks.picker.lsp_definitions() end,
+            { desc = "Jump to definition for symbol under cursor" })
+        nmap("grd", function() Snacks.picker.diagnostics_buffer() end,
+            { desc = "Find all diagnostics in current buffer" })
 
         if client:supports_method("textDocument/completion") then
             vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true, })
-            imap("<C-Space>", vim.lsp.completion.get, { desc = "Display LSP completions" })
+            imap("<C-Space>", vim.lsp.completion.get,
+                { desc = "Get completion for current token" })
+
+            -- This autocmd was taken straight from
+            -- https://gist.github.com/przepompownia/0690ebe28a24bd10b45118fceb980dfd
+            vim.api.nvim_create_autocmd("CompleteChanged", {
+                buffer = args.buf,
+                callback = function()
+                    local info = vim.fn.complete_info({ "selected" })
+                    local completionItem = vim.tbl_get(vim.v.completed_item, "user_data", "nvim", "lsp",
+                        "completion_item")
+                    if nil == completionItem then
+                        return
+                    end
+
+                    local resolvedItem = vim.lsp.buf_request_sync(
+                        args.buf,
+                        vim.lsp.protocol.Methods.completionItem_resolve,
+                        completionItem,
+                        500
+                    )
+
+                    if nil == resolvedItem then
+                        return
+                    end
+
+                    local docs = vim.tbl_get(resolvedItem[args.data.client_id], "result", "documentation", "value")
+                    if nil == docs then
+                        return
+                    end
+
+                    local winData = vim.api.nvim__complete_set(info["selected"], { info = docs })
+                    if not winData.winid or not vim.api.nvim_win_is_valid(winData.winid) then
+                        return
+                    end
+
+                    vim.api.nvim_win_set_config(winData.winid, { border = "rounded" })
+                    vim.treesitter.start(winData.bufnr, "markdown")
+                    vim.wo[winData.winid].conceallevel = 3
+                end
+            })
         end
 
         if client:supports_method("textDocument/diagnostic") then

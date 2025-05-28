@@ -100,7 +100,7 @@ set.swapfile = false
 
 -- List of options for 'ins-completion'. Read ':help completeopt' for specifics.
 -- (default): vim.o.completeopt = "menu,popup"
-set.completeopt = "fuzzy,menuone,preview,noinsert"
+set.completeopt = "fuzzy,menuone,popup,noinsert"
 
 -- Sets the current colorscheme.
 vim.cmd.colorscheme("catppuccin")
