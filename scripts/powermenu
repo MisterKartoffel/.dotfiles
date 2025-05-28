@@ -3,6 +3,7 @@
 OPTIONS=(
     poweroff
     reboot
+    logout
     lock
 )
 
@@ -14,6 +15,9 @@ case "${SELECTED}" in
         ;;
     reboot)
         systemctl reboot
+        ;;
+    logout)
+        niri msg action quit
         ;;
     lock)
         hyprlock
