@@ -3,7 +3,6 @@
 OPTIONS=(
     poweroff
     reboot
-    logout
     lock
 )
 
@@ -18,9 +17,6 @@ case "${SELECTED}" in
         ;;
     lock)
         hyprlock
-        ;;
-    logout)
-        uwsm stop
         ;;
     *)
         return 0

@@ -1,9 +1,4 @@
 # Important notes
-## uwsm logout after login
-Could be caused by a lack of WAYLAND_DISPLAY and HYPRLAND_INSTANCE_SIGNATURE in the exported variables, causing uwsm to timeout. This is corroborated by an inspection of `journalctl`. Testing a variety of fixes in `$HOME/.config/hypr/hyprland/launch.conf`
-1. No environment-related `exec-once` failed, once caused the bug to happen twice consecutively.
-2. `exec-once = exec uwsm finalize` failed.
-3. Testing `exec-once = exec uwsm finalize WAYLAND_DISPLAY HYPRLAND_INSTANCE_SIGNATURE`.
 
 ---
 

@@ -7,26 +7,22 @@
     "margin": "4",
     "reload_style_on_change": true,
 
-    "modules-left": ["hyprland/workspaces", "hyprland/window"],
+    "modules-left": ["niri/workspaces", "niri/window"],
     "modules-center": ["idle_inhibitor", "clock"],
     "modules-right": ["cpu", "memory", "disk", "pulseaudio", "pulseaudio#microphone", "network", "backlight"],
 
-    "hyprland/workspaces": {
+    "niri/workspaces": {
         "format": "{icon}",
         "format-icons": {
-            "1": "",
-            "2": "󰈹",
-            "3": "",
-            "default": "",
-            "empty": ""
-        },
-        "persistent-workspaces": {
-            "*": [1, 2, 3]
+            "terminal": "",
+            "browser": "󰈹",
+            "discord": "",
+            "default": ""
         }
     },
 
-    "hyprland/window": {
-        "format": "{initialTitle}",
+    "niri/window": {
+        "format": "{title}",
         "tooltip": false,
         "rewrite": {
             "": "󰣇"

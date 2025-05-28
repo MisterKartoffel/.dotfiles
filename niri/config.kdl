@@ -1,0 +1,200 @@
+input {
+    keyboard {
+        xkb {
+            layout "br"
+            options "caps:escape"
+        }
+
+        numlock
+    }
+
+    disable-power-key-handling
+    focus-follows-mouse
+    workspace-auto-back-and-forth
+}
+
+output "eDP-1" {
+    mode "1920x1080"
+    focus-at-startup
+}
+
+output "HDMI-A-1" {
+    off
+    mode "1920x1080"
+    position x=0 y=-1080
+}
+
+workspace "terminal"
+workspace "browser"
+workspace "discord"
+
+layout {
+    gaps 4
+
+    // TODO: test different behaviors
+    center-focused-column "on-overflow"
+    always-center-single-column
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+        fixed 1920
+    }
+
+    default-column-width { proportion 1.0; }
+
+    focus-ring {
+        width 1
+        active-color "#7fc8ff"
+        inactive-color "#505050"
+    }
+
+    border {
+        off
+    }
+
+    struts {
+        left 0
+        right 0
+        top -4
+        bottom 0
+    }
+}
+
+window-rule {
+    match title="Notifications" app-id="com.mitchellh.ghostty"
+    match title="Volume Control" app-id="org.pulseaudio.pavucontrol"
+    match title="File Upload" app-id="xdg-desktop-portal-gtk"
+    open-floating true
+}
+
+window-rule {
+    match title="Bitwarden" app-id="com.mitchellh.ghostty"
+    open-floating true
+    block-out-from "screen-capture"
+}
+
+window-rule {
+    geometry-corner-radius 10
+    clip-to-geometry true
+}
+
+binds {
+    // General use binds
+        Mod+Shift+Slash { show-hotkey-overlay; }
+        Mod+T hotkey-overlay-title="Open Ghostty" { spawn "ghostty"; }
+        Mod+F hotkey-overlay-title="Open Zen Browser" { spawn "app.zen_browser.zen"; }
+        Mod+D hotkey-overlay-title="Open Discord" { spawn "dev.vencord.Vesktop"; }
+        Mod+Space hotkey-overlay-title="Open application launcher" { spawn "anyrun"; }
+        Mod+Delete { spawn "powermenu"; }
+        Mod+Shift+Delete { quit; }
+        Mod+Q { close-window; }
+
+    // Screencapture
+        Mod+P { screenshot; }
+        Mod+Ctrl+P { screenshot-window; }
+        Mod+Print { spawn "sh" "-c" "wl-paste | satty --fullscreen -f - -o $HOME/Pictures/Screenshots/$(date '+%Y%m%d-%H:%M:%S').png"; }
+        Mod+F10 { spawn "record"; }
+
+    // Media controls
+        XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "-l" "1.0" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+        XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "-l" "1.0" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+        XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+        Shift+XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "-l" "1.0" "@DEFAULT_AUDIO_SOURCE@" "5%+"; }
+        Shift+XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "-l" "1.0" "@DEFAULT_AUDIO_SOURCE@" "5%-"; }
+        Shift+XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+        XF86AudioPlay allow-when-locked=true { spawn "playerctl" "play-pause"; }
+        XF86AudioPrev allow-when-locked=true { spawn "playerctl" "previous"; }
+        XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
+
+    // Window and workspace movement
+        // Move focus with Mod + [hjkl]
+            Mod+H     { focus-column-left; }
+            Mod+J     { focus-window-down; }
+            Mod+K     { focus-window-up; }
+            Mod+L     { focus-column-right; }
+
+            // Move focus left / right with Mod + Mouse Wheel
+                Mod+Shift+WheelScrollDown      { focus-column-right; }
+                Mod+Shift+WheelScrollUp        { focus-column-left; }
+
+        // Switch workspaces with Mod + [1-5]
+            Mod+1 { focus-workspace 1; }
+            Mod+2 { focus-workspace 2; }
+            Mod+3 { focus-workspace 3; }
+            Mod+4 { focus-workspace 4; }
+            Mod+5 { focus-workspace 5; }
+
+            // Focus workspace below / above with Mod + Mouse Wheel
+                Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+                Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+
+        // Resize focused window / column with Mod + [Shift] + [Minus / Equal]
+            Mod+Minus { set-column-width "-10%"; }
+            Mod+Equal { set-column-width "+10%"; }
+            Mod+R { switch-preset-column-width; }
+            Mod+M { maximize-column; }
+            Mod+Shift+Minus { set-window-height "-10%"; }
+            Mod+Shift+Equal { set-window-height "+10%"; }
+            Mod+Ctrl+R { reset-window-height; }
+
+        // Move focused window around or between workspaces with Mod + Shift + [hjkl]
+            Mod+Shift+H     { move-column-left; }
+            Mod+Shift+J     { move-window-down-or-to-workspace-down; }
+            Mod+Shift+K     { move-window-up-or-to-workspace-up; }
+            Mod+Shift+L     { move-column-right; }
+            Mod+C { center-column; }
+    
+        // Move focused window to a workspace with Mod + Shift + [1-5]
+            Mod+Shift+1 { move-window-to-workspace 1; }
+            Mod+Shift+2 { move-window-to-workspace 2; }
+            Mod+Shift+3 { move-window-to-workspace 3; }
+            Mod+Shift+4 { move-window-to-workspace 4; }
+            Mod+Shift+5 { move-window-to-workspace 5; }
+
+        // Move focused window to the previous / next monitor with Mod + Shift + [pn]
+            Mod+Shift+P     { move-window-to-monitor-previous; }
+            Mod+Shift+N     { move-window-to-monitor-next; }
+
+    // Column manipulation
+        // Consume current window into adjacent column with Mod + []
+            Mod+BracketLeft  { consume-or-expel-window-left; }
+            Mod+BracketRight { consume-or-expel-window-right; }
+
+        // Consume right-adjacent window into current column with Mod + ,.
+            Mod+Comma  { consume-window-into-column; }
+            Mod+Period { expel-window-from-column; }
+
+    // When all else fails
+        Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+}
+
+prefer-no-csd
+screenshot-path null
+
+environment {
+    GDK_BACKEND "wayland"
+    GTK_THEME "catppuccin-mocha-mauve-standard+default:dark"
+    QT_QPA_PLATFORM "wayland"
+    QT_QPA_PLATFORMTHEME "kvantum"
+    QT_STYLE_OVERRIDE "kvantum"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+    QT_AUTO_SCREEN_SCALE_FACTOR "1"
+}
+
+cursor {
+    xcursor-theme "Bibata-Modern-Ice"
+    xcursor-size 24
+
+    hide-when-typing
+    hide-after-inactive-ms 1000
+}
+
+clipboard {
+    disable-primary
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
