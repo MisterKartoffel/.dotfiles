@@ -7,7 +7,7 @@ nf() {
 
 # Find manpage to open in Neovim
 mf() {
-    man -k . | cut -d " " -f 1 | fzf -q "$1" --preview "man --pager='nvim +Man!' {}" | xargs -ro man
+    man -k . | fzf -q "$1" --preview "man --pager='nvim +Man!' {1}" | cut -d " " -f 1 | xargs -ro man
 }
 
 # Find and install package(s) in repos or AUR
