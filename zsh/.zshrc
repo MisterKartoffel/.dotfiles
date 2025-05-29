@@ -29,7 +29,10 @@ zstyle ":completion:*" menu no
 zstyle ":fzf-tab:*" use-fzf-default-opts yes
 
 ## Adds zsh-completions to fpath
-fpath=(${ZDOTDIR}/plugins/zsh-completions/src ${fpath})
+fpath+=(
+    ${ZDOTDIR}/plugins/zsh-completions/src
+    ${ZDOTDIR}/completions
+)
 
 # Colors
 export LS_COLORS="$(vivid generate catppuccin-mocha)"
