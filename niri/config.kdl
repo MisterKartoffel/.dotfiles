@@ -34,6 +34,8 @@ layout {
     // TODO: test different behaviors
     center-focused-column "on-overflow"
     always-center-single-column
+    default-column-display "tabbed"
+    background-color "transparent"
 
     preset-column-widths {
         proportion 0.33333
@@ -52,6 +54,11 @@ layout {
 
     border {
         off
+    }
+
+    tab-indicator {
+        hide-when-single-tab
+        place-within-column
     }
 
     struts {
@@ -83,6 +90,16 @@ window-rule {
 window-rule {
     geometry-corner-radius 10
     clip-to-geometry true
+}
+
+layer-rule {
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
+
+layer-rule {
+    match namespace="^notifications$"
+    block-out-from "screen-capture"
 }
 
 binds {
@@ -212,4 +229,9 @@ clipboard {
 
 hotkey-overlay {
     skip-at-startup
+}
+
+/-debug {
+    preview-render "screencast"
+    // preview-render "screen-capture"
 }
