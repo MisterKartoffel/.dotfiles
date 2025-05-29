@@ -69,7 +69,7 @@
         "format-muted": "mute {icon}",
         "tooltip": false,
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "on-click-right": "uwsm-app -- pavucontrol -t 3",
+        "on-click-right": "pavucontrol -t 3",
         "min-length": 6,
         "scroll-step": 5,
         "format-icons": {
@@ -87,7 +87,7 @@
         "format-source": "{volume}% 󰍬",
         "format-source-muted": "mute 󰍭",
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-        "on-click-right": "uwsm app -- pavucontrol -t 4",
+        "on-click-right": "pavucontrol -t 4",
         "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
         "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5%",
         "min-length": 6,
