@@ -188,6 +188,13 @@ vm.watermark_scale_factor = 125
 vm.page-cluster = 0
 ```
 
+## Change I/O scheduler for HDDs
+```conf
+/etc/udev/rules.d/60-ioschedulers.rules
+
+ACTION=="add|change", KERNEL=="sd[a-z]*", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
+```
+
 ## Pacman configuration
 ```conf
 /etc/pacman.conf
@@ -474,4 +481,29 @@ instead of all.
 [Service]
 ExecStart=
 ExecStart=/usr/lib/systemd/systemd-networkd-wait-online --any
+```
+## Changes to systemd configurations
+> Disabling coredump.
+```systemd
+/etc/systemd/coredump.conf.d/10-disable.conf
+
+[Coredump]
+Storage=none
+ProcessSizeMax=0
+```
+
+> Reducing journal size.
+```systemd
+/etc/systemd/journald.conf.d/10-journal_size.conf
+
+[Journal]
+SystemMaxUse=50M
+```
+
+> Reducing hibernate delay on suspend-then-hibernate.
+```systemd
+/etc/systemd/sleep.conf.d/10-hibernate_delay_sec.conf
+
+[Sleep]
+HibernateDelaySec=30m
 ```
