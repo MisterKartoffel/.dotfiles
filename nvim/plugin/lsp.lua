@@ -21,6 +21,33 @@ end
 vim.lsp.config("*", {
     root_markers = { ".git" },
     capabilities = defaultClientCapabilities(),
+    on_attach = function()
+        local debug = false
+        if debug then
+            vim.lsp.set_log_level(vim.log.levels.DEBUG)
+            vim.lsp.log.set_format_func(vim.inspect)
+        else
+            vim.lsp.set_log_level(vim.log.levels.OFF)
+        end
+    end
+})
+
+vim.diagnostic.config({
+    severity_sort = true,
+    virtual_lines = {
+        current_line = true,
+        format = function(diagnostic)
+            return diagnostic.message
+        end,
+    },
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.HINT] = "󰌵",
+        },
+    },
 })
 
 local lsp_configs = {}
@@ -29,15 +56,6 @@ for _, file in pairs(vim.api.nvim_get_runtime_file("lsp/*.lua", true)) do
     table.insert(lsp_configs, server_name)
 end
 vim.lsp.enable(lsp_configs)
-
-vim.diagnostic.config({
-    virtual_lines = {
-        current_line = true,
-        format = function(diagnostic)
-            return diagnostic.message
-        end,
-    }
-})
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("LSP", { clear = false }),
