@@ -286,7 +286,7 @@ Exec = /usr/bin/pacdiff --output
 Depends = pacman-contrib
 ```
 
-## Fix audio popping when booting up (still happens rarely)
+## Fix audio popping when booting up (still happens rarely) [TEMPORARILY UNDONE]
 > Disable power saving for the snd_hda_intel device.
 ```conf
 /etc/modprobe.d/snd_hda_intel.conf
@@ -466,11 +466,26 @@ Restart=no
 WantedBy=default.target
 ```
 
-> Keep boot messages in TTY1.
+> Created swaybg.service for setting wallpaper on boot.
 ```systemd
-/etc/systemd/system/getty@tty1.service.d/noclear.conf
+$HOME/.config/systemd/user/swaybg.service
 
-TTYVTDisallocate=no
+[Unit]
+Description=Swaybg unit for setting the wallpaper
+Documentation=man:swaybg(1)
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+Environment="WALLPAPER=.background"
+ExecStart=/usr/bin/swaybg -i ${WALLPAPER} -o eDP-1
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target
 ```
 
 > Change systemd-networkd-wait-online.service to wait for any interface
