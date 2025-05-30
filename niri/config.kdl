@@ -1,3 +1,12 @@
+workspace "terminal"
+workspace "browser"
+workspace "discord"
+
+prefer-no-csd
+screenshot-path null
+
+spawn-at-startup "ghostty" "--initial-window=false"
+
 input {
     keyboard {
         xkb {
@@ -23,10 +32,6 @@ output "HDMI-A-1" {
     mode "1920x1080"
     position x=0 y=-1080
 }
-
-workspace "terminal"
-workspace "browser"
-workspace "discord"
 
 layout {
     gaps 4
@@ -70,14 +75,20 @@ layout {
 }
 
 window-rule {
-    match title="Notifications" app-id="com.mitchellh.ghostty"
-    match title="Volume Control" app-id="org.pulseaudio.pavucontrol"
-    match title="File Upload" app-id="xdg-desktop-portal-gtk"
+    match title="Notifications" app-id=r#"^com\.mitchellh\.ghostty$"#
+    match title="File Upload" app-id=r#"^xdg-desktop-portal-gtk$"#
     open-floating true
 }
 
 window-rule {
-    match title="Bitwarden" app-id="com.mitchellh.ghostty"
+    match title="Volume Control" app-id=r#"^org\.pulseaudio\.pavucontrol"#
+    default-column-width { fixed 900; }
+    default-window-height { fixed 525; }
+    open-floating true
+}
+
+window-rule {
+    match title="Bitwarden" app-id=r#"^com\.mitchellh\.ghostty$"#
     open-floating true
     block-out-from "screen-capture"
 }
@@ -104,20 +115,20 @@ layer-rule {
 
 binds {
     // General use binds
-        Mod+Shift+Slash  { show-hotkey-overlay; }
-        Mod+T            { spawn "ghostty"; }
-        Mod+F            { spawn "app.zen_browser.zen"; }
-        Mod+D            { spawn "dev.vencord.Vesktop"; }
-        Mod+Space        { spawn "anyrun"; }
-        Mod+Delete       { spawn "powermenu"; }
-        Mod+Shift+Delete { quit; }
-        Mod+Q            { close-window; }
+        Mod+Shift+Slash  repeat=false { show-hotkey-overlay; }
+        Mod+T            repeat=false { spawn "ghostty"; }
+        Mod+F            repeat=false { spawn "app.zen_browser.zen"; }
+        Mod+D            repeat=false { spawn "dev.vencord.Vesktop"; }
+        Mod+Space        repeat=false { spawn "anyrun"; }
+        Mod+Delete       repeat=false { spawn "powermenu"; }
+        Mod+Shift+Delete repeat=false { quit; }
+        Mod+Q            repeat=false { close-window; }
 
     // Screencapture
-        Mod+F12       { screenshot; }
-        Mod+Shift+F12 { screenshot-window; }
-        Mod+Print     { spawn "sh" "-c" "wl-paste | satty --fullscreen -f - -o $HOME/Pictures/Screenshots/$(date '+%Y%m%d-%H:%M:%S').png"; }
-        Mod+F10       { spawn "record"; }
+        Mod+F12       repeat=false { screenshot; }
+        Mod+Shift+F12 repeat=false { screenshot-window; }
+        Mod+Print     repeat=false { spawn "sh" "-c" "wl-paste | satty --fullscreen -f - -o $HOME/Pictures/Screenshots/$(date '+%Y%m%d-%H:%M:%S').png"; }
+        Mod+F10       repeat=false { spawn "record"; }
 
     // Window and workspace movement
         // Move focus with Mod + [hjkl]
@@ -127,8 +138,12 @@ binds {
             Mod+L { focus-column-right; }
 
             // Move focus left / right with Mod + Mouse Wheel
-                Mod+Shift+WheelScrollDown { focus-column-right; }
                 Mod+Shift+WheelScrollUp   { focus-column-left; }
+                Mod+Shift+WheelScrollDown { focus-column-right; }
+
+            // Focus window / workspace below / above with Mod + Mouse Wheel
+                Mod+WheelScrollUp   cooldown-ms=100 { focus-window-or-workspace-up; }
+                Mod+WheelScrollDown cooldown-ms=100 { focus-window-or-workspace-down; }
 
         // Switch to previous / next monitor with Mod + [pn]
             Mod+P { focus-monitor-up; }
@@ -140,10 +155,6 @@ binds {
             Mod+3 { focus-workspace 3; }
             Mod+4 { focus-workspace 4; }
             Mod+5 { focus-workspace 5; }
-
-            // Focus workspace below / above with Mod + Mouse Wheel
-                Mod+WheelScrollDown cooldown-ms=100 { focus-workspace-down; }
-                Mod+WheelScrollUp   cooldown-ms=100 { focus-workspace-up; }
 
         // Resize focused window / column with Mod + [Shift] + [Minus / Equal]
             Mod+Minus       { set-column-width "-10%"; }
@@ -159,18 +170,17 @@ binds {
             Mod+Shift+J { move-window-down-or-to-workspace-down; }
             Mod+Shift+K { move-window-up-or-to-workspace-up; }
             Mod+Shift+L { move-column-right; }
-            Mod+C       { center-column; }
     
+        // Move focused window to the previous / next monitor with Mod + Shift + [pn]
+            Mod+Shift+P { move-window-to-monitor-previous; }
+            Mod+Shift+N { move-window-to-monitor-next; }
+
         // Move focused window to a workspace with Mod + Shift + [1-5]
             Mod+Shift+1 { move-window-to-workspace 1; }
             Mod+Shift+2 { move-window-to-workspace 2; }
             Mod+Shift+3 { move-window-to-workspace 3; }
             Mod+Shift+4 { move-window-to-workspace 4; }
             Mod+Shift+5 { move-window-to-workspace 5; }
-
-        // Move focused window to the previous / next monitor with Mod + Shift + [pn]
-            Mod+Shift+P { move-window-to-monitor-previous; }
-            Mod+Shift+N { move-window-to-monitor-next; }
 
     // Column manipulation
         // Consume current window into adjacent column with Mod + []
@@ -180,6 +190,9 @@ binds {
         // Consume right-adjacent window into current column with Mod + ,.
             Mod+Comma  { consume-window-into-column; }
             Mod+Period { expel-window-from-column; }
+
+        // Toggle between tabbed and column display
+            Mod+SemiColon { toggle-column-tabbed-display; }
 
     // Media controls
         XF86AudioRaiseVolume       allow-when-locked=true { spawn "wpctl" "set-volume" "-l" "1.0" "@DEFAULT_AUDIO_SINK@" "5%+"; }
@@ -200,11 +213,6 @@ binds {
         Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 }
 
-prefer-no-csd
-screenshot-path null
-
-spawn-at-startup "ghostty" "--initial-window=false"
-
 environment {
     GDK_BACKEND "wayland"
     GTK_THEME "catppuccin-mocha-mauve-standard+default:dark"
@@ -218,7 +226,6 @@ environment {
 cursor {
     xcursor-theme "Bibata-Modern-Ice"
     xcursor-size 24
-
     hide-when-typing
     hide-after-inactive-ms 1000
 }
@@ -232,6 +239,6 @@ hotkey-overlay {
 }
 
 /-debug {
-    preview-render "screencast"
-    // preview-render "screen-capture"
+    preview-render "screen-capture"
+    // preview-render "screencast"
 }
