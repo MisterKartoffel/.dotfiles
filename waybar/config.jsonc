@@ -22,10 +22,16 @@
     },
 
     "niri/window": {
-        "format": "{title}",
+        "format": "{app_id}",
         "tooltip": false,
         "rewrite": {
-            "": "󰣇"
+            "com.mitchellh.ghostty": "Ghostty",
+            "zen": "Zen Browser",
+            "org.pulseaudio.pavucontrol": "Volume Control",
+            "com.github.tchx84.Flatseal": "Flatseal",
+            "kvantummanager": "Kvantum",
+            "vesktop": "Discord",
+            "Notifications": "Notification History"
         }
     },
 
