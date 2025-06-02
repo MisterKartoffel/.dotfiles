@@ -20,7 +20,6 @@ ghostty
 git
 hypridle
 hyprlock
-hyprpolkitagent
 intel-ucode
 iwd
 kvantum
