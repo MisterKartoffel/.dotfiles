@@ -13,13 +13,10 @@ input {
             layout "br"
             options "caps:escape"
         }
-
         numlock
     }
 
-    disable-power-key-handling
-    focus-follows-mouse
-    workspace-auto-back-and-forth
+    focus-follows-mouse max-scroll-amount="0%"
 }
 
 output "eDP-1" {
@@ -36,8 +33,6 @@ output "HDMI-A-1" {
 layout {
     gaps 4
 
-    // TODO: test different behaviors
-    center-focused-column "on-overflow"
     always-center-single-column
     default-column-display "tabbed"
     background-color "transparent"
@@ -46,7 +41,7 @@ layout {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
-        fixed 1912
+        proportion 1.0
     }
 
     default-column-width { proportion 1.0; }
@@ -162,8 +157,9 @@ binds {
             Mod+Shift+Minus { set-window-height "-10%"; }
             Mod+Shift+Equal { set-window-height "+10%"; }
             Mod+R           { switch-preset-column-width; }
-            Mod+M           { maximize-column; }
             Mod+Ctrl+R      { reset-window-height; }
+            Mod+M           { maximize-column; }
+            Mod+F11         { fullscreen-window; }
 
         // Move focused window around or between workspaces with Mod + Shift + [hjkl]
             Mod+Shift+H { move-column-left; }
