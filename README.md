@@ -4,7 +4,7 @@ Remote repository for my personal dotfiles.
 ## Requirements
 Install the following dependencies:
 ```text
-# pacman -S git stow
+# pacman -S git
 ```
 
 ## Installation
@@ -14,9 +14,10 @@ $ git clone git@github.com/MisterKartoffel/.dotfiles.git $HOME
 $ cd .dotfiles
 ```
 
-Then use GNU Stow to create the necessary symlinks:
+Verify that all files are correct and move the directory to `$HOME/.config`:
 ```text
-$ stow .
+$ mv $HOME/.config{,.bak}
+$ mv $HOME/.{dotfiles,config}
 ```
 
 Finally, manually symlink `.zshenv` to `$HOME`:
@@ -24,12 +25,4 @@ Finally, manually symlink `.zshenv` to `$HOME`:
 $ ln -sf ./.zshenv $HOME/.zshenv
 ```
 
-## Caveats
-If you run into a conflict error when Stow-ing the configuration, you need to remove the conflicting local files:
-```text
-# Either moving or copying conflicting files works, for example:
-$ mv /path/to/conflicting/files{,.bak}
-
-# Then, stow as normal:
-$ stow .
-```
+Then, follow system-wide configuration instructions listed in `$HOME/.config/notes.md`.
