@@ -3,9 +3,9 @@
 [user]
     name        = Felipe Duarte
     email       = felipesdrs@hotmail.com
-    signingKey  = ~/.ssh/github_sign_id_ed25519.pub
+    signingKey  = ~/.ssh/ghost_id_ed25519.pub
 [core]
-    sshCommand  = ssh -i ~/.ssh/github_auth_id_ed25519
+    sshCommand  = ssh -i ~/.ssh/ghost_id_ed25519
     compression = 9
     editor      = nvim
     whitespace  = error

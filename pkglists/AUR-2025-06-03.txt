@@ -3,4 +3,3 @@ downgrade
 maplemono-nf
 maplemono-ttf-autohint
 paru-bin
-spotify-player-full

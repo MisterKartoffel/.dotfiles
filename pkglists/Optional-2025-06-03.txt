@@ -1,4 +1,5 @@
 7zip
+bat
 chafa
 fd
 geoclue
@@ -9,6 +10,7 @@ linux-firmware
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
+npm
 openssh
 pipewire-alsa
 pipewire-pulse
@@ -16,6 +18,6 @@ poppler
 qt5-wayland
 ripgrep
 rsync
-vulkan-mesa-layers
-vulkan-radeon
+swaybg
+waybar
 wl-clipboard

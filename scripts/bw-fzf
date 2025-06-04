@@ -11,17 +11,18 @@ trap 'cleanup' EXIT
 ITEMS=
 TIMEOUT=60s
 TIMEOUT_PID=
+BW_EMAIL="$(sops decrypt --extract '["bitwarden"]["email"]' ${CREDENTIAL_FILE})"
+BW_PASSWORD="$(sops decrypt --extract '["bitwarden"]["password"]' ${CREDENTIAL_FILE})"
+BW_TOTP="$(sops decrypt --extract '["bitwarden"]["totp"]' ${CREDENTIAL_FILE})"
 TIMESTAMP_FILE="/tmp/bw-fzf-active.timestamp"
 TEMP_ITEMS_FILE=
 SHOULD_LOGIN=0
-CLIP_COMMAND="wl-copy"
-CLIP_ARGS="-o"
 DEPENDS=(
     bw
     fzf
     jq
     oathtool
-    "${CLIP_COMMAND}"
+    wl-copy
 )
 
 function exit_handler() {
@@ -63,7 +64,7 @@ function handle_session() {
     case "${SHOULD_LOGIN}" in
         0)
             local VAULT_SESSION
-            VAULT_SESSION=$(bw unlock --raw --passwordenv BW_PASSWORD 2>/dev/null)
+            VAULT_SESSION=$(bw unlock "${BW_PASSWORD}" --raw 2>/dev/null)
             if [[ -z "${VAULT_SESSION}" ]]; then
                 echo "Could not unlock vault."
                 exit 1
@@ -75,7 +76,7 @@ function handle_session() {
             return 0
             ;;
         1)
-            if ! bw login --apikey --quiet 2>/dev/null; then
+            if ! bw login "${BW_EMAIL}" "${BW_PASSWORD}" --code "$(oathtool --totp -b "${BW_TOTP}")" --quiet 2>/dev/null; then
                 echo "Could not log in."
                 exit 1
             fi
@@ -98,7 +99,7 @@ function check_credentials() {
     case "${CHECK_LOGIN}" in
         0)
             if [[ "${SHOULD_UNLOCK}" -ne 0 ]] && [[ -z "${BW_PASSWORD}" ]]; then
-                echo "Password environment variable not set."
+                echo "Could not source password."
                 exit 1
             fi
 
@@ -106,8 +107,8 @@ function check_credentials() {
             return 0
             ;;
         1)
-            if [[ -z "${BW_CLIENTID}" ]] || [[ -z "${BW_CLIENTSECRET}" ]]; then
-                echo "Client ID and/or client secret environment variables not set."
+            if [[ -z "${BW_EMAIL}" ]] || [[ -z "${BW_TOTP}" ]]; then
+                echo "Could not source credentials."
                 exit 1
             fi
 
@@ -196,9 +197,9 @@ function bw_list() {
         --input-label="Search"
         --bind="change:execute-silent(touch ${TIMESTAMP_FILE})"
         --bind="focus:execute-silent(touch ${TIMESTAMP_FILE})"
-        --bind="ctrl-u:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); username=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.username' \"${TEMP_ITEMS_FILE}\"); echo -n \"\$username\" | ${CLIP_COMMAND} ${CLIP_ARGS})+execute-silent(touch ${TIMESTAMP_FILE})"
-        --bind="ctrl-p:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); password=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.password' \"${TEMP_ITEMS_FILE}\"); echo -n \"\$password\" | ${CLIP_COMMAND} ${CLIP_ARGS})+execute-silent(touch ${TIMESTAMP_FILE})"
-        --bind="ctrl-o:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); totp_secret=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.totp' \"${TEMP_ITEMS_FILE}\"); if [[ \"\$totp_secret\" != \"null\" ]]; then totp=\$(oathtool --totp -b \"\$totp_secret\"); echo -n \"\$totp\" | ${CLIP_COMMAND} ${CLIP_ARGS}; else echo \"No TOTP available for this item\"; fi)+execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-u:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); username=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.username' \"${TEMP_ITEMS_FILE}\"); echo -n \"\$username\" | wl-copy -o)+execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-p:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); password=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.password' \"${TEMP_ITEMS_FILE}\"); echo -n \"\$password\" | wl-copy -o)+execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-o:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); totp_secret=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.totp' \"${TEMP_ITEMS_FILE}\"); if [[ \"\$totp_secret\" != \"null\" ]]; then totp=\$(oathtool --totp -b \"\$totp_secret\"); echo -n \"\$totp\" | wl-copy -o; else echo \"No TOTP available for this item\"; fi)+execute-silent(touch ${TIMESTAMP_FILE})"
         --bind="ctrl-f:preview(echo \"${HELP_TEXT}\")"
         --header="Press ctrl-f for help"
         --preview-window="right:50%"
