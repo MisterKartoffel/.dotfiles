@@ -25,12 +25,14 @@ linux-lts
 ly
 man-db
 mpv
+ncspot
 neovim
 niri
 noto-fonts
 oath-toolkit
 pavucontrol
 pkgstats
+power-profiles-daemon
 qbittorrent-nox
 rage-encryption
 reflector
