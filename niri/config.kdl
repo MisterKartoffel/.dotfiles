@@ -1,6 +1,14 @@
-workspace "terminal"
-workspace "browser"
-workspace "discord"
+workspace "terminal" {
+    open-on-output "eDP-1"
+}
+
+workspace "browser" {
+    open-on-output "eDP-1"
+}
+
+workspace "discord" {
+    open-on-output "eDP-1"
+}
 
 prefer-no-csd
 screenshot-path null
@@ -38,9 +46,7 @@ layout {
     background-color "transparent"
 
     preset-column-widths {
-        proportion 0.33333
         proportion 0.5
-        proportion 0.66667
         proportion 1.0
     }
 
@@ -104,11 +110,6 @@ layer-rule {
     place-within-backdrop true
 }
 
-layer-rule {
-    match namespace="^notifications$"
-    block-out-from "screen-capture"
-}
-
 binds {
     // General use binds
         Mod+Shift+Slash  repeat=false { show-hotkey-overlay; }
@@ -168,9 +169,9 @@ binds {
             Mod+Shift+K { move-window-up-or-to-workspace-up; }
             Mod+Shift+L { move-column-right; }
     
-        // Move focused window to the previous / next monitor with Mod + Shift + [pn]
-            Mod+Shift+P { move-window-to-monitor-previous; }
-            Mod+Shift+N { move-window-to-monitor-next; }
+        // Move current workspace to the previous / next monitor with Mod + Shift + [pn]
+            Mod+Shift+P { move-workspace-to-monitor-previous; }
+            Mod+Shift+N { move-workspace-to-monitor-next; }
 
         // Move focused window to a workspace with Mod + Shift + [1-5]
             Mod+Shift+1 { move-window-to-workspace 1; }
