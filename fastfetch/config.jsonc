@@ -11,19 +11,31 @@
 			"keyColor": "red"
 		},
 		{
-			"type": "OS",
+			"type": "os",
 			"key": "│ ├󱅲",
 			"keyColor": "red"
 		},
 		{
 			"type": "packages",
 			"key": "│ ├󰏖",
-			"keyColor": "red"
+			"keyColor": "red",
+            "format": "{all} packages"
 		},
 		{
 			"type": "shell",
-			"key": "│ └",
+			"key": "│ ├",
 			"keyColor": "red"
+		},
+		{
+			"type": "uptime",
+			"key": "│ ├󰅐",
+			"keyColor": "red"
+		},
+		{
+			"type": "disk",
+			"key": "│ └",
+			"keyColor": "red",
+			"format": "{days} days"
 		},
 		{
 			"type": "custom",
@@ -42,7 +54,12 @@
 		},
 		{
 			"type": "terminal",
-			"key": "│ └",
+			"key": "│ ├",
+			"keyColor": "blue"
+		},
+		{
+			"type": "terminalfont",
+			"key": "│ └",
 			"keyColor": "blue"
 		},
 		{
@@ -70,17 +87,11 @@
 			"key": "│ ├󰑭",
 			"keyColor": "green"
 		},
-		{
-			"type": "uptime",
-			"key": "│ ├󰅐",
-			"keyColor": "green"
-		},
-		{
-			"type": "disk",
-			"key": "│ └",
-			"keyColor": "green",
-			"format": "{days} days"
-		},
+        {
+            "type": "swap",
+            "key": "│ ├󰓡",
+            "keyColor": "green"
+        },
 		{
 			"type": "colors",
 			"key": "{#35} Colors  ",
