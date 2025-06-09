@@ -25,6 +25,7 @@ Kind=bond
 Mode=active-backup
 PrimaryReselectPolicy=always
 MIIMonitorSec=1s
+FailOverMACPolicy=active
 ```
 
 > Create the bond network.
@@ -51,7 +52,7 @@ InitialAdvertisedReceiveWindow=30
 /etc/systemd/network/30-ethernet-bond0.network
 
 [Match]
-PermanentMACAddress=
+PermanentMACAddress=<check>
 
 [Network]
 Bond=bond0
@@ -62,18 +63,10 @@ PrimarySlave=true
 /etc/systemd/network/30-wifi-bond0.network
 
 [Match]
-PermanentMACAddress=
+PermanentMACAddress=<check>
 
 [Network]
 Bond=bond0
-```
-
-> Enable iwd's built-in DHCP client.
-```conf
-/etc/iwd/main.conf
-
-[General]
-EnableNetworkConfiguration=true
 ```
 
 > Enable systemd units.
