@@ -39,7 +39,7 @@ Name=bond0
 RequiredForOnline=yes
 
 [Network]
-BindCarrier=enp7s0 wlan0
+BindCarrier=eth0 wlan0
 DHCP=yes
 
 [Route]
@@ -67,6 +67,14 @@ PermanentMACAddress=<check>
 
 [Network]
 Bond=bond0
+```
+
+> Reintroduce traditional interface naming for ethernet (for consistency, iwd does this for WLAN)
+```systemd
+/etc/systemd/network/99-default.link.d/10-traditional_interface_naming.conf
+
+[Link]
+NamePolicy=keep kernel
 ```
 
 > Enable systemd units.
