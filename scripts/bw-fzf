@@ -11,9 +11,9 @@ trap 'cleanup' EXIT
 ITEMS=
 TIMEOUT=60s
 TIMEOUT_PID=
-BW_EMAIL="$(sops decrypt --extract '["bitwarden"]["email"]' ${CREDENTIAL_FILE})"
-BW_PASSWORD="$(sops decrypt --extract '["bitwarden"]["password"]' ${CREDENTIAL_FILE})"
-BW_TOTP="$(sops decrypt --extract '["bitwarden"]["totp"]' ${CREDENTIAL_FILE})"
+BW_EMAIL="$(sops decrypt --extract '["bitwarden"]["email"]' "${CREDENTIAL_FILE}")"
+BW_PASSWORD="$(sops decrypt --extract '["bitwarden"]["password"]' "${CREDENTIAL_FILE}")"
+BW_TOTP="$(sops decrypt --extract '["bitwarden"]["totp"]' "${CREDENTIAL_FILE}")"
 TIMESTAMP_FILE="/tmp/bw-fzf-active.timestamp"
 TEMP_ITEMS_FILE=
 SHOULD_LOGIN=0
@@ -21,6 +21,7 @@ DEPENDS=(
     bw
     fzf
     jq
+    sops
     oathtool
     wl-copy
 )
@@ -40,6 +41,7 @@ function cleanup() {
     rm -f "${TIMESTAMP_FILE}" 2>/dev/null
     rm -f "${TEMP_ITEMS_FILE}" 2>/dev/null
 
+    bw logout --quiet 2>/dev/null || true
     pkill -P $$ 2>/dev/null || true
     wait 2>/dev/null || true
 }

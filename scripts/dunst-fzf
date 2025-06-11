@@ -9,9 +9,9 @@ trap 'cleanup' EXIT
 
 HIST_FILE=
 DEPENDS=(
+    dunstctl
     fzf
     jq
-    dunstctl
 )
 
 function exit_handler() {

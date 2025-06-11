@@ -20,7 +20,7 @@ case "${SELECTED}" in
         niri msg action quit
         ;;
     lock)
-        hyprlock
+        loginctl lock-session
         ;;
     *)
         return 0

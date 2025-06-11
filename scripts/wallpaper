@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2016
 # vim: set filetype=bash :
 
 # Script mostly taken from this example
@@ -13,7 +14,11 @@ case "${1}" in
     pick)
         # TODO: Fix preview
         # Open wallpaper selector in fzf
-        WALLPAPER=$(fd -t f . "${WALLPAPER_DIR}" | fzf --preview 'xargs -ro chafa')
+        WALLPAPER=$(fd -t f . "${WALLPAPER_DIR}" | fzf --preview '
+            dim=${FZF_PREVIEW_COLUMNS}x$((FZF_PREVIEW_LINES - 1))
+            chafa -f kitty -s ${dim} {}
+            echo
+        ')
         ;;
     *)
         # Pick selected wallpaper
