@@ -3,11 +3,6 @@
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
 [mgr]
-prepend_keymap = [
-    { on = "J", run = "plugin parent-arrow 1",   desc = "Move cursor down in parent directory" },
-    { on = "K", run = "plugin parent-arrow -1",  desc = "Move cursor up in parent directory" },
-]
-
 keymap = [
     { on = "<Esc>", run = "escape", desc = "Exit visual mode, clear selected, or cancel search" },
     { on = "q",     run = "quit",   desc = "Exit the process" },
