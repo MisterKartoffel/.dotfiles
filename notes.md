@@ -134,7 +134,7 @@ fallback_options="--cmdline /etc/kernel/cmdline-fallback ..."
 ```conf
 /etc/mkinitcpio.conf.d/10-modules.conf
 
-MODULES=(btrfs amdgpu)
+MODULES=(btrfs)
 ```
 
 ```conf
@@ -248,20 +248,12 @@ ILoveCandy
 ```
 
 ## Forced AMDGPU module
-> Disable radeon support for CI and SIK.
+> Disable and enable radeon and amdgpu support for SI, respectively.
 ```conf
-/etc/modprobe.d/radeon.conf
+/etc/modprobe.d/10-gpu_driver.conf
 
 options radeon si_support=0
-options radeon cik_support=0
-```
-
-> Explicitly enable amdgpu support for CI and SIK.
-```conf
-/etc/modprobe.d/amdgpu.conf
-
 options amdgpu si_support=1
-options amdgpu cik_support=1
 ```
 
 ## Automount USB devices
@@ -393,7 +385,7 @@ monitor.bluez.rules = [
 
 > Blacklist the iTCO_wdt device.
 ```conf
-/etc/modprobe.d/disable-iTCO_wdt.conf
+/etc/modprobe.d/11-blacklist_iTCO_wdt.conf
 
 blacklist iTCO_wdt
 ```
