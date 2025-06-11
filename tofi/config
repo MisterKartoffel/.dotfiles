@@ -1,0 +1,22 @@
+font = "Maple Mono NF"
+font-size = 24
+
+text-color = #cdd6f4
+prompt-color = #f38ba8
+selection-color = #f9e2af
+
+num-results = 5
+result-spacing = 25
+
+width = 100%
+height = 100%
+background-color = #11111baa
+outline-width = 0
+border-width = 0
+padding-top = 35%
+padding-left = 35%
+
+hide-cursor = true
+history = true
+fuzzy-match = true
+drun-launch = true

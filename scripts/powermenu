@@ -7,7 +7,7 @@ OPTIONS=(
     lock
 )
 
-SELECTED=$(for OPTION in "${OPTIONS[@]}"; do echo "${OPTION}"; done | anyrun --plugins libstdin.so)
+SELECTED=$(for OPTION in "${OPTIONS[@]}"; do echo "${OPTION}"; done | tofi)
 
 case "${SELECTED}" in
     poweroff)

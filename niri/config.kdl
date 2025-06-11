@@ -116,7 +116,7 @@ binds {
         Mod+T            repeat=false { spawn "ghostty"; }
         Mod+F            repeat=false { spawn "app.zen_browser.zen"; }
         Mod+D            repeat=false { spawn "dev.vencord.Vesktop"; }
-        Mod+Space        repeat=false { spawn "anyrun"; }
+        Mod+Space        repeat=false { spawn "tofi-drun"; }
         Mod+Delete       repeat=false { spawn "powermenu"; }
         Mod+Shift+Delete repeat=false { quit; }
         Mod+Q            repeat=false { close-window; }
