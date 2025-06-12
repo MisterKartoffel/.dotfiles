@@ -1,10 +1,8 @@
-7zip
 bat
 chafa
 fd
 geoclue
 jq
-kvantum-qt5
 libnotify
 linux-firmware
 noto-fonts-cjk
@@ -14,8 +12,6 @@ npm
 openssh
 pipewire-alsa
 pipewire-pulse
-qt5-wayland
-ripgrep
 rsync
 swaybg
 waybar

@@ -1,12 +1,10 @@
 Bitwarden CLI
 dconf
+npm
 pulse
 qBittorrent
-rclone
 systemd
 pavucontrol.ini
-QtProject.conf
-npm
 
 *.log
 *.zwc
