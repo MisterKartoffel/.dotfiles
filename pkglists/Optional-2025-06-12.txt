@@ -14,5 +14,4 @@ pipewire-alsa
 pipewire-pulse
 rsync
 swaybg
-waybar
 wl-clipboard

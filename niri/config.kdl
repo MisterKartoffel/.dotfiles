@@ -39,7 +39,7 @@ output "HDMI-A-1" {
 }
 
 layout {
-    gaps 4
+    gaps 8
 
     always-center-single-column
     default-column-display "tabbed"
@@ -65,13 +65,6 @@ layout {
     tab-indicator {
         hide-when-single-tab
         place-within-column
-    }
-
-    struts {
-        left 0
-        right 0
-        top -4
-        bottom 0
     }
 }
 
