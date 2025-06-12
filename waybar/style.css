@@ -19,9 +19,9 @@ tooltip { background: @base; }
     transition: all .5s ease;
 }
 
-#workspaces, #window,
+#workspaces, #window, #custom-media,
 #cpu, #memory, #disk,
-#pulseaudio, #network, #backlight {
+#pulseaudio, #network, #systemd-failed-units {
     background: @base;
     padding: 4px 12px;
     border: 1px solid @text;
@@ -29,9 +29,10 @@ tooltip { background: @base; }
     transition: all .5s ease;
 }
 
-#idle_inhibitor:hover, #clock:hover {}
+#custom-media:hover, #idle_inhibitor:hover, #clock:hover,
 #cpu:hover, #memory:hover, #disk:hover,
-#pulseaudio:hover, #pulseaudio.microphone:hover, #network:hover, #backlight:hover {
+#pulseaudio:hover,
+#network:hover, #systemd-failed-units:hover {
     color: @text;
     border-color: @text;
     transition: all .5s ease;
@@ -49,11 +50,16 @@ tooltip { background: @base; }
 #workspaces button.urgent { color: @red; }
 
 #workspaces {
+    color: @flamingo;
+    border-color: @flamingo;
+}
+
+#window {
     color: @pink;
     border-color: @pink;
 }
 
-#window {
+#custom-media {
     color: @mauve;
     border-color: @mauve;
 }
@@ -88,7 +94,7 @@ tooltip { background: @base; }
     border-color: @sky;
 }
 
-#backlight {
-    color: @sapphire;
-    border-color: @sapphire;
+#systemd-failed-units {
+    color: @blue;
+    border-color: @blue;
 }

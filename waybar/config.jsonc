@@ -7,9 +7,9 @@
     "margin": "4",
     "reload_style_on_change": true,
 
-    "modules-left": ["niri/workspaces", "niri/window"],
+    "modules-left": ["niri/workspaces", "niri/window", "custom/media"],
     "modules-center": ["idle_inhibitor", "clock"],
-    "modules-right": ["cpu", "memory", "disk", "pulseaudio", "pulseaudio#microphone", "network", "backlight"],
+    "modules-right": ["cpu", "memory", "disk", "pulseaudio", "pulseaudio#microphone", "network", "systemd-failed-units"],
 
     "niri/workspaces": {
         "format": "{icon}",
@@ -33,6 +33,19 @@
             "vesktop": "Discord",
             "Notifications": "Notification History"
         }
+    },
+
+    "custom/media": {
+        "format": "{text}",
+        "escape": true,
+        "return-type": "json",
+        "max-length": 40,
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl stop",
+        "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2>/dev/null" // Script in resources/custom_modules folder
     },
 
     "idle_inhibitor": {
@@ -114,13 +127,11 @@
         }
     },
 
-    "backlight": {
-        "format": "{percent}% {icon}",
-        "on-scroll-up": "brightnessctl set +5%",
-        "on-scroll-down": "brightnessctl set 5%-",
-        "min-length": 6,
-        "format-icons": {
-            "default": ["", "󰽥", "󰽣", "󰽦", "󰽢"]
-        }
+    "systemd-failed-units": {
+        "format": "{nr-failed} ✗",
+        "format-ok": "✓",
+        "user": true,
+        "system": true,
+        "hide-on-ok": false
     }
 }
