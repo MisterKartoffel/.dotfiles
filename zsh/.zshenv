@@ -13,6 +13,7 @@ export GOPATH="${XDG_DATA_HOME}/go" # Go directory
 export GOMODCACHE="${XDG_CACHE_HOME}/go/mod"
 export GOCACHE="${XDG_CACHE_HOME}/go-build"
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
+export POWERLEVEL9K_CONFIG_FILE="${XDG_CACHE_HOME}/zsh/p10k.zsh"
 export PYTHON_HISTORY="${XDG_STATE_HOME}/python_history"
 export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
 export PYTHONUSERBASE="${XDG_DATA_HOME}/python"

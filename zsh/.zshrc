@@ -1,14 +1,15 @@
 # Set PROFILING_MODE to 1 to enable profiling when sourced
 export PROFILING_MODE=0
-if [ ${PROFILING_MODE} -ne 0 ]; then
+if [[ "${PROFILING_MODE}" -ne 0 ]]; then
     zmodload zsh/zprof
     ZSH_START_TIME=$(python3 -c 'import time; print(int(time.time() * 1000))')
 fi
 
 # Completion styling
 ## Enable caching for completion
+[[ -d "{XDG_CACHE_HOME}"/zsh ]] || mkdir -p "${XDG_CACHE_HOME}"/zsh
 zstyle ":completion:*" use-cache on
-zstyle ":completion:*" cache-path ${ZDOTDIR}/cache
+zstyle ":completion:*" cache-path "${XDG_CACHE_HOME}"/zsh/zcompcache
 
 ## Ignore completion for unavailable commands
 zstyle ":completion:*:functions" ignored-patterns "_*"
@@ -30,8 +31,8 @@ zstyle ":fzf-tab:*" use-fzf-default-opts yes
 
 ## Adds zsh-completions to fpath
 fpath+=(
-    ${ZDOTDIR}/plugins/zsh-completions/src
-    ${ZDOTDIR}/completions
+    "${ZDOTDIR}"/plugins/zsh-completions/src
+    "${ZDOTDIR}"/completions
 )
 
 # Colors
@@ -44,17 +45,18 @@ export FZF_DEFAULT_OPTS=" \
     --multi"
 
 autoload -Uz compinit
-ZSH_COMPDUMP="${ZDOTDIR}/cache/.zcompdump"
+ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump-${ZSH_VERSION}"
 compinit -C -d "${ZSH_COMPDUMP}"
 
 # Plugins
-source ${ZDOTDIR}/plugins/fzf-tab/fzf-tab.plugin.zsh
-source ${ZDOTDIR}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-source ${ZDOTDIR}/plugins/powerlevel10k/powerlevel10k.zsh-theme
-source ${ZDOTDIR}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source "${ZDOTDIR}"/plugins/fzf-tab/fzf-tab.plugin.zsh
+source "${ZDOTDIR}"/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
+source "${ZDOTDIR}"/plugins/powerlevel10k/powerlevel10k.zsh-theme
+source "${ZDOTDIR}"/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # History
-HISTFILE="${ZDOTDIR}/cache/.zsh_history"
+[[ -d "{XDG_STATE_HOME}"/zsh ]] || mkdir -p "${XDG_STATE_HOME}"/zsh
+HISTFILE="${XDG_STATE_HOME}/zsh/history"
 HISTSIZE=10000
 SAVEHIST=${HISTSIZE}
 HISTDUP=erase
@@ -90,18 +92,18 @@ setopt SHARE_HISTORY
 source <(fzf --zsh)
 
 # Aliases
-source ${ZDOTDIR}/aliases/.general_aliases
-source ${ZDOTDIR}/aliases/.git_aliases
+source "${ZDOTDIR}"/aliases/.general_aliases
+source "${ZDOTDIR}"/aliases/.git_aliases
 
 # Helper functions
-source ${ZDOTDIR}/aliases/.zsh_functions
+source "${ZDOTDIR}"/aliases/.zsh_functions
 
 # Finish profiling and print out total initialization time
-if [ ${PROFILING_MODE} -ne 0 ]; then
+if [[ ${PROFILING_MODE} -ne 0 ]]; then
     ZSH_END_TIME=$(python3 -c 'import time; print(int(time.time() * 1000))')
     zprof
     echo "Shell init time: $((ZSH_END_TIME - ZSH_START_TIME - 21)) ms"
 fi
 
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/cache/.p10k.zsh ]] || source ~/.config/zsh/cache/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit ${XDG_CACHE_HOME}/zsh/.p10k.zsh.
+[[ ! -f "${XDG_CACHE_HOME}"/zsh/p10k.zsh ]] || source "${XDG_CACHE_HOME}"/zsh/p10k.zsh
