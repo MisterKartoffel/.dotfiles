@@ -1,7 +1,6 @@
 bat
 chafa
 fd
-geoclue
 jq
 libnotify
 linux-firmware
