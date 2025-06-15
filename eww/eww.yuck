@@ -7,7 +7,7 @@
     :exclusive false
     (powermenu_layout))
 
-(defpoll net
+(defpoll wirelessSignalStrength
     :interval "100s"
     :initial `N/A`
     `iwctl station wlan0 show | awk '/AverageRSSI/ {print $2}'`)
@@ -15,6 +15,7 @@
     :interval "5s"
     :initial `date +'{"hour":"%H","min":"%M"}'`
     `date +'{"hour":"%H","min":"%M"}'`)
+(defvar clockHover false)
 
 (defwidget powermenu_layout []
     (box
@@ -27,7 +28,7 @@
             :spacing 25
             (_sundial)
             (_network
-                :strength net
+                :strength wirelessSignalStrength
                 :excellent "󰤨"
                 :good "󰤥"
                 :okay "󰤢"
@@ -38,12 +39,13 @@
             :hexpand true
             :vexpand true
             (box
-                :spacing 15
+                :spacing 30
                 :class "tm-box"
                 :space-evenly false
                 :valign "end"
                 :halign "start"
-                (label :text "󰅐    ${time.hour}  ${time.min}"))
+                (_idle)
+                (_clock))
             (_buttons
                 :shutdown "poweroff"
                 :shutdown_icon "󰐥"
@@ -51,6 +53,24 @@
                 :reboot_icon "󰜉"
                 :logout "loginctl kill-session self"
                 :logout_icon "󰍃"))))
+
+(defwidget _sundial []
+    (label
+        :class "sundial-lbl"
+        :halign "end"
+        :hexpand true
+        :text { time.hour >= 2 && time.hour <= 4 ? "Early Morning" :
+                time.hour <= 5 ? "Dawn" :
+                time.hour >= 6 && (time.hour <= 8 && time.min <= 59) ? "Morning" :
+                time.hour >= 9 && (time.hour <= 11 && time.min <= 59) ? "Late Morning" :
+                time.hour == 12 && time.min <= 29 ? "Midday" :
+                time.hour >= 12 && time.hour <= 16 ? "Afternoon" :
+                time.hour > 16 && time.hour <= 17 ? "Late Afternoon" :
+                (time.hour >= 17 && time.min <= 1) || (time.hour <= 18 && time.min <= 20) ? "Early Evening" :
+                time.hour >= 18 && time.hour <= 19 ? "Dusk" :
+                time.hour > 19 && time.hour <= 21 ? "Late Evening" :
+                time.hour > 21 ? "Night" :
+                "Midnight" }))
 
 (defwidget _network [strength offline excellent
                     good okay slow]
@@ -65,6 +85,20 @@
             strength > -81 ? slow :
             offline })))
 
+(defwidget _idle []
+    (box
+        :class "idle-box"
+        (checkbox
+            :onchecked "systemctl --user start idle-inhibitor"
+            :onunchecked "systemctl --user stop idle-inhibitor"
+            "󰅐")))
+
+(defwidget _clock []
+    (eventbox
+        :onhover "${EWW_CMD} update clockHover=true"
+        :onhoverlost "${EWW_CMD} update clockHover=false"
+        { formattime(EWW_TIME, clockHover ? "%a, %h %d, %Y" : "%H %M") }))
+
 (defwidget _buttons [shutdown shutdown_icon reboot
                     reboot_icon logout logout_icon]
     (box
@@ -78,21 +112,3 @@
         (button :onclick shutdown shutdown_icon)
         (button :onclick reboot reboot_icon)
         (button :onclick logout logout_icon)))
-
-(defwidget _sundial []
-    (label
-        :class "sundial-lbl"
-        :halign "end"
-        :hexpand true
-        :text {time.hour >= 2 && time.hour <= 4 ? "Early Morning" :
-               time.hour <= 5 ? "Dawn" :
-               time.hour >= 6 && (time.hour <= 8 && time.min <= 59) ? "Morning" :
-               time.hour >= 9 && (time.hour <= 11 && time.min <= 59) ? "Late Morning" :
-               time.hour == 12 && time.min <= 29 ? "Midday" :
-               time.hour >= 12 && time.hour <= 16 ? "Afternoon" :
-               time.hour > 16 && time.hour <= 17 ? "Late Afternoon" :
-               (time.hour >= 17 && time.min <= 1) || (time.hour <= 18 && time.min <= 20) ? "Early Evening" :
-               time.hour >= 18 && time.hour <= 19 ? "Dusk" :
-               time.hour > 19 && time.hour <= 21 ? "Late Evening" :
-               time.hour > 21 ? "Night" :
-               "Midnight"}))

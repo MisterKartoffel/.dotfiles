@@ -13,6 +13,7 @@ workspace "discord" {
 prefer-no-csd
 screenshot-path null
 
+spawn-at-startup "eww" "open" "powermenu"
 spawn-at-startup "ghostty" "--initial-window=false"
 
 input {
@@ -42,6 +43,7 @@ layout {
     gaps 8
 
     always-center-single-column
+    empty-workspace-above-first
     default-column-display "tabbed"
     background-color "transparent"
 
