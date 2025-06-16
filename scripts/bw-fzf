@@ -166,10 +166,10 @@ function bw_list() {
     local HELP_TEXT="
     Keyboard Shortcuts:
     ------------------
-    ctrl-f        Show this help window
-    ctrl-u        Copy username to clipboard
-    ctrl-p        Copy password to clipboard
-    ctrl-o        Copy TOTP code to clipboard
+    ctrl-f       Show this help window
+    ctrl-u       Copy username to clipboard
+    ctrl-p       Copy password to clipboard
+    ctrl-o       Copy TOTP code to clipboard
 
     Navigation:
     ----------
@@ -193,8 +193,6 @@ function bw_list() {
         --prompt="> "
         --ghost="Name, ID or Username"
         --border="rounded"
-        --list-border="rounded"
-        --list-label="Vault Items"
         --input-border="rounded"
         --input-label="Search"
         --bind="change:execute-silent(touch ${TIMESTAMP_FILE})"
@@ -204,7 +202,7 @@ function bw_list() {
         --bind="ctrl-o:execute(item_id=\$(echo {} | sed -n 's/.*(\(.*\)).*/\1/p'); totp_secret=\$(jq -r --arg id \"\$item_id\" '.[] | select(.id == \$id) | .login.totp' \"${TEMP_ITEMS_FILE}\"); if [[ \"\$totp_secret\" != \"null\" ]]; then totp=\$(oathtool --totp -b \"\$totp_secret\"); echo -n \"\$totp\" | wl-copy -o; else echo \"No TOTP available for this item\"; fi)+execute-silent(touch ${TIMESTAMP_FILE})"
         --bind="ctrl-f:preview(echo \"${HELP_TEXT}\")"
         --header="Press ctrl-f for help"
-        --preview-window="right:50%"
+        --preview-window="right:60%"
         --preview-label="Login Details"
         --preview='
             if [[ "{}" == "HELP" ]]; then
