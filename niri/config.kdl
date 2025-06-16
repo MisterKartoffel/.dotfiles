@@ -173,6 +173,13 @@ binds {
             Mod+Shift+4 { move-window-to-workspace 4; }
             Mod+Shift+5 { move-window-to-workspace 5; }
 
+            // Move focused window silently to a workspace with Mod + Alt + [1-5]
+                Mod+Alt+1 { move-window-to-workspace focus=false 1; }
+                Mod+Alt+2 { move-window-to-workspace focus=false 2; }
+                Mod+Alt+3 { move-window-to-workspace focus=false 3; }
+                Mod+Alt+4 { move-window-to-workspace focus=false 4; }
+                Mod+Alt+5 { move-window-to-workspace focus=false 5; }
+
     // Column manipulation
         // Consume current window into adjacent column with Mod + []
             Mod+BracketLeft  { consume-or-expel-window-left; }
