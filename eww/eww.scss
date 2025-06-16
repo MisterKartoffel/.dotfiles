@@ -7,14 +7,16 @@ $surface-red: #f38ba8;
 * { all: unset; }
 
 .layout-box {
-  font-family: "Maple Mono NF";
-  background-repeat: no-repeat;
-  background-size: contain;
-  padding: 5em;
   color: rgba($surface-fg, 0.8);
+  padding: 5em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-family: "Maple Mono NF";
 }
 
 .tm-box {
+  padding-bottom: 1.2em;
+
   label {
     font-size: 2em;
   }
@@ -22,6 +24,7 @@ $surface-red: #f38ba8;
 
 .close-btn {
   font-size: 2em;
+
   &:hover {
     color: $surface-red;
   }
@@ -32,12 +35,12 @@ $surface-red: #f38ba8;
 
   button {
     padding: 0.4em;
-    border-radius: 0.1em;
     background-color: rgba($surface-darkgrey, 0.3);
+    border-radius: 0.1em;
 
     &:hover {
-      transition: 200ms linear background-color, border-radius;
       background-color: rgba($surface-lightgrey, 0.6);
+      transition: 200ms linear background-color, border-radius;
     }
 
     &:first-child {
@@ -46,20 +49,11 @@ $surface-red: #f38ba8;
   }
 }
 
-.sep {
-  font-size: 1em;
-  padding-top: 0.15em;
-  padding-left: 0.2em;
-  padding-right: 0.2em;
-  font-family: "Maple Mono NF";
-  font-weight: 400;
-}
-
 .sundial-lbl {
-  font-size: 1.5em;
+  font-family: "Maple Mono NF";
   font-weight: bold;
-  border-radius: 0.2em;
+  font-size: 1.5em;
   padding: 0.4em;
   padding-bottom: 0.5em;
-  font-family: "Maple Mono NF";
+  border-radius: 0.2em;
 }
