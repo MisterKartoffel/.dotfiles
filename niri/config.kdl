@@ -117,10 +117,10 @@ binds {
         Mod+Q            repeat=false { close-window; }
 
     // Screencapture
-        Mod+F12       repeat=false { screenshot; }
-        Mod+Shift+F12 repeat=false { screenshot-window; }
-        Mod+Print     repeat=false { spawn "sh" "-c" "wl-paste | satty --fullscreen -f - -o $HOME/Pictures/Screenshots/$(date '+%Y%m%d-%H:%M:%S').png"; }
-        Mod+F10       repeat=false { spawn "record"; }
+        Mod+Print       repeat=false { screenshot; }
+        Mod+Shift+Print repeat=false { screenshot-window; }
+        Mod+F12         repeat=false { spawn "sh" "-c" "wl-paste | satty --fullscreen -f - -o $HOME/Pictures/Screenshots/$(date '+%Y%m%d-%H:%M:%S').png"; }
+        Mod+F10         repeat=false { spawn "record"; }
 
     // Window and workspace movement
         // Move focus with Mod + [hjkl]
