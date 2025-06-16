@@ -58,11 +58,6 @@
 			"keyColor": "blue"
 		},
 		{
-			"type": "terminalfont",
-			"key": "│ └",
-			"keyColor": "blue"
-		},
-		{
 			"type": "custom",
 			"key": "󰍹 PC",
 			"keyColor": "green"
