@@ -26,6 +26,7 @@ require("session"):setup({
     sync_yanked = true,
 })
 
+-- Change pane ratio when opened inside of Neovim
 require("neovim"):setup({
     ratio = { 0, 1, 4 },
 })
