@@ -29,6 +29,7 @@ noto-fonts
 oath-toolkit
 pavucontrol
 pkgstats
+playerctl
 qbittorrent-nox
 rage-encryption
 reflector
