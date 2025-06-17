@@ -23,26 +23,24 @@ logTime="$(date --rfc-3339="seconds")"
 pkgListDir="${XDG_CONFIG_HOME:-${HOME}/.config}/pkglists"
 
 function setupListings() {
-    local creationTime
     local currentList
     local logMessage
-    creationTime="$(date '+%F')"
 
     for source in "$@"; do
-        currentList="${pkgListDir}/${source}-${creationTime}.txt"
+        currentList="${pkgListDir}/${source}.txt"
         logMessage="[${logTime}] ${source} install listing: ${currentList}"
 
         case "${source}" in
             AUR)
-                pacman -Qqem >"${currentList}"
+                pacman -Qqem > "${currentList}"
                 ;;
 
             Flatpak)
-                flatpak list --columns=application --app >"${currentList}"
+                flatpak list --columns=application --app > "${currentList}"
                 ;;
 
             Optional)
-                comm -13 <(pacman -Qqdt | sort) <(pacman -Qqdtt | sort) >"${currentList}"
+                comm -13 <(pacman -Qqdt | sort) <(pacman -Qqdtt | sort) > "${currentList}"
                 ;;
 
             Explicit)
@@ -50,21 +48,21 @@ function setupListings() {
                 ;;
 
             *)
-                echo "[${logTime}] Error: $1 undefined as a source." >>"${logFile}"
+                echo "[${logTime}] Error: $1 undefined as a source." >> "${logFile}"
                 exit 1
                 ;;
         esac
 
-        echo "${logMessage}" >>"${logFile}"
+        echo "${logMessage}" >> "${logFile}"
     done
 }
 
 if [[ -e "${pkgListDir}" ]]; then
     rm -rf "${pkgListDir}"
-    echo "[${logTime}] Cleared previous package lists under ${pkgListDir}" >>"${logFile}"
+    echo "[${logTime}] Cleared previous package lists under ${pkgListDir}" >> "${logFile}"
 fi
 
 mkdir "${pkgListDir}"
-echo "[${logTime}] New package listing master directory: ${pkgListDir}" >>"${logFile}"
+echo "[${logTime}] New package listing master directory: ${pkgListDir}" >> "${logFile}"
 
 setupListings "AUR" "Flatpak" "Optional" "Explicit"
