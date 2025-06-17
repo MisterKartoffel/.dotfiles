@@ -1,20 +1,15 @@
-workspace "terminal" {
-    open-on-output "eDP-1"
-}
-
-workspace "browser" {
-    open-on-output "eDP-1"
-}
-
-workspace "discord" {
-    open-on-output "eDP-1"
-}
+workspace "terminal" { open-on-output "eDP-1"; }
+workspace "browser" { open-on-output "eDP-1"; }
+workspace "discord" { open-on-output "eDP-1"; }
 
 prefer-no-csd
 screenshot-path null
 
 spawn-at-startup "eww" "open" "powermenu"
 spawn-at-startup "ghostty" "--initial-window=false"
+
+clipboard { disable-primary; }
+hotkey-overlay { skip-at-startup; }
 
 input {
     keyboard {
@@ -24,7 +19,6 @@ input {
         }
         numlock
     }
-
     focus-follows-mouse max-scroll-amount="0%"
 }
 
@@ -59,9 +53,7 @@ layout {
         inactive-color "#11111b"
     }
 
-    border {
-        off
-    }
+    border { off; }
 
     tab-indicator {
         hide-when-single-tab
@@ -224,14 +216,6 @@ cursor {
     xcursor-size 24
     hide-when-typing
     hide-after-inactive-ms 1000
-}
-
-clipboard {
-    disable-primary
-}
-
-hotkey-overlay {
-    skip-at-startup
 }
 
 /-debug {
