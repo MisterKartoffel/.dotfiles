@@ -17,6 +17,7 @@ BW_TOTP="$(sops decrypt --extract '["bitwarden"]["totp"]' "${CREDENTIAL_FILE}")"
 TIMESTAMP_FILE="/tmp/bw-fzf-active.timestamp"
 TEMP_ITEMS_FILE=
 SHOULD_LOGIN=0
+LOGOUT=0
 DEPENDS=(
     bw
     fzf
@@ -41,7 +42,10 @@ function cleanup() {
     rm -f "${TIMESTAMP_FILE}" 2>/dev/null
     rm -f "${TEMP_ITEMS_FILE}" 2>/dev/null
 
-    bw logout --quiet 2>/dev/null || true
+    if "${LOGOUT}"; then
+        bw logout --quiet 2>/dev/null || true
+    fi
+
     pkill -P $$ 2>/dev/null || true
     wait 2>/dev/null || true
 }
@@ -279,6 +283,10 @@ function main() {
             -t | --timeout)
                 shift
                 TIMEOUT="${1}"
+                ;;
+            -l | --logout)
+                shift
+                LOGOUT=1
                 ;;
             *)
                 echo "Invalid option: ${1}"
