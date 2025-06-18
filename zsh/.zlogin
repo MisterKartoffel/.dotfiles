@@ -6,6 +6,7 @@
                     "${ZDOTDIR:-${HOME}}/.zprofile" -- \
                     "${ZDOTDIR:-${HOME}}/.zshrc" -- \
                     "${ZDOTDIR:-${HOME}}/.zlogin" -- \
+                    "${ZDOTDIR:-${HOME}}/.zlogout" -- \
                     "${ZSH_COMPDUMP}" -- \
                     \
                     "${ZDOTDIR}/plugins/powerlevel10k/powerlevel10k.zsh-theme" -- \
