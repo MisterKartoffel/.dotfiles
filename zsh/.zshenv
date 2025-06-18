@@ -21,7 +21,7 @@ export XCURSOR_PATH="${XDG_DATA_HOME}/icons" # Xcursor themes
 
 # Zsh path environments
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="${PATH}:${HOME}/.local/bin"
 
 # Applications
 export EDITOR=nvim
