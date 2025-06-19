@@ -2,7 +2,7 @@
 # shellcheck disable=SC2016
 # vim: set filetype=bash :
 
-# Mostly taken from https://github.com/radityaharya/bw-fzf
+# Originally for Bitwarden CLI on https://github.com/radityaharya/bw-fzf
 # with some changes for my use case
 
 trap 'exit_handler' INT TERM
@@ -17,7 +17,6 @@ DEPENDS=(
     fzf
     pinentry
     jq
-    oathtool
     wl-copy
 )
 
@@ -125,9 +124,10 @@ function rbw_list() {
         --input-label="Search"
         --bind="change:execute-silent(touch ${TIMESTAMP_FILE})"
         --bind="focus:execute-silent(touch ${TIMESTAMP_FILE})"
-        --bind="ctrl-u:execute-silent(echo -n \$(rbw get {} --raw | jq -r '.data.username') | wl-copy -o)+execute-silent(touch ${TIMESTAMP_FILE})"
-        --bind="ctrl-p:execute-silent(echo -n \$(rbw get {} --raw | jq -r '.data.password') | wl-copy -o)+execute-silent(touch ${TIMESTAMP_FILE})"
-        --bind="ctrl-o:execute-silent(totp_secret=\$(rbw get {} --raw | jq -r '.data.totp // empty'); if [[ -n \"\$totp_secret\" ]]; then echo -n \$(oathtool --totp -b \"\$totp_secret\") | wl-copy -o; fi)+execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-u:execute-silent(wl-copy -o \$(rbw get {} --field username))+execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-p:execute-silent(wl-copy -o \$(rbw get {} --field password))+execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-o:execute-silent(wl-copy -o \$(rbw code {}))+execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-r:execute-silent(wl-copy -o \$(rbw get {} --raw | jq -r --arg category \"Recovery\" '.fields[]? | select (.name == \$category) | .value'))+execute-silent(touch ${TIMESTAMP_FILE})"
         --bind="ctrl-f:preview(echo \"${HELP_TEXT}\")"
         --header="Press ctrl-f for help"
         --preview-window="right:60%"
@@ -136,60 +136,49 @@ function rbw_list() {
             if [[ "{}" == "HELP" ]]; then
                 echo "'"${HELP_TEXT}"'"
             else
-                item_name=$(echo {})
                 touch '"${TIMESTAMP_FILE}"'
-                item=$(rbw get $item_name --raw)
-
-                username=$(jq -r ".data.username // empty" <<< $item)
-                notes=$(jq -r ".notes // empty" <<< $item)
-                uris=$(jq -r ".data.uris[]?.uri // empty" <<< "$item" | sed "s/^\([a-z].*\)$/  • \1/")
-                edits=$(jq -r ".history[]?.last_used_date // empty" <<< "$item" | sed "s/^\([0-9].*\)T\(.*\)\.[0-9]*Z$/  • \1 at \2 UTC/")
-
-                password_available=$(jq -r ".data.password != null" <<< $item)
-                if [ "$password_available" = "true" ]; then
-                    password="[Press Ctrl+p to copy password]"
-                else
-                    password=""
-                fi
-
-                totp_available=$(jq -r ".data.totp != null" <<< $item)
-                if [ "$totp_available" = "true" ]; then
-                    totp="[Press Ctrl+o to copy TOTP]"
-                else
-                    totp=""
-                fi
+                item=$(rbw get {} --raw)
 
                 bold=$(tput bold)
                 normal=$(tput sgr0)
-                cyan=$(tput setaf 6)
-                underline=$(tput smul)
-                nounderline=$(tput rmul)
+                blue=$(tput setaf 4)
                 padding="  "
 
                 printf "\n"
 
-                if [ "$username" != "" ]; then
-                    printf "${padding}${bold}${cyan}Username${normal}\n${padding}  %s\n\n" "$username"
+                username=$(jq -r ".data.username // empty" <<< $item)
+                if [[ "$username" != "" ]]; then
+                    printf "${padding}${bold}${blue}Username${normal}\n${padding} %s\n\n" "$username"
                 fi
 
-                if [ "$password" != "" ]; then
-                    printf "${padding}${bold}${cyan}Password${normal}\n${padding}  %s\n\n" "$password"
+                if [[ "$(jq -r ".data.password != null" <<< $item)" ]]; then
+                    password="[Press Ctrl+p to copy]"
+                    printf "${padding}${bold}${blue}Password${normal}\n${padding} %s\n\n" "$password"
                 fi
 
-                if [ "$totp" != "" ]; then
-                    printf "${padding}${bold}${cyan}TOTP${normal}\n${padding}  %s\n\n" "$totp"
+                if [[ "$(jq -r ".data.totp != null" <<< $item)" ]]; then
+                    totp="[Press Ctrl+o to copy]"
+                    printf "${padding}${bold}${blue}TOTP${normal}\n${padding} %s\n\n" "$totp"
                 fi
 
+                if [[ "$(jq -r --arg category "Recovery" ".fields[]? | select (.name == \$category) != null" <<< $item)" ]]; then
+                    recovery_code="[Press Ctrl+r to copy]"
+                    printf "${padding}${bold}${blue}Recovery code${normal}\n${padding} %s\n\n" "$recovery_code"
+                fi
+
+                notes=$(jq -r ".notes // empty" <<< $item)
                 if [ "$notes" != "" ]; then
-                    printf "${padding}${bold}${cyan}Notes${normal}\n${padding}  %s\n\n" "$notes"
+                    printf "${padding}${bold}${blue}Notes${normal}\n${padding} %s\n\n" "$notes"
                 fi
 
+                uris=$(jq -r ".data.uris[]?.uri // empty" <<< "$item" | sed "s/^\([a-z].*\)$/  • \1/")
                 if [ "$uris" != "" ]; then
-                    printf "${padding}${bold}${cyan}URIs${normal}\n%s\n\n" "$uris"
+                    printf "${padding}${bold}${blue}URIs${normal}\n%s\n\n" "$uris"
                 fi
 
-                if [ "$edits" != "" ]; then
-                    printf "${padding}${bold}${cyan}Edited on${normal}\n%s\n\n" "$edits"
+                item_history=$(jq -r ".history[]?.last_used_date // empty" <<< "$item" | sed "s/^\([0-9].*\)T\(.*\)\.[0-9]*Z$/  • \1 at \2 UTC/")
+                if [ "$item_history" != "" ]; then
+                    printf "${padding}${bold}${blue}Edited on${normal}\n%s\n\n" "$item_history"
                 fi
             fi
         '
