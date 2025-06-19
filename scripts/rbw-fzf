@@ -39,6 +39,17 @@ function cleanup() {
     wait 2>/dev/null || true
 }
 
+function check_depends() {
+    for COMMAND in "${DEPENDS[@]}"; do
+        if ! command -v "${COMMAND}" >/dev/null; then
+            echo "${COMMAND} is missing. Exiting."
+            exit 1
+        fi
+    done
+
+    return 0
+}
+
 function monitor_inactivity() {
     rm -f "${TIMESTAMP_FILE}"
     touch "${TIMESTAMP_FILE}"
@@ -72,17 +83,6 @@ function load_items() {
         exit 1
     fi
     echo "Items loaded successfully."
-}
-
-function check_depends() {
-    for COMMAND in "${DEPENDS[@]}"; do
-        if ! command -v "${COMMAND}" >/dev/null; then
-            echo "${COMMAND} is missing. Exiting."
-            exit 1
-        fi
-    done
-
-    return 0
 }
 
 export -f monitor_inactivity
