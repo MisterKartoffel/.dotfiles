@@ -7,7 +7,6 @@ linux-firmware
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
-npm
 openssh
 pipewire-alsa
 pipewire-pulse

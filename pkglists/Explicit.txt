@@ -4,7 +4,6 @@ alsa-utils
 apparmor
 base
 base-devel
-bitwarden-cli
 brightnessctl
 btop
 diff-so-fancy
@@ -32,6 +31,7 @@ pkgstats
 playerctl
 qbittorrent-nox
 rage-encryption
+rbw
 reflector
 ripgrep
 satty

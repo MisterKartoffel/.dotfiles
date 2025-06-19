@@ -1,0 +1,241 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2016
+# vim: set filetype=bash :
+
+# Mostly taken from https://github.com/radityaharya/bw-fzf
+# with some changes for my use case
+
+trap 'exit_handler' INT TERM
+trap 'cleanup' EXIT
+
+ITEMS=
+TIMEOUT=60s
+TIMEOUT_PID=
+TIMESTAMP_FILE="/tmp/rbw-fzf-active.timestamp"
+DEPENDS=(
+    rbw
+    fzf
+    pinentry
+    jq
+    oathtool
+    wl-copy
+)
+
+function exit_handler() {
+    trap - INT TERM
+    cleanup
+    exit 1
+}
+
+function cleanup() {
+    if [[ -n "${TIMEOUT_PID}" ]]; then
+        kill "${TIMEOUT_PID}" 2>/dev/null || true
+        wait "${TIMEOUT_PID}" 2>/dev/null || true
+    fi
+
+    rm -f "${TIMESTAMP_FILE}" 2>/dev/null
+
+    pkill -P $$ 2>/dev/null || true
+    wait 2>/dev/null || true
+}
+
+function monitor_inactivity() {
+    rm -f "${TIMESTAMP_FILE}"
+    touch "${TIMESTAMP_FILE}"
+    while true; do
+        sleep 1
+        if [[ -f "${TIMESTAMP_FILE}" ]]; then
+            if [[ $(("$(date +%s)" - "$(stat -c %Y "${TIMESTAMP_FILE}")")) -ge ${TIMEOUT%s} ]]; then
+                echo -e "\nSession timed out after ${TIMEOUT}"
+                cleanup
+                exit 1
+            fi
+        fi
+    done &
+    TIMEOUT_PID=$!
+}
+
+function handle_session() {
+    rbw unlocked >/dev/null 2>&1 || rbw unlock
+
+    if ! rbw unlocked; then
+        cleanup
+    fi
+
+    return 0
+}
+
+function load_items() {
+    echo "Loading items..."
+    if ! ITEMS=$(rbw list 2>/dev/null); then
+        echo "Could not load items or operation timed out."
+        exit 1
+    fi
+    echo "Items loaded successfully."
+}
+
+function check_depends() {
+    for COMMAND in "${DEPENDS[@]}"; do
+        if ! command -v "${COMMAND}" >/dev/null; then
+            echo "${COMMAND} is missing. Exiting."
+            exit 1
+        fi
+    done
+
+    return 0
+}
+
+export -f monitor_inactivity
+
+function rbw_list() {
+    monitor_inactivity
+
+    # Define help text as a variable
+    local HELP_TEXT="
+    Keyboard Shortcuts:
+    ------------------
+    ctrl-f       Show this help window
+    ctrl-u       Copy username to clipboard
+    ctrl-p       Copy password to clipboard
+    ctrl-o       Copy TOTP code to clipboard
+
+    Navigation:
+    ----------
+    ↑/↓          Select item
+    Enter        Select item
+    Page Up/Down Scroll preview window
+    /            Filter items
+    ESC          Clear filter/Exit
+
+    Tips:
+    -----
+    • Type to filter entries
+    • All copied items go to system clipboard
+    • Session times out after ${TIMEOUT} of inactivity
+    "
+
+    local fzf_args=(
+        --cycle
+        --no-info
+        --no-mouse
+        --prompt="> "
+        --ghost="Name, ID or Username"
+        --border="rounded"
+        --input-border="rounded"
+        --input-label="Search"
+        --bind="change:execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="focus:execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-u:execute(item_name=\$(echo {}); username=\$(rbw get \$item_name --raw | jq -r --arg name \"\$item_name\" 'select(.name == \$name) | .data.username');  echo -n \"\$username\" | wl-copy -o)+execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-p:execute(item_name=\$(echo {}); password=\$(rbw get \$item_name --raw | jq -r --arg name \"\$item_name\" 'select(.name == \$name) | .data.password'); echo -n \"\$password\" | wl-copy -o)+execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-o:execute(item_name=\$(echo {}); totp_secret=\$(rbw get \$item_name --raw | jq -r --arg name \"\$item_name\" 'select(.name == \$name) | .data.totp'); if [[ \"\$totp_secret\" != \"null\" ]]; then totp=\$(oathtool --totp -b \"\$totp_secret\"); echo -n \"\$totp\" | wl-copy -o; else echo \"No TOTP available for this item\"; fi)+execute-silent(touch ${TIMESTAMP_FILE})"
+        --bind="ctrl-f:preview(echo \"${HELP_TEXT}\")"
+        --header="Press ctrl-f for help"
+        --preview-window="right:60%"
+        --preview-label="Login Details"
+        --preview='
+            if [[ "{}" == "HELP" ]]; then
+                echo "'"${HELP_TEXT}"'"
+            else
+                item_name=$(echo {})
+                touch '"${TIMESTAMP_FILE}"'
+                item=$(rbw get $item_name --raw)
+
+                username=$(jq -r ".data.username // empty" <<< $item)
+                notes=$(jq -r ".notes // empty" <<< $item)
+                uris=$(jq -r ".data.uris[]?.uri // empty" <<< "$item" | sed "s/^\([a-z].*\)$/  • \1/")
+                edits=$(jq -r ".history[]?.last_used_date // empty" <<< "$item" | sed "s/^\([0-9].*\)T\(.*\)\.[0-9]*Z$/  • \1 at \2 UTC/")
+
+                password_available=$(jq -r ".data.password != null" <<< $item)
+                if [ "$password_available" = "true" ]; then
+                    password="[Press Ctrl+p to copy password]"
+                else
+                    password=""
+                fi
+
+                totp_available=$(jq -r ".data.totp != null" <<< $item)
+                if [ "$totp_available" = "true" ]; then
+                    totp="[Press Ctrl+o to copy TOTP]"
+                else
+                    totp=""
+                fi
+
+                bold=$(tput bold)
+                normal=$(tput sgr0)
+                cyan=$(tput setaf 6)
+                underline=$(tput smul)
+                nounderline=$(tput rmul)
+                padding="  "
+
+                printf "\n"
+
+                if [ "$username" != "" ]; then
+                    printf "${padding}${bold}${cyan}Username${normal}\n${padding}  %s\n\n" "$username"
+                fi
+
+                if [ "$password" != "" ]; then
+                    printf "${padding}${bold}${cyan}Password${normal}\n${padding}  %s\n\n" "$password"
+                fi
+
+                if [ "$totp" != "" ]; then
+                    printf "${padding}${bold}${cyan}TOTP${normal}\n${padding}  %s\n\n" "$totp"
+                fi
+
+                if [ "$notes" != "" ]; then
+                    printf "${padding}${bold}${cyan}Notes${normal}\n${padding}  %s\n\n" "$notes"
+                fi
+
+                if [ "$uris" != "" ]; then
+                    printf "${padding}${bold}${cyan}URIs${normal}\n%s\n\n" "$uris"
+                fi
+
+                if [ "$edits" != "" ]; then
+                    printf "${padding}${bold}${cyan}Edited on${normal}\n%s\n\n" "$edits"
+                fi
+            fi
+        '
+    )
+
+    for ITEM in "${ITEMS[@]}"; do echo "${ITEM}"; done | fzf "${fzf_args[@]}"
+}
+
+function help() {
+    echo "rbw-fzf - An rbw cli wrapper with fzf"
+    echo
+    echo "Usage: rbw-fzf [OPTIONS]"
+    echo
+    echo "Options:"
+    echo "  -t, --timeout    Set custom timeout (e.g., 30s, 1m). Default is 1 minute."
+    echo "  -h, --help       Show this help message"
+    echo
+}
+
+function main() {
+    while [[ -n "${1}" ]]; do
+        case "${1}" in
+            -h | --help)
+                help
+                exit 0
+                ;;
+            -t | --timeout)
+                shift
+                TIMEOUT="${1}"
+                ;;
+            *)
+                echo "Invalid option: ${1}"
+                help
+                exit 1
+                ;;
+        esac
+        shift
+    done
+
+    check_depends
+
+    monitor_inactivity
+
+    handle_session
+    load_items
+    rbw_list
+}
+
+main "${@}"
