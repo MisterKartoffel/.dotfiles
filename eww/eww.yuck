@@ -11,10 +11,10 @@
     :interval "100s"
     :initial `N/A`
     `iwctl station wlan0 show | awk '/AverageRSSI/ {print $2}'`)
-(defpoll time
+(defpoll hour
     :interval "5s"
-    :initial `date +'{"hour":"%H"}'`
-    `date +'{"hour":"%H"}'`)
+    :initial `date '+%H'`
+    `date '+%H'`)
 (defvar clockHover false)
 
 (defwidget powermenu_layout []
@@ -59,16 +59,16 @@
         :class "sundial-lbl"
         :halign "end"
         :hexpand true
-        :text { time.hour >= 1 && time.hour <= 5 ? "Late Night" :
-                time.hour == 6 ? "Dawn" :
-                time.hour >= 7 && time.hour <= 9 ? "Early Morning" :
-                time.hour >= 10 && time.hour <= 11 ? "Late Morning" :
-                time.hour == 12 ? "Noon" :
-                time.hour >= 13 && time.hour <= 15 ? "Afternoon" :
-                time.hour >= 16 && time.hour <= 17 ? "Evening" :
-                time.hour == 18 ? "Dusk" :
-                time.hour >= 19 && time.hour <= 21 ? "Early Night" :
-                time.hour >= 22 && time.hour <= 23 ? "Night" :
+        :text { hour >= 22 ? "Night" :
+                hour >= 19 ? "Early Night" :
+                hour == 18 ? "Dusk" :
+                hour >= 16 ? "Evening" :
+                hour >= 13 ? "Afternoon" :
+                hour == 12 ? "Noon" :
+                hour >= 10 ? "Late Morning" :
+                hour >= 07 ? "Early Morning" :
+                hour == 06 ? "Dawn" :
+                hour >= 01 ? "Late Night" :
                 "Midnight" }))
 
 (defwidget _network [strength offline excellent
