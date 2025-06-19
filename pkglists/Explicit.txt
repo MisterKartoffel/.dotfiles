@@ -30,13 +30,11 @@ pavucontrol
 pkgstats
 playerctl
 qbittorrent-nox
-rage-encryption
 rbw
 reflector
 ripgrep
 satty
 snap-pac
-sops
 tealdeer
 ufw
 vivid

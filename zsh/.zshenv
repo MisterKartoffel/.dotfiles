@@ -29,7 +29,3 @@ export VISUAL=nvim
 export PAGER='less --mouse'
 export MANPAGER='nvim +Man!'
 export BROWSER=app.zen_browser.zen
-
-# Credentials
-export CREDENTIAL_FILE="${HOME}/.sops/secrets.yaml"
-export SOPS_AGE_KEY_FILE="${HOME}/.sops/keys.txt"
