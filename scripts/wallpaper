@@ -6,6 +6,12 @@
 # https://wiki.hyprland.org/Hypr-Ecosystem/hyprpaper/#using-this-keyword-to-randomize-your-wallpaper
 
 WALLPAPER_DIR="${HOME}/Pictures/Wallpapers"
+FZF_ARGS=(
+    --preview='
+        dim=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}
+        chafa -f kitty -s ${dim} {}
+    '
+)
 
 case "${1}" in
     random)
@@ -14,11 +20,7 @@ case "${1}" in
     pick)
         # TODO: Fix preview
         # Open wallpaper selector in fzf
-        WALLPAPER=$(fd -t f . "${WALLPAPER_DIR}" | fzf --preview '
-            dim=${FZF_PREVIEW_COLUMNS}x$((FZF_PREVIEW_LINES - 1))
-            chafa -f kitty -s ${dim} {}
-            echo
-        ')
+        WALLPAPER=$(fd -t f . "${WALLPAPER_DIR}" | fzf "${FZF_ARGS[@]}")
         ;;
     *)
         # Pick selected wallpaper
