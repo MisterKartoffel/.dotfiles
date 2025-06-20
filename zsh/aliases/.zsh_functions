@@ -2,7 +2,7 @@
 
 # Find file to open in Neovim
 nf() {
-    fd -t f -H -E ".gnupg" -E ".sops" -E ".ssh" -E ".var" . $HOME | fzf -q "$1" -m --preview "bat -n --color=always {}" --bind "enter:become(nvim {})"
+    fd -t f -H -E ".gnupg" -E ".ssh" -E ".var" . "${HOME}" | fzf -q "$1" -m --preview "bat -n --color=always {}" --bind "enter:become(nvim {})"
 }
 
 # Find manpage to open in Neovim
