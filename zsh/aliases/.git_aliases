@@ -1,4 +1,4 @@
-# vim: set filetype=zsh :
+# vim: filetype=zsh
 # File specifically used to define git aliases
 
 alias ga="git add"

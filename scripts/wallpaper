@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2016
-# vim: set filetype=bash :
+# vim: filetype=bash
 
 # Script mostly taken from this example
 # https://wiki.hyprland.org/Hypr-Ecosystem/hyprpaper/#using-this-keyword-to-randomize-your-wallpaper

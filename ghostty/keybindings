@@ -1,4 +1,4 @@
-# vim: set filetype=dosini :
+# vim: filetype=dosini
 
 # General keybinds
     keybind = clear

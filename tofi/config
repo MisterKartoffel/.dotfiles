@@ -1,3 +1,5 @@
+# vim: filetype=dosini
+
 font = "Maple Mono NF"
 font-size = 24
 

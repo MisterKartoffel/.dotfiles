@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2016
-# vim: set filetype=bash :
+# vim: filetype=bash
 
 # Originally for Bitwarden CLI on https://github.com/radityaharya/bw-fzf
 # with some changes for my use case
