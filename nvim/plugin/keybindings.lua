@@ -15,8 +15,6 @@ nmap("J", "V<Esc>Jgv<Esc>zz", { desc = "Append line below while keeping cursor s
 nmap("<C-d>", "<C-d>zz", { desc = "Scroll half page down and center screen on cursor" })
 nmap("<C-u>", "<C-u>zz", { desc = "Scroll half page up and center screen on cursor" })
 
-map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
 nmap("<leader><leader>", ":w<CR> :so<CR>", { desc = "Save and source current file" })
 
 -- Lazy and Mason
