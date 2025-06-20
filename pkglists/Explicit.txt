@@ -25,7 +25,7 @@ mpv
 neovim
 niri
 noto-fonts
-oath-toolkit
+npm
 pavucontrol
 pkgstats
 playerctl
