@@ -145,7 +145,6 @@ preloaders = [
 ]
 
 prepend_previewers = [
-    { name = "**/.sops/**", run = "noop" },
     { name = "**/.ssh/*id*", run = "noop" },
     { name = "**/.gnupg/*.conf", run = "code" },
     { name = "**/.gnupg/**", run = "noop" },
