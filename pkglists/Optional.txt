@@ -3,7 +3,6 @@ chafa
 fd
 jq
 libnotify
-linux-firmware
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra

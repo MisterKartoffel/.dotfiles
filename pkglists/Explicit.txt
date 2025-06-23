@@ -18,6 +18,8 @@ hyprlock
 intel-ucode
 iwd
 linux
+linux-firmware-amdgpu
+linux-firmware-realtek
 linux-lts
 ly
 man-db
