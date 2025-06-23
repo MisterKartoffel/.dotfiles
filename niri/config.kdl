@@ -128,8 +128,8 @@ binds {
                 Mod+Shift+WheelScrollDown { focus-column-right; }
 
             // Focus window / workspace below / above with Mod + Mouse Wheel
-                Mod+WheelScrollUp   cooldown-ms=100 { focus-window-or-workspace-up; }
-                Mod+WheelScrollDown cooldown-ms=100 { focus-window-or-workspace-down; }
+                Mod+WheelScrollUp   { focus-window-or-workspace-up; }
+                Mod+WheelScrollDown { focus-window-or-workspace-down; }
 
         // Switch to previous / next monitor with Mod + [pn]
             Mod+P { focus-monitor-up; }
