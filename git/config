@@ -22,8 +22,6 @@
     tool        = nvimdiff
     algorithm   = histogram
     renames     = copies
-[diff-so-fancy]
-    markEmptyLines = false
 
 [merge]
     conflictstyle = zdiff3
