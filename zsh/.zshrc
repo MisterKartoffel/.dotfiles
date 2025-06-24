@@ -15,7 +15,6 @@ export FZF_DEFAULT_OPTS=" \
 
 # Completion styling
 ## Enable caching for completion
-[[ -d "{XDG_CACHE_HOME}"/zsh ]] || mkdir -p "${XDG_CACHE_HOME}"/zsh
 zstyle ":completion:*" use-cache on
 zstyle ":completion:*" cache-path "${XDG_CACHE_HOME}"/zsh/zcompcache
 
@@ -43,27 +42,17 @@ fpath+=(
     "${ZDOTDIR}"/completions
 )
 
-# Colors
-export LS_COLORS="$(vivid generate catppuccin-mocha)"
-export FZF_DEFAULT_OPTS=" \
-    --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
-    --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-    --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
-    --color=selected-bg:#45475a \
-    --multi"
-
 autoload -Uz compinit
 ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump-${ZSH_VERSION}"
 compinit -C -d "${ZSH_COMPDUMP}"
 
 # Plugins
-source "${ZDOTDIR}"/plugins/fzf-tab/fzf-tab.plugin.zsh
-source "${ZDOTDIR}"/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh
-source "${ZDOTDIR}"/plugins/powerlevel10k/powerlevel10k.zsh-theme
-source "${ZDOTDIR}"/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source "${ZDOTDIR}/plugins/fzf-tab/fzf-tab.plugin.zsh"
+source "${ZDOTDIR}/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh"
+source "${ZDOTDIR}/plugins/powerlevel10k/powerlevel10k.zsh-theme"
+source "${ZDOTDIR}/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
 
 # History
-[[ -d "{XDG_STATE_HOME}"/zsh ]] || mkdir -p "${XDG_STATE_HOME}"/zsh
 HISTFILE="${XDG_STATE_HOME}/zsh/history"
 HISTSIZE=10000
 SAVEHIST=${HISTSIZE}
@@ -115,4 +104,4 @@ if [[ ${ZSH_PROFILE} -ne 0 ]]; then
 fi
 
 # To customize prompt, run `p10k configure` or edit ${XDG_CACHE_HOME}/zsh/.p10k.zsh.
-[[ ! -f "${XDG_CACHE_HOME}"/zsh/p10k.zsh ]] || source "${XDG_CACHE_HOME}"/zsh/p10k.zsh
+[[ ! -f "${XDG_CACHE_HOME}/zsh/p10k.zsh" ]] || source "${XDG_CACHE_HOME}/zsh/p10k.zsh"
