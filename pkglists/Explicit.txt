@@ -12,8 +12,7 @@ fastfetch
 flatpak
 ghostty
 git
-hypridle
-hyprlock
+gtklock
 intel-ucode
 iwd
 linux
@@ -36,6 +35,7 @@ reflector
 ripgrep
 satty
 snap-pac
+swayidle
 tealdeer
 ufw
 wf-recorder

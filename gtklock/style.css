@@ -1,0 +1,51 @@
+@define-color base      #1e1e2e;
+@define-color surface   #313244;
+@define-color overlay   #6c7086;
+@define-color text      #cdd6f4;
+@define-color blue      #89b4fa;
+
+* { all: unset; }
+
+window {
+    background-image: url("./.background");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#window-box {
+    background-color: alpha(@base, 0.96);
+    border: 1px solid @overlay;
+    padding: 10px 32px;
+    box-shadow:
+    0 60px 80px rgba(0, 0, 0, 0.6),
+    0 45px 26px rgba(0, 0, 0, 0.14);
+    border-radius: 8px;
+}
+
+/* hide "Password:" label */
+#input-label {
+    font-size: 0;
+}
+
+#input-field {
+    border-radius: 20px;
+    padding: 10px 15px;
+    border: 1px solid @overlay;
+}
+
+#warning-label,
+#error-label,
+#unlock-button {
+    margin-top: 12px;
+    padding: 10px 2rem;
+    margin-bottom: 10px;
+}
+
+#unlock-button {
+    border-radius: 20px;
+    background-color: alpha(@blue, 0.1);
+    color: @blue;
+    border-radius: 24px;
+    border: 1px solid alpha(@blue, 0.5);
+}
