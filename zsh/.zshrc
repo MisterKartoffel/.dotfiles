@@ -34,8 +34,7 @@ fpath+=(
 )
 
 autoload -Uz compinit
-ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump-${ZSH_VERSION}"
-compinit -C -d "${ZSH_COMPDUMP}"
+compinit -C -d "${XDG_CACHE_HOME}/zsh/zcompdump-${ZSH_VERSION}"
 
 # Plugins
 source "${ZDOTDIR}/plugins/fzf-tab/fzf-tab.plugin.zsh"
