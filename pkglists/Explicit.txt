@@ -1,5 +1,4 @@
 7zip
-alsa-firmware
 alsa-utils
 base
 base-devel
