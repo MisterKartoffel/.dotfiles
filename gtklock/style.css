@@ -7,7 +7,7 @@
 * { all: unset; }
 
 window {
-    background-image: url("./.background");
+    background-image: url("../../.background");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

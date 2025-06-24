@@ -30,6 +30,6 @@ esac
 
 if [[ -n "${WALLPAPER}" ]]; then
     # Hardlink wallpaper to $HOME (used by hyprlock)
-    ln -f "${WALLPAPER}" "${HOME}"/.background
+    ln -sf "${WALLPAPER}" "${HOME}"/.background
     systemctl --user restart swaybg.service
 fi
