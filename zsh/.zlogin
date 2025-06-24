@@ -10,7 +10,8 @@
                     "${ZSH_COMPDUMP}" -- \
                     \
                     "${ZDOTDIR}/plugins/powerlevel10k/powerlevel10k.zsh-theme" -- \
-                    "${XDG_CACHE_HOME}/zsh/p10k.zsh"
+                    "${XDG_CACHE_HOME}/zsh/p10k.zsh" -- \
+                    "${XDG_CACHE_HOME}/zsh/fzf.zsh"
 
     PLUGINS=(
         fzf-tab

@@ -5,6 +5,15 @@ if [[ "${PROFILING_MODE}" -ne 0 ]]; then
     ZSH_START_TIME=$(python3 -c 'import time; print(int(time.time() * 1000))')
 fi
 
+# Colors
+export LS_COLORS="$(cat "${XDG_CACHE_HOME}/zsh/vivid.zsh")"
+export FZF_DEFAULT_OPTS=" \
+    --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+    --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+    --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+    --color=selected-bg:#45475a \
+    --multi"
+
 # Completion styling
 ## Enable caching for completion
 [[ -d "{XDG_CACHE_HOME}"/zsh ]] || mkdir -p "${XDG_CACHE_HOME}"/zsh
@@ -89,7 +98,7 @@ setopt HIST_IGNORE_SPACE
 setopt SHARE_HISTORY
 
 # Shell integrations
-source <(fzf --zsh)
+source "${XDG_CACHE_HOME}/zsh/fzf.zsh"
 
 # Aliases
 source "${ZDOTDIR}"/aliases/.general_aliases

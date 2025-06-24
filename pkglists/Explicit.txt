@@ -39,7 +39,6 @@ satty
 snap-pac
 tealdeer
 ufw
-vivid
 wf-recorder
 yazi
 zsh
