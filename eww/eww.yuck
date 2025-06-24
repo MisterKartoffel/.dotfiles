@@ -7,14 +7,13 @@
     :exclusive false
     (powermenu_layout))
 
-(defpoll wirelessSignalStrength
-    :interval "100s"
-    :initial `N/A`
-    `iwctl station wlan0 show | awk '/AverageRSSI/ {print $2}'`)
 (defpoll hour
     :interval "5s"
     :initial `date '+%H'`
     `date '+%H'`)
+(defpoll wttr
+    :interval "1h"
+    `curl wttr.in/?format=1 | sed 's/  //'`)
 (defvar clockHover false)
 
 (defwidget powermenu_layout []
@@ -27,20 +26,14 @@
             :space-evenly false
             :spacing 25
             (_sundial)
-            (_network
-                :strength wirelessSignalStrength
-                :excellent "󰤨"
-                :good "󰤥"
-                :okay "󰤢"
-                :slow "󰤟"
-                :offline "󰤮"))
+            (_forecast))
         (box
             :space-evenly false
             :hexpand true
             :vexpand true
             (box
                 :spacing 30
-                :class "tm-box"
+                :class "clock-box"
                 :space-evenly false
                 :valign "end"
                 :halign "start"
@@ -71,22 +64,13 @@
                 hour >= 01 ? "Late Night" :
                 "Midnight" }))
 
-(defwidget _network [strength offline excellent
-                    good okay slow]
+(defwidget _forecast []
     (box
-        :class "net-box"
-        :space-evenly false
-        :spacing 8
-        (label
-            :text { strength > -21 ? excellent :
-            strength > -41 ? good :
-            strength > -61 ? okay :
-            strength > -81 ? slow :
-            offline })))
+        :class "wttr-box"
+        wttr))
 
 (defwidget _idle []
     (box
-        :class "idle-box"
         (checkbox
             :onchecked "systemctl --user start idle-inhibitor"
             :onunchecked "systemctl --user stop idle-inhibitor"

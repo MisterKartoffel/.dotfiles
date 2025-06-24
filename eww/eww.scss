@@ -14,7 +14,7 @@ $surface-red: #f38ba8;
   font-family: "Maple Mono NF";
 }
 
-.tm-box {
+.clock-box {
   padding-bottom: 1.2em;
 
   label {
@@ -22,12 +22,9 @@ $surface-red: #f38ba8;
   }
 }
 
-.close-btn {
-  font-size: 2em;
-
-  &:hover {
-    color: $surface-red;
-  }
+.wttr-box label {
+  font-size: 1.3em;
+  font-weight: bold;
 }
 
 .btns-box {
@@ -50,7 +47,6 @@ $surface-red: #f38ba8;
 }
 
 .sundial-lbl {
-  font-family: "Maple Mono NF";
   font-weight: bold;
   font-size: 1.5em;
   padding: 0.4em;
