@@ -1,96 +1,98 @@
 {
-	"$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
-	"display": {
-		"separator": " "
-	},
-	"modules": [
-		"break",
-		{
-			"type": "custom",
-			"key": " OS",
-			"keyColor": "red"
-		},
-		{
-			"type": "os",
-			"key": "│ ├󱅲",
-			"keyColor": "red"
-		},
-		{
-			"type": "packages",
-			"key": "│ ├󰏖",
-			"keyColor": "red",
-            "format": "{all} packages"
-		},
-		{
-			"type": "shell",
-			"key": "│ ├",
-			"keyColor": "red"
-		},
-		{
-			"type": "uptime",
-			"key": "│ ├󰅐",
-			"keyColor": "red"
-		},
-		{
-			"type": "disk",
-			"key": "│ └",
-			"keyColor": "red",
-			"format": "{days} days"
-		},
-		{
-			"type": "custom",
-			"key": " WM",
-			"keyColor": "blue"
-		},
-		{
-			"type": "lm",
-			"key": "│ ├󰷛",
-			"keyColor": "blue"
-		},
-		{
-			"type": "wm",
-			"key": "│ ├󰧨",
-			"keyColor": "blue"
-		},
-		{
-			"type": "terminal",
-			"key": "│ ├",
-			"keyColor": "blue"
-		},
-		{
-			"type": "custom",
-			"key": "󰍹 PC",
-			"keyColor": "green"
-		},
-		{
-			"type": "cpu",
-			"key": "│ ├󰻠",
-			"keyColor": "green"
-		},
-		{
-			"type": "gpu",
-			"key": "│ ├󰍛",
-			"keyColor": "green"
-		},
-		{
-			"type": "btrfs",
-			"key": "│ ├",
-			"keyColor": "green"
-		},
-		{
-			"type": "memory",
-			"key": "│ ├󰑭",
-			"keyColor": "green"
-		},
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "display": {
+        "separator": " "
+    },
+    "modules": [
+        "break",
+        {
+            "type": "custom",
+            "key": " OS",
+            "keyColor": "red"
+        },
+        {
+            "type": "kernel",
+            "key": "│ ├󱅲",
+            "keyColor": "red"
+        },
+        {
+            "type": "packages",
+            "key": "│ ├󰏖",
+            "keyColor": "red"
+        },
+        {
+            "type": "disk",
+            "key": "│ ├",
+            "keyColor": "red",
+            "format": "{days} days old"
+        },
+        {
+            "type": "uptime",
+            "key": "│ └󰅐",
+            "keyColor": "red"
+        },
+        {
+            "type": "custom",
+            "key": " WM",
+            "keyColor": "blue"
+        },
+        {
+            "type": "lm",
+            "key": "│ ├󰷛",
+            "keyColor": "blue"
+        },
+        {
+            "type": "wm",
+            "key": "│ ├󰧨",
+            "keyColor": "blue"
+        },
+        {
+            "type": "terminal",
+            "key": "│ ├",
+            "keyColor": "blue"
+        },
+        {
+            "type": "shell",
+            "key": "│ ├",
+            "keyColor": "blue"
+        },
+        {
+            "type": "custom",
+            "key": "󰍹 PC",
+            "keyColor": "green"
+        },
+        {
+            "type": "cpu",
+            "key": "│ ├󰻠",
+            "keyColor": "green",
+            "format": "{name}"
+        },
+        {
+            "type": "gpu",
+            "key": "│ ├󰍛",
+            "keyColor": "green",
+            "format": "{vendor} {name}"
+        },
+        {
+            "type": "btrfs",
+            "key": "│ ├",
+            "keyColor": "green",
+            "format": "{used} / {total} ({used-percentage})"
+        },
+        {
+            "type": "memory",
+            "key": "│ ├󰑭",
+            "keyColor": "green"
+        },
         {
             "type": "swap",
             "key": "│ └󰓡",
             "keyColor": "green"
         },
-		{
-			"type": "colors",
-			"key": "{#35} Colors  ",
-			"symbol": "circle"
-		}
-	]
+        {
+            "type": "colors",
+            "key": "{#35} Colors  ",
+            "symbol": "circle"
+        }
+    ]
 }
