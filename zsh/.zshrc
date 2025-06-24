@@ -59,9 +59,6 @@ SAVEHIST=${HISTSIZE}
 HISTDUP=erase
 
 # Options
-## Sets vim keybindings for Zsh
-bindkey -v
-
 ## If an issued command is the name of a directory,
 ## cd into that directory
 setopt AUTO_CD
