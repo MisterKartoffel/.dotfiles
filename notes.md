@@ -166,24 +166,6 @@ $HOME/Pictures
 $HOME/Videos
 ```
 
-## AppArmor
-> Add AppArmor to kernel parameters.
-```conf
-lsm=landlock,lockdown,yama,integrity,apparmor,bpf
-```
-
-> Load profiles on boot.
-```sh
-systemctl enable apparmor.service
-```
-
-> Enable profile caching.
-```conf
-/etc/apparmor/parser.conf
-
-write-cache
-```
-
 ## Enabled zswap for hibernation
 > [!IMPORTANT]
 > Before running the command below, make sure the swapfile will be in a non-snapshotted, non-COW subvolume.

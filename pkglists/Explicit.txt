@@ -1,7 +1,6 @@
 7zip
 alsa-firmware
 alsa-utils
-apparmor
 base
 base-devel
 brightnessctl
