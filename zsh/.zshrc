@@ -1,6 +1,5 @@
-# Set PROFILING_MODE to 1 to enable profiling when sourced
-export PROFILING_MODE=0
-if [[ "${PROFILING_MODE}" -ne 0 ]]; then
+# Set ZSH_PROFILE to 1 to enable profiling when sourced
+if [[ "${ZSH_PROFILE}" -ne 0 ]]; then
     zmodload zsh/zprof
     ZSH_START_TIME=$(python3 -c 'import time; print(int(time.time() * 1000))')
 fi
@@ -108,10 +107,11 @@ source "${ZDOTDIR}"/aliases/.git_aliases
 source "${ZDOTDIR}"/aliases/.zsh_functions
 
 # Finish profiling and print out total initialization time
-if [[ ${PROFILING_MODE} -ne 0 ]]; then
+if [[ ${ZSH_PROFILE} -ne 0 ]]; then
     ZSH_END_TIME=$(python3 -c 'import time; print(int(time.time() * 1000))')
     zprof
     echo "Shell init time: $((ZSH_END_TIME - ZSH_START_TIME - 21)) ms"
+    ZSH_PROFILE=0
 fi
 
 # To customize prompt, run `p10k configure` or edit ${XDG_CACHE_HOME}/zsh/.p10k.zsh.
