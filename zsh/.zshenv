@@ -6,6 +6,9 @@ export XDG_STATE_HOME="${HOME}/.local/state"
 # XDG_RUNTIME_DIR is set by pam_systemd
 # XDG_RUNTIME_DIR="/run/user/${UID}"
 
+# SSH agent socket
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+
 # XDG Base Directory compliance
 export CARGO_HOME="${XDG_DATA_HOME}/cargo" # Rust Cargo
 export FFMPEG_DATADIR="${XDG_CONFIG_HOME}/ffmpeg" # Ffmpeg config
