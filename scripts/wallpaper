@@ -36,4 +36,7 @@ MIMETYPE="$(xdg-mime query filetype "${WALLPAPER}")"
 if [[ -n "${WALLPAPER}" ]] && [[ "${MIMETYPE}" =~ ${ACCEPTED_MIMETYPE} ]]; then
     ln -sf "${WALLPAPER}" "${HOME}"/.background
     systemctl --user restart swaybg.service
+    exit 0
 fi
+
+exit 1
