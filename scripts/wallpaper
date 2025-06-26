@@ -30,8 +30,10 @@ case "${1}" in
         ;;
 esac
 
-if [[ -n "${WALLPAPER}" ]]; then
-    # Hardlink wallpaper to $HOME (used by hyprlock)
+ACCEPTED_MIMETYPE="image/*"
+MIMETYPE="$(xdg-mime query filetype "${WALLPAPER}")"
+
+if [[ -n "${WALLPAPER}" ]] && [[ "${MIMETYPE}" =~ ${ACCEPTED_MIMETYPE} ]]; then
     ln -sf "${WALLPAPER}" "${HOME}"/.background
     systemctl --user restart swaybg.service
 fi
