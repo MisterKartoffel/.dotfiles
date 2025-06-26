@@ -74,17 +74,17 @@
         (checkbox
             :onchecked "systemctl --user start idle-inhibitor"
             :onunchecked "systemctl --user stop idle-inhibitor"
-            { ( hour == 13 || hour == 01 ) ? "󱑋" :
-              ( hour == 14 || hour == 02 ) ? "󱑌" :
-              ( hour == 15 || hour == 03 ) ? "󱑍" :
-              ( hour == 16 || hour == 04 ) ? "󱑎" :
-              ( hour == 17 || hour == 05 ) ? "󱑏" :
-              ( hour == 18 || hour == 06 ) ? "󱑐" :
-              ( hour == 19 || hour == 07 ) ? "󱑑" :
-              ( hour == 20 || hour == 08 ) ? "󱑒" :
-              ( hour == 21 || hour == 09 ) ? "󱑓" :
-              ( hour == 22 || hour == 10 ) ? "󱑔" :
-              ( hour == 23 || hour == 11 ) ? "󱑕" :
+            { ( hour % 12 == 01 ) ? "󱑋" :
+              ( hour % 12 == 02 ) ? "󱑌" :
+              ( hour % 12 == 03 ) ? "󱑍" :
+              ( hour % 12 == 04 ) ? "󱑎" :
+              ( hour % 12 == 05 ) ? "󱑏" :
+              ( hour % 12 == 06 ) ? "󱑐" :
+              ( hour % 12 == 07 ) ? "󱑑" :
+              ( hour % 12 == 08 ) ? "󱑒" :
+              ( hour % 12 == 09 ) ? "󱑓" :
+              ( hour % 12 == 10 ) ? "󱑔" :
+              ( hour % 12 == 11 ) ? "󱑕" :
               "󱑖" })))
 
 (defwidget _clock []
