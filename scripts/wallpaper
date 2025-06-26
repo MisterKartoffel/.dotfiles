@@ -7,36 +7,62 @@
 
 WALLPAPER_DIR="${HOME}/Pictures/Wallpapers"
 
-# TODO: Fix preview, currently doesn't erase previous images from window.
-FZF_ARGS=(
-    --preview-window="right:70%"
-    --preview='
-        dim=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}
-        chafa -f kitty -s ${dim} {}
-    '
+DEPENDS=(
+    chafa
+    fd
+    fzf
 )
 
-case "${1}" in
-    random)
-        WALLPAPER=$(fd -t f . "${WALLPAPER_DIR}" | shuf -n 1)
-        ;;
-    pick)
-        # Open wallpaper selector in fzf
-        WALLPAPER=$(fd -t f . "${WALLPAPER_DIR}" | fzf "${FZF_ARGS[@]}")
-        ;;
-    *)
-        # Pick selected wallpaper
-        WALLPAPER="$1"
-        ;;
-esac
+function check_depends() {
+    if [[ ! -d "${WALLPAPER_DIR}" ]]; then
+        echo "[ERROR] Path ${WALLPAPER_DIR} not found."
+        exit 1
+    fi
 
-ACCEPTED_MIMETYPE="image/*"
-MIMETYPE="$(xdg-mime query filetype "${WALLPAPER}")"
+    for COMMAND in "${DEPENDS[@]}"; do
+        if ! command -v "${COMMAND}" >/dev/null; then
+            echo "[ERROR] Dependency ${COMMAND} not found."
+            exit 1
+        fi
+    done
+}
 
-if [[ -n "${WALLPAPER}" ]] && [[ "${MIMETYPE}" =~ ${ACCEPTED_MIMETYPE} ]]; then
-    ln -sf "${WALLPAPER}" "${HOME}"/.background
-    systemctl --user restart swaybg.service
-    exit 0
-fi
+function main() {
+    check_depends
 
-exit 1
+    case "${1}" in
+        random)
+            WALLPAPER=$(fd -t f . "${WALLPAPER_DIR}" | shuf -n 1)
+            ;;
+        pick)
+            # Open wallpaper selector in fzf
+            # TODO: Fix preview, currently doesn't erase previous images from window.
+            FZF_ARGS=(
+                --preview-window="right:70%"
+                --preview='
+                dim=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}
+                chafa -f kitty -s ${dim} {}
+                '
+            )
+
+            WALLPAPER=$(fd -t f . "${WALLPAPER_DIR}" | fzf "${FZF_ARGS[@]}")
+            ;;
+        *)
+            # Pick selected wallpaper
+            WALLPAPER="$1"
+            ;;
+    esac
+
+    ACCEPTED_MIMETYPE="image/*"
+    MIMETYPE="$(file --mime --brief "${WALLPAPER}")"
+
+    if [[ -n "${WALLPAPER}" ]] && [[ "${MIMETYPE}" =~ ${ACCEPTED_MIMETYPE} ]]; then
+        ln -sf "${WALLPAPER}" "${HOME}"/.background
+        systemctl --user restart swaybg.service
+        exit 0
+    fi
+
+    exit 1
+}
+
+main "${@}"
