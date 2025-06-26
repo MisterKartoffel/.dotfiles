@@ -19,16 +19,15 @@
 # Exec = /bin/su - user /bin/sh -c '/home/user/.local/bin/genpkglist'
 
 logFile="${XDG_CONFIG_HOME:-${HOME}/.config}/scripts/genpkglist.log"
-logTime="$(date --rfc-3339="seconds")"
 pkgListDir="${XDG_CONFIG_HOME:-${HOME}/.config}/pkglists"
 
 function setupListings() {
     local currentList
     local logMessage
+    local logTime
 
     for source in "$@"; do
         currentList="${pkgListDir}/${source}.txt"
-        logMessage="[${logTime}] ${source} install listing: ${currentList}"
 
         case "${source}" in
             AUR)
@@ -53,6 +52,8 @@ function setupListings() {
                 ;;
         esac
 
+        logTime="$(date --rfc-3339="seconds")"
+        logMessage="[${logTime}] ${source} install listing: ${currentList}"
         echo "${logMessage}" >> "${logFile}"
     done
 }
