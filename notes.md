@@ -30,7 +30,7 @@ Defaults passprompt="[sudo] password for %p: "
 
 > [!NOTE]
 > This configuration takes advantage of bonding to bind multiple interfaces and
-the RouteMetric directive to assign one interface as a priority.
+the active-backup mode to achieve no downtime with a backup connection.
 
 > Create the bond interface.
 ```systemd
