@@ -13,7 +13,7 @@
     `date '+%H'`)
 (defpoll wttr
     :interval "1h"
-    `curl wttr.in/?format=1 | sed 's/  //'`)
+    `curl wttr.in/Porto%20Alegre?format=1 | sed 's/[[:space:]]//g'`)
 (defvar clockHover false)
 
 (defwidget powermenu_layout []
