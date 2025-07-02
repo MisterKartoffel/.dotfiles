@@ -29,8 +29,7 @@ Defaults passprompt="[sudo] password for %p: "
 > - iwd
 
 > [!NOTE]
-> This configuration takes advantage of bonding to bind multiple interfaces and
-the active-backup mode to achieve no downtime with a backup connection.
+> This configuration takes advantage of bonding to bind multiple interfaces and the active-backup mode to achieve no downtime with a backup connection.
 
 > Create the bond interface.
 ```systemd
@@ -155,8 +154,7 @@ MODULES=(btrfs)
 ```conf
 /etc/mkinitcpio.conf.d/40-hooks.conf
 
-HOOKS=(systemd autodetect microcode modconf kms keyboard sd-vconsole block
-filesystems)
+HOOKS=(systemd autodetect microcode modconf kms keyboard sd-vconsole block filesystems)
 ```
 
 ## Disable Copy-on-Write on select $HOME directories
@@ -263,8 +261,7 @@ ACTION=="add", SUBSYSTEMS=="usb", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesys
 
 ## Pacman hooks
 > [!INFO]
-> This hook enables automatic backups of the /boot partition on every kernel
-update.
+> This hook enables automatic backups of the /boot partition on every kernel update.
 ```conf
 /etc/pacman.d/hooks/10-bootbackup.hook
 
@@ -300,8 +297,7 @@ Exec = /bin/su - user /bin/sh -c '$HOME/.local/bin/genpkglist'
 ```
 
 > [!INFO]
-> This hook explicitly prints out .pacnew and .pacsave files post system
-update.
+> This hook explicitly prints out .pacnew and .pacsave files post system update.
 ```conf
 /etc/pacman.d/hooks/99-pacdiff.hook
 
