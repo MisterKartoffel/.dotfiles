@@ -83,7 +83,16 @@ PermanentMACAddress=<check>
 Bond=bond0
 ```
 
-> Reintroduce traditional interface naming for ethernet (for consistency, iwd does this for WLAN)
+> Change systemd-networkd-wait-online.service to wait for any interface instead of all.
+```systemd
+/etc/systemd/system/systemd-networkd-wait-online.service.d/10-wait_for_only_one_interface.conf
+
+[Service]
+ExecStart=
+ExecStart=/usr/lib/systemd/systemd-networkd-wait-online --any
+```
+
+> Reintroduce traditional interface naming for all interfaces (for consistency, iwd does this for WLAN)
 ```systemd
 /etc/systemd/network/99-default.link.d/10-traditional_interface_naming.conf
 
