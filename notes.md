@@ -108,8 +108,7 @@ systemctl enable --now iwd.service
 
 > Connect to wireless access point via iwd.
 ```sh
-iwctl
-[iwctl]# station interface connect SSID
+iwctl station interface connect SSID
 ```
 
 ## Configure Unified Kernel Image generation
