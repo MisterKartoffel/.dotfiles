@@ -364,20 +364,43 @@ RemainAfterExit=yes
 Environment="WALLPAPER=.background"
 ExecStart=/usr/bin/swaybg -i ${WALLPAPER} -o eDP-1
 Restart=on-failure
-
-[Install]
-WantedBy=graphical-session.target
 ```
 
-> Change systemd-networkd-wait-online.service to wait for any interface
-instead of all.
+> Created swayidle.service for automatic startup of the idle manager
 ```systemd
-/etc/systemd/system/systemd-networkd-wait-online.service.d/10-wait_for_only_one_interface.conf
+[Unit]
+Description=Idle manager for Wayland
+Documentation=man:swayidle(1)
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
 
 [Service]
-ExecStart=
-ExecStart=/usr/lib/systemd/systemd-networkd-wait-online --any
+Type=simple
+ExecStart=/usr/bin/swayidle -w                      \
+    timeout 60 'brightnessctl -s set 0'             \
+        resume 'brightnessctl -r'                   \
+   timeout 120 'loginctl lock-session'              \
+   timeout 300 'niri msg action power-off-monitors' \
+        resume 'niri msg action power-on-monitors'  \
+   timeout 600 'systemctl suspend-then-hibernate'   \
+  before-sleep 'loginctl lock-session'              \
+          lock 'pidof gtklock || gtklock -d'
+Restart=on-failure
 ```
+
+> Created idle-inhibitor.service to toggle idle inhibit via systemd, for any application that may need that.
+```systemd
+[Unit]
+Description=Idle inhibitor
+After=suspend.target
+Before=sleep.target
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/systemd-inhibit --what=idle --who="{application}" --why="{reason}" --mode=block sleep infinity
+```
+
 ## Changes to systemd configurations
 > Disabling coredump.
 ```systemd
