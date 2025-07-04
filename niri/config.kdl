@@ -105,7 +105,7 @@ binds {
         Mod+F            repeat=false { spawn "app.zen_browser.zen"; }
         Mod+D            repeat=false { spawn "dev.vencord.Vesktop"; }
         Mod+Space        repeat=false { spawn "tofi-drun"; }
-        Mod+Delete       repeat=false { spawn "powermenu"; }
+        Mod+Delete       repeat=false { spawn "powermenu.sh"; }
         Mod+Shift+Delete repeat=false { quit; }
         Mod+Q            repeat=false { close-window; }
         Mod+O            repeat=false { toggle-overview; }
@@ -114,7 +114,7 @@ binds {
         Mod+Print       repeat=false { screenshot; }
         Mod+Shift+Print repeat=false { screenshot-window; }
         Mod+F12         repeat=false { spawn "sh" "-c" "wl-paste | satty --fullscreen -f - -o $HOME/Pictures/Screenshots/$(date '+%Y%m%d-%H:%M:%S').png"; }
-        Mod+F10         repeat=false { spawn "record"; }
+        Mod+F10         repeat=false { spawn "record.sh"; }
 
     // Window and workspace movement
         // Move focus with Mod + [hjkl]

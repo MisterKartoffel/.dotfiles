@@ -16,7 +16,7 @@
 # [Action]
 # Description = Generating updated package lists...
 # When = PostTransaction
-# Exec = /bin/su - user /bin/sh -c '/home/user/.local/bin/genpkglist'
+# Exec = /bin/su - user /bin/sh -c '/home/user/.local/bin/genpkglist.sh'
 
 logFile="${XDG_CONFIG_HOME:-${HOME}/.config}/scripts/genpkglist.log"
 pkgListDir="${XDG_CONFIG_HOME:-${HOME}/.config}/pkglists"
