@@ -35,5 +35,4 @@ swayidle
 tealdeer
 ufw
 wf-recorder
-yazi
 zsh

@@ -84,7 +84,8 @@ window-rule {
 }
 
 window-rule {
-    match app-id="mpv"
+    match app-id=r#"^mpv$"#
+    match app-id=r#"^io\.github\.celluloid_player\.Celluloid$"#
     open-on-output "HDMI-A-1"
 }
 
