@@ -1,6 +1,7 @@
 bat
 chafa
 fd
+fzf
 jq
 libnotify
 noto-fonts-cjk

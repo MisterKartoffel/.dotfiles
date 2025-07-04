@@ -1,4 +1,3 @@
-downgrade
 eww
 maplemono-nf
 maplemono-ttf-autohint
