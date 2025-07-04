@@ -12,7 +12,7 @@
     notification_limit = 20
 
     ### Progress bar ###
-    progress_bar = true
+    progress_bar = false
     progress_bar_height = 10
     progress_bar_frame_width = 1
     progress_bar_min_width = 150
