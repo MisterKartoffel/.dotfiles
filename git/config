@@ -10,6 +10,9 @@
     editor      = nvim
     whitespace  = error
 
+[alias]
+    patch = "add --patch"
+
 [init]
     defaultBranch = main
 
