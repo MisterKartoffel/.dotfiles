@@ -6,7 +6,6 @@ btop
 diff-so-fancy
 dunst
 eza
-fastfetch
 flatpak
 ghostty
 git
