@@ -23,7 +23,6 @@ return {
                 { section = "startup" },
             },
         },
-        explorer = { replace_netrw = true, },
         indent = { enabled = true, },
         notifier = {
             enabled = true,
@@ -42,10 +41,6 @@ return {
         },
         picker = {
             enabled = true,
-            explorer = {
-                auto_close = true,
-                jump = { close = true, },
-            },
             files = { hidden = true, },
         },
         quickfile = {
@@ -73,7 +68,6 @@ return {
         { "<leader>fo", function() Snacks.picker.loclist() end,                                 desc = "Find item in location list" },
         { "<leader>fq", function() Snacks.picker.qflist() end,                                  desc = "Find item in quickfix list" },
         { "<leader>fp", function() Snacks.picker() end,                                         desc = "Pick a picker" },
-        { "<leader>fe", function() Snacks.explorer.open() end,                                  desc = "Find files in Neovim's configuration" },
         -- LSP pickers are defined in $HOME/.config/nvim/plugin/lsp.lua
         -- Git pickers are defined in $HOME/.config/nvim/lua/plugins/gitsigns.lua
     },
