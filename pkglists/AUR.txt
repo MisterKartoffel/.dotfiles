@@ -3,4 +3,5 @@ maplemono-nf
 maplemono-ttf-autohint
 paru-bin
 qt6-base-headless
+spotify-player-bin
 tofi
