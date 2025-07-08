@@ -3,17 +3,23 @@
 -- █▀█ █▄█ ░█░ █▄█ █▄▄ █▄█ █░▀░█ █░▀░█ █▀█ █░▀█ █▄▀ ▄█
 --
 
+local augroup = vim.api.nvim_create_augroup("ConfigAutocmd", {})
+
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight yanked text",
-    group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+    group = augroup,
     callback = function()
         vim.hl.on_yank()
     end,
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-    desc = "Remove autocommenting on new lines",
-    group = vim.api.nvim_create_augroup("autocomment_disable", { clear = true }),
-    pattern = "",
-    command = "set fo-=c fo-=r fo-=o",
+vim.api.nvim_create_autocmd("BufWritePre", {
+    desc = "Create directory when saving file",
+    group = augroup,
+    callback = function()
+        local dir = vim.fn.expand("<afile>:p:h")
+        if not vim.fn.isdirectory(dir) then
+            vim.fn.mkdir(dir, "p")
+        end
+    end,
 })
