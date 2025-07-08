@@ -1,4 +1,3 @@
-bat
 libnotify
 noto-fonts-cjk
 noto-fonts-emoji
