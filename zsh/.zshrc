@@ -76,8 +76,7 @@ setopt SHARE_HISTORY
 source "${XDG_CACHE_HOME}/zsh/fzf.zsh"
 
 # Aliases
-source "${ZDOTDIR}"/aliases/.general_aliases
-source "${ZDOTDIR}"/aliases/.git_aliases
+alias ls="eza -la --icons=always --group-directories-first"
 
 # Helper functions
 source "${ZDOTDIR}"/aliases/.zsh_functions

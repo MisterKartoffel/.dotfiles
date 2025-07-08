@@ -1,4 +1,0 @@
-# vim: filetype=zsh
-# General system-use aliases
-
-alias ls="eza -la --icons=always --group-directories-first"
