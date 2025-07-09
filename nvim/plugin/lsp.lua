@@ -58,13 +58,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
         local map = require("utils").map
 
-        map("n", "gri", function() Snacks.picker.lsp_implementations() end,
+        map("n", "gri", vim.lsp.buf.implementation,
             { desc = "Find implementations for current symbol" })
-        map("n", "grr", function() Snacks.picker.lsp_references() end,
+        map("n", "grr", vim.lsp.buf.references,
             { desc = "Find references for current symbol" })
-        map("n", "grd", function() Snacks.picker.lsp_definitions() end,
+        map("n", "grd", vim.lsp.buf.definition,
             { desc = "Go to definition for current symbol" })
-        map("n", "gre", function() Snacks.picker.diagnostics() end,
+        map("n", "gre", vim.diagnostic.setloclist,
             { desc = "Browse diagnostics for current buffer" })
         map("n", "grn", vim.lsp.buf.rename, { desc = "Rename current symbol" })
         map("n", "gra", vim.lsp.buf.code_action, { desc = "Display available code actions" })
