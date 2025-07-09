@@ -1,11 +1,8 @@
 function _G.get_oil_winbar()
-    local bufnr = vim.api.nvim_win_get_buf(vim.g.statusline_winid)
-    local dir = require("oil").get_current_dir(bufnr)
-    if dir then
-        return vim.fn.fnamemodify(dir, ":~")
-    else
-        return vim.api.nvim_buf_get_name(0)
-    end
+    local path = vim.fn.expand("%")
+    path = path:gsub("oil://", "")
+
+    return vim.fn.fnamemodify(path, ":~")
 end
 
 return {
@@ -14,8 +11,17 @@ return {
     lazy = false,
     opts = {
         delete_to_trash = true,
+        watch_for_changes = true,
         view_options = { show_hidden = true, },
         win_options = { winbar = "%!v:lua.get_oil_winbar()", },
+        keymaps = {
+            ["<C-c>"] = { "actions.close", mode = "n", opts = { exit_if_last_buf = true, }, },
+            ["<C-v>"] = { "actions.select", mode = "n", opts = { vertical = true, }, },
+            ["<C-s>"] = { "actions.select", mode = "n", opts = { horizontal = true, }, },
+            ["<C-t>"] = { "actions.select", mode = "n", opts = { tab = true, }, },
+
+            ["gd"] = { "actions.cd", mode = "n", },
+        },
     },
     keys = {
         { "-", ":Oil<CR>", desc = "Open parent directory in Oil", },
