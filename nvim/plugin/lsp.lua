@@ -34,12 +34,7 @@ vim.lsp.config("*", {
 
 vim.diagnostic.config({
     severity_sort = true,
-    virtual_lines = {
-        current_line = true,
-        format = function(diagnostic)
-            return diagnostic.message
-        end,
-    },
+    virtual_text = true,
     signs = {
         text = {
             [vim.diagnostic.severity.ERROR] = "",
@@ -58,22 +53,26 @@ end
 vim.lsp.enable(lsp_configs)
 
 vim.api.nvim_create_autocmd("LspAttach", {
-    group = vim.api.nvim_create_augroup("LSP", { clear = false }),
+    group = vim.api.nvim_create_augroup("LSP", { clear = false, }),
     callback = function(args)
         local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-        local nmap = require("utils").nmap
-        local imap = require("utils").imap
+        local map = require("utils").map
 
-        nmap("gO", function() Snacks.picker.lsp_symbols() end,
-            { desc = "Find all symbols in current buffer" })
-        nmap("grD", function() Snacks.picker.lsp_definitions() end,
-            { desc = "Jump to definition for symbol under cursor" })
-        nmap("grd", function() Snacks.picker.diagnostics_buffer() end,
-            { desc = "Find all diagnostics in current buffer" })
+        map("n", "gri", function() Snacks.picker.lsp_implementations() end,
+            { desc = "Find implementations for current symbol" })
+        map("n", "grr", function() Snacks.picker.lsp_references() end,
+            { desc = "Find references for current symbol" })
+        map("n", "grd", function() Snacks.picker.lsp_definitions() end,
+            { desc = "Go to definition for current symbol" })
+        map("n", "gre", function() Snacks.picker.diagnostics() end,
+            { desc = "Browse diagnostics for current buffer" })
+        map("n", "grn", vim.lsp.buf.rename, { desc = "Rename current symbol" })
+        map("n", "gra", vim.lsp.buf.code_action, { desc = "Display available code actions" })
+        map("n", "K", vim.lsp.buf.hover, { desc = "Display hover information for current symbol" })
 
         if client:supports_method("textDocument/completion") then
             vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true, })
-            imap("<C-Space>", vim.lsp.completion.get,
+            map("i", "<C-Space>", vim.lsp.completion.get,
                 { desc = "Get completion for current token" })
 
             -- This autocmd was taken straight from
@@ -122,7 +121,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         if client:supports_method("textDocument/formatting") then
             local format_opts = { bufnr = args.buf, id = client.id }
-            nmap("grf", function() vim.lsp.buf.format(format_opts) end,
+            map("n", "grf", function() vim.lsp.buf.format(format_opts) end,
                 { desc = "Autoformat using LSP formatting" })
 
             if not client:supports_method("textDocument/willSaveWaitUntil") then
@@ -137,12 +136,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
         if client:supports_method("textDocument/inlayHint") then
-            nmap("grh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+            map("n", "grh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
                 { desc = "Toggle LSP inlay hint" })
         end
 
         if client:supports_method("textDocument/signatureHelp") then
-            nmap("grs", vim.lsp.buf.signature_help,
+            map("i", "<C-s>", vim.lsp.buf.signature_help,
                 { desc = "Display signature help for currently hovered symbol" })
         end
     end,
