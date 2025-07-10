@@ -1,3 +1,5 @@
+---@param command_name string
+---@return fun():nil run_tinymist_command, string cmd_name, string cmd_desc
 local function create_tinymist_command(command_name, client, bufnr)
     local export_type = command_name:match("tinymist%.export(%w+)")
     local info_type = command_name:match("tinymist%.(%w+)")
@@ -5,9 +7,13 @@ local function create_tinymist_command(command_name, client, bufnr)
         info_type = info_type:gsub("^get", "Get")
     end
     local cmd_display = export_type or info_type
+
+    ---@return nil
     local function run_tinymist_command()
         local arguments = { vim.api.nvim_buf_get_name(bufnr) }
         local title_str = export_type and ("Export " .. cmd_display) or cmd_display
+
+        ---@type lsp.Handler
         local function handler(err, res)
             if err then
                 return vim.notify(err.code .. ": " .. err.message, vim.log.levels.ERROR)
@@ -24,6 +30,8 @@ local function create_tinymist_command(command_name, client, bufnr)
             return vim.notify("Tinymist commands require Neovim 0.11+", vim.log.levels.WARN)
         end
     end
+
+    ---@type string
     local cmd_name = export_type and ("LspTinymistExport" .. cmd_display) or ("LspTinymist" .. cmd_display)
     local cmd_desc = export_type and ("Export to " .. cmd_display) or ("Get " .. cmd_display)
     return run_tinymist_command, cmd_name, cmd_desc

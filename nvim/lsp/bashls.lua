@@ -3,6 +3,7 @@ return {
     filetypes = { "bash", "sh", "zsh", },
     settings = {
         bashIde = {
+            globPattern = vim.env.GLOB_PATTERN or '*@(.sh|.inc|.bash|.command)',
             shellcheckArguments = {
                 "-o", "add-default-case",
                 "-o", "avoid-nullary-conditions",
