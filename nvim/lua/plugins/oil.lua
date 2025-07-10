@@ -21,6 +21,11 @@ return {
             ["<C-t>"] = { "actions.select", mode = "n", opts = { tab = true, }, },
 
             ["gd"] = { "actions.cd", mode = "n", },
+
+            ["<C-h>"] = false, -- use <C-s> instead, as in vanilla neovim
+            ["<CR>"] = false,  -- gf, see comment above
+            ["`"] = false,     -- gd
+            ["~"] = false,     -- gd
         },
     },
     keys = {
