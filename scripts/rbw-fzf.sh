@@ -117,21 +117,20 @@ function rbw_list() {
         --cycle
         --no-info
         --no-mouse
-        --prompt="> "
+        --prompt=""
         --ghost="Item name"
         --border="rounded"
+        --border-label="Bitwarden"
         --input-border="rounded"
-        --input-label="Search"
-        --bind="change:execute-silent(touch ${TIMESTAMP_FILE})"
-        --bind="focus:execute-silent(touch ${TIMESTAMP_FILE})"
-        --bind="ctrl-u:execute-silent(wl-copy -o \$(rbw get {} --field username))+execute-silent(touch ${TIMESTAMP_FILE})"
-        --bind="ctrl-p:execute-silent(wl-copy -o \$(rbw get {} --field password))+execute-silent(touch ${TIMESTAMP_FILE})"
-        --bind="ctrl-o:execute-silent(wl-copy -o \$(rbw code {}))+execute-silent(touch ${TIMESTAMP_FILE})"
-        --bind="ctrl-r:execute-silent(wl-copy -o \$(rbw get {} --raw | jq -r --arg category \"Recovery\" '.fields[]? | select (.name == \$category) | .value'))+execute-silent(touch ${TIMESTAMP_FILE})"
+        --input-label="Press ctrl-f for help"
+        --bind="change:execute-silent(touch ${TIMESTAMP_FILE})+transform-input-label(echo \"Press ctrl-f for help\")"
+        --bind="focus:execute-silent(touch ${TIMESTAMP_FILE})+transform-input-label(echo \"Press ctrl-f for help\")"
+        --bind="ctrl-u:execute-silent(wl-copy -o \$(rbw get {} --field username))+execute-silent(touch ${TIMESTAMP_FILE})+transform-input-label(echo \"Copied username\")"
+        --bind="ctrl-p:execute-silent(wl-copy -o \$(rbw get {} --field password))+execute-silent(touch ${TIMESTAMP_FILE})+transform-input-label(echo \"Copied password\")"
+        --bind="ctrl-o:execute-silent(wl-copy -o \$(rbw code {}))+execute-silent(touch ${TIMESTAMP_FILE})+transform-input-label(echo \"Copied OTP\")"
+        --bind="ctrl-r:execute-silent(wl-copy -o \$(rbw get {} --raw | jq -r --arg category \"Recovery\" '.fields[]? | select (.name == \$category) | .value'))+execute-silent(touch ${TIMESTAMP_FILE})+transform-input-label(echo \"Copied recovery code\")"
         --bind="ctrl-f:preview(echo \"${HELP_TEXT}\")"
-        --header="Press ctrl-f for help"
         --preview-window="right:60%"
-        --preview-label="Login Details"
         --preview='
             if [[ "{}" == "HELP" ]]; then
                 echo "'"${HELP_TEXT}"'"
