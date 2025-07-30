@@ -39,5 +39,6 @@ snap-pac
 swayidle
 tealdeer
 ufw
+vivid
 wf-recorder
 zsh
