@@ -23,7 +23,6 @@ return {
             ["gd"] = { "actions.cd", mode = "n", },
 
             ["<C-h>"] = false, -- use <C-s> instead, as in vanilla neovim
-            ["<CR>"] = false,  -- gf, see comment above
             ["`"] = false,     -- gd
             ["~"] = false,     -- gd
         },
