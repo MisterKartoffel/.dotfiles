@@ -73,7 +73,7 @@ setopt HIST_IGNORE_SPACE
 setopt SHARE_HISTORY
 
 # Shell integrations
-source "${XDG_CACHE_HOME}/zsh/fzf.zsh"
+source <(fzf --zsh)
 
 # Aliases
 alias ls="eza -la --icons=always --group-directories-first"
