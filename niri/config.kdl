@@ -1,7 +1,3 @@
-workspace "terminal" { open-on-output "eDP-1"; }
-workspace "browser" { open-on-output "eDP-1"; }
-workspace "discord" { open-on-output "eDP-1"; }
-
 prefer-no-csd
 screenshot-path null
 
