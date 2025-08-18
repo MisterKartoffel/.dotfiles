@@ -22,10 +22,11 @@
         :space-evenly false
         :orientation "vertical"
         (box
+            :class "wttr-box"
+            :hexpand true
+            :vexpand true
             :valign "start"
-            :space-evenly false
-            :spacing 25
-            (_sundial)
+            :halign "end"
             (_forecast))
         (box
             :space-evenly false
@@ -46,23 +47,6 @@
                 :reboot_icon "󰜉"
                 :logout "loginctl kill-session self"
                 :logout_icon "󰍃"))))
-
-(defwidget _sundial []
-    (label
-        :class "sundial-lbl"
-        :halign "end"
-        :hexpand true
-        :text { hour >= 22 ? "Night" :
-                hour >= 19 ? "Early Night" :
-                hour == 18 ? "Dusk" :
-                hour >= 16 ? "Evening" :
-                hour >= 13 ? "Afternoon" :
-                hour == 12 ? "Noon" :
-                hour >= 10 ? "Late Morning" :
-                hour >= 07 ? "Early Morning" :
-                hour == 06 ? "Dawn" :
-                hour >= 01 ? "Late Night" :
-                "Midnight" }))
 
 (defwidget _forecast []
     (box
