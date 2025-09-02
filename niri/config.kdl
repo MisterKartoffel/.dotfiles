@@ -5,7 +5,10 @@ spawn-at-startup "eww" "open" "powermenu"
 spawn-at-startup "ghostty" "--initial-window=false"
 
 clipboard { disable-primary; }
-hotkey-overlay { skip-at-startup; }
+hotkey-overlay {
+    skip-at-startup
+    hide-not-bound
+}
 
 input {
     keyboard {
@@ -110,7 +113,7 @@ binds {
     // Screencapture
         Mod+Print       repeat=false { screenshot; }
         Mod+Shift+Print repeat=false { screenshot-window; }
-        Mod+F12         repeat=false { spawn "sh" "-c" "wl-paste | satty --fullscreen -f - -o $HOME/Pictures/Screenshots/$(date '+%Y%m%d-%H:%M:%S').png"; }
+        Mod+F12         repeat=false { spawn-sh "wl-paste | satty --fullscreen -f - -o $HOME/Pictures/Screenshots/$(date '+%Y%m%d-%H:%M:%S').png"; }
         Mod+F10         repeat=false { spawn "record.sh"; }
 
     // Window and workspace movement
@@ -154,6 +157,10 @@ binds {
             Mod+Shift+K { move-window-up-or-to-workspace-up; }
             Mod+Shift+L { move-column-right; }
 
+            // Move focused window silently to a workspace with Mod + Alt + [1-5]
+                Mod+Alt+J { move-window-to-workspace-down focus=false; }
+                Mod+Alt+K { move-window-to-workspace-up focus=false; }
+
         // Move current workspace to the previous / next monitor with Mod + Shift + [pn]
             Mod+Shift+P { move-workspace-to-monitor-previous; }
             Mod+Shift+N { move-workspace-to-monitor-next; }
@@ -185,20 +192,20 @@ binds {
             Mod+SemiColon { toggle-column-tabbed-display; }
 
     // Media controls
-        XF86AudioRaiseVolume       allow-when-locked=true { spawn "volume.sh" "@DEFAULT_SINK@" "5%+"; }
-        XF86AudioLowerVolume       allow-when-locked=true { spawn "volume.sh" "@DEFAULT_SINK@" "5%-"; }
-        XF86AudioMute              allow-when-locked=true { spawn "volume.sh" "@DEFAULT_SINK@" "mute"; }
-        Shift+XF86AudioRaiseVolume allow-when-locked=true { spawn "volume.sh" "@DEFAULT_SOURCE@" "5%+"; }
-        Shift+XF86AudioLowerVolume allow-when-locked=true { spawn "volume.sh" "@DEFAULT_SOURCE@" "5%-"; }
-        Shift+XF86AudioMute        allow-when-locked=true { spawn "volume.sh" "@DEFAULT_SOURCE@" "mute"; }
-        XF86AudioPlay              allow-when-locked=true { spawn "playerctl" "play-pause"; }
-        XF86AudioStop              allow-when-locked=true { spawn "playerctl" "stop"; }
-        XF86AudioPrev              allow-when-locked=true { spawn "playerctl" "previous"; }
-        XF86AudioNext              allow-when-locked=true { spawn "playerctl" "next"; }
+        XF86AudioRaiseVolume       allow-when-locked=true { spawn-sh "volume.sh @DEFAULT_SINK@ 5%+"; }
+        XF86AudioLowerVolume       allow-when-locked=true { spawn-sh "volume.sh @DEFAULT_SINK@ 5%-"; }
+        XF86AudioMute              allow-when-locked=true { spawn-sh "volume.sh @DEFAULT_SINK@ mute"; }
+        Shift+XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "volume.sh @DEFAULT_SOURCE@ 5%+"; }
+        Shift+XF86AudioLowerVolume allow-when-locked=true { spawn-sh "volume.sh @DEFAULT_SOURCE@ 5%-"; }
+        Shift+XF86AudioMute        allow-when-locked=true { spawn-sh "volume.sh @DEFAULT_SOURCE@ mute"; }
+        XF86AudioPlay              allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+        XF86AudioStop              allow-when-locked=true { spawn-sh "playerctl stop"; }
+        XF86AudioPrev              allow-when-locked=true { spawn-sh "playerctl previous"; }
+        XF86AudioNext              allow-when-locked=true { spawn-sh "playerctl next"; }
 
     // Brightness controls
-        XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "+5%"; }
-        XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }
+        XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "brightnessctl set +5%"; }
+        XF86MonBrightnessDown allow-when-locked=true { spawn-sh "brightnessctl set 5%-"; }
 
     // When all else fails
         Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
