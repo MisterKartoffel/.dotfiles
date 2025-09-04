@@ -192,20 +192,20 @@ binds {
             Mod+SemiColon { toggle-column-tabbed-display; }
 
     // Media controls
-        XF86AudioRaiseVolume       allow-when-locked=true { spawn-sh "volume.sh @DEFAULT_SINK@ 5%+"; }
-        XF86AudioLowerVolume       allow-when-locked=true { spawn-sh "volume.sh @DEFAULT_SINK@ 5%-"; }
-        XF86AudioMute              allow-when-locked=true { spawn-sh "volume.sh @DEFAULT_SINK@ mute"; }
-        Shift+XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "volume.sh @DEFAULT_SOURCE@ 5%+"; }
-        Shift+XF86AudioLowerVolume allow-when-locked=true { spawn-sh "volume.sh @DEFAULT_SOURCE@ 5%-"; }
-        Shift+XF86AudioMute        allow-when-locked=true { spawn-sh "volume.sh @DEFAULT_SOURCE@ mute"; }
-        XF86AudioPlay              allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-        XF86AudioStop              allow-when-locked=true { spawn-sh "playerctl stop"; }
-        XF86AudioPrev              allow-when-locked=true { spawn-sh "playerctl previous"; }
-        XF86AudioNext              allow-when-locked=true { spawn-sh "playerctl next"; }
+        XF86AudioRaiseVolume       allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "5%+" "--limit" "0.5"; }
+        XF86AudioLowerVolume       allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "5%-"; }
+        XF86AudioMute              allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_SINK@" "toggle"; }
+        Shift+XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_SOURCE@" "5%+" "--limit" "1.0"; }
+        Shift+XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_SOURCE@" "5%-"; }
+        Shift+XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_SOURCE@" "toggle"; }
+        XF86AudioPlay              allow-when-locked=true { spawn "playerctl" "play-pause"; }
+        XF86AudioStop              allow-when-locked=true { spawn "playerctl" "stop"; }
+        XF86AudioPrev              allow-when-locked=true { spawn "playerctl" "previous"; }
+        XF86AudioNext              allow-when-locked=true { spawn "playerctl" "next"; }
 
     // Brightness controls
-        XF86MonBrightnessUp   allow-when-locked=true { spawn-sh "brightnessctl set +5%"; }
-        XF86MonBrightnessDown allow-when-locked=true { spawn-sh "brightnessctl set 5%-"; }
+        XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "+5%"; }
+        XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }
 
     // When all else fails
         Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
