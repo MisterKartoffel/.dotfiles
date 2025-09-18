@@ -226,4 +226,6 @@ cursor {
 /-debug {
     preview-render "screen-capture"
     // preview-render "screencast"
+
+    render-drm-device "/dev/dri/renderD129"
 }
