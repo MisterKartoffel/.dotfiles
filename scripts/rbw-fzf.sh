@@ -55,7 +55,7 @@ function monitor_inactivity() {
     while true; do
         sleep 1
         if [[ -f "${TIMESTAMP_FILE}" ]]; then
-            if [[ $(("$(date +%s)" - "$(stat -c %Y "${TIMESTAMP_FILE}")")) -ge ${TIMEOUT%s} ]]; then
+            if [[ $(("$(printf '%(%s)T\n' "-1")" - "$(stat -c %Y "${TIMESTAMP_FILE}")")) -ge ${TIMEOUT%s} ]]; then
                 echo -e "\nSession timed out after ${TIMEOUT}"
                 cleanup
                 exit 1
