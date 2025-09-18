@@ -1,10 +1,10 @@
 # vim: filetype=dosini
 
-font-family = Maple Mono NF
+font-family = Maple Mono
 font-style = Medium
 font-size = 16
 
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 
 window-padding-x = 5
 window-decoration = none
@@ -18,11 +18,12 @@ confirm-close-surface = false
 quit-after-last-window-closed = false
 
 shell-integration = zsh
-shell-integration-features = true
+shell-integration-features = cursor, sudo, title
+
+bell-features = border
 
 gtk-single-instance = true
 gtk-tabs-location = bottom
-gtk-adwaita = false
 
 config-file = ?keybindings
 config-file = ?maple-mono-font-features

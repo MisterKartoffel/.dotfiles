@@ -2,9 +2,9 @@ prefer-no-csd
 screenshot-path null
 
 spawn-at-startup "eww" "open" "powermenu"
-spawn-at-startup "ghostty" "--initial-window=false"
 
 clipboard { disable-primary; }
+
 hotkey-overlay {
     skip-at-startup
     hide-not-bound
@@ -101,7 +101,7 @@ layer-rule {
 binds {
     // General use binds
         Mod+Shift+Slash  repeat=false { show-hotkey-overlay; }
-        Mod+T            repeat=false { spawn "ghostty"; }
+        Mod+T            repeat=false { spawn "ghostty +new-window"; }
         Mod+F            repeat=false { spawn "app.zen_browser.zen"; }
         Mod+D            repeat=false { spawn "dev.vencord.Vesktop"; }
         Mod+Space        repeat=false { spawn "tofi-drun"; }
