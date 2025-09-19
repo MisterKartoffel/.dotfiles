@@ -30,20 +30,20 @@ function setupListings() {
         currentList="${pkgListDir}/${source}.txt"
 
         case "${source}" in
-            AUR)
+            aur)
                 pacman -Qqem > "${currentList}"
                 ;;
 
-            Flatpak)
+            flatpak)
                 flatpak list --columns=application --app > "${currentList}"
                 ;;
 
-            Optional)
+            optional)
                 comm -13 <(pacman -Qqdt | sort) <(pacman -Qqdtt | sort) > "${currentList}"
                 ;;
 
-            Explicit)
-                pacman -Qqen >"${currentList}"
+            explicit)
+                pacman -Qqen > "${currentList}"
                 ;;
 
             *)
@@ -66,4 +66,4 @@ fi
 mkdir "${pkgListDir}"
 echo "[${logTime}] New package listing master directory: ${pkgListDir}" >> "${logFile}"
 
-setupListings "AUR" "Flatpak" "Optional" "Explicit"
+setupListings "aur" "flatpak" "optional" "explicit"
