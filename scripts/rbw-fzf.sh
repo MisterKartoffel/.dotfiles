@@ -17,6 +17,7 @@ DEPENDS=(
     fzf
     jq
     wl-copy
+    notify-send
 )
 
 function exit_handler() {
@@ -38,6 +39,7 @@ function cleanup() {
 }
 
 function check_depends() {
+    # TODO: check if this needs a for loop or if expanding "${COMMAND[@]}" is enough
     for COMMAND in "${DEPENDS[@]}"; do
         if ! command -v "${COMMAND}" >/dev/null; then
             echo "${COMMAND} is missing. Exiting."
@@ -55,7 +57,7 @@ function monitor_inactivity() {
         sleep 1
         if [[ -f "${TIMESTAMP_FILE}" ]]; then
             if [[ $(("$(printf '%(%s)T\n' "-1")" - "$(stat -c %Y "${TIMESTAMP_FILE}")")) -ge ${TIMEOUT%s} ]]; then
-                echo -e "\nSession timed out after ${TIMEOUT}"
+                notify-send --app-name="Bitwarden" --urgency="Normal" "Bitwarden" "Session timed out after ${TIMEOUT}"
                 cleanup
                 exit 1
             fi
@@ -68,16 +70,19 @@ function handle_session() {
     rbw unlocked >/dev/null 2>&1 || rbw unlock
 
     if ! rbw unlocked; then
+        notify-send --app-name="Bitwarden" --urgency="Critical" "Bitwarden" "Could not unlock vault."
         cleanup
+        exit 1
     fi
-
+    
+    echo "Vault unlocked!"
     return 0
 }
 
 function load_items() {
     echo "Loading items..."
     if ! ITEMS=$(rbw list 2>/dev/null); then
-        echo "Could not load items or operation timed out."
+        notify-send --app-name="Bitwarden" --urgency="Critical" "Bitwarden" "Could not load items."
         exit 1
     fi
     echo "Items loaded successfully."
