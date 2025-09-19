@@ -1,5 +1,8 @@
 # Important notes
 
+TODO:
+- [ ] Evaluate migrating from eww to Quickshell.
+
 ---
 
 # System-wide modifications
