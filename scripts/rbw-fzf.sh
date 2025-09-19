@@ -15,7 +15,6 @@ TIMESTAMP_FILE="/tmp/rbw-fzf-active.timestamp"
 DEPENDS=(
     rbw
     fzf
-    pinentry
     jq
     wl-copy
 )
