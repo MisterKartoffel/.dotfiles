@@ -96,6 +96,7 @@ function rbw_list() {
     ctrl-u       Copy username to clipboard
     ctrl-p       Copy password to clipboard
     ctrl-o       Copy TOTP code to clipboard
+    ctrl-r       Copy recovery code
 
     Navigation:
     ----------
