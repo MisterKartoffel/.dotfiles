@@ -60,6 +60,8 @@ layout {
     }
 }
 
+// TODO: rules with Ghostty's appid are not working, fix soontm maybe?
+
 window-rule {
     match title="Notifications" app-id=r#"^com\.mitchellh\.ghostty$"#
     match title="Picture-in-Picture" app-id="zen"
@@ -70,7 +72,12 @@ window-rule {
     match title="Volume Control" app-id=r#"^org\.pulseaudio\.pavucontrol"#
     match title="File Upload" app-id=r#"^xdg-desktop-portal-gtk$"#
     match title="Save As" app-id=r#"^xdg-desktop-portal-gtk$"#
+
+    // TODO: check if the following also works, would be simpler
+    // match app-id=r#"^vesktop$"
+    // exclude title=r#"^Vesktop$"#
     match title=r#"^(?:\sVesktop)|(\s.*)$"# app-id=r#"vesktop"#
+
     default-column-width { fixed 900; }
     default-window-height { fixed 525; }
     open-floating true
