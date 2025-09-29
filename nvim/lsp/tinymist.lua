@@ -1,4 +1,6 @@
 ---@param command_name string
+---@param client vim.lsp.Client
+---@param bufnr integer
 ---@return fun():nil run_tinymist_command, string cmd_name, string cmd_desc
 local function create_tinymist_command(command_name, client, bufnr)
     local export_type = command_name:match("tinymist%.export(%w+)")
@@ -20,23 +22,20 @@ local function create_tinymist_command(command_name, client, bufnr)
             end
             vim.notify(export_type and res or vim.inspect(res), vim.log.levels.INFO)
         end
-        if vim.fn.has("nvim-0.11") == 1 then
-            return client:exec_cmd({
-                title = title_str,
-                command = command_name,
-                arguments = arguments,
-            }, { bufnr = bufnr }, handler)
-        else
-            return vim.notify("Tinymist commands require Neovim 0.11+", vim.log.levels.WARN)
-        end
+        
+        return client:exec_cmd({
+            title = title_str,
+            command = command_name,
+            arguments = arguments,
+        }, { bufnr = bufnr }, handler)
     end
 
-    ---@type string
-    local cmd_name = export_type and ("LspTinymistExport" .. cmd_display) or ("LspTinymist" .. cmd_display)
-    local cmd_desc = export_type and ("Export to " .. cmd_display) or ("Get " .. cmd_display)
+    local cmd_name = export_type and ("LspTinymistExport" .. cmd_display) or ("LspTinymist" .. cmd_display) ---@type string
+    local cmd_desc = export_type and ("Export to " .. cmd_display) or ("Get " .. cmd_display) ---@type string
     return run_tinymist_command, cmd_name, cmd_desc
 end
 
+---@type vim.lsp.Config
 return {
     cmd = { "tinymist", },
     filetypes = { "typst", },
@@ -57,7 +56,7 @@ return {
             'tinymist.getDocumentMetrics',
         }) do
             local cmd_func, cmd_name, cmd_desc = create_tinymist_command(command, client, bufnr)
-            vim.api.nvim_buf_create_user_command(0, cmd_name, cmd_func, { nargs = 0, desc = cmd_desc })
+            vim.api.nvim_buf_create_user_command(bufnr, cmd_name, cmd_func, { nargs = 0, desc = cmd_desc })
         end
     end,
 }
