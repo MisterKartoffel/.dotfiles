@@ -8,15 +8,5 @@ return {
                 package_uninstalled = "✗"
             },
         },
-        ensure_installed = {
-            "bashls",
-            "jsonls",
-            "lua_ls",
-            "ruff",
-            "shellcheck",
-            "taplo",
-            "tinymist",
-            "typstyle",
-        },
     },
 }
