@@ -72,6 +72,7 @@ window-rule {
     match title="Volume Control" app-id=r#"^org\.pulseaudio\.pavucontrol"#
     match title="File Upload" app-id=r#"^xdg-desktop-portal-gtk$"#
     match title="Save As" app-id=r#"^xdg-desktop-portal-gtk$"#
+    match title="Bitwarden" app-id=r#"^com\.mitchellh\.ghostty$"#
 
     // TODO: check if the following also works, would be simpler
     // match app-id=r#"^vesktop$"
@@ -85,7 +86,6 @@ window-rule {
 
 window-rule {
     match title="Bitwarden" app-id=r#"^com\.mitchellh\.ghostty$"#
-    open-floating true
     block-out-from "screen-capture"
 }
 

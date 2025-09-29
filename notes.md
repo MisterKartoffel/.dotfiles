@@ -1,6 +1,7 @@
 # Important notes
 
 TODO:
+- [ ] Fix window rules no longer working???
 - [ ] Evaluate migrating from eww to Quickshell.
 
 ---
