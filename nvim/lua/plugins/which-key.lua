@@ -3,7 +3,7 @@ return {
     event = "VeryLazy",
     opts_extend = { "spec", },
     opts = {
-        delay = 0,
+        delay = 200,
         preset = "modern",
         keys = {
             scroll_down = "<C-n>",
