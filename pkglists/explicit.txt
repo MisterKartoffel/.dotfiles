@@ -13,7 +13,6 @@ flatpak
 fzf
 ghostty
 git
-glycin
 gnome-keyring
 gtklock
 intel-ucode
