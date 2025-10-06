@@ -1,3 +1,7 @@
+[display]
+compact = false
+use_pager = false
+
 [style.description]
 underline = false
 bold = false
@@ -27,12 +31,11 @@ underline = true
 bold = false
 italic = false
 
-[display]
-compact = false
-use_pager = false
+[search]
+languages = [ "en", ]
+platforms = [ "linux", "common", ]
 
 [updates]
 auto_update = false
-auto_update_interval_hours = 720
 
 [directories]
