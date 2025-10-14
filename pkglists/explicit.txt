@@ -1,10 +1,8 @@
-7zip
 base
 base-devel
 bat
 brightnessctl
 btop
-chafa
 diff-so-fancy
 dunst
 eza
