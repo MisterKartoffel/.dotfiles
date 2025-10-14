@@ -8,7 +8,6 @@
 WALLPAPER_DIR="${HOME}/Pictures/Wallpapers"
 
 DEPENDS=(
-    chafa
     fd
     fzf
 )
@@ -35,17 +34,7 @@ function main() {
             WALLPAPER=$(fd -t f . "${WALLPAPER_DIR}" | shuf -n 1)
             ;;
         pick)
-            # Open wallpaper selector in fzf
-            # TODO: Fix preview, currently doesn't erase previous images from window.
-            FZF_ARGS=(
-                --preview-window="right:70%"
-                --preview='
-                dim=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}
-                chafa -f kitty -s ${dim} {}
-                '
-            )
-
-            WALLPAPER=$(fd -t f . "${WALLPAPER_DIR}" | fzf "${FZF_ARGS[@]}")
+            WALLPAPER=$(fd -t f . "${WALLPAPER_DIR}")
             ;;
         *)
             # Pick selected wallpaper
