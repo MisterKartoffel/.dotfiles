@@ -1,21 +1,6 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Find file to open in Neovim
 nf() {
     fd -t f -H -E ".gnupg" -E ".ssh" -E ".var" . "${HOME}" | fzf -q "$1" -m --preview "bat -n --color=always {}" --bind "enter:become(nvim {})"
-}
-
-# Find manpage to open in Neovim
-mf() {
-    man -k . | fzf -q "$1" --preview "man --pager='nvim +Man!' {1}" | cut -d " " -f 1 | xargs -ro man
-}
-
-# Find and install package(s) in repos or AUR
-install() {
-    paru -Sl | fzf -q "$1" -m --preview "paru -Si {2}" | cut -d " " -f 2 | xargs -ro paru -S
-}
-
-# Find and uninstall locally installed packages
-uninstall() {
-    paru -Q | fzf -q "$1" -m --preview "paru -Qi {1}" | cut -d " " -f 1 | xargs -ro paru -Rns
 }
