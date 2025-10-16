@@ -1,8 +1,6 @@
 prefer-no-csd
 screenshot-path null
 
-spawn-at-startup "eww" "open" "powermenu"
-
 clipboard { disable-primary; }
 
 hotkey-overlay {
