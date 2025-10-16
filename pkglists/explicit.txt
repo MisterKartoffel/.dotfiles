@@ -32,11 +32,9 @@ playerctl
 qbittorrent-nox
 rbw
 reflector
-ripgrep
 satty
 snap-pac
 swayidle
-tealdeer
 ufw
 vivid
 wf-recorder
