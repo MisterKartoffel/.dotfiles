@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# Rudimentary fzf menu for pacman
+
+FZF_ARGS=(
+    --no-mouse
+    --multi
+    --reverse
+    --info="inline-right"
+    --border="rounded"
+    --border-label="⎸ pacman ⎹"
+    --prompt=": "
+    --input-border="rounded"
+    --input-label="⎸ query ⎹"
+    --list-border="rounded"
+    --list-label=""
+    --preview="if paru -Qq {2} >/dev/null 2>&1; then paru -Qi {2}; else paru -Si {2}; fi"
+    --preview-label=""
+    --preview-border="rounded"
+    --footer-label="⎸ Selected packages ⎹"
+    --footer-border="rounded"
+    --bind="result:transform-list-label(if [[ -n \$FZF_QUERY ]]; then echo \"⎸ \$FZF_MATCH_COUNT matches for [\$FZF_QUERY] ⎹\"; else echo \"\"; fi)"
+    --bind="multi:transform-footer(if [[ \$FZF_SELECT_COUNT -ge 1 ]]; then \$HOME/.config/scripts/helper/pac-footer.sh \"{+2..}\"; fi)"
+    --bind="focus:transform-preview-label(echo \"⎸ {2} ⎹\")"
+    --color="info:#4C4F69,spinner:#4C4F69,border:#FAB387,label:#FAB387,prompt:#89B4FA,hl:#A6E3A1,hl+:#A6E3A1,input-border:#A6E3A1,input-label:#A6E3A1,footer-border:#4C4F69,footer-label:#4C4F69,footer-fg:#89B4FA,list-border:#CDD6F4,list-label:#CDD6F4,marker:#A6E3A1,preview-border:#89B4FA,preview-label:#89B4FA"
+)
+
+PACKAGE_LIST=$(paru -Sl | cut -d " " -f 1,2,4- | fzf "${FZF_ARGS[@]}" | cut -d " " -f 2)
+INSTALL_LIST=()
+UNINSTALL_LIST=()
+
+for PACKAGE in ${PACKAGE_LIST}; do
+    if paru -Qq "${PACKAGE}" >/dev/null 2>&1; then
+        UNINSTALL_LIST+=("${PACKAGE}")
+    else
+        INSTALL_LIST+=("${PACKAGE}")
+    fi
+done
+
+if [[ -n "${INSTALL_LIST[0]}" ]]; then
+    echo "${INSTALL_LIST[@]}" | xargs -ro paru -S
+fi
+
+if [[ -n "${UNINSTALL_LIST[0]}" ]]; then
+    echo "${UNINSTALL_LIST[@]}" | xargs -ro paru -Rns
+fi
