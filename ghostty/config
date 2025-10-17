@@ -1,14 +1,11 @@
 # vim: filetype=dosini
 
-font-family = Maple Mono
-font-style = Medium
+font-family = CommitMono Nerd Font Propo
 font-size = 16
 
 theme = Catppuccin Mocha
 
-window-padding-x = 5
 window-decoration = none
-
 resize-overlay = never
 
 clipboard-trim-trailing-spaces = true
@@ -26,4 +23,3 @@ gtk-single-instance = true
 gtk-tabs-location = bottom
 
 config-file = ?keybindings
-config-file = ?maple-mono-font-features

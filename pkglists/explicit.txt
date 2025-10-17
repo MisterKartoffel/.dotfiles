@@ -27,6 +27,7 @@ neovim
 niri
 noto-fonts
 npm
+otf-commit-mono-nerd
 pavucontrol
 playerctl
 qbittorrent-nox

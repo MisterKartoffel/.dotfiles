@@ -1,5 +1,3 @@
-maplemono-nf
-maplemono-ttf-autohint
 paru-bin
 qt6-base-headless
 tofi
