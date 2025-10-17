@@ -1,0 +1,137 @@
+{
+    "layer": "top",
+    "output": "eDP-1",
+    "position": "top",
+    "height": 20,
+    "spacing": 10,
+    "margin": "4",
+    "reload_style_on_change": true,
+
+    "modules-left": ["niri/workspaces", "niri/window", "custom/media"],
+    "modules-center": ["idle_inhibitor", "clock"],
+    "modules-right": ["cpu", "memory", "disk", "pulseaudio", "pulseaudio#microphone", "network", "systemd-failed-units"],
+
+    "niri/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "terminal": "",
+            "browser": "󰈹",
+            "discord": "",
+            "default": ""
+        }
+    },
+
+    "niri/window": {
+        "format": "{app_id}",
+        "tooltip": false,
+        "rewrite": {
+            "com.mitchellh.ghostty": "Ghostty",
+            "zen": "Zen Browser",
+            "org.pulseaudio.pavucontrol": "Volume Control",
+            "com.github.tchx84.Flatseal": "Flatseal",
+            "kvantummanager": "Kvantum",
+            "vesktop": "Discord",
+            "Notifications": "Notification History"
+        }
+    },
+
+    "custom/media": {
+        "format": "{text}",
+        "escape": true,
+        "return-type": "json",
+        "max-length": 40,
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl stop",
+        "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2>/dev/null" // Script in resources/custom_modules folder
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "󰥔",
+            "deactivated": "󰅐"
+        }
+    },
+
+    "clock": {
+        "format": "{:%R}",
+        "format-alt": "{:%a, %b %d %Y}",
+        "interval": 1,
+        "tooltip": false
+    },
+
+    "group/audio": {
+        "orientation": "inherit",
+        "modules": ["pulseaudio", "pulseaudio#microphone"]
+    },
+
+    "cpu": {
+        "format": "{usage}% 󰘚",
+        "tooltip": false
+    },
+
+    "memory": {
+        "format": "{used:0.1f}G ",
+        "tooltip": false
+    },
+
+    "disk": {
+        "format": "{used} 󰒋",
+        "tooltip": false
+    },
+
+    "pulseaudio": {
+        "format": "{volume}% {icon}",
+        "format-muted": "mute {icon}",
+        "tooltip": false,
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "pavucontrol -t 3",
+        "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-",
+        "min-length": 6,
+        "format-icons": {
+            "default": ["", "", ""],
+            "default-muted": "",
+            "headphone": "",
+            "headphone-muted": "󰟎",
+            "hdmi": "󰡁"
+        }
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "tooltip": false,
+        "format-source": "{volume}% 󰍬",
+        "format-source-muted": "mute 󰍭",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-click-right": "pavucontrol -t 4",
+        "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+",
+        "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%-",
+        "min-length": 6,
+        "scroll-step": 5
+    },
+
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) {icon}",
+        "format-ethernet": "{ipaddr}/{cidr} {icon}",
+        "format-disconnected": "Disconnected {icon}",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "tooltip-format-disconnected": "Disconnected",
+        "format-icons": {
+            "wifi": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+            "ethernet": "󰛳",
+            "disconnected": "󰌙"
+        }
+    },
+
+    "systemd-failed-units": {
+        "format": "{nr-failed} ✗",
+        "format-ok": "✓",
+        "user": true,
+        "system": true,
+        "hide-on-ok": false
+    }
+}

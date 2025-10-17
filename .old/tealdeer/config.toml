@@ -1,0 +1,41 @@
+[display]
+compact = false
+use_pager = false
+
+[style.description]
+underline = false
+bold = false
+italic = false
+
+[style.command_name]
+foreground = "blue"
+underline = false
+bold = false
+italic = false
+
+[style.example_text]
+foreground = { rgb = { r = 205, g = 214, b = 244 } }
+underline = false
+bold = false
+italic = false
+
+[style.example_code]
+foreground = "blue"
+underline = false
+bold = false
+italic = false
+
+[style.example_variable]
+foreground = "white"
+underline = true
+bold = false
+italic = false
+
+[search]
+languages = [ "en", ]
+platforms = [ "linux", "common", ]
+
+[updates]
+auto_update = false
+
+[directories]

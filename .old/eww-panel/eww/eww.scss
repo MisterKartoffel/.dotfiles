@@ -1,0 +1,46 @@
+$surface-darkgrey: #313244;
+$surface-fg: #cdd6f4;
+$surface-lightgrey: #585b70;
+$surface-grey: #45475a;
+$surface-red: #f38ba8;
+
+* { all: unset; }
+
+.layout-box {
+  color: rgba($surface-fg, 0.8);
+  padding: 5em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  font-family: "Maple Mono NF";
+}
+
+.clock-box {
+  padding-bottom: 1.2em;
+
+  label {
+    font-size: 2em;
+  }
+}
+
+.wttr-box label {
+  font-size: 1.5em;
+}
+
+.btns-box {
+  font-size: 2.5em;
+
+  button {
+    padding: 0.4em;
+    background-color: rgba($surface-darkgrey, 0.3);
+    border-radius: 0.1em;
+
+    &:hover {
+      background-color: rgba($surface-lightgrey, 0.6);
+      transition: 200ms linear background-color, border-radius;
+    }
+
+    &:first-child {
+      color: rgba($surface-red, 0.8);
+    }
+  }
+}
