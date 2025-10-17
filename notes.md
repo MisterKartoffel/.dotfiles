@@ -388,6 +388,16 @@ ExecStart=/usr/bin/systemd-inhibit --what=idle --who="{application}" --why="{rea
 ```
 
 ## Changes to systemd configurations
+> Idle and sleep handling changes.
+```systemd
+[Login]
+IdleAction=sleep
+IdleActionSec=10min
+
+HandlePowerKey=lock
+HandlePowerKeyLongPress=sleep
+```
+
 > Disabling coredump.
 ```systemd
 /etc/systemd/coredump.conf.d/10-disable.conf
