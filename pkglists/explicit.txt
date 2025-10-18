@@ -12,7 +12,6 @@ fzf
 ghostty
 git
 gnome-keyring
-gtklock
 intel-ucode
 iwd
 jq
