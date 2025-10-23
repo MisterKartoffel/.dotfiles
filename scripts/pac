@@ -59,8 +59,18 @@ declare -a FZF_ARGS=(
                 MODE=\$(( (MODE + 1) % 3 ))
                 echo \$MODE > /tmp/fzf_mode.txt
             )"
-    --bind="result:transform-list-label(if [[ -n \$FZF_QUERY ]]; then echo \"⎸ \$FZF_MATCH_COUNT matches for [\$FZF_QUERY] ⎹\"; else echo \"\"; fi)"
-    --bind="multi:transform-footer( if [[ \$FZF_SELECT_COUNT -ge 1 ]]; then \$HOME/.config/scripts/helper/pac-footer.sh \"{+}\"; fi)"
+    --bind="result:transform-list-label(
+                if [[ -n \$FZF_QUERY ]]; then
+                    echo \"⎸ \$FZF_MATCH_COUNT matches for [\$FZF_QUERY] ⎹\"
+                else
+                    echo \"\"
+                fi
+            )"
+    --bind="multi:transform-footer(
+                if [[ \$FZF_SELECT_COUNT -ge 1 ]]; then
+                    \$HOME/.config/scripts/helper/pac-footer.sh \"{+}\"
+                fi
+            )"
     --bind="focus:transform-preview-label(
                 MODE=\$(<\"/tmp/fzf_mode.txt\")
                 case \$MODE in
@@ -68,7 +78,7 @@ declare -a FZF_ARGS=(
                     2) echo \"⎸ {2} ⎹\" ;;
                 esac
             )+preview(
-                MODE=\$(cat /tmp/fzf_mode.txt)
+                MODE=\$(<\"/tmp/fzf_mode.txt\")
                 if [[ \$MODE == 2 ]]; then
                     paru -Qi {2}
                 else
