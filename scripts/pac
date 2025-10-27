@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Rudimentary fzf menu for pacman
+# TODO: add loading bar in split_list?
 
 trap 'exit_handler' INT TERM
 trap 'cleanup' EXIT
@@ -17,17 +18,46 @@ function cleanup() {
     wait 2>/dev/null || true
 }
 
-declare -i START_MODE=0
-declare -rA FILES=(
-    ["installed"]="/tmp/fzf_installed.txt"
-    ["repos"]="/tmp/fzf_repos.txt"
-    ["aur"]="/tmp/fzf_aur.txt"
-    ["mode"]="/tmp/fzf_mode.txt"
-)
+function check_depends() {
+    if ! command -v "${DEPENDS[@]}" >/dev/null; then
+        echo "${COMMAND} is missing. Exiting."
+        exit 1
+    fi
+}
 
+function split_list() {
+    declare -a INSTALLED REPOS AUR || exit 1
+
+    while read -r REPO PACKAGE VERSION OPTIONAL; do
+        if [[ "${OPTIONAL}" == *"[installed]"* ]]; then
+            INSTALLED+=("${REPO} ${PACKAGE} ${VERSION}")
+        else
+            [[ "${REPO}" == "aur" ]] && \
+                AUR+=("${PACKAGE} ${VERSION}") || \
+                REPOS+=("${PACKAGE} ${VERSION}")
+        fi
+    done
+
+    printf '%s\n' "${REPOS[@]}" > "${FILES[repos]}"
+    printf '%s\n' "${AUR[@]}" > "${FILES[aur]}" &
+    printf '%s\n' "${INSTALLED[@]}" > "${FILES[installed]}" &
+}
+
+declare -i START_MODE=0 || exit 1
+
+declare -A FILES=(
+    [installed]="/tmp/pac_installed.txt"
+    [repos]="/tmp/pac_repos.txt"
+    [aur]="/tmp/pac_aur.txt"
+    [mode]="/tmp/pac_mode.txt"
+) || exit 1
+
+declare -a PACKAGES || exit 1
+declare -a DEPENDS=(fzf)
 declare -a FZF_ARGS=(
     --no-mouse
     --multi
+    --sync
     --reverse
     --info="inline-right"
     --border="rounded"
@@ -38,104 +68,97 @@ declare -a FZF_ARGS=(
     --list-border="rounded"
     --list-label=""
     --preview=""
-    --preview-label="⎸ 'amd-ucode' ⎹"
+    --preview-label=""
     --preview-border="rounded"
     --footer-label="⎸ Selected packages ⎹"
     --footer-border="rounded"
-    --bind="ctrl-f:reload(
-                MODE=\$(<\"/tmp/fzf_mode.txt\")
+    --bind="change:first"
+    --bind="start:transform-preview-label(
+                echo \"⎸ {1} ⎹\"
+            )"
+    --bind="ctrl-s:reload(
+                MODE=\$(<\"/tmp/pac_mode.txt\")
                 case \$MODE in
-                    0) cat /tmp/fzf_repos.txt ;;
-                    1) cat /tmp/fzf_aur.txt ;;
-                    2) cat /tmp/fzf_installed.txt ;;
+                    0) cat /tmp/pac_repos.txt ;;
+                    1) cat /tmp/pac_aur.txt ;;
+                    2) cat /tmp/pac_installed.txt ;;
                 esac
             )+transform-input-label(
-                MODE=\$(<\"/tmp/fzf_mode.txt\")
+                MODE=\$(<\"/tmp/pac_mode.txt\")
                 case \$MODE in
                     0) echo \"⎸ AUR ⎹\" ;;
                     1) echo \"⎸ Uninstall ⎹\" ;;
                     2) echo \"⎸ [core] and [extra] ⎹\" ;;
                 esac
                 MODE=\$(( (MODE + 1) % 3 ))
-                echo \$MODE > /tmp/fzf_mode.txt
+                echo \$MODE > /tmp/pac_mode.txt
             )"
     --bind="result:transform-list-label(
-                if [[ -n \$FZF_QUERY ]]; then
-                    echo \"⎸ \$FZF_MATCH_COUNT matches for [\$FZF_QUERY] ⎹\"
-                else
+                [[ -n \$FZF_QUERY ]] && \\
+                    echo \"⎸ \$FZF_MATCH_COUNT matches for '\$FZF_QUERY' ⎹\" || \\
                     echo \"\"
-                fi
             )"
     --bind="multi:transform-footer(
                 if [[ \$FZF_SELECT_COUNT -ge 1 ]]; then
-                    \$HOME/.config/scripts/helper/pac-footer.sh \"{+}\"
+                    [[ \$(<\"/tmp/pac_mode.txt\") == 2 ]] && COLOR=\$(tput setaf 1)
+                    printf '%s%s\n' \"\$COLOR\" {+}
                 fi
             )"
-    --bind="focus:transform-preview-label(
-                MODE=\$(<\"/tmp/fzf_mode.txt\")
+    --bind="load:transform-preview-label(
+                MODE=\$(<\"/tmp/pac_mode.txt\")
                 case \$MODE in
                     0|1) echo \"⎸ {1} ⎹\" ;;
                     2) echo \"⎸ {2} ⎹\" ;;
                 esac
             )+preview(
-                MODE=\$(<\"/tmp/fzf_mode.txt\")
-                if [[ \$MODE == 2 ]]; then
-                    paru -Qi {2}
-                else
-                    paru -Si {1}
-                fi
+                MODE=\$(<\"/tmp/pac_mode.txt\")
+                [[ \$MODE == 2 ]] && paru -Qi {2} || paru -Si {1}
             )"
-    --color="info:#4C4F69,spinner:#4C4F69,border:#FAB387,label:#FAB387,prompt:#89B4FA,hl:#A6E3A1,hl+:#A6E3A1,input-border:#A6E3A1,input-label:#A6E3A1,footer-border:#4C4F69,footer-label:#4C4F69,footer-fg:#89B4FA,list-border:#CDD6F4,list-label:#CDD6F4,marker:#A6E3A1,preview-border:#89B4FA,preview-label:#89B4FA"
-)
+    --bind="focus:transform-preview-label(
+                MODE=\$(<\"/tmp/pac_mode.txt\")
+                case \$MODE in
+                    0|1) echo \"⎸ {1} ⎹\" ;;
+                    2) echo \"⎸ {2} ⎹\" ;;
+                esac
+            )+preview(
+                MODE=\$(<\"/tmp/pac_mode.txt\")
+                [[ \$MODE == 2 ]] && paru -Qi {2} || paru -Si {1}
+            )"
+    --color="info:#4C4F69,spinner:#4C4F69,border:#FAB387,label:#FAB387,
+            prompt:#89B4FA,hl:#A6E3A1,hl+:#A6E3A1,input-border:#A6E3A1,
+            input-label:#A6E3A1,footer-border:#4C4F69,footer-label:#4C4F69,
+            footer-fg:#89B4FA,list-border:#CDD6F4,list-label:#CDD6F4,
+            marker:#A6E3A1,preview-border:#89B4FA,preview-label:#89B4FA"
+) || exit 1
 
-function split_list() {
-    declare -a INSTALLED REPOS AUR
+function main() {
+    check_depends
+    split_list < <(paru -Sl)
 
-    while read -r REPO PACKAGE VERSION OPTIONAL; do
-        if [[ "${OPTIONAL}" == *"[installed]"* ]]; then
-            INSTALLED+=("${REPO} ${PACKAGE} ${OPTIONAL}")
-        else
-            if [[ "${REPO}" == "aur" ]]; then
-                AUR+=("${PACKAGE} ${VERSION}")
-            else
-                REPOS+=("${PACKAGE} ${VERSION}")
-            fi
-        fi
-    done
+    echo "${START_MODE}" > "${FILES[mode]}" &
 
-    printf '%s\n' "${INSTALLED[@]}" > "${FILES["installed"]}"
-    printf '%s\n' "${REPOS[@]}" > "${FILES["repos"]}"
-    printf '%s\n' "${AUR[@]}" > "${FILES["aur"]}"
+    mapfile -t SELECTION < <(fzf "${FZF_ARGS[@]}" < "${FILES[repos]}") || exit 1
+    [[ -z "${SELECTION[*]}" ]] && echo "No packages selected." && exit 0
+
+    case "$(<"${FILES[mode]}")" in
+        0|1)
+            PACKAGES=("${SELECTION[@]%% *}")
+            paru -S "${PACKAGES[@]}"
+            ;;
+
+        2)
+            PACKAGES=("${SELECTION[@]#* }")
+            PACKAGES=("${PACKAGES[@]%% *}")
+            paru -Rns "${PACKAGES[@]}"
+            ;;
+
+        *)
+            echo "ERROR: Unknown mode ${MODE}."
+            exit 1
+            ;;
+    esac
+
+    exit 0
 }
 
-split_list < <(paru -Sl)
-
-echo "${START_MODE}" > "${FILES["mode"]}"
-
-SELECTION="$(fzf "${FZF_ARGS[@]}" < "${FILES["repos"]}")"
-
-if [[ -z "${SELECTION}" ]]; then
-    echo "No packages were selected, exiting."
-    exit 0
-fi
-
-# MODES:
-# 0 - Repo packages
-# 1 - AUR packages
-# 2 - Installed packages
-case "$(<"${FILES["mode"]}")" in
-    0|1)
-        SELECTION="$(echo "${SELECTION}" | cut -d " " -f 1)"
-        paru -S "${SELECTION[@]}"
-    ;;
-
-    2)
-        SELECTION="$(echo "${SELECTION}" | cut -d " " -f 2)"
-        paru -Rns "${SELECTION[@]}"
-    ;;
-
-    *)
-        echo "ERROR: Unknown mode ${MODE}."
-        exit 1
-    ;;
-esac
+main "${@}"
