@@ -53,7 +53,7 @@ declare -A FILES=(
 ) || exit 1
 
 declare -a PACKAGES || exit 1
-declare -a DEPENDS=(fzf)
+declare -a DEPENDS=(fzf paru)
 declare -a FZF_ARGS=(
     --no-mouse
     --multi
