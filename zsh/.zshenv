@@ -19,6 +19,11 @@ export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
 export PYTHONUSERBASE="${XDG_DATA_HOME}/python"
 export XCURSOR_PATH="${XDG_DATA_HOME}/icons" # Xcursor themes
 
+# run0 variables
+export SYSTEMD_RUN_SHELL_PROMPT_PREFIX="(run0) root "
+export SYSTEMD_ADJUST_TERMINAL_TITLE="false"
+export SYSTEMD_TINT_BACKGROUND="false"
+
 # Zsh path environments
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 export PATH="${PATH}:${HOME}/.local/bin"
