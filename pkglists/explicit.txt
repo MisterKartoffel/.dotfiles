@@ -1,5 +1,4 @@
 base
-base-devel
 bat
 brightnessctl
 btop
@@ -31,6 +30,7 @@ otf-commit-mono-nerd
 pavucontrol
 playerctl
 qbittorrent-nox
+qt6-base
 rbw
 reflector
 satty

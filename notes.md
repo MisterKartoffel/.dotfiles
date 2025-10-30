@@ -273,9 +273,17 @@ ACTION=="add", SUBSYSTEMS=="usb", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesys
 
 ## Pacman hooks
 > [!INFO]
+> This configures hooks pertaining to the `snap-pac` package.
+```ini
+/etc/snap-pac.ini
+
+important_packages = ["linux", "linux-lts", "systemd", "pacman"]
+```
+
+> [!INFO]
 > This hook enables automatic backups of the /boot partition on every kernel update.
 ```conf
-/etc/pacman.d/hooks/10-bootbackup.hook
+/etc/pacman.d/hooks/04-efibackup.hook
 
 [Trigger]
 Operation = Upgrade
@@ -287,7 +295,7 @@ Target = usr/lib/modules/*/vmlinuz
 [Action]
 Description = Pre-transaction /boot backup...
 When = PreTransaction
-Exec = /usr/bin/bash -c 'rsync -a --mkpath --delete /boot/ "/.bootbackup/$(date +%Y_%m_%d_%H.%M.%S)_pre"/'
+Exec = /usr/bin/rsync -avzq --delete /efi /.efibackup
 Depends = rsync
 ```
 
@@ -319,15 +327,6 @@ blacklist iTCO_wdt
 ```
 
 ## Changes to systemd units
-> Added userdata to snapper-boot.service.
-```systemd
-/etc/systemd/system/snapper-boot.service.d/10-userdata.conf
-
-[Service]
-ExecStart=
-ExecStart=/usr/bin/snapper --config root create --cleanup-algorithm number --description "boot" --userdata "important=yes"
-```
-
 > Mask systemd-fsck-root.service (not needed for btrfs).
 ```sh
 systemctl mask systemd-fsck-root.service
@@ -350,41 +349,6 @@ RemainAfterExit=yes
 Environment="WALLPAPER=.background"
 ExecStart=/usr/bin/swaybg -i ${WALLPAPER} -o eDP-1
 Restart=on-failure
-```
-
-> Created swayidle.service for automatic startup of the idle manager
-```systemd
-[Unit]
-Description=Idle manager for Wayland
-Documentation=man:swayidle(1)
-PartOf=graphical-session.target
-After=graphical-session.target
-Requisite=graphical-session.target
-
-[Service]
-Type=simple
-ExecStart=/usr/bin/swayidle -w                      \
-    timeout 60 'brightnessctl -s set 0'             \
-        resume 'brightnessctl -r'                   \
-   timeout 120 'loginctl lock-session'              \
-   timeout 300 'niri msg action power-off-monitors' \
-        resume 'niri msg action power-on-monitors'  \
-   timeout 600 'systemctl suspend-then-hibernate'   \
-  before-sleep 'loginctl lock-session'              \
-          lock 'pidof gtklock || gtklock -d'
-Restart=on-failure
-```
-
-> Created idle-inhibitor.service to toggle idle inhibit via systemd, for any application that may need that.
-```systemd
-[Unit]
-Description=Idle inhibitor
-After=suspend.target
-Before=sleep.target
-
-[Service]
-Type=exec
-ExecStart=/usr/bin/systemd-inhibit --what=idle --who="{application}" --why="{reason}" --mode=block sleep infinity
 ```
 
 ## Changes to systemd configurations
