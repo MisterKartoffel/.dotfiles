@@ -62,7 +62,6 @@ layout {
 // TODO: rules with Ghostty's appid are not working, fix soontm maybe?
 
 window-rule {
-    match title="Notifications" app-id=r#"^com\.mitchellh\.ghostty$"#
     match title="Picture-in-Picture" app-id="zen"
     open-floating true
 }
@@ -71,7 +70,8 @@ window-rule {
     match title="Volume Control" app-id=r#"^org\.pulseaudio\.pavucontrol"#
     match title="File Upload" app-id=r#"^xdg-desktop-portal-gtk$"#
     match title="Save As" app-id=r#"^xdg-desktop-portal-gtk$"#
-    match title="Bitwarden" app-id=r#"^com\.mitchellh\.ghostty$"#
+    match title="rbw-fzf.sh" app-id=r#"^com\.mitchellh\.ghostty$"#
+    match title="dunst-fzf.sh" app-id=r#"^com\.mitchellh\.ghostty$"#
 
     // TODO: check if the following also works, would be simpler
     // match app-id=r#"^vesktop$"
@@ -84,7 +84,7 @@ window-rule {
 }
 
 window-rule {
-    match title="Bitwarden" app-id=r#"^com\.mitchellh\.ghostty$"#
+    match title="rbw-fzf.sh" app-id=r#"^com\.mitchellh\.ghostty$"#
     block-out-from "screen-capture"
 }
 
@@ -110,7 +110,7 @@ binds {
         Mod+T            repeat=false { spawn "ghostty"; }
         Mod+F            repeat=false { spawn "app.zen_browser.zen"; }
         Mod+D            repeat=false { spawn "dev.vencord.Vesktop"; }
-        Mod+Space        repeat=false { spawn "tofi-drun"; }
+        Mod+Space        repeat=false { spawn "fuzzel"; }
         Mod+Delete       repeat=false { spawn "powermenu.sh"; }
         Mod+Shift+Delete repeat=false { quit; }
         Mod+Q            repeat=false { close-window; }

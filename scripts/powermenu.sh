@@ -7,7 +7,7 @@ OPTIONS=(
     lock
 )
 
-SELECTED=$(for OPTION in "${OPTIONS[@]}"; do echo "${OPTION}"; done | tofi)
+SELECTED=$(fuzzel --dmenu --minimal-lines --hide-prompt < <(printf '%s\n' "${OPTIONS[@]}"))
 
 case "${SELECTED}" in
     poweroff)

@@ -8,6 +8,7 @@ dunst
 eza
 fd
 flatpak
+fuzzel
 fzf
 ghostty
 git
