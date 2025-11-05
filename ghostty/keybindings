@@ -2,43 +2,38 @@
 
 # General keybinds
     keybind = clear
-    keybind = ctrl+comma=reload_config
-    keybind = ctrl+period=clear_screen
-    keybind = ctrl+shift+p=toggle_command_palette
+    keybind = alt+comma=reload_config
+    keybind = alt+period=clear_screen
     keybind = ctrl+shift+c=copy_to_clipboard
     keybind = ctrl+shift+v=paste_from_clipboard
 
 # Font keybinds
-    keybind = ctrl+equal=increase_font_size:1
-    keybind = ctrl+minus=decrease_font_size:1
-    keybind = ctrl+zero=reset_font_size
+    keybind = alt+equal=increase_font_size:1
+    keybind = alt+minus=decrease_font_size:1
+    keybind = alt+zero=reset_font_size
 
 # Surface keybinds
     # Close current split -> tab -> window
-        # Not <C-w> not to interfere with Neovim's CTRL-W
-        keybind = ctrl+q=close_surface
+        keybind = alt+q=close_surface
 
     # Split keybinds
-        keybind = ctrl+shift+h=new_split:left
-        keybind = ctrl+shift+j=new_split:down
-        keybind = ctrl+shift+k=new_split:up
-        keybind = ctrl+shift+l=new_split:right
+        keybind = alt+shift+h=new_split:left
+        keybind = alt+shift+j=new_split:down
+        keybind = alt+shift+k=new_split:up
+        keybind = alt+shift+l=new_split:right
 
-        keybind = ctrl+left=resize_split:left,20
-        keybind = ctrl+down=resize_split:down,20
-        keybind = ctrl+up=resize_split:up,20
-        keybind = ctrl+right=resize_split:right,20
-        keybind = ctrl+enter=equalize_splits
+        keybind = alt+left=resize_split:left,20
+        keybind = alt+down=resize_split:down,20
+        keybind = alt+up=resize_split:up,20
+        keybind = alt+right=resize_split:right,20
+        keybind = alt+enter=equalize_splits
 
-        keybind = ctrl+h=goto_split:left
-        keybind = ctrl+j=goto_split:bottom
-        keybind = ctrl+k=goto_split:top
-        keybind = ctrl+l=goto_split:right
+        keybind = alt+h=goto_split:left
+        keybind = alt+j=goto_split:bottom
+        keybind = alt+k=goto_split:top
+        keybind = alt+l=goto_split:right
 
     # Tab keybinds
-        # Not <C-t> not to interfere with Neovim's i_CTRL-T
-        keybind = ctrl+shift+t=new_tab
-
-        # Not <C-n> and <C-p> not to interfere with Neovim's CTRL-N and CTRL-P
-        keybind = ctrl+shift+n=next_tab
-        keybind = ctrl+shift+p=previous_tab
+        keybind = alt+t=new_tab
+        keybind = alt+n=next_tab
+        keybind = alt+p=previous_tab
