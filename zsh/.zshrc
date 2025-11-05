@@ -74,12 +74,13 @@ setopt SHARE_HISTORY
 
 # Shell integrations
 source <(fzf --zsh)
+source "${ZDOTDIR}"/aliases/fzf_opts
 
 # Aliases
 alias ls="eza -la --icons=always --group-directories-first"
 
 # Helper functions
-source "${ZDOTDIR}"/aliases/.zsh_functions
+source "${ZDOTDIR}"/aliases/zsh_functions
 
 # Finish profiling and print out total initialization time
 if [[ ${ZSH_PROFILE} -ne 0 ]]; then

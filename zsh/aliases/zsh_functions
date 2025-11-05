@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Find file to open in Neovim
+nf() {
+    FZF_DEFAULT_COMMAND="fd --type file --hidden --exclude .gnupg --exclude .ssh --exclude .var --base-directory ${HOME}"
+    FZF_ARGS=(
+        --multi
+        --preview="bat --number --color=always ${HOME}/{}"
+        --bind "enter:become(nvim ${HOME}/{})"
+    )
+
+    FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND}" fzf "${FZF_ARGS[@]}"
+}
+
+# Find repositories
+gf() {
+    FZF_DEFAULT_COMMAND="fd --type directory --exact-depth 3 --base-directory ${HOME}/Desktop/Repositories"
+    FZF_ARGS=(
+        --preview="eza --tree --color=always --icons=always ${HOME}/Desktop/Repositories/{}"
+        --bind "enter:become(cd ${HOME}/Desktop/Repositories/{})"
+    )
+
+    FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND}" fzf "${FZF_ARGS[@]}"
+}
