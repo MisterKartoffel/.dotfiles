@@ -1,11 +1,3 @@
-# Important notes
-
-TODO:
-- [ ] Fix window rules no longer working???
-- [ ] Evaluate migrating from eww to Quickshell.
-
----
-
 # System-wide modifications
 ## Sudo
 > [!IMPORTANT]
@@ -253,11 +245,11 @@ ACTION=="add", SUBSYSTEMS=="usb", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesys
 ```ini
 /etc/snap-pac.ini
 
-important_packages = ["linux", "linux-lts", "systemd", "pacman"]
+important_packages = ["linux", "systemd", "pacman"]
 ```
 
 > [!INFO]
-> This hook enables automatic backups of the /boot partition on every kernel update.
+> This hook enables automatic backups of the /efi partition on every kernel update.
 ```conf
 /etc/pacman.d/hooks/04-efibackup.hook
 
