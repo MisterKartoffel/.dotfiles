@@ -24,6 +24,9 @@ export SYSTEMD_RUN_SHELL_PROMPT_PREFIX="(run0) root "
 export SYSTEMD_ADJUST_TERMINAL_TITLE="false"
 export SYSTEMD_TINT_BACKGROUND="false"
 
+# SSH variables
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+
 # Zsh path environments
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 export PATH="${PATH}:${HOME}/.local/bin"
