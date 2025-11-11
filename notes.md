@@ -145,15 +145,9 @@ default_splash="/usr/share/systemd/bootctl/splash-arch.bmp"
 
 ## Mkinitcpio drop-in configuration
 ```conf
-/etc/mkinitcpio.conf.d/10-modules.conf
-
-MODULES=(btrfs)
-```
-
-```conf
 /etc/mkinitcpio.conf.d/40-hooks.conf
 
-HOOKS=(systemd autodetect microcode modconf kms keyboard sd-vconsole block filesystems)
+HOOKS=(systemd autodetect microcode modconf block filesystems)
 ```
 
 ## Disable Copy-on-Write on select $HOME directories
