@@ -179,33 +179,28 @@ $HOME/Videos
 sudo btrfs filesystem mkswapfile --size 8g --uuid clear /swap/swapfile
 ```
 
-> Add the swapfile device.
-```fstab
-/etc/fstab
+> Configure the swapfile unit.
+```systemd
+/etc/systemd/system/swapfile.swap
 
-/swap/swapfile  none    swap    defaults    0   0
+[Swap]
+What=/swap/swapfile
+
+[Install]
+WantedBy=swap.target
 ```
 
 ## Enabled swap on zram
-> Enable the zram kernel module.
+> Configure zram-generator.
 ```conf
-/etc/modules-load.d/zram.conf
+/etc/systemd/zram-generator.conf
 
-zram
+[zram0]
 ```
 
-> Initialize zram with 4G of swap space via udev.
-```conf
-/etc/udev/rules.d/99-zram.rules
-
-ACTION=="add", KERNEL=="zram0", ATTR{initstate}=="0", ATTR{comp_algorithm}="zstd", ATTR{disksize}="4G", RUN="/usr/bin/mkswap -U clear %N", TAG+="systemd"
-```
-
-> Add the zram device.
-```fstab
-/etc/fstab
-
-/dev/zram0  none    swap    defaults,discard,pri=100    0   0
+> Start the zram unit.
+```sh
+systemctl start systemd-zram-generator@zram0.service
 ```
 
 > Configure zram parameters.
