@@ -116,41 +116,28 @@ iwctl station interface connect SSID
 ```
 
 ## Configure Unified Kernel Image generation
-> Create the command lines for default and fallback images.
+> Create the command lines for default image.
 ```conf
-/etc/kernel/cmdline
+/etc/cmdline.d/linux.conf
 
 quiet nowatchdog
 ```
 
-```conf
-/etc/kernel/cmdline-fallback
-
-debug
-```
-
-> Modify mkinitcpio preset files.
+> Modify mkinitcpio preset file.
 ```conf
 /etc/mkinitcpio.d/linux.preset
 
+ALL_kver="/boot/vmlinuz-linux"
+
 PRESETS=('default')
 
-default_uki="esp/EFI/Linux/arch-linux.efi"
-default_options="--cmdline /etc/kernel/cmdline ..."
+default_uki="esp/EFI/BOOT/BOOTX64.efi"
+default_splash="/usr/share/systemd/bootctl/splash-arch.bmp"
 ```
 
-```conf
-/etc/mkinitcpio.d/linux-lts.preset
-
-PRESETS=('fallback')
-
-fallback_uki="esp/EFI/Linux/arch-linux-lts-fallback.efi"
-fallback_options="--cmdline /etc/kernel/cmdline-fallback ..."
-```
-
-> Build the kernel images.
+> Build the kernel image.
 ```sh
-# mkdir -p esp/EFI/Linux
+# mkdir -p esp/EFI/BOOT
 # mkinitcpio -P
 ```
 
