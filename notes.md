@@ -1,23 +1,4 @@
 # System-wide modifications
-## Sudo
-> [!IMPORTANT]
-> Verify at every step to avoid being locked out.
-
-> Create and edit drop-in file.
-```conf
-/etc/sudoers.d/overrides
-
-# User privilege specification
-## Allows members of the wheel group to execute any command
-%wheel ALL=(ALL:ALL) ALL
-
-# Lock visudo to a restricted editor, reject passing editor variables
-Defaults editor=/usr/bin/nvim, !env_editor
-
-# Add terminal bell to password prompt
-Defaults passprompt="[sudo] password for %p: "
-```
-
 ## Systemd-networkd / iwd based internet
 > [!IMPORTANT]
 > List of dependencies:
