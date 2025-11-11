@@ -11,14 +11,12 @@ fuzzel
 fzf
 ghostty
 git
-gnome-keyring
 intel-ucode
 iwd
 jq
 linux
 linux-firmware-amdgpu
 linux-firmware-realtek
-linux-lts
 ly
 man-db
 mpv
@@ -37,4 +35,5 @@ snap-pac
 ufw
 vivid
 wf-recorder
+zram-generator
 zsh
