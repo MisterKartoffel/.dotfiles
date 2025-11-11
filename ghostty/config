@@ -8,14 +8,11 @@ theme = Catppuccin Mocha
 window-decoration = none
 resize-overlay = never
 
-clipboard-trim-trailing-spaces = true
-clipboard-paste-protection = true
-
 confirm-close-surface = false
 quit-after-last-window-closed = false
 
 shell-integration = zsh
-shell-integration-features = cursor, sudo, title
+shell-integration-features = cursor,sudo,title
 
 bell-features = border
 
