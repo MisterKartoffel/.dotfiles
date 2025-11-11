@@ -17,8 +17,8 @@ gf() {
     FZF_DEFAULT_COMMAND="fd --type directory --exact-depth 3 --base-directory ${HOME}/Desktop/Repositories"
     FZF_ARGS=(
         --preview="eza --tree --color=always --icons=always ${HOME}/Desktop/Repositories/{}"
-        --bind "enter:become(cd ${HOME}/Desktop/Repositories/{})"
     )
 
-    FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND}" fzf "${FZF_ARGS[@]}"
+    CD_PATH="$(FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND}" fzf "${FZF_ARGS[@]}")" || exit 1
+    cd "${HOME}/Desktop/Repositories/${CD_PATH}" || exit 1
 }
