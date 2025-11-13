@@ -1,7 +1,3 @@
-# TODO:
-
-- [ ] Fix having a redundant home subvolume with home/$USER.homedir subvolume
-
 # System-wide modifications
 ## Systemd-networkd / iwd based internet
 > [!IMPORTANT]
