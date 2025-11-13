@@ -12,7 +12,7 @@ input {
     keyboard {
         xkb {
             layout "br"
-            options "caps:escape"
+            options "caps:escape_shifted_capslock"
         }
         numlock
     }
