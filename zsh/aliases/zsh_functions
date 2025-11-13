@@ -20,5 +20,5 @@ gf() {
     )
 
     CD_PATH="$(FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND}" fzf "${FZF_ARGS[@]}")" || exit 1
-    cd "${HOME}/Desktop/Repositories/${CD_PATH}" || exit 1
+    cd "${HOME}/Desktop/Repositories/${CD_PATH}" || return
 }
