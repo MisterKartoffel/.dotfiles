@@ -73,12 +73,12 @@ window-rule {
     match title="dunst-fzf.sh" app-id=r#"^com\.mitchellh\.ghostty$"#
 
     // TODO: check if the following also works, would be simpler
-    // match app-id=r#"^vesktop$"
-    // exclude title=r#"^Vesktop$"#
-    match title=r#"^(?:\sVesktop)|(\s.*)$"# app-id=r#"vesktop"#
+    match app-id=r#"^vesktop$"#
+    exclude title=r#"^Vesktop$"#
+    // match title=r#"^(?:\sVesktop)|(\s.*)$"# app-id=r#"vesktop"#
 
-    default-column-width { fixed 900; }
-    default-window-height { fixed 525; }
+    default-column-width { proportion 0.5; }
+    default-window-height { proportion 0.5; }
     open-floating true
 }
 
