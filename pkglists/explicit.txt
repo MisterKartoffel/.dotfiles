@@ -28,7 +28,6 @@ otf-commit-mono-nerd
 pavucontrol
 playerctl
 qbittorrent-nox
-rbw
 reflector
 satty
 snap-pac

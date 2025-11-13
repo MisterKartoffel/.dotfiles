@@ -70,7 +70,6 @@ window-rule {
     match title="Volume Control" app-id=r#"^org\.pulseaudio\.pavucontrol"#
     match title="File Upload" app-id=r#"^xdg-desktop-portal-gtk$"#
     match title="Save As" app-id=r#"^xdg-desktop-portal-gtk$"#
-    match title="rbw-fzf.sh" app-id=r#"^com\.mitchellh\.ghostty$"#
     match title="dunst-fzf.sh" app-id=r#"^com\.mitchellh\.ghostty$"#
 
     // TODO: check if the following also works, would be simpler
@@ -81,11 +80,6 @@ window-rule {
     default-column-width { fixed 900; }
     default-window-height { fixed 525; }
     open-floating true
-}
-
-window-rule {
-    match title="rbw-fzf.sh" app-id=r#"^com\.mitchellh\.ghostty$"#
-    block-out-from "screen-capture"
 }
 
 window-rule {
