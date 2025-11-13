@@ -154,7 +154,7 @@ sudo btrfs filesystem mkswapfile --size 8g --uuid clear /swap/swapfile
 
 > Configure the swapfile unit.
 ```systemd
-/etc/systemd/system/swapfile.swap
+/etc/systemd/system/swap-swapfile.swap
 
 [Swap]
 What=/swap/swapfile
@@ -306,9 +306,9 @@ Restart=on-failure
 [Login]
 IdleAction=sleep
 IdleActionSec=10min
-
 HandlePowerKey=lock
 HandlePowerKeyLongPress=sleep
+StopIdleSessionSec=0
 ```
 
 > Disabling coredump.
