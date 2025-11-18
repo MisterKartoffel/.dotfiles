@@ -13,7 +13,6 @@ ghostty
 git
 intel-ucode
 iwd
-jq
 linux
 linux-firmware-amdgpu
 linux-firmware-realtek
@@ -25,7 +24,6 @@ niri
 noto-fonts
 npm
 otf-commit-mono-nerd
-pavucontrol
 playerctl
 qbittorrent-nox
 reflector
@@ -34,5 +32,6 @@ snap-pac
 ufw
 vivid
 wf-recorder
+wiremix
 zram-generator
 zsh
