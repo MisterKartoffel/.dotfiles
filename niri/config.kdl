@@ -35,7 +35,6 @@ layout {
     gaps 8
 
     always-center-single-column
-    empty-workspace-above-first
     background-color "transparent"
 
     preset-column-widths {
@@ -59,18 +58,11 @@ layout {
     }
 }
 
-// TODO: rules with Ghostty's appid are not working, fix soontm maybe?
-
 window-rule {
-    match title="Picture-in-Picture" app-id="zen"
-    open-floating true
-}
-
-window-rule {
-    match title="Volume Control" app-id=r#"^org\.pulseaudio\.pavucontrol"#
-    match title="File Upload" app-id=r#"^xdg-desktop-portal-gtk$"#
-    match title="Save As" app-id=r#"^xdg-desktop-portal-gtk$"#
-    match title="dunst-fzf.sh" app-id=r#"^com\.mitchellh\.ghostty$"#
+    match title=r#"^Picture-in-Picture$"# app-id=r#"^app\.zen_browser\.zen$"#
+    match title=r#"^File Upload$"# app-id=r#"^xdg-desktop-portal-gtk$"#
+    match title=r#"^Save As$"# app-id=r#"^xdg-desktop-portal-gtk$"#
+    match title=r#"^wiremix$"# app-id=r#"^com\.mitchellh\.ghostty$"#
 
     // TODO: check if the following also works, would be simpler
     match app-id=r#"^vesktop$"#
@@ -226,8 +218,8 @@ cursor {
     hide-after-inactive-ms 1000
 }
 
-/-debug {
-    preview-render "screen-capture"
+debug {
+    // preview-render "screen-capture"
     // preview-render "screencast"
 
     render-drm-device "/dev/dri/renderD129"
