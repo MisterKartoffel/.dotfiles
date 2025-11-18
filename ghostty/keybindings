@@ -3,7 +3,6 @@
 # General keybinds
     keybind = clear
     keybind = alt+comma=reload_config
-    keybind = alt+period=clear_screen
     keybind = ctrl+shift+c=copy_to_clipboard
     keybind = ctrl+shift+v=paste_from_clipboard
 
