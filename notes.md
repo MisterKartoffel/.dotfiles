@@ -40,7 +40,7 @@ DHCP=yes
 
 > Enslave wanted network interfaces.
 ```
-/etc/systemd/network/30-ethernet-bond0.network
+/etc/systemd/network/30-eth0-bond0.network
 
 [Match]
 PermanentMACAddress=<check>
@@ -51,7 +51,7 @@ PrimarySlave=true
 ```
 
 ```
-/etc/systemd/network/30-wifi-bond0.network
+/etc/systemd/network/30-wlan0-bond0.network
 
 [Match]
 PermanentMACAddress=<check>
@@ -60,21 +60,26 @@ PermanentMACAddress=<check>
 Bond=bond0
 ```
 
+> Enable magic packet for Wake-on-LAN.
+```
+/etc/systemd/network/50-eth0-wol.link
+
+[Match]
+PermanentMACAddress=<check>
+
+[Link]
+NamePolicy=keep kernel
+MACAddressPolicy=persistent
+WakeOnLan=magic
+```
+
 > Change systemd-networkd-wait-online.service to wait for any interface instead of all.
 ```systemd
-/etc/systemd/system/systemd-networkd-wait-online.service.d/10-wait_for_only_one_interface.conf
+/etc/systemd/system/systemd-networkd-wait-online.service.d/overrides.conf
 
 [Service]
 ExecStart=
 ExecStart=/usr/lib/systemd/systemd-networkd-wait-online --any
-```
-
-> Reintroduce traditional interface naming for all interfaces (for consistency, iwd does this for WLAN)
-```systemd
-/etc/systemd/network/99-default.link.d/10-traditional_interface_naming.conf
-
-[Link]
-NamePolicy=keep kernel
 ```
 
 > Enable systemd units.
@@ -85,7 +90,7 @@ systemctl enable --now iwd.service
 
 > Connect to wireless access point via iwd.
 ```sh
-iwctl station interface connect SSID
+iwctl station <interface> connect SSID
 ```
 
 ## Configure Unified Kernel Image generation
