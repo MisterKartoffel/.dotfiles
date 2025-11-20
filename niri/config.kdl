@@ -215,8 +215,8 @@ cursor {
     hide-after-inactive-ms 1000
 }
 
-debug {
-    // preview-render "screen-capture"
+/-debug {
+    preview-render "screen-capture"
     // preview-render "screencast"
 
     render-drm-device "/dev/dri/renderD129"
