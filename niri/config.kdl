@@ -35,6 +35,7 @@ layout {
     gaps 8
 
     always-center-single-column
+    empty-workspace-above-first
     background-color "transparent"
 
     preset-column-widths {
@@ -45,9 +46,8 @@ layout {
     default-column-width { proportion 1.0; }
 
     focus-ring {
-        width 1
-        active-color "#cdd6f4"
-        inactive-color "#11111b"
+        width 2
+        active-color "#45475a"
     }
 
     border { off; }
