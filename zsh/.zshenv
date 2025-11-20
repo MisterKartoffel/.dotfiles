@@ -31,6 +31,9 @@ export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 export PATH="${PATH}:${HOME}/.local/bin"
 
+# Legacy deadkey handling
+export GTK_IM_MODULE="simple"
+
 # Colors
 export LS_COLORS="$(vivid generate catppuccin-mocha)"
 export FZF_DEFAULT_OPTS=" \

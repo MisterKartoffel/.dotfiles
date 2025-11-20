@@ -206,9 +206,6 @@ binds {
 environment {
     GDK_BACKEND "wayland"
     GTK_THEME "catppuccin-mocha-mauve-standard+default:dark"
-
-    // Need this for better deadkey handling starting in GTK 4.20
-    GTK_IM_MODULE "simple"
 }
 
 cursor {
