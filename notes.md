@@ -98,7 +98,7 @@ iwctl station <interface> connect SSID
 ```conf
 /etc/cmdline.d/linux.conf
 
-quiet nowatchdog
+quiet amdgpu.si_support=1
 ```
 
 > Modify mkinitcpio preset file.
@@ -191,11 +191,19 @@ vm.watermark_scale_factor = 125
 vm.page-cluster = 0
 ```
 
-## Change I/O scheduler for HDDs
+## Udev rules
+> Change IO scheduler for HDDs.
 ```conf
 /etc/udev/rules.d/60-ioschedulers.rules
 
 ACTION=="add|change", KERNEL=="sd[a-z]*", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
+```
+
+> Automount USB devices with systemd-mount.
+```conf
+/etc/udev/rules.d/72-usb_automount.rules
+
+ACTION=="add", SUBSYSTEMS=="usb", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesystem", RUN{program}+="/usr/bin/systemd-mount --no-block --automount=yes --collect $devnode /mnt"
 ```
 
 ## Pacman configuration
@@ -206,23 +214,6 @@ Color
 VerbosePkgLists
 DisableDownloadTimeout
 ILoveCandy
-```
-
-## Forced AMDGPU module
-> Disable and enable radeon and amdgpu support for SI, respectively.
-```conf
-/etc/modprobe.d/10-gpu_driver.conf
-
-options radeon si_support=0
-options amdgpu si_support=1
-```
-
-## Automount USB devices
-> Create udev rule to automount USB devices with systemd-mount.
-```conf
-/etc/udev/rules.d/72-usb_automount.rules
-
-ACTION=="add", SUBSYSTEMS=="usb", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesystem", RUN{program}+="/usr/bin/systemd-mount --no-block --automount=yes --collect $devnode /media"
 ```
 
 ## Pacman hooks
@@ -270,16 +261,6 @@ When = PostTransaction
 Exec = /bin/su - user /bin/sh -c '$HOME/.local/bin/genpkglist'
 ```
 
-## Disabled watchdogs
-> Add `nowatchdog` to kernel parameters.
-
-> Blacklist the iTCO_wdt device.
-```conf
-/etc/modprobe.d/11-blacklist_iTCO_wdt.conf
-
-blacklist iTCO_wdt
-```
-
 ## Changes to systemd units
 > Mask systemd-fsck-root.service (not needed for btrfs).
 ```sh
@@ -318,7 +299,7 @@ StopIdleSessionSec=0
 
 > Disabling coredump.
 ```systemd
-/etc/systemd/coredump.conf.d/10-disable.conf
+/etc/systemd/coredump.conf.d/overrides.conf
 
 [Coredump]
 Storage=none
@@ -327,7 +308,7 @@ ProcessSizeMax=0
 
 > Reducing journal size.
 ```systemd
-/etc/systemd/journald.conf.d/10-journal_size.conf
+/etc/systemd/journald.conf.d/overrides.conf
 
 [Journal]
 SystemMaxUse=50M
@@ -335,7 +316,7 @@ SystemMaxUse=50M
 
 > Reducing hibernate delay on suspend-then-hibernate.
 ```systemd
-/etc/systemd/sleep.conf.d/10-hibernate_delay_sec.conf
+/etc/systemd/sleep.conf.d/overrides.conf
 
 [Sleep]
 HibernateDelaySec=30m
