@@ -1,7 +1,6 @@
 base
 brightnessctl
 btop
-diff-so-fancy
 eza
 fd
 flatpak

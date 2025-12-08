@@ -50,11 +50,9 @@
 [column]
     ui = auto
 [interactive]
-    diffFilter  = diff-so-fancy --patch
     singleKey   = true
 [pager]
     branch  = false
-    diff    = diff-so-fancy | $PAGER
 [help]
     autocorrect = prompt
 [log]
