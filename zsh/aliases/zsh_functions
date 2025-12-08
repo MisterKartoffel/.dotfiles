@@ -5,7 +5,7 @@ nf() {
     FZF_DEFAULT_COMMAND="fd --type file --hidden --exclude .gnupg --exclude .ssh --exclude .var --base-directory ${HOME}"
     FZF_ARGS=(
         --multi
-        --preview="bat --number --color=always ${HOME}/{}"
+        --preview="cat --number ${HOME}/{}"
         --bind "enter:become(nvim ${HOME}/{})"
     )
 

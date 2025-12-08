@@ -1,5 +1,4 @@
 base
-bat
 brightnessctl
 btop
 diff-so-fancy
