@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# Find file to open in Neovim
+# Find file in .config to open in Neovim
 nf() {
-    FZF_DEFAULT_COMMAND="fd --type file --hidden --exclude .gnupg --exclude .ssh --exclude .var --base-directory ${HOME}"
+    FZF_DEFAULT_COMMAND="fd --type file --hidden --exclude .git --base-directory ${XDG_CONFIG_HOME}"
     FZF_ARGS=(
         --multi
         --preview="cat --number ${HOME}/{}"
-        --bind "enter:become(nvim ${HOME}/{})"
+        --bind "enter:become(nvim ${XDG_CONFIG_HOME}/{})"
     )
 
     FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND}" fzf "${FZF_ARGS[@]}"
@@ -14,11 +14,12 @@ nf() {
 
 # Find repositories
 gf() {
-    FZF_DEFAULT_COMMAND="fd --type directory --exact-depth 3 --base-directory ${HOME}/Desktop/Repositories"
+    REPO_DIR="${HOME}/Desktop/Repositories"
+    FZF_DEFAULT_COMMAND="fd --type directory --exact-depth 3 --base-directory ${REPO_DIR}"
     FZF_ARGS=(
-        --preview="eza --tree --color=always --icons=always ${HOME}/Desktop/Repositories/{}"
+        --preview="eza --tree --color=always --icons=always ${REPO_DIR}/{}"
     )
 
-    CD_PATH="$(FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND}" fzf "${FZF_ARGS[@]}")" || exit 1
-    cd "${HOME}/Desktop/Repositories/${CD_PATH}" || return
+    CD_PATH="$(FZF_DEFAULT_COMMAND="${FZF_DEFAULT_COMMAND}" fzf "${FZF_ARGS[@]}")" || exit 0
+    cd "${REPO_DIR}"/"${CD_PATH}" || return
 }
