@@ -18,7 +18,7 @@
 # When = PostTransaction
 # Exec = /bin/su - user /bin/sh -c '/home/user/.local/bin/genpkglist.sh'
 
-logFile="${XDG_CONFIG_HOME:-${HOME}/.config}/scripts/genpkglist.log"
+logFile="${XDG_STATE_HOME:-${HOME}/.local/state}/genpkglist.log"
 pkgListDir="${XDG_CONFIG_HOME:-${HOME}/.config}/pkglists"
 
 function setupListings() {

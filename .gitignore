@@ -5,6 +5,5 @@ npm
 pulse
 systemd
 
-*.log
 *.zwc
 *.zwc.old
