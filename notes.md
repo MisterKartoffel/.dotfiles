@@ -84,8 +84,8 @@ ExecStart=/usr/lib/systemd/systemd-networkd-wait-online --any
 
 > Enable systemd units.
 ```sh
-systemctl enable --now systemd-networkd.service
-systemctl enable --now iwd.service
+systemctl enable --now systemd-networkd
+systemctl enable --now iwd
 ```
 
 > Connect to wireless access point via iwd.
@@ -238,7 +238,7 @@ Type = Path
 Target = usr/lib/modules/*/vmlinuz
 
 [Action]
-Description = Pre-transaction /boot backup...
+Description = Pre-transaction /efi backup...
 When = PreTransaction
 Exec = /usr/bin/rsync -avzq --delete /efi /.efibackup
 Depends = rsync
