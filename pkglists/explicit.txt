@@ -17,7 +17,6 @@ linux-firmware-realtek
 ly
 mako
 man-db
-mpv
 neovim
 niri
 noto-fonts

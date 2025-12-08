@@ -2,3 +2,4 @@ app.zen_browser.zen
 com.github.tchx84.Flatseal
 dev.vencord.Vesktop
 io.github.celluloid_player.Celluloid
+org.gnome.Loupe
