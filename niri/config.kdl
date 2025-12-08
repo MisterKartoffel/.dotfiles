@@ -8,6 +8,8 @@ hotkey-overlay {
     hide-not-bound
 }
 
+recent-windows { off; }
+
 input {
     keyboard {
         xkb {
@@ -29,6 +31,7 @@ output "eDP-1" {
 output "HDMI-A-1" {
     mode "1920x1080"
     position x=0 y=-1080
+    hot-corners { off; }
 }
 
 layout {
@@ -172,13 +175,13 @@ binds {
                 Mod+Alt+5 { move-window-to-workspace focus=false 5; }
 
     // Column manipulation
-        // Consume current window into adjacent column with Mod + []
-            Mod+BracketLeft  { consume-or-expel-window-left; }
-            Mod+BracketRight { consume-or-expel-window-right; }
-
         // Consume right-adjacent window into current column with Mod + ,.
             Mod+Comma  { consume-window-into-column; }
             Mod+Period { expel-window-from-column; }
+
+        // Consume current window into adjacent column with Mod + Shift + ,.
+            Mod+Shift+Comma { consume-or-expel-window-left; }
+            Mod+Shift+Period { consume-or-expel-window-right; }
 
         // Toggle between tabbed and column display
             Mod+SemiColon { toggle-column-tabbed-display; }
