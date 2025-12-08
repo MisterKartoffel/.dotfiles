@@ -2,7 +2,6 @@ base
 brightnessctl
 btop
 diff-so-fancy
-dunst
 eza
 fd
 flatpak
@@ -12,10 +11,12 @@ ghostty
 git
 intel-ucode
 iwd
+libnotify
 linux
 linux-firmware-amdgpu
 linux-firmware-realtek
 ly
+mako
 man-db
 mpv
 neovim
