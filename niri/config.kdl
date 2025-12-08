@@ -1,5 +1,5 @@
 prefer-no-csd
-screenshot-path null
+screenshot-path "/tmp/niri-screenshot.png"
 
 clipboard { disable-primary; }
 
@@ -105,7 +105,7 @@ binds {
     // Screencapture
         Mod+Print       repeat=false { screenshot; }
         Mod+Shift+Print repeat=false { screenshot-window; }
-        Mod+F12         repeat=false { spawn-sh "wl-paste | satty --fullscreen -f - -o $HOME/Pictures/Screenshots/$(date '+%Y%m%d-%H:%M:%S').png"; }
+        Mod+F12         repeat=false { spawn-sh "satty -f /tmp/niri-screenshot.png -o $HOME/Pictures/Screenshots/$(date '+%Y%m%d-%H:%M:%S').png"; }
         Mod+F10         repeat=false { spawn "record.sh"; }
 
     // Window and workspace movement
