@@ -80,7 +80,7 @@ WakeOnLan=magic
 
 > Change systemd-networkd-wait-online.service to wait for any interface instead of all.
 ```systemd
-/etc/systemd/system/systemd-networkd-wait-online.service.d/overrides.conf
+/etc/systemd/system/systemd-networkd-wait-online.service.d/override.conf
 
 [Service]
 ExecStart=
@@ -304,7 +304,7 @@ StopIdleSessionSec=0
 
 > Disabling coredump.
 ```systemd
-/etc/systemd/coredump.conf.d/overrides.conf
+/etc/systemd/coredump.conf.d/override.conf
 
 [Coredump]
 Storage=none
@@ -313,7 +313,7 @@ ProcessSizeMax=0
 
 > Reducing journal size.
 ```systemd
-/etc/systemd/journald.conf.d/overrides.conf
+/etc/systemd/journald.conf.d/override.conf
 
 [Journal]
 SystemMaxUse=50M
@@ -321,7 +321,7 @@ SystemMaxUse=50M
 
 > Reducing hibernate delay on suspend-then-hibernate.
 ```systemd
-/etc/systemd/sleep.conf.d/overrides.conf
+/etc/systemd/sleep.conf.d/override.conf
 
 [Sleep]
 HibernateDelaySec=30m
