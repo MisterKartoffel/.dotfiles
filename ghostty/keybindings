@@ -6,6 +6,9 @@
     keybind = ctrl+shift+c=copy_to_clipboard
     keybind = ctrl+shift+v=paste_from_clipboard
 
+    # This is here until v1.3.0 drops
+    keybind = alt+f=write_scrollback_file:paste
+
 # Font keybinds
     keybind = alt+equal=increase_font_size:1
     keybind = alt+minus=decrease_font_size:1
