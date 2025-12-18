@@ -1,0 +1,100 @@
+# vim: ft=neomuttrc
+# This file is a WIP
+
+# In order: not addressed to me, addressed to me,
+# addressed to group, copied to me, sent by me, mailing list
+set to_chars = " "
+# tagged, favorited, marked for deletion, attachment marked for deletion, replied to
+set flag_chars = "      "
+
+set sort = "reverse-date"
+
+set index_format = "%zc %zs %zt  %-20.20L %@attachment_info@ %-30.100s %*  %(!%a, %d %h %H:%M)  "
+index-format-hook attachment_info "=B text/calendar ~X 1-" "󰁦 "
+index-format-hook attachment_info "=B text/calendar" "  "
+index-format-hook attachment_info "~X 1-" "  󰁦"
+index-format-hook attachment_info "~A" "   "
+
+set markers=no
+# set status_format = " %D %u %R %d %t %F %p"
+set status_format = " %D %?u? %u ?%?R? %R ?%?d? %d ?%?t? %t ?%?F? %F ?%?p? %p?"
+set sidebar_format = "%D%?Z? [%Z]?%* %?S?%S?"
+
+# Statusbar Colors   ----------------------------------------------------------------
+color status color8 default '(|)'
+color status default color8 '\w+/\w+(\s\w+)*'
+color status green color8 ' [0-9]+'        # Unread messages count
+color status blue color8 ' [0-9]+'         # Read messages count icon
+color status color229 color8 ' [0-9]+'     # Flagged icon
+color status color216 color8 ' [0-9]+'     # Tagged icon
+color status color210 color8 ' [0-9]+'          # Pending delete icon
+
+color index      green default ~U    # Unread messages
+color index      blue default ~R     # Read messages
+color index      color229 default ~F # Flagged messages
+color index      color216 default ~T # Tagged messages
+color index      color210 default ~D # Messages to delete
+color attachment color86 default     # Attachments
+color signature  color245 default    # Signatures
+
+color normal    color15 default
+color indicator color189 black  # currently highlighted message Surface 2=Background Text=Foreground
+color error     color210 default  # error messages are Red
+color status    color15 default # status line "Subtext 0"
+color tree      color15 default # thread tree arrows Subtext 0
+color tilde     color15 default # blank line padding Subtext 0
+
+color hdrdefault color245 default # default headers
+color header     color189 default "^From:"
+color header     color189 default "^Subject:"
+
+color quoted  color15 default # Subtext 0
+color quoted1 color7 default  # Subtext 1
+color quoted2 color8 default  # Surface 2
+color quoted3 color0 default  # Surface 1
+color quoted4 color0 default
+color quoted5 color0 default
+
+color body color2 default [\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+               # email addresses Green
+color body white default (^|[[:space:]])\\*[^[:space:]]+\\*([[:space:]]|$) # *bold* text White
+color body white default (^|[[:space:]])_[^[:space:]]+_([[:space:]]|$)     # _underlined_ text White
+color body white default (^|[[:space:]])/[^[:space:]]+/([[:space:]]|$)     # /italic/ text White
+
+# Sidebar Colors   ------------------------------------------------------------------
+color sidebar_highlight color189 black  # highlighted, but not open, mailbox.
+color sidebar_ordinary default default  # Color to give mailboxes by default
+color sidebar_indicator green default   # currently selected mailbox
+color sidebar_divider color8 black      # divider between sidebar & content
+
+# Message Headers   -----------------------------------------------------------------
+color hdrdefault color8 default
+
+# Message Body   --------------------------------------------------------------------
+
+# Attachments
+color attachment color8 default
+
+# Signature
+color signature color8 default
+
+# emails
+color body color14 default  '[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+'
+
+# hide "mailto"
+color body color0 color0  '<mailto:[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+>'
+
+# URLs
+color body color4 default  '(https?|ftp)://[-\.,/%~_:?&=\#a-zA-Z0-9\+]+'
+
+# Dividers
+color body color8 default '(^[-_]*$)'
+
+# Important info in calendar invites
+color body color6 default '^(Date\/Time|Location|Organiser|Invitees|Teams Meeting)(:| \~\~)'
+
+# Quotes
+color quoted		color61		default
+color quoted1		color117	default
+color quoted2		color84		default
+color quoted3		color215	default
+color quoted4		color212	default

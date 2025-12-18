@@ -1,0 +1,3 @@
+text/html; w3m -I %{charset} -T text/html -cols ${COLUMNS} -dump; copiousoutput
+application/pdf; app.zen_browser.zen %s
+image/*; swayimg --config="info.show=no" %s

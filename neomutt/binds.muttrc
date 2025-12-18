@@ -1,0 +1,18 @@
+# vim: ft=neomuttrc
+macro index c "<change-folder>?" "Change to folder overview"
+
+bind attach,browser,index g noop
+bind attach,browser,index gg first-entry
+bind attach,browser,index G last-entry
+bind pager g noop
+bind pager gg top
+bind pager G bottom
+bind pager k previous-line
+bind pager j next-line
+
+bind index \CB sidebar-toggle-visible
+bind index \Cn sidebar-next
+bind index \Cp sidebar-prev
+bind index \Co sidebar-open
+bind index k previous-entry
+bind index j next-entry

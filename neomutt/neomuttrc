@@ -1,0 +1,40 @@
+account-hook imaps://outlook.office365.com/ "source $XDG_CONFIG_HOME/neomutt/accounts/hotmail.muttrc"
+account-hook imaps://imap.ufrgs.br/ "source $XDG_CONFIG_HOME/neomutt/accounts/ufrgs.muttrc"
+
+folder-hook "Hotmail/*" "source $XDG_CONFIG_HOME/neomutt/accounts/hotmail.muttrc"
+folder-hook "UFRGS/*" "source $XDG_CONFIG_HOME/neomutt/accounts/ufrgs.muttrc"
+
+named-mailboxes "Hotmail/Caixa de Entrada" "imaps://outlook.office365.com/Inbox" \
+                "Hotmail/Arquivo Morto" "imaps://outlook.office365.com/Arquivo Morto" \
+                "Hotmail/Lixeira" "imaps://outlook.office365.com/Deleted" \
+                "Hotmail/Rascunhos" "imaps://outlook.office365.com/Drafts" \
+                "Hotmail/Enviados" "imaps://outlook.office365.com/Sent" \
+                "Hotmail/Lixo Eletrônico" "imaps://outlook.office365.com/Junk" \
+                "UFRGS/Caixa de Entrada" "imaps://imap.ufrgs.br/INBOX" \
+                "UFRGS/Arquivo Morto" "imaps://imap.ufrgs.br/Arquivo Morto" \
+                "UFRGS/Lixeira" "imaps://imap.ufrgs.br/Trash" \
+                "UFRGS/Rascunhos" "imaps://imap.ufrgs.br/Drafts" \
+                "UFRGS/Enviados" "imaps://imap.ufrgs.br/Sent" \
+                "UFRGS/Lixo Eletrônico" "imaps://imap.ufrgs.br/Spam"
+
+set editor = "nvim"
+set mailcap_path = "$XDG_CONFIG_HOME/neomutt/mailcap"
+
+ignore *
+unignore from: to: cc: date: subject:
+hdr_order from: to: cc: date: subject:
+
+alternative_order text/html text/*
+
+set implicit_auto_view = yes
+set mail_check_stats = yes
+set imap_condstore = yes
+set imap_qresync = yes
+set imap_idle = yes
+set sort_browser = unsorted
+set sidebar_folder_indent = yes
+set sidebar_short_path = yes
+set delete = yes
+
+source binds.muttrc
+source style.muttrc
