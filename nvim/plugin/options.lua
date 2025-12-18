@@ -126,8 +126,8 @@ set.swapfile = false
 -- Create a persistent undo file.
 -- (default): vim.opt.undofile = false
 set.undofile = true
-local undodir = vim.fn.expand("~/.config/nvim/undo")
-if vim.fn.isdirectory(undodir) then
+local undodir = os.getenv("XDG_CACHE_HOME") .. "/nvim/undo"
+if not vim.fn.isdirectory(undodir) then
     vim.fn.mkdir(undodir, "p")
 end
 set.undodir = undodir
