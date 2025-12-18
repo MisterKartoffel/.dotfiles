@@ -1,6 +1,6 @@
 base
-brightnessctl
 btop
+dunst
 eza
 fd
 flatpak
@@ -15,8 +15,8 @@ linux
 linux-firmware-amdgpu
 linux-firmware-realtek
 ly
-mako
 man-db
+neomutt
 neovim
 niri
 noto-fonts
@@ -27,8 +27,10 @@ qbittorrent-nox
 reflector
 satty
 snap-pac
+swayimg
 ufw
 vivid
+w3m
 wf-recorder
 wiremix
 zram-generator
