@@ -4,6 +4,3 @@ gtk-4.0
 npm
 pulse
 systemd
-
-*.zwc
-*.zwc.old
