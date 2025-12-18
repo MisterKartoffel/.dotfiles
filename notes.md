@@ -1,3 +1,8 @@
+# TODO
+
+- [ ] Keep an eye for if isync is ever compiled with OAUTH2 support in the repos.
+- [ ] Configure swayimg.
+
 # System-wide modifications
 ## Systemd-networkd / iwd based internet
 > [!IMPORTANT]
