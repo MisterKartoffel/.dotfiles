@@ -2,10 +2,10 @@
 
 # Find file in .config to open in Neovim
 nf() {
-    FZF_DEFAULT_COMMAND="fd --type file --hidden --exclude .git --base-directory ${XDG_CONFIG_HOME}"
+    FZF_DEFAULT_COMMAND="fd --type file --hidden --exclude .git --exclude .old --exclude zsh/plugins --base-directory ${XDG_CONFIG_HOME}"
     FZF_ARGS=(
         --multi
-        --preview="cat --number ${HOME}/{}"
+        --preview="cat --number ${XDG_CONFIG_HOME}/{}"
         --bind "enter:become(nvim ${XDG_CONFIG_HOME}/{})"
     )
 

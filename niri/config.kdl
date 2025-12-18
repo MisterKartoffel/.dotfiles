@@ -198,17 +198,16 @@ binds {
         XF86AudioPrev              allow-when-locked=true { spawn "playerctl" "previous"; }
         XF86AudioNext              allow-when-locked=true { spawn "playerctl" "next"; }
 
-    // Brightness controls
-        XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "+5%"; }
-        XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }
-
     // When all else fails
         Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 }
 
 environment {
-    GDK_BACKEND "wayland"
+    // Variables that are not used in tty should go here,
+    // otherwise they go in $HOME/.zshenv
+
     GTK_THEME "catppuccin-mocha-mauve-standard+default:dark"
+    BROWSER "app.zen_browser.zen"
 }
 
 cursor {

@@ -8,15 +8,11 @@ export XDG_STATE_HOME="${HOME}/.local/state"
 
 # XDG Base Directory compliance
 export CARGO_HOME="${XDG_DATA_HOME}/cargo" # Rust Cargo
-export FFMPEG_DATADIR="${XDG_CONFIG_HOME}/ffmpeg" # Ffmpeg config
-export GOPATH="${XDG_DATA_HOME}/go" # Go directory
-export GOMODCACHE="${XDG_CACHE_HOME}/go/mod"
-export GOCACHE="${XDG_CACHE_HOME}/go-build"
-export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 export POWERLEVEL9K_CONFIG_FILE="${XDG_CACHE_HOME}/zsh/p10k.zsh"
 export PYTHON_HISTORY="${XDG_STATE_HOME}/python_history"
 export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
 export PYTHONUSERBASE="${XDG_DATA_HOME}/python"
+export W3M_DIR="${XDG_STATE_HOME}/w3m"
 export XCURSOR_PATH="${XDG_DATA_HOME}/icons" # Xcursor themes
 
 # run0 variables
@@ -24,8 +20,9 @@ export SYSTEMD_RUN_SHELL_PROMPT_PREFIX="run0 "
 export SYSTEMD_ADJUST_TERMINAL_TITLE="false"
 export SYSTEMD_TINT_BACKGROUND="false"
 
-# SSH variables
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+# GPG and SSH setup
+unset SSH_AGENT_PID
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
 
 # Zsh path environments
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
@@ -47,4 +44,3 @@ export EDITOR=nvim
 export VISUAL=nvim
 export PAGER='less --mouse'
 export MANPAGER='nvim +Man!'
-export BROWSER=app.zen_browser.zen

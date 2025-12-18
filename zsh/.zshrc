@@ -72,12 +72,16 @@ setopt HIST_IGNORE_SPACE
 ## to current session
 setopt SHARE_HISTORY
 
+# GPG-agent start
+export GPG_TTY="$(tty)"
+gpg-connect-agent updatestartuptty /bye >/dev/null
+
 # Shell integrations
 source <(fzf --zsh)
 source "${ZDOTDIR}"/aliases/fzf_opts
 
 # Aliases
-alias ls="eza -la --icons=always --group-directories-first"
+alias ls="eza --long --icons=always --group-directories-first"
 
 # Helper functions
 source "${ZDOTDIR}"/aliases/zsh_functions
