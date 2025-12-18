@@ -88,14 +88,12 @@
     background = "#1e1e2e"
     foreground = "#cdd6f4"
     timeout = 10
-    default_icon = dialog-information
 
 [urgency_normal]
     background = "#1e1e2e"
     foreground = "#cdd6f4"
     timeout = 10
     override_pause_level = 30
-    default_icon = dialog-information
 
 [urgency_critical]
     background = "#1e1e2e"
@@ -103,7 +101,6 @@
     frame_color = "#fab387"
     timeout = 0
     override_pause_level = 60
-    default_icon = dialog-warning
 
 # Misc
 # Every section that isn't one of the above is interpreted as a rules to
