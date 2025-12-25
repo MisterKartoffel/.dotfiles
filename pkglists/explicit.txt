@@ -4,13 +4,11 @@ dunst
 eza
 fd
 flatpak
-fuzzel
 fzf
 ghostty
 git
 intel-ucode
 iwd
-libnotify
 linux
 linux-firmware-amdgpu
 linux-firmware-realtek
@@ -29,9 +27,6 @@ satty
 snap-pac
 swayimg
 ufw
-vivid
 w3m
-wf-recorder
 wiremix
-zram-generator
 zsh
