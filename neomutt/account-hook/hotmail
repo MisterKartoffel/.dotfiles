@@ -1,0 +1,6 @@
+# vim: ft=neomuttrc
+set imap_oauth_refresh_command = "`$my_fetcher $my_host imap-refresh_command`"
+
+# This setting implies hotmail is the "main" mailbox,
+# i.e. the one that should be open on startup.
+set spool_file = +Inbox

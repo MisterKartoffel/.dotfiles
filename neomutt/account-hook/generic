@@ -1,0 +1,7 @@
+# vim: ft=neomuttrc
+set folder = "`$my_fetcher $my_host folder`"
+
+set imap_user = "`$my_fetcher $my_host imap-user`"
+set imap_authenticators = "`$my_fetcher $my_host imap-auth`"
+
+source "${my_host}"

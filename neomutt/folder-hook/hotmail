@@ -1,0 +1,7 @@
+# vim: ft=neomuttrc
+set imap_user = "`$my_fetcher $my_host imap-user`"
+set imap_authenticators = "`$my_fetcher $my_host imap-auth`"
+set imap_oauth_refresh_command = "`$my_fetcher $my_host imap-refresh_command`"
+
+set spool_file = +Inbox
+set trash = +Deleted

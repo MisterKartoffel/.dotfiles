@@ -1,0 +1,3 @@
+# vim: ft=neomuttrc
+set spool_file = +INBOX
+set trash = +Trash

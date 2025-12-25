@@ -1,8 +1,12 @@
-account-hook imaps://outlook.office365.com/ "source $XDG_CONFIG_HOME/neomutt/accounts/hotmail.muttrc"
-account-hook imaps://imap.ufrgs.br/ "source $XDG_CONFIG_HOME/neomutt/accounts/ufrgs.muttrc"
+# I have NO idea why these have to be different,
+# but unfortunately they do. Trust me I'd know.
+startup-hook "echo `gpg --decrypt --quiet $XDG_CONFIG_HOME/neomutt/credentials/credentials.gpg > $XDG_RUNTIME_DIR/neomutt-credentials.sh`"
+shutdown-hook 'echo `rm -f $XDG_RUNTIME_DIR/neomutt-credentials.sh`'
 
-folder-hook "Hotmail/*" "source $XDG_CONFIG_HOME/neomutt/accounts/hotmail.muttrc"
-folder-hook "UFRGS/*" "source $XDG_CONFIG_HOME/neomutt/accounts/ufrgs.muttrc"
+set my_fetcher = "$XDG_CONFIG_HOME/neomutt/helper/fetch-credential.sh"
+account-hook outlook.office365.com "set my_host = hotmail"
+account-hook imap.ufrgs.br "set my_host = ufrgs"
+account-hook . "source account-hook/generic"
 
 named-mailboxes "Hotmail/Caixa de Entrada" "imaps://outlook.office365.com/Inbox" \
                 "Hotmail/Arquivo Morto" "imaps://outlook.office365.com/Arquivo Morto" \
@@ -17,24 +21,31 @@ named-mailboxes "Hotmail/Caixa de Entrada" "imaps://outlook.office365.com/Inbox"
                 "UFRGS/Enviados" "imaps://imap.ufrgs.br/Sent" \
                 "UFRGS/Lixo Eletrônico" "imaps://imap.ufrgs.br/Spam"
 
-set editor = "nvim"
+folder-hook outlook.office365.com "set my_host = hotmail"
+folder-hook imap.ufrgs.br "set my_host = ufrgs"
+folder-hook . "source folder-hook/generic"
+
+send-hook ~P "source send-hook/generic"
+
 set mailcap_path = "$XDG_CONFIG_HOME/neomutt/mailcap"
+set new_mail_command = "notify-send \"New e-mail\!\" \"New: %n.\nUnread: %u.\" --app-name=\"NeoMutt\" --icon=\"${XDG_DATA_HOME}/icons/applications/neomutt-mail.svg\""
 
 ignore *
-unignore from: to: cc: date: subject:
-hdr_order from: to: cc: date: subject:
+unignore subject: from: to: cc: date:
+hdr_order subject: from: to: cc: date:
 
 alternative_order text/html text/*
 
-set implicit_auto_view = yes
-set mail_check_stats = yes
-set imap_condstore = yes
-set imap_qresync = yes
-set imap_idle = yes
+set mail_check_stats
+set imap_condstore
+set imap_qresync
+set imap_idle
+set implicit_auto_view
+set use_threads = threads
+set sort = reverse-last-date
 set sort_browser = unsorted
-set sidebar_folder_indent = yes
-set sidebar_short_path = yes
 set delete = yes
+set nomarkers
 
-source binds.muttrc
-source style.muttrc
+source keybinds
+source style

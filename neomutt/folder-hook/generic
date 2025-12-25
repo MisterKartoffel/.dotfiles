@@ -1,0 +1,12 @@
+# vim: ft=neomuttrc
+set folder = "`$my_fetcher $my_host folder`"
+set from = "`$my_fetcher $my_host email`"
+
+set postponed = +Drafts
+
+set header_cache = $XDG_CACHE_HOME/neomutt/${my_host}/header
+set message_cache_dir = $XDG_CACHE_HOME/neomutt/${my_host}/message
+
+unset real_name imap_pass imap_oauth_refresh_command smtp_user smtp_authenticators smtp_pass smtp_oauth_refresh_command smtp_url
+
+source "${my_host}"

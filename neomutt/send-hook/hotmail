@@ -1,0 +1,2 @@
+# vim: ft=neomuttrc
+set smtp_oauth_refresh_command = "`$my_fetcher $my_host smtp-refresh_command`"

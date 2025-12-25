@@ -1,0 +1,10 @@
+# vim: ft=neomuttrc
+set real_name = "`$my_fetcher $my_host name`"
+
+set smtp_user = "`$my_fetcher $my_host smtp-user`"
+set smtp_authenticators = "`$my_fetcher $my_host smtp-auth`"
+set smtp_url = "`$my_fetcher $my_host smtp-url`"
+
+set record = +Sent
+
+source "${my_host}"

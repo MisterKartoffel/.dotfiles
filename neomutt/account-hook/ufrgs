@@ -1,0 +1,2 @@
+# vim: ft=neomuttrc
+set imap_pass = "`$my_fetcher $my_host imap-pass`"
