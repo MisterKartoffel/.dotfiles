@@ -174,26 +174,25 @@ WantedBy=swap.target
 ```
 
 ## Enabled swap on zram
-> Configure zram-generator.
+> Load the zram module at boot.
 ```conf
-/etc/systemd/zram-generator.conf
+/etc/modules-load.d/zram.conf
 
-[zram0]
+zram
 ```
 
-> Start the zram unit.
-```sh
-systemctl start systemd-zram-generator@zram0.service
+> Create udev rule.
+```conf
+/etc/udev/rules.d/99-zram.rules
+
+ACTION=="add", KERNEL=="zram0", ATTR{initstate}=="0", ATTR{comp_algorithm}="zstd", ATTR{disksize}="4G", TAG+="systemd"
 ```
 
-> Configure zram parameters.
+> Add `/dev/zram0` to fstab.
 ```conf
-/etc/sysctl.d/99-vm-zram-parameters.conf
+/etc/fstab
 
-vm.swappiness = 180
-vm.watermark_boost_factor = 0
-vm.watermark_scale_factor = 125
-vm.page-cluster = 0
+/dev/zram0 none swap defaults,discard,pri=100,x-systemd.makefs 0 0
 ```
 
 ## Udev rules
