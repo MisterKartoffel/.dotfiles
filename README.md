@@ -1,5 +1,5 @@
-# Dotfiles
-Remote repository for my personal dotfiles.
+## NOTICE:
+This repository has been archived, as I no longer use Arch Linux, but still want to preserve it as a reference. You may follow my endeavors over at [nix-config](https://github.com/MisterKartoffel/nix-config), if you want.
 
 ## Requirements
 Install the following dependencies:
